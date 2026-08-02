@@ -45,14 +45,18 @@ const PILOTS = [
   ['元代', 'data/元代_pilot_20260802.json'],
 ];
 
-// ---- 读 data/coords_demo.json（打样坐标缓存，F3 前临时；由 js/_extract_coords.js 从 demo2.html 提取） ----
-function parseDemoCoords() {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'coords_demo.json'), 'utf8'));
-  } catch (e) {
-    console.warn('coords_demo.json 读取失败（可先跑 js/_extract_coords.js）:', e.message);
-    return {};
-  }
+// ---- 读坐标来源（优先级：coords_resolved 历史坐标 > coords_modern 今址表 > coords_demo 打样） ----
+function loadJson(file) {
+  try { return JSON.parse(fs.readFileSync(path.join(ROOT, file), 'utf8')); }
+  catch (e) { console.warn(file + ' 读取失败:', e.message); return {}; }
+}
+const histCoords = loadJson('data/coords_resolved.json');   // CHGIS 历史坐标（按 title）
+const modernCoords = loadJson('data/coords_modern.json');   // 今址坐标表（按"今址"）
+const demoCoords = loadJson('data/coords_demo.json');       // demo 打样（按 title）
+
+function todayName(loc) {
+  const m = String(loc || '').match(/（(.+?)）/);
+  return m ? m[1] : null;
 }
 
 // ---- 字段白名单与必填校验 ----
@@ -60,7 +64,6 @@ const REQ = ['title', 'year', 'yearMode', 'yearRange', 'dynasty', 'period', 'typ
   'summary', 'cause', 'effect', 'examTip', 'people', 'location', 'tags', 'related', 'wikiSlug'];
 
 function main() {
-  const demoCoords = parseDemoCoords();
   const events = [];
   const errs = [];
   let chMiss = {};
@@ -104,9 +107,14 @@ function main() {
   if (Object.keys(chMiss).length) errs.push(`未映射的 dynasty: ${JSON.stringify(chMiss)}`);
   if (errs.length) { console.error('ERRORS:\n - ' + errs.join('\n - ')); process.exit(1); }
 
-  // COORDS：按 title 复用 demo 打样坐标
+  // COORDS：历史坐标 > 今址表 > demo 打样
   const coords = {};
-  events.forEach(e => { if (demoCoords[e.title]) coords[e.title] = demoCoords[e.title]; });
+  events.forEach(e => {
+    if (histCoords[e.title]) { coords[e.title] = histCoords[e.title]; return; }
+    const t = todayName(e.location);
+    if (t && modernCoords[t]) { coords[e.title] = modernCoords[t]; return; }
+    if (demoCoords[e.title]) coords[e.title] = demoCoords[e.title];
+  });
 
   const out = '// 自动生成，勿手改 — 由 js/gen_data.js 从 *_pilot_*.json 合并产出（F2 数据关卡前为试点基线）\n'
     + `const EVENTS=${JSON.stringify(events, null, 1)};\n\n`

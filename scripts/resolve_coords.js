@@ -18,6 +18,10 @@ if (!MODE || !pilotFile) {
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'data', 'coords_resolved.json');
 
+// 本地今址坐标表（先秦通道优先查表，缺表才调高德 API）
+const modernMap = fs.existsSync(path.join(ROOT, 'data', 'coords_modern.json'))
+  ? JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'coords_modern.json'), 'utf8')) : {};
+
 // ---- GCJ02 → WGS84（高德地理编码结果反转；数据层统一 WGS84） ----
 function gcj02ToWgs84(lat, lng) {
   const a = 6378245.0, ee = 0.00669342162296594323;
@@ -108,8 +112,9 @@ async function amapQuery(addr) {
         if (!coord) { console.log(`[CHGIS 未命中] ${e.title}(${plainName(loc)} yr=${yr})`); fail++; continue; }
       } else if (MODE === 'amap') {
         const addr = todayName(loc) || plainName(loc);
-        coord = await amapQuery(addr);
-        if (!coord) { console.log(`[AMAP 未命中] ${e.title}(${addr})`); fail++; continue; }
+        if (modernMap[addr]) { coord = modernMap[addr]; }   // 本地表优先（零 API）
+        else if (process.env.AMAP_KEY) { coord = await amapQuery(addr); }
+        if (!coord) { console.log(`[坐标缺失] ${e.title}(${addr}) → 请补 data/coords_modern.json 或设 AMAP_KEY`); fail++; continue; }
       } else { throw new Error('未知模式: ' + MODE); }
     } catch (err) {
       console.log(`[ERR] ${e.title}: ${err.message}`); fail++; continue;
