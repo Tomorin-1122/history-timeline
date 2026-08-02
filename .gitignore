@@ -1,2 +1,5 @@
 # 废弃数据隔离区（不纳入版本库）
 data/obsolete/
+# Python 编译缓存
+__pycache__/
+*.pyc
