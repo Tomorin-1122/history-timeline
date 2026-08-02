@@ -104,8 +104,8 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   check('时间轴视图隐藏', await page.locator('#view-timeline[hidden]').count() === 1);
   check('Leaflet 初始化', await page.locator('#map.leaflet-container').count() === 1);
   const markerCount = await page.locator('#map path.leaflet-interactive').count();
-  const expMarkers = await page.evaluate(() => Object.keys(COORDS).length);
-  check('地图 marker = COORDS 数', markerCount === expMarkers, '实际 ' + markerCount + ' 期望 ' + expMarkers);
+  const expMarkers = await page.evaluate(() => EVENTS.filter(e => e.ch !== 0 && COORDS[e.title]).length);
+  check('地图 marker = 历史事件数（隔离原始社会）', markerCount === expMarkers, '实际 ' + markerCount + ' 期望 ' + expMarkers);
   // 滑块范围：min/max 为历史范围
   const slider = await page.locator('#yrSlider').evaluate(el => [el.min, el.max, el.value]);
   check('滑块范围历史年份', Math.abs(Number(slider[0])) < 10000 && Math.abs(Number(slider[1])) < 10000, slider.join(','));
@@ -131,11 +131,11 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   const preMarkers = await page.locator('#map path.leaflet-interactive').count();
   const preExpect = await page.evaluate(() => EVENTS.filter(e => e.ch === 0 && COORDS[e.title]).length);
   check('原始社会模式 marker = 史前坐标数', preMarkers === preExpect, '期望 ' + preExpect + ' 实际 ' + preMarkers);
-  // 史前播放进度推进（防 step 钳制卡死回归）
+  // 史前播放推进（防 step 钳制卡死；播放为逐事件停靠，远处事件未到时持续走）
   await page.click('#playBtn');
   await page.waitForTimeout(1400);
   const playingVal = Number(await page.locator('#yrSlider').inputValue());
-  check('史前播放进度推进', playingVal > 0.05, 'value=' + playingVal);
+  check('史前播放推进', playingVal > 0.05, 'value=' + playingVal);
   await page.click('#playBtn');
   await page.waitForTimeout(200);
   await page.click('#filterToggle');   /* 展开筛选面板以点击分期链接 */
@@ -158,7 +158,51 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.click('#speedBtn');
   check('倍速切 8×', (await page.locator('#speedBtn').textContent()) === '8×');
   await page.click('#speedBtn');
+  check('倍速切 0.5×', (await page.locator('#speedBtn').textContent()) === '0.5×');
+  await page.click('#speedBtn');
+  check('倍速切 0.1×', (await page.locator('#speedBtn').textContent()) === '0.1×');
+  await page.click('#speedBtn');
   check('倍速循环回 1×', (await page.locator('#speedBtn').textContent()) === '1×');
+
+  // 11e. 步进按钮：精准上一个/下一个事件
+  const s0 = Number(await page.locator('#yrSlider').inputValue());
+  await page.click('#stepNext');
+  const s1 = Number(await page.locator('#yrSlider').inputValue());
+  check('步进到下一个事件', s1 > s0, s0 + '→' + s1);
+  await page.click('#stepNext');
+  const s2 = Number(await page.locator('#yrSlider').inputValue());
+  check('步进连续前进', s2 > s1, s1 + '→' + s2);
+  await page.click('#stepPrev');
+  const s3 = Number(await page.locator('#yrSlider').inputValue());
+  check('步进回上一个事件', s3 >= s1 && s3 < s2, s2 + '→' + s3);
+  // 11f. 连续播放保留最近 N 个事件（默认 10，渐透明；事件到点出现不提前）
+  await page.click('.bar a.jump:has-text("全部")');   /* 清章过滤 */
+  await page.locator('#yrSlider').evaluate(el => { el.value = '0'; el.dispatchEvent(new Event('input')); });
+  await page.click('#playBtn');
+  await page.waitForTimeout(1500);
+  const keepCount = await page.locator('#map path.leaflet-interactive').count();
+  check('连续播放保留最近10个事件', keepCount === 10, '实际 ' + keepCount);
+  const boldTip = await page.locator('#map .leaflet-tooltip span[style*="font-weight"]').count();
+  check('最新事件标签加粗', boldTip === 1, '加粗标签数=' + boldTip);
+  const fadeTip = await page.locator('#map .leaflet-tooltip span[style*="opacity"]').count();
+  check('旧事件标签渐透明', fadeTip === 9, '透明标签数=' + fadeTip);
+  await page.click('#playBtn');   /* 停止播放 */
+  await page.waitForTimeout(200);
+  // 11f2. 保留数循环切档 + 历史模式与原始社会完全隔离
+  await page.click('#keepN');
+  check('保留数循环切 5 个', (await page.locator('#keepN').textContent()) === '保留 5 个');
+  await page.click('#yrAll');     /* 历史模式全部年份 */
+  const domMarkers = await page.locator('#map path.leaflet-interactive').count();
+  const expectMarkers = await page.evaluate(() => EVENTS.filter(e => e.ch !== 0 && COORDS[e.title]).length);
+  check('历史模式与原始社会隔离', domMarkers === expectMarkers, domMarkers + ' vs ' + expectMarkers);
+  // 11g. 步进随筛选联动：门类=军事时，步进只跳军事事件
+  await page.click('#typeGroup button:has-text("军事")');
+  await page.locator('#yrSlider').evaluate(el => { el.value = '-300'; el.dispatchEvent(new Event('input')); });
+  await page.click('#stepNext');
+  const mv = Number(await page.locator('#yrSlider').inputValue());
+  const hasMil = await page.evaluate((y) => EVENTS.some(e => e.type === '军事' && e.year === y && COORDS[e.title]), mv);
+  check('步进随军事筛选联动', hasMil, 'v=' + mv);
+  await page.click('#typeGroup button:has-text("全部")');   /* 恢复门类筛选 */
 
   // 12. 视图切换：复习
   await page.click('.tab[data-view="review"]');
@@ -208,9 +252,9 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.waitForTimeout(300);
   check('toBand 滚动后可见', await page.locator('#toBand:visible').count() === 1);
 
-  // 14. 分期筛选链接 = 15
+  // 14. 分期筛选链接 = 16（"全部" + 15 章）
   const jumpLinks = await page.locator('.bar a.jump').count();
-  check('分期筛选链接 = 15', jumpLinks === 15, '实际 ' + jumpLinks);
+  check('分期筛选链接 = 16', jumpLinks === 16, '实际 ' + jumpLinks);
 
   // ---- 汇总 ----
   let pass = 0, fail = 0;

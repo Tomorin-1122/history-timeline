@@ -92,6 +92,18 @@ async function amapQuery(addr) {
   return null;
 }
 
+// ---- CHGIS 古名别名表（CHGIS 收录名与教材/数据常用名不一致时）----
+// 例：东汉"洛阳"当时称"雒阳"（CHGIS 按雒阳县收录 23~264）；"钜鹿"异体"巨鹿"
+const CHGIS_ALIAS = {
+  '洛阳': ['洛阳', '雒阳', '洛陽'],
+  '钜鹿': ['钜鹿', '巨鹿'],
+  '鄯善': ['鄯善', '鄯善县'],
+  '于阗': ['于阗', '于阗县', '和田'],
+  '伊吾卢': ['伊吾卢', '伊吾'],
+  '成皋': ['成皋', '成皋县', '汜水'],
+  '京口': ['京口', '京口县'],
+};
+
 // ---- 主流程 ----
 (async () => {
   const pilot = JSON.parse(fs.readFileSync(pilotFile, 'utf8'));
@@ -102,14 +114,27 @@ async function amapQuery(addr) {
   for (const e of pilot) {
     if (prev[e.title]) { skip++; continue; }        // 已有坐标，跳过
     const loc = e.location;
-    if (!loc || /^[国国界区]/.test(loc) || plainName(loc) === loc) { fail++; console.log(`[跳过 location 无效] ${e.title}: "${loc}"`); continue; }
+    // 跳过：空 location / 国名区域开头（"国""界""区"）
+    if (!loc || /^[国界区]/.test(loc)) { fail++; console.log(`[跳过 location 无效] ${e.title}: "${loc}"`); continue; }
+    // amap（先秦）模式必须带今址括号；chgis（秦汉后）模式纯政区名即可
+    if (MODE === 'amap' && plainName(loc) === loc) { fail++; console.log(`[跳过 先秦无今址] ${e.title}: "${loc}"`); continue; }
     let coord = null;
     try {
       if (MODE === 'chgis') {
         const yr = e.yearMode === 'range' ? e.yearRange[0] : e.year;
         if (yr == null) { skip++; continue; }       // era 无年份，CHGIS 无法消歧
-        coord = await chgisQuery(plainName(loc), yr);
-        if (!coord) { console.log(`[CHGIS 未命中] ${e.title}(${plainName(loc)} yr=${yr})`); fail++; continue; }
+        const base = plainName(loc);
+        const names = CHGIS_ALIAS[base] || [base];
+        for (const n of names) {
+          coord = await chgisQuery(n, yr);
+          if (coord) break;
+        }
+        if (!coord) {
+          // 今址兜底：location 带"（今址）"时查本地今址表
+          const t = todayName(loc);
+          if (t && modernMap[t]) { coord = modernMap[t]; }
+          else { console.log(`[CHGIS+今址未命中] ${e.title}(${base} yr=${yr} 今址=${t || '-'})`); fail++; continue; }
+        }
       } else if (MODE === 'amap') {
         const addr = todayName(loc) || plainName(loc);
         if (modernMap[addr]) { coord = modernMap[addr]; }   // 本地表优先（零 API）

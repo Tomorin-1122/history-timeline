@@ -14,10 +14,12 @@ const PRE_MIN_LOG=Math.log10(2070);          /* 前2070（对数下界） */
 const PRE_SPAN=PRE_MAX_LOG-PRE_MIN_LOG;      /* 对数跨度 ≈3.59 */
 const STEP_HIST=5, STEP_PRE=0.05;            /* 播放步长：历史 5 年 / 史前 0.05 对数单位 */
 const R_HIST=50, R_PRE=0.08;                 /* 过滤窗口：历史 50 年 / 史前 ±0.08 数量级(≈±20%年份差) */
-const SPEEDS=[1,2,4,8];                      /* 播放倍速档 */
+const SPEEDS=[1,2,4,8,0.5,0.1];                     /* 播放倍速档（1×→2×→4×→8×→0.5×→0.1× 循环） */
 
 let mapRange='hist';                          /* 'hist' | 'pre' */
 let speedIdx=0;                               /* 当前倍速档索引 */
+let keepN=10;                                 /* 连续播放时屏幕保留事件数（默认 10） */
+const KEEP_OPTS=[10,5,3,2,1];                /* 保留数循环档（默认 10 → 5 → 3 → 2 → 1） */
 
 const yrSlider=document.getElementById("yrSlider"),
       yrLabel=document.getElementById("yrLabel"),
@@ -31,7 +33,8 @@ function logS(absYear){ return PRE_MAX_LOG - Math.log10(Math.max(absYear,1)); }
 
 function curY(){ return mapRange==='pre'?[0,PRE_SPAN]:[HIST_YMIN,HIST_YMAX]; }
 function curStep(){ return (mapRange==='pre'?STEP_PRE:STEP_HIST)*SPEEDS[speedIdx]; }
-function curR(){ return mapRange==='pre'?R_PRE:R_HIST; }
+/* 过滤窗口：pre 始终原样（老板定案）；hist 步进后精准 ±0.5，拖动 ±50 */
+function curR(){ return mapRange==='pre'?R_PRE:(precise?0.5:R_HIST); }
 
 /* 年份标签：历史"前 X 年 ±50"；史前"距今约 X 万年 前后"（对数刻度逆变换） */
 function fmtYrLabel(v){
@@ -48,7 +51,7 @@ function setRange(mode){
   mapRange=mode;
   document.querySelectorAll(".range-btn").forEach(b=>b.classList.toggle("on",b.dataset.range===mode));
   const [ymin,ymax]=curY();
-  yrSlider.step=mapRange==='pre'?0.01:1;   /* 史前对数刻度小数步长（step=1 会钳制 0.05→0 卡死播放） */
+  setStep();
   yrSlider.min=ymin; yrSlider.max=ymax; yrSlider.value=ymin;
   if(playing) togglePlay();               /* 切模式停播放，避免范围/步长混乱 */
   yrLabel.textContent=yrAll.classList.contains("on")?"全部年份":fmtYrLabel(+yrSlider.value);
@@ -75,16 +78,62 @@ function initMap(){
 }
 
 /* 门类配色（古籍五色：军事墨蓝、经济竹青、文化靛蓝、制度赭金、政治朱砂） */
-const TYPE_COLORS={"政治":"#9e3d26","军事":"#37474f","经济":"#4f6d3a","文化":"#3d5a80","制度":"#8a6d2c"};
+const TYPE_COLORS={"政治":"#9e3d26","军事":"#37474f","经济":"#4f6d3a","文化":"#3d5a80","制度":"#8a6d2c","民族关系":"#6d5a8e","对外关系":"#b4713b"};
+
+/* 渲染单个 marker（alpha 透明度：keepN 播放时旧的渐透明；bold：最新事件标签加粗） */
+function addMarker(e, alpha, bold){
+  const c=COORDS[e.title]; if(!c) return;
+  const g=wgs84ToGcj02(c[0],c[1]);       /* 高德瓦片需 gcj02，WGS84 源数据转一次 */
+  const col=TYPE_COLORS[e.type]||"#9e3d26";
+  const isEra=e.yearMode==="era";
+  const a=alpha==null?1:alpha;
+  const m=L.circleMarker(g,{
+    radius:(isEra?9:7)+(bold?3:0), color:col, weight:bold?3:1.5,
+    fillColor:isEra?"#f5f1e6":col, fillOpacity:(isEra?.7:.78)*a, opacity:a,
+    dashArray:isEra?"3 3":null
+  });
+  if(yrAll.classList.contains("on")){
+    m.bindTooltip(e.title);
+  }else{
+    const st=[];
+    if(a<1) st.push('opacity:'+a);                  /* 标签随事件渐透明 */
+    if(bold) st.push('font-weight:700');            /* 最新事件标签加粗 */
+    const stl=st.length?' style="'+st.join(';')+'"':'';
+    m.bindTooltip('<span'+stl+'>'+e.title+' '+fmtShort(e)+'</span>',{permanent:true,direction:"top",offset:[0,-7],className:"mp-label"});
+  }
+  m.bindPopup(popupHTML(e),{closeButton:false,offset:[0,-6]});
+  markers.addLayer(m);
+}
 
 function drawMarkers(){
   if(!markers) return;
   markers.clearLayers();
   const allMode=yrAll.classList.contains("on"), cyr=+yrSlider.value, R=curR(), q=(state.q||"").toLowerCase();
   const pre=mapRange==='pre';
-  EVENTS.forEach((e,idx)=>{
+  /* 连续播放（hist）：保留 ≤当前年 的最近 keepN 个事件，越早越透明，最新置顶（事件到真实年份才出现，不提前） */
+  if(!pre && playing && !allMode){
+    const keep=[];
+    for(const e of EVENTS){
+      if(e.ch===0) continue;                      /* 完全隔离：历史模式不看原始社会章 */
+      if(state.ch>=0 && e.ch!==state.ch) continue;
+      if(!COORDS[e.title]) continue;
+      if(state.type!=="全部" && e.type!==state.type) continue;
+      if(state.imp!==0 && e.importance!==state.imp) continue;
+      if(q && !matchEvent(e,q)) continue;
+      if(e.year===null || e.year>cyr) continue;   /* 未来事件不出现 */
+      keep.push(e);
+    }
+    keep.sort((a,b)=>b.year-a.year);
+    keep.slice(0,keepN).reverse().forEach((e,idx)=>{   /* 倒序：最旧先加、最新最后加 → 最新层级最高不被遮 */
+      addMarker(e,1-((keepN-1-idx)/keepN)*0.85, idx===keepN-1);
+    });
+    return;
+  }
+  EVENTS.forEach((e)=>{
     if(pre && e.ch!==0) return;            /* 原始社会模式只看原始社会章 */
-    const c=COORDS[e.title]; if(!c) return;
+    if(!pre && e.ch===0) return;          /* 完全隔离：历史模式不看原始社会章 */
+    if(state.ch>=0 && e.ch!==state.ch) return;  /* 分期筛选：只显示所选章 */
+    if(!COORDS[e.title]) return;
     if(state.type!=="全部" && e.type!==state.type) return;
     if(state.imp!==0 && e.importance!==state.imp) return;
     if(q && !matchEvent(e,q)) return;
@@ -96,21 +145,7 @@ function drawMarkers(){
         if(Math.abs(e.year-cyr)>R) return;
       }
     }
-    const g=wgs84ToGcj02(c[0],c[1]);       /* 高德瓦片需 gcj02，WGS84 源数据转一次 */
-    const col=TYPE_COLORS[e.type]||"#9e3d26";
-    const isEra=e.yearMode==="era";
-    const m=L.circleMarker(g,{
-      radius:isEra?9:7, color:col, weight:1.5,
-      fillColor:isEra?"#f5f1e6":col, fillOpacity:isEra?.7:.78,
-      dashArray:isEra?"3 3":null
-    });
-    if(allMode){
-      m.bindTooltip(e.title);
-    }else{
-      m.bindTooltip(e.title+" "+fmtShort(e),{permanent:true,direction:"top",offset:[0,-7],className:"mp-label"});
-    }
-    m.bindPopup(popupHTML(e),{closeButton:false,offset:[0,-6]});
-    markers.addLayer(m);
+    addMarker(e,1);
   });
 }
 
@@ -121,14 +156,18 @@ function popupHTML(e){
 
 function fmtYear(v){return v<0?("前 "+(-v)+" 年"):(v+" 年");}
 
-/* ---- 自动播放 ---- */
+/* ---- 自动播放：连续播放（pre 原样；hist 播放时显示最近 keepN 个事件渐透明，事件到点出现不提前） ---- */
 let playing=false, playTimer=null;
+let precise=false;                         /* hist 步进后精准 ±0.5；拖 slider 恢复 ±50 */
+function setStep(){ yrSlider.step=mapRange==='pre'?(playing?0.001:0.01):(playing?0.1:1); }
 function togglePlay(){
   playing=!playing;
   playBtn.textContent=playing?"⏸ 暂停":"▶ 播放";
   playBtn.classList.toggle("on",playing);
   if(playing){
     yrAll.classList.remove("on");
+    precise=false;                          /* 播放走 keepN（hist）/原窗口（pre），不用精准 */
+    setStep();
     playTimer=setInterval(()=>{
       let v=+yrSlider.value+curStep();
       const [ymin,ymax]=curY();
@@ -139,9 +178,62 @@ function togglePlay(){
     },600);
   }else{
     clearInterval(playTimer);
+    setStep();
   }
 }
 playBtn.addEventListener("click",togglePlay);
-function pickYearFilter(){yrAll.classList.remove("on");yrLabel.textContent=fmtYrLabel(+yrSlider.value);drawMarkers();}
+/* ---- 步进：上一个/下一个事件（随当前筛选联动：章/门类/等第/搜索均生效，播放中则先停） ---- */
+const stepPrev=document.getElementById("stepPrev"), stepNext=document.getElementById("stepNext");
+function stepEvent(dir){
+  if(playing) togglePlay();
+  precise=true;
+  const v=+yrSlider.value, pre=mapRange==='pre', q=(state.q||"").toLowerCase();
+  let best=null;
+  for(const e of EVENTS){
+    if(pre && e.ch!==0) continue;
+    if(!pre && e.ch===0) continue;         /* 完全隔离：历史模式步进不看原始社会章 */
+    if(state.ch>=0 && e.ch!==state.ch) continue;
+    if(!COORDS[e.title]) continue;
+    if(state.type!=="全部" && e.type!==state.type) continue;
+    if(state.imp!==0 && e.importance!==state.imp) continue;
+    if(q && !matchEvent(e,q)) continue;
+    if(e.year===null) continue;
+    const y=pre?logS(Math.abs(e.year)):e.year;
+    if(dir>0 && y>v && (best===null||y<best)) best=y;
+    if(dir<0 && y<v && (best===null||y>best)) best=y;
+  }
+  if(best!==null){ yrSlider.value=best; yrLabel.textContent=fmtYrLabel(best); drawMarkers(); }
+}
+stepPrev.addEventListener("click",()=>stepEvent(-1));
+stepNext.addEventListener("click",()=>stepEvent(1));
+/* ---- 保留事件数：连续播放时屏幕同时存在 N 个（默认 10），点击循环 10/20/30/50 ---- */
+const keepBtn=document.getElementById("keepN");
+if(keepBtn){
+  keepBtn.textContent="保留 "+keepN+" 个";
+  keepBtn.addEventListener("click",()=>{
+    keepN=KEEP_OPTS[(KEEP_OPTS.indexOf(keepN)+1)%KEEP_OPTS.length];
+    keepBtn.textContent="保留 "+keepN+" 个";
+    if(playing) drawMarkers();
+  });
+}
+/* ---- 全屏沉浸式：隐藏顶栏/页脚，仅地图占满（Fullscreen API） ---- */
+const fullBtn=document.getElementById("fullBtn");
+if(fullBtn){
+  fullBtn.addEventListener("click",()=>{
+    if(!document.fullscreenElement){
+      const p=document.documentElement.requestFullscreen();
+      if(p && p.catch) p.catch(()=>{});
+      document.body.classList.add("immersive");
+    }else{
+      const p=document.exitFullscreen();
+      if(p && p.catch) p.catch(()=>{});
+      document.body.classList.remove("immersive");
+    }
+  });
+  document.addEventListener("fullscreenchange",()=>{
+    if(!document.fullscreenElement) document.body.classList.remove("immersive");
+  });
+}
+function pickYearFilter(){precise=false;yrAll.classList.remove("on");yrLabel.textContent=fmtYrLabel(+yrSlider.value);drawMarkers();}
 yrSlider.addEventListener("input",()=>{if(playing)togglePlay();pickYearFilter();});
 yrAll.addEventListener("click",()=>{yrAll.classList.add("on");yrLabel.textContent="全部年份";drawMarkers();});

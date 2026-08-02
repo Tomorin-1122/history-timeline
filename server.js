@@ -26,6 +26,10 @@ const PILOTS = [
   ['战国', 'data/战国_pilot_20260801.json'],
   ['秦', 'data/秦_pilot_20260802.json'],
   ['西汉', 'data/西汉_pilot_20260802.json'],
+  ['东汉', 'data/东汉.json'],
+  ['三国两晋南北朝', 'data/三国两晋南北朝.json'],
+  ['隋', 'data/隋.json'],
+  ['唐', 'data/唐.json'],
   ['元代', 'data/元代_pilot_20260802.json'],
 ];
 

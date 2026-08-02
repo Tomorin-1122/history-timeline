@@ -6,7 +6,7 @@ const rvCfg={type:"全部",imp:0,per:"全部",q:"",numMode:"all",num:10,mode:"tr
 
 function initReview(){
   if(rvInit) return; rvInit=true;
-  rvBtns(document.getElementById("rvTypeBtns"),[["全部","全部"],["政治","政治"],["军事","军事"],["经济","经济"],["文化","文化"],["制度","制度"]],v=>{rvCfg.type=v;updateCount();},"全部");
+  rvBtns(document.getElementById("rvTypeBtns"),[["全部","全部"],["政治","政治"],["军事","军事"],["经济","经济"],["文化","文化"],["制度","制度"],["民族关系","民族关系"],["对外关系","对外关系"]],v=>{rvCfg.type=v;updateCount();},"全部");
   rvBtns(document.getElementById("rvImpBtns"),[["全部",0],["★★★",3],["★★",2],["★",1]],v=>{rvCfg.imp=v;updateCount();},0);
   rvBtns(document.getElementById("rvPerBtns"),[["全部","全部"],...CHAPTERS.map((c,i)=>[c.name,i])],v=>{rvCfg.per=v;updateCount();},"全部");
   document.getElementById("rvQ").addEventListener("input",e=>{rvCfg.q=e.target.value.trim();updateCount();});

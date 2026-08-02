@@ -53,10 +53,14 @@
       <button class="f range-btn" data-range="pre" id="rangePre" title="原始社会：史前（距今约800万年前）~ 夏朝前，非等距刻度">原始社会</button>
       <button class="f range-btn on" data-range="hist" id="rangeHist" title="主时间轴：夏朝（前2070）~ 鸦片战争（1840）">历史时期</button>
       <span class="yrlabel" id="yrLabel">全部年份</span>
+      <button class="f" id="stepPrev" title="上一个事件（精准定位）">◀</button>
       <input type="range" id="yrSlider" step="1" aria-label="年代">
+      <button class="f" id="stepNext" title="下一个事件（精准定位）">▶</button>
       <button class="f on" id="yrAll">全部</button>
       <button class="f" id="playBtn">▶ 播放</button>
-      <button class="f" id="speedBtn" title="播放速度，点击循环 1×/2×/4×/8×">1×</button>
+      <button class="f" id="speedBtn" title="播放速度，点击循环 1×/2×/4×/8×/0.5×/0.1×">1×</button>
+      <button class="f" id="keepN" title="连续播放时屏幕保留最近事件数，点击循环 10/5/3/2/1">保留 10 个</button>
+      <button class="f" id="fullBtn" title="全屏沉浸式体验（仅地图）">⛶ 全屏</button>
     </div>
     <div class="mapwrap">
       <div id="map"></div>
@@ -130,7 +134,7 @@
     时间轴左列四种记号：实心方 = 精确年，虚线方 = 约年，长条 = 起止区间，圆圈 = 时代段。<br>
     地图标记按门类分色：
     <span class="fg">
-      <span class="fg-i" data-c="政治">政治</span><span class="fg-i" data-c="军事">军事</span><span class="fg-i" data-c="经济">经济</span><span class="fg-i" data-c="文化">文化</span><span class="fg-i" data-c="制度">制度</span>
+      <span class="fg-i" data-c="政治">政治</span><span class="fg-i" data-c="军事">军事</span><span class="fg-i" data-c="经济">经济</span><span class="fg-i" data-c="文化">文化</span><span class="fg-i" data-c="制度">制度</span><span class="fg-i" data-c="民族关系">民族关系</span><span class="fg-i" data-c="对外关系">对外关系</span>
     </span>
     ；空心圈 = 时代段，实心点 = 可考年份，坐标为打样值（正式坐标随数据推进补齐）。
   </footer>
@@ -174,7 +178,7 @@
       <label class="mf"><span>时代副句（eraSub，如 距今约170万年）</span><input id="fEraSub" disabled></label>
       <label class="mf"><span>朝代</span><input id="fDynasty"></label>
       <label class="mf"><span>大分期（先秦/秦汉/魏晋南北朝/隋唐/宋元/明清）</span><input id="fPeriod"></label>
-      <label class="mf"><span>门类（政治/军事/经济/文化/制度）</span><input id="fType"></label>
+      <label class="mf"><span>门类（政治/军事/经济/文化/制度/民族关系/对外关系）</span><input id="fType"></label>
       <label class="mf"><span>重要性</span><select id="fImp"><option value="3">3 核心考点</option><option value="2">2 常考</option><option value="1">1 了解</option></select></label>
       <label class="mf"><span>摘要（学术腔，2-3 句）</span><textarea id="fSum" rows="3"></textarea></label>
       <label class="mf"><span>前因</span><textarea id="fCause" rows="2"></textarea></label>

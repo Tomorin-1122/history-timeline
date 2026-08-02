@@ -1,9 +1,9 @@
 /* timeline.js — 时间轴视图：章节带 + 事件行渲染、筛选/搜索联动、详情抽屉、章节回顶 */
 'use strict';
 
-const TYPES=["全部","政治","军事","经济","文化","制度"];
+const TYPES=["全部","政治","军事","经济","文化","制度","民族关系","对外关系"];
 const IMPS=[["全部",0],["★★★",3],["★★",2],["★",1]];
-const state={type:"全部",imp:0,q:""};
+const state={type:"全部",imp:0,q:"",ch:-1};
 
 /* ---- 渲染：全 15 章章节带 + 事件行（空章占位） ---- */
 const main=document.getElementById("main");
@@ -41,13 +41,16 @@ CHAPTERS.forEach((c,ci)=>{
   });
 });
 
-/* ---- 分期筛选链接（按 CHAPTERS 动态生成） ---- */
+/* ---- 分期筛选链接（按 CHAPTERS 动态生成；地图界面点按章过滤） ---- */
 (function(){
   const perGroup=document.getElementById("perGroup");
   if(!perGroup) return;
-  CHAPTERS.forEach(c=>{
+  const all=document.createElement("a");
+  all.className="jump on"; all.href="#"; all.textContent="全部"; all.dataset.ch="-1";
+  perGroup.appendChild(all);
+  CHAPTERS.forEach((c,i)=>{
     const a=document.createElement("a");
-    a.className="jump"; a.href="#"+c.id; a.textContent=c.name;
+    a.className="jump"; a.href="#"+c.id; a.textContent=c.name; a.dataset.ch=i;
     perGroup.appendChild(a);
   });
 })();

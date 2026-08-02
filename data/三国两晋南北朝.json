@@ -1,0 +1,3302 @@
+[
+  {
+    "title": "董卓之乱",
+    "year": 189,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "189年，外戚何进谋诛宦官，召董卓入京。董卓废少帝立献帝，专权乱政，导致东汉中央权力真空，开启军阀混战局面。",
+    "cause": "东汉外戚宦官斗争，何进谋诛宦官，引董卓入京。",
+    "effect": "董卓专权激起关东军阀讨伐，东汉政权瓦解，进入军阀混战时期。",
+    "examTip": "记住董卓入京是189年，是军阀混战的开端。",
+    "people": [
+      "董卓",
+      "袁绍",
+      "何进",
+      "吕布",
+      "王允"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "军阀混战",
+      "东汉灭亡"
+    ],
+    "related": [
+      "关东军讨伐董卓"
+    ],
+    "wikiSlug": "董卓之乱"
+  },
+  {
+    "title": "关东军讨伐董卓",
+    "year": 190,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "190年，关东军阀以袁绍为盟主，组成联军讨伐董卓。董卓挟持汉献帝西迁长安，联军不久瓦解，各自割据混战。",
+    "cause": "董卓专权，关东军阀不满，以讨伐董卓为名起兵。",
+    "effect": "董卓西迁，关东联军瓦解，军阀割据混战加剧。",
+    "examTip": "记住是190年，袁绍为盟主，但联军很快瓦解。",
+    "people": [
+      "袁绍",
+      "曹操",
+      "董卓"
+    ],
+    "location": "",
+    "tags": [
+      "军阀混战",
+      "反董卓联盟"
+    ],
+    "related": [
+      "董卓之乱"
+    ],
+    "wikiSlug": "关东军讨伐董卓"
+  },
+  {
+    "title": "曹操迎献帝都许",
+    "year": 196,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "196年，曹操将汉献帝迎至许昌，取得“挟天子以令诸侯”的政治优势，为统一北方奠定基础。",
+    "cause": "曹操采纳毛玠、荀彧建议，利用献帝号令天下。",
+    "effect": "曹操政治地位提升，吸引人才，加速统一北方。",
+    "examTip": "196年，挟天子以令诸侯，是曹操崛起的关键。",
+    "people": [
+      "曹操",
+      "汉献帝",
+      "毛玠",
+      "荀彧"
+    ],
+    "location": "许昌（今河南许昌）",
+    "tags": [
+      "曹操",
+      "挟天子以令诸侯"
+    ],
+    "related": [
+      "曹操募民屯田"
+    ],
+    "wikiSlug": "曹操迎献帝都许"
+  },
+  {
+    "title": "曹操募民屯田",
+    "year": 196,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "经济",
+    "importance": 2,
+    "summary": "196年，曹操为解决军粮问题，在许下募民屯田，得谷百万斛，推动北方农业恢复，为统一北方提供经济基础。",
+    "cause": "军阀混战，粮食短缺，曹操采纳枣祗建议。",
+    "effect": "初步解决军粮，为曹魏屯田制推行开端。",
+    "examTip": "与迎献帝同年，许下屯田，记住是募民屯田，不是军屯。",
+    "people": [
+      "曹操",
+      "枣祗"
+    ],
+    "location": "许下（今河南许昌）",
+    "tags": [
+      "屯田制",
+      "经济恢复"
+    ],
+    "related": [
+      "曹操迎献帝都许"
+    ],
+    "wikiSlug": "曹操募民屯田"
+  },
+  {
+    "title": "官渡之战",
+    "year": 200,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "200年，曹操与袁绍在官渡进行决战，曹操以少胜多，大败袁绍，歼灭其主力，奠定统一北方的基础。",
+    "cause": "袁绍与曹操争夺中原霸权，袁绍南下进攻。",
+    "effect": "袁绍势力崩溃，曹操统一北方，形成北方优势。",
+    "examTip": "以少胜多经典战例，记住火烧乌巢。",
+    "people": [
+      "曹操",
+      "袁绍",
+      "许攸",
+      "张郃"
+    ],
+    "location": "官渡（今河南中牟东北）",
+    "tags": [
+      "以少胜多",
+      "官渡之战",
+      "曹操统一北方"
+    ],
+    "related": [
+      "曹操远征乌桓",
+      "赤壁之战"
+    ],
+    "wikiSlug": "官渡之战"
+  },
+  {
+    "title": "曹操远征乌桓",
+    "year": 207,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "民族关系",
+    "importance": 2,
+    "summary": "207年，曹操亲征乌桓，统一北方，消除后患。",
+    "cause": "乌桓助袁氏残余势力，威胁北方。",
+    "effect": "彻底统一北方，为南下准备。",
+    "examTip": "207年，曹操基本统一北方。",
+    "people": [
+      "曹操"
+    ],
+    "location": "柳城（今辽宁朝阳南）",
+    "tags": [
+      "统一北方"
+    ],
+    "related": [
+      "官渡之战"
+    ],
+    "wikiSlug": "曹操远征乌桓"
+  },
+  {
+    "title": "赤壁之战",
+    "year": 208,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "208年，曹操南下，孙刘联军在赤壁以火攻大败曹军，曹操退回北方，三国鼎立局面初步形成。",
+    "cause": "曹操欲统一全国，南下进攻荆州、东吴。",
+    "effect": "曹操统一全国计划失败，三国鼎立格局形成。",
+    "examTip": "赤壁之战，孙刘联军火攻，奠定三分天下。",
+    "people": [
+      "曹操",
+      "孙权",
+      "刘备",
+      "周瑜",
+      "诸葛亮",
+      "黄盖"
+    ],
+    "location": "赤壁（今湖北蒲圻西北）",
+    "tags": [
+      "以少胜多",
+      "赤壁之战",
+      "三国鼎立"
+    ],
+    "related": [],
+    "wikiSlug": "赤壁之战"
+  },
+  {
+    "title": "曹操平定凉州",
+    "year": 211,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "211年，曹操击败马超、韩遂，平定凉州，控制关中地区。",
+    "cause": "马超、韩遂在凉州反叛，威胁关中。",
+    "effect": "曹操巩固后方，为之后取汉中创造条件。",
+    "examTip": "211年，渭南之战，曹操离间马超、韩遂。",
+    "people": [
+      "曹操",
+      "马超",
+      "韩遂"
+    ],
+    "location": "渭南（今陕西渭南）",
+    "tags": [
+      "曹操",
+      "凉州"
+    ],
+    "related": [
+      "曹操取汉中"
+    ],
+    "wikiSlug": "曹操平定凉州"
+  },
+  {
+    "title": "曹操取汉中",
+    "year": 215,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "215年，曹操击败张鲁，占领汉中，威胁益州。",
+    "cause": "曹操欲控制益州门户汉中。",
+    "effect": "曹操势力进入巴蜀，但不久撤退。",
+    "examTip": "215年，张鲁降曹，汉中归曹。",
+    "people": [
+      "曹操",
+      "张鲁"
+    ],
+    "location": "汉中（今陕西汉中）",
+    "tags": [
+      "曹操"
+    ],
+    "related": [
+      "刘备取汉中"
+    ],
+    "wikiSlug": "曹操取汉中"
+  },
+  {
+    "title": "刘备取汉中",
+    "year": 219,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "219年，刘备从曹操手中夺取汉中，自封汉中王，势力达到顶峰。",
+    "cause": "刘备欲巩固益州，需占据汉中屏障。",
+    "effect": "刘备势力壮大，形成三国鼎立之一极。",
+    "examTip": "219年，定军山之战，黄忠斩夏侯渊。",
+    "people": [
+      "刘备",
+      "曹操",
+      "夏侯渊",
+      "黄忠"
+    ],
+    "location": "汉中（今陕西汉中）",
+    "tags": [
+      "刘备",
+      "汉中"
+    ],
+    "related": [
+      "曹操取汉中",
+      "孙权袭取荆州"
+    ],
+    "wikiSlug": "刘备取汉中"
+  },
+  {
+    "title": "孙权袭取荆州",
+    "year": 219,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东汉末年",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "219年，孙权趁关羽北伐之机，派吕蒙袭取荆州，擒杀关羽，吴蜀联盟破裂。",
+    "cause": "孙权对刘备占据荆州不满，欲夺回荆州。",
+    "effect": "刘备失去荆州，势力被封锁，吴蜀联盟破裂。",
+    "examTip": "白衣渡江，关羽大意失荆州，219年。",
+    "people": [
+      "孙权",
+      "吕蒙",
+      "关羽"
+    ],
+    "location": "江陵（今湖北荆州）",
+    "tags": [
+      "荆州",
+      "孙刘联盟"
+    ],
+    "related": [
+      "夷陵之战"
+    ],
+    "wikiSlug": "孙权袭取荆州"
+  },
+  {
+    "title": "曹丕称帝建魏",
+    "year": 220,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "曹魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "220年，曹操病死，曹丕废汉献帝，自立为帝，国号魏，定都洛阳，东汉灭亡。",
+    "cause": "曹操死后，曹丕继承权位，取代汉室。",
+    "effect": "东汉结束，曹魏建立，三国时期正式开始。",
+    "examTip": "220年，曹丕篡汉，魏国建立。",
+    "people": [
+      "曹丕",
+      "汉献帝"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "曹魏建立",
+      "三国"
+    ],
+    "related": [],
+    "wikiSlug": "曹丕称帝建魏"
+  },
+  {
+    "title": "九品中正制确立",
+    "year": 220,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "曹魏",
+    "period": "魏晋南北朝",
+    "type": "制度",
+    "importance": 3,
+    "summary": "220年，曹丕采纳陈群建议，推行九品中正制，作为选官制度，初期品状并重，后演变为门阀垄断工具。",
+    "cause": "汉代察举制衰落，曹魏需要新的选官办法，并争取士族支持。",
+    "effect": "成为魏晋南北朝门阀士族形成的重要制度支柱。",
+    "examTip": "九品中正制，上品无寒门，下品无势族，记住是陈群建议。",
+    "people": [
+      "曹丕",
+      "陈群"
+    ],
+    "location": "",
+    "tags": [
+      "选官制度",
+      "门阀"
+    ],
+    "related": [],
+    "wikiSlug": "九品中正制确立"
+  },
+  {
+    "title": "刘备称帝建蜀汉",
+    "year": 221,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "蜀汉",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "221年，刘备在成都称帝，国号汉，史称蜀汉，以继汉统。",
+    "cause": "曹丕称帝后，刘备以汉室宗亲身份称帝，延续汉祚。",
+    "effect": "蜀汉政权正式建立，三国鼎立形成。",
+    "examTip": "221年，刘备称帝，注意与曹丕220年对比。",
+    "people": [
+      "刘备"
+    ],
+    "location": "成都",
+    "tags": [
+      "蜀汉建立",
+      "三国"
+    ],
+    "related": [
+      "曹丕称帝建魏"
+    ],
+    "wikiSlug": "刘备称帝建蜀汉"
+  },
+  {
+    "title": "夷陵之战",
+    "year": 222,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "三国",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "222年，刘备为夺回荆州，亲征东吴，在夷陵被陆逊火攻击败，逃回白帝城，蜀汉元气大伤。",
+    "cause": "孙权袭取荆州，杀关羽，刘备为复仇并夺回荆州。",
+    "effect": "蜀汉力量削弱，三国鼎立局面定型。",
+    "examTip": "又称猇亭之战，陆逊火烧连营，记住222年。",
+    "people": [
+      "刘备",
+      "陆逊"
+    ],
+    "location": "夷陵（今湖北宜都北）",
+    "tags": [
+      "以少胜多",
+      "蜀吴战争"
+    ],
+    "related": [
+      "孙权袭取荆州"
+    ],
+    "wikiSlug": "夷陵之战"
+  },
+  {
+    "title": "孙权称吴王",
+    "year": 222,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "孙吴",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "222年，孙权在夷陵之战后称吴王，建元黄武，实际独立。",
+    "cause": "孙权在夷陵之战后地位稳固，称王以示独立。",
+    "effect": "东吴政权正式建立，三国鼎立形成。",
+    "examTip": "孙权称王在222年，229年才称帝。",
+    "people": [
+      "孙权"
+    ],
+    "location": "武昌（今湖北鄂州）",
+    "tags": [
+      "东吴建立"
+    ],
+    "related": [
+      "孙权称帝建吴"
+    ],
+    "wikiSlug": "孙权称吴王"
+  },
+  {
+    "title": "蜀吴重新结盟",
+    "year": 223,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "三国",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "223年，刘备死后，诸葛亮派邓芝使吴，重新恢复吴蜀联盟，共同抗魏。",
+    "cause": "刘备死后，蜀汉危弱，诸葛亮执行联吴抗魏方针。",
+    "effect": "吴蜀联盟恢复，稳定了三国鼎立格局。",
+    "examTip": "诸葛亮派邓芝，223年，吴蜀复盟。",
+    "people": [
+      "诸葛亮",
+      "邓芝",
+      "孙权"
+    ],
+    "location": "",
+    "tags": [
+      "吴蜀联盟"
+    ],
+    "related": [
+      "夷陵之战",
+      "诸葛亮北伐"
+    ],
+    "wikiSlug": "蜀吴重新结盟"
+  },
+  {
+    "title": "诸葛亮南征",
+    "year": 225,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "蜀汉",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "225年，诸葛亮率军南征益州南部诸郡，平定南中叛乱，七擒孟获，巩固后方。",
+    "cause": "南中叛乱，威胁蜀汉后方。",
+    "effect": "稳定蜀汉后方，为北伐取得人力物力。",
+    "examTip": "七擒七纵，心战为上，225年。",
+    "people": [
+      "诸葛亮",
+      "孟获"
+    ],
+    "location": "南中（今云南贵州）",
+    "tags": [
+      "南征",
+      "七擒孟获"
+    ],
+    "related": [
+      "诸葛亮北伐"
+    ],
+    "wikiSlug": "诸葛亮南征"
+  },
+  {
+    "title": "朱应康泰出使南海",
+    "year": 226,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "孙吴",
+    "period": "魏晋南北朝",
+    "type": "对外关系",
+    "importance": 2,
+    "summary": "226年，吴将吕岱遣朱应、康泰出使南海诸国，加强了中国与东南亚的联系。",
+    "cause": "吴国欲发展海外关系。",
+    "effect": "中国与南海诸国正式交往开始。",
+    "examTip": "与秦论来华同年，226年。",
+    "people": [
+      "朱应",
+      "康泰",
+      "吕岱"
+    ],
+    "location": "",
+    "tags": [
+      "中外交流",
+      "南海"
+    ],
+    "related": [
+      "大秦商人秦论来华"
+    ],
+    "wikiSlug": "朱应康泰出使南海"
+  },
+  {
+    "title": "大秦商人秦论来华",
+    "year": 226,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "孙吴",
+    "period": "魏晋南北朝",
+    "type": "对外关系",
+    "importance": 2,
+    "summary": "226年，大秦（罗马帝国）商人秦论经交趾至武昌见孙权，开启中欧直接交往。",
+    "cause": "海上丝绸之路贸易发展。",
+    "effect": "促进中西文化交流。",
+    "examTip": "226年，大秦商人秦论，孙权接见。",
+    "people": [
+      "秦论",
+      "孙权"
+    ],
+    "location": "武昌（今湖北鄂州）",
+    "tags": [
+      "中外交流",
+      "大秦"
+    ],
+    "related": [],
+    "wikiSlug": "大秦商人秦论来华"
+  },
+  {
+    "title": "诸葛亮北伐",
+    "year": 228,
+    "yearMode": "range",
+    "yearRange": [
+      228,
+      234
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "蜀汉",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "228-234年，诸葛亮五次北伐曹魏，虽取得局部胜利，但整体未能成功，最终病逝五丈原。",
+    "cause": "蜀汉以恢复汉室为名，北伐曹魏，以攻为守。",
+    "effect": "消耗蜀汉国力，但维持了蜀汉的主动态势。",
+    "examTip": "五次北伐，记住街亭、五丈原。",
+    "people": [
+      "诸葛亮",
+      "姜维",
+      "司马懿",
+      "马谡"
+    ],
+    "location": "汉中（今陕西汉中）",
+    "tags": [
+      "北伐",
+      "蜀汉"
+    ],
+    "related": [
+      "诸葛亮南征",
+      "魏灭蜀"
+    ],
+    "wikiSlug": "诸葛亮北伐"
+  },
+  {
+    "title": "孙权称帝建吴",
+    "year": 229,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "孙吴",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "229年，孙权正式称帝，国号吴，定都建业，三国鼎立完全形成。",
+    "cause": "孙权称王后，势力稳固，称帝以与魏蜀抗衡。",
+    "effect": "三国鼎立局面正式确立。",
+    "examTip": "229年，孙权称帝，吴国建立。",
+    "people": [
+      "孙权"
+    ],
+    "location": "建业（今江苏南京）",
+    "tags": [
+      "东吴建立",
+      "三国鼎立"
+    ],
+    "related": [
+      "孙权称吴王"
+    ],
+    "wikiSlug": "孙权称帝建吴"
+  },
+  {
+    "title": "吴国卫温诸葛直达夷洲",
+    "year": 230,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "孙吴",
+    "period": "魏晋南北朝",
+    "type": "对外关系",
+    "importance": 2,
+    "summary": "230年，孙权派将军卫温、诸葛直率万人船队到达夷洲（台湾），这是大陆与台湾交往的首次明确记载。",
+    "cause": "孙权欲开拓疆域，获取人口。",
+    "effect": "加强了大陆与台湾的联系。",
+    "examTip": "230年，卫温诸葛直，台湾。",
+    "people": [
+      "卫温",
+      "诸葛直",
+      "孙权"
+    ],
+    "location": "夷洲（今台湾）",
+    "tags": [
+      "台湾",
+      "海上交通"
+    ],
+    "related": [],
+    "wikiSlug": "吴国卫温诸葛直达夷洲"
+  },
+  {
+    "title": "邪马台国遣使来魏",
+    "year": 238,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "曹魏",
+    "period": "魏晋南北朝",
+    "type": "对外关系",
+    "importance": 2,
+    "summary": "238年，倭国邪马台女王卑弥呼遣使至洛阳，曹魏回赐，中日官方交往开始。",
+    "cause": "日本欲与中国建立联系。",
+    "effect": "中日官方往来开始。",
+    "examTip": "238年，卑弥呼，魏国。",
+    "people": [
+      "卑弥呼"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "中日交流"
+    ],
+    "related": [],
+    "wikiSlug": "邪马台国遣使来魏"
+  },
+  {
+    "title": "司马懿平辽东",
+    "year": 238,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "曹魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "238年，司马懿率军平定辽东公孙渊，北方统一。",
+    "cause": "公孙渊割据辽东，威胁曹魏。",
+    "effect": "曹魏完全统一北方。",
+    "examTip": "238年，司马懿平辽东。",
+    "people": [
+      "司马懿",
+      "公孙渊"
+    ],
+    "location": "襄平（今辽宁辽阳）",
+    "tags": [
+      "统一北方"
+    ],
+    "related": [],
+    "wikiSlug": "司马懿平辽东"
+  },
+  {
+    "title": "高平陵事变",
+    "year": 249,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "曹魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "249年，司马懿趁曹爽陪同曹芳出城谒陵之机，发动政变，诛杀曹爽集团，控制曹魏政权。",
+    "cause": "曹爽专权，排挤司马懿，司马氏密谋夺权。",
+    "effect": "司马氏专权开始，曹魏名存实亡。",
+    "examTip": "249年，高平陵之变，司马氏夺权。",
+    "people": [
+      "司马懿",
+      "曹爽",
+      "曹芳"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "司马氏夺权",
+      "政变"
+    ],
+    "related": [
+      "西晋建立"
+    ],
+    "wikiSlug": "高平陵事变"
+  },
+  {
+    "title": "淮南三叛",
+    "year": 251,
+    "yearMode": "range",
+    "yearRange": [
+      251,
+      257
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "曹魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "251-257年，王凌、毌丘俭、诸葛诞先后在淮南起兵反对司马氏专权，均被镇压。",
+    "cause": "司马氏专权，亲曹势力不满。",
+    "effect": "司马氏势力更为巩固。",
+    "examTip": "三次反司马氏兵变，注意人名。",
+    "people": [
+      "王凌",
+      "毌丘俭",
+      "诸葛诞",
+      "司马懿",
+      "司马师",
+      "司马昭"
+    ],
+    "location": "寿春（今安徽寿县）",
+    "tags": [
+      "司马氏",
+      "反叛"
+    ],
+    "related": [
+      "高平陵事变"
+    ],
+    "wikiSlug": "淮南三叛"
+  },
+  {
+    "title": "魏灭蜀",
+    "year": 263,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "曹魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "263年，司马昭派邓艾、钟会等伐蜀，邓艾偷渡阴平，直逼成都，后主刘禅出降，蜀汉灭亡。",
+    "cause": "蜀汉后期衰弱，司马昭欲统一天下。",
+    "effect": "蜀汉亡，三国鼎立开始打破。",
+    "examTip": "263年，邓艾阴平偷渡，刘禅降。",
+    "people": [
+      "司马昭",
+      "邓艾",
+      "钟会",
+      "刘禅",
+      "姜维"
+    ],
+    "location": "成都",
+    "tags": [
+      "三国统一",
+      "蜀汉灭亡"
+    ],
+    "related": [
+      "西晋建立"
+    ],
+    "wikiSlug": "魏灭蜀"
+  },
+  {
+    "title": "西晋建立",
+    "year": 265,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "265年，司马炎逼魏元帝禅让，称帝，国号晋，定都洛阳，史称西晋。",
+    "cause": "司马氏长期专权，取代曹魏条件成熟。",
+    "effect": "曹魏灭亡，西晋建立，后统一全国。",
+    "examTip": "265年，司马炎代魏，西晋开始。",
+    "people": [
+      "司马炎",
+      "魏元帝"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "西晋建立",
+      "禅让"
+    ],
+    "related": [
+      "魏灭蜀",
+      "西晋灭吴统一全国"
+    ],
+    "wikiSlug": "西晋建立"
+  },
+  {
+    "title": "西晋分封同姓王",
+    "year": 265,
+    "yearMode": "approx",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "制度",
+    "importance": 2,
+    "summary": "西晋建国后，分封27同姓王，并赋予军权，意在藩卫皇室，但为八王之乱埋下隐患。",
+    "cause": "吸取曹魏不分封宗室而亡的教训。",
+    "effect": "诸王权力过大，导致八王之乱。",
+    "examTip": "分封同姓王，是八王之乱的重要原因。",
+    "people": [
+      "司马炎"
+    ],
+    "location": "",
+    "tags": [
+      "分封制",
+      "八王之乱"
+    ],
+    "related": [
+      "八王之乱"
+    ],
+    "wikiSlug": "西晋分封同姓王"
+  },
+  {
+    "title": "西晋设立国子学",
+    "year": 276,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "文化",
+    "importance": 2,
+    "summary": "276年，西晋设立国子学，专门教育贵族子弟，标志着士族教育特权制度化。",
+    "cause": "门阀士族要求教育特权，与太学分离。",
+    "effect": "士族教育特权得到法律保障，门阀制度强化。",
+    "examTip": "276年，国子学，士族子弟学校。",
+    "people": [],
+    "location": "",
+    "tags": [
+      "教育",
+      "门阀"
+    ],
+    "related": [],
+    "wikiSlug": "西晋设立国子学"
+  },
+  {
+    "title": "西晋灭吴统一全国",
+    "year": 280,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "280年，晋武帝发兵六路灭吴，孙皓投降，西晋统一全国，结束汉末以来分裂局面。",
+    "cause": "晋武帝准备充分，吴主孙皓暴虐，国力衰弱。",
+    "effect": "全国统一，太康之治开始。",
+    "examTip": "280年，王濬楼船下益州，金陵王气黯然收。",
+    "people": [
+      "司马炎",
+      "王濬",
+      "孙皓"
+    ],
+    "location": "建业（今江苏南京）",
+    "tags": [
+      "统一全国",
+      "西晋"
+    ],
+    "related": [
+      "西晋建立",
+      "太康之治"
+    ],
+    "wikiSlug": "西晋灭吴统一全国"
+  },
+  {
+    "title": "西晋颁行占田制",
+    "year": 280,
+    "yearMode": "approx",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "经济",
+    "importance": 3,
+    "summary": "太康年间，西晋颁行占田制，规定农民占田课田、士族占田荫客等，限制土地兼并，保证财政收入。",
+    "cause": "废除屯田制后，需解决土地与劳动力结合问题。",
+    "effect": "促进太康经济繁荣，但未根本解决土地问题。",
+    "examTip": "占田制，一品官占田五十顷，注意与均田制区别。",
+    "people": [
+      "司马炎"
+    ],
+    "location": "",
+    "tags": [
+      "土地制度",
+      "占田制"
+    ],
+    "related": [
+      "太康之治"
+    ],
+    "wikiSlug": "西晋颁行占田制"
+  },
+  {
+    "title": "太康之治",
+    "year": 280,
+    "yearMode": "range",
+    "yearRange": [
+      280,
+      289
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "经济",
+    "importance": 2,
+    "summary": "太康年间（280-289年），晋武帝灭吴后，社会安定，经济恢复，户口增加，出现短暂繁荣，史称太康之治。",
+    "cause": "统一全国，占田制推行，休养生息政策。",
+    "effect": "西晋进入短暂盛世，但奢侈腐化随之而来。",
+    "examTip": "太康之治，与文景之治、贞观之治对比。",
+    "people": [
+      "司马炎"
+    ],
+    "location": "",
+    "tags": [
+      "治世",
+      "西晋"
+    ],
+    "related": [
+      "西晋灭吴统一全国",
+      "西晋颁行占田制"
+    ],
+    "wikiSlug": "太康之治"
+  },
+  {
+    "title": "八王之乱",
+    "year": 291,
+    "yearMode": "range",
+    "yearRange": [
+      291,
+      306
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "291-306年，西晋宗室诸王为争夺中央政权，爆发持续16年的混战，导致西晋衰亡。",
+    "cause": "晋惠帝无能，贾后乱政，诸王觊觎皇权。",
+    "effect": "西晋统治崩溃，社会动荡，引发五胡乱华。",
+    "examTip": "八王之乱，记住八王名字，16年混战。",
+    "people": [
+      "司马炎",
+      "贾南风",
+      "司马伦",
+      "司马冏",
+      "司马颖",
+      "司马颙",
+      "司马越",
+      "司马亮",
+      "司马玮",
+      "司马乂"
+    ],
+    "location": "洛阳（今河南洛阳）",
+    "tags": [
+      "宗室内乱",
+      "西晋衰亡"
+    ],
+    "related": [
+      "西晋分封同姓王"
+    ],
+    "wikiSlug": "八王之乱"
+  },
+  {
+    "title": "前凉建立",
+    "year": 301,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "301年，张轨任凉州刺史，建立前凉政权，保境安民，成为汉族在西北的割据势力。",
+    "cause": "西晋末乱，张轨利用凉州相对安定局面建立政权。",
+    "effect": "前凉保有一方，延续中原文化。",
+    "examTip": "前凉，301年，张轨，汉族政权。",
+    "people": [
+      "张轨"
+    ],
+    "location": "姑臧（今甘肃武威）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "前凉建立"
+  },
+  {
+    "title": "李特起义",
+    "year": 301,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "301年，李特领导秦雍流民在益州起义，304年其子李雄建立成汉政权。",
+    "cause": "流民受官府和地主欺压，被逼返乡。",
+    "effect": "成汉政权建立，为十六国之一。",
+    "examTip": "李特起义，成汉，304年建国。",
+    "people": [
+      "李特",
+      "李雄"
+    ],
+    "location": "成都",
+    "tags": [
+      "流民起义",
+      "成汉"
+    ],
+    "related": [
+      "成汉建立"
+    ],
+    "wikiSlug": "李特起义"
+  },
+  {
+    "title": "张昌起义",
+    "year": 303,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "303年，张昌在江夏利用道教发动起义，控制荆、江等五州，同年被镇压。",
+    "cause": "西晋征发兵役，人民不满。",
+    "effect": "起义失败，但反映了西晋统治危机。",
+    "examTip": "303年，张昌，道教起义。",
+    "people": [
+      "张昌"
+    ],
+    "location": "江夏（今湖北安陆）",
+    "tags": [
+      "流民起义"
+    ],
+    "related": [],
+    "wikiSlug": "张昌起义"
+  },
+  {
+    "title": "刘渊建汉",
+    "year": 304,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "民族关系",
+    "importance": 3,
+    "summary": "304年，匈奴贵族刘渊在左国城起兵反晋，建立汉国，后改称赵，开启五胡十六国时期。",
+    "cause": "西晋内乱，刘渊利用匈奴势力起兵。",
+    "effect": "五胡十六国开始，西晋灭亡加速。",
+    "examTip": "304年，刘渊建汉，五胡十六国开始。",
+    "people": [
+      "刘渊"
+    ],
+    "location": "左国城（今山西离石北）",
+    "tags": [
+      "五胡十六国",
+      "匈奴"
+    ],
+    "related": [
+      "永嘉之乱",
+      "西晋灭亡"
+    ],
+    "wikiSlug": "刘渊建汉"
+  },
+  {
+    "title": "成汉建立",
+    "year": 304,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "成汉",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "304年，李雄在成都称成都王，306年称帝，国号成，后改汉，史称成汉。",
+    "cause": "李特起义后，李雄继续领导，占领益州。",
+    "effect": "成汉割据益州，347年为东晋桓温所灭。",
+    "examTip": "304年，李雄建成汉，记住是十六国之一。",
+    "people": [
+      "李雄"
+    ],
+    "location": "成都",
+    "tags": [
+      "十六国",
+      "成汉"
+    ],
+    "related": [
+      "李特起义"
+    ],
+    "wikiSlug": "成汉建立"
+  },
+  {
+    "title": "王如起义",
+    "year": 310,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "310年，王如领导关中流民在宛城起义，转战汉沔，312年失败。",
+    "cause": "流民被逼返乡，生活无着。",
+    "effect": "起义失败。",
+    "examTip": "310年，王如，关中流民。",
+    "people": [
+      "王如"
+    ],
+    "location": "宛城（今河南南阳）",
+    "tags": [
+      "流民起义"
+    ],
+    "related": [],
+    "wikiSlug": "王如起义"
+  },
+  {
+    "title": "永嘉之乱",
+    "year": 311,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "311年，刘聪派刘曜、王弥攻破洛阳，俘晋怀帝，杀王公士民三万余人，西晋名存实亡。",
+    "cause": "汉国进攻，西晋内乱不已。",
+    "effect": "洛阳陷落，怀帝被俘，西晋统治崩溃。",
+    "examTip": "311年，永嘉之乱，怀帝被俘。",
+    "people": [
+      "刘聪",
+      "刘曜",
+      "王弥",
+      "晋怀帝"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "西晋灭亡",
+      "永嘉之乱"
+    ],
+    "related": [
+      "西晋灭亡",
+      "刘渊建汉"
+    ],
+    "wikiSlug": "永嘉之乱"
+  },
+  {
+    "title": "杜弢起义",
+    "year": 311,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "311年，杜弢领导益梁流民在荆湘起义，转战两湖，后被镇压。",
+    "cause": "流民受欺压，官府欲杀尽流民。",
+    "effect": "起义失败。",
+    "examTip": "311年，杜弢，荆湘流民。",
+    "people": [
+      "杜弢"
+    ],
+    "location": "长沙（今湖南长沙）",
+    "tags": [
+      "流民起义"
+    ],
+    "related": [],
+    "wikiSlug": "杜弢起义"
+  },
+  {
+    "title": "祖逖北伐",
+    "year": 313,
+    "yearMode": "range",
+    "yearRange": [
+      313,
+      321
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "313-321年，祖逖率部曲北伐，收复黄河以南大片土地，后因东晋内乱忧愤而死，北伐成果丧失。",
+    "cause": "祖逖志在恢复中原，请求北伐。",
+    "effect": "北伐一度成功，但最终失败。",
+    "examTip": "中流击楫，祖逖北伐，313年。",
+    "people": [
+      "祖逖"
+    ],
+    "location": "淮阴（今江苏淮安）",
+    "tags": [
+      "北伐",
+      "东晋"
+    ],
+    "related": [
+      "东晋建立"
+    ],
+    "wikiSlug": "祖逖北伐"
+  },
+  {
+    "title": "西晋灭亡",
+    "year": 316,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西晋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "316年，刘曜围攻长安，愍帝出降，西晋灭亡。",
+    "cause": "汉国持续进攻，西晋无力抵抗。",
+    "effect": "西晋亡，司马睿在江南重建东晋。",
+    "examTip": "316年，愍帝出降，西晋亡。",
+    "people": [
+      "刘曜",
+      "晋愍帝"
+    ],
+    "location": "长安",
+    "tags": [
+      "西晋灭亡",
+      "东晋建立"
+    ],
+    "related": [
+      "永嘉之乱",
+      "东晋建立"
+    ],
+    "wikiSlug": "西晋灭亡"
+  },
+  {
+    "title": "东晋建立",
+    "year": 317,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "317年，琅琊王司马睿在江南建康称晋王，次年称帝，建立东晋，偏安江南。",
+    "cause": "西晋灭亡，北方士族南渡，拥立司马睿。",
+    "effect": "东晋偏安江南，形成南北对峙。",
+    "examTip": "317年，司马睿，建康，东晋建立。",
+    "people": [
+      "司马睿",
+      "王导"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "东晋建立",
+      "永嘉之乱"
+    ],
+    "related": [
+      "西晋灭亡",
+      "祖逖北伐"
+    ],
+    "wikiSlug": "东晋建立"
+  },
+  {
+    "title": "前赵建立",
+    "year": 318,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "前赵",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "318年，刘曜迁都长安，改国号为赵，史称前赵。",
+    "cause": "刘聪死后，汉国内乱，刘曜控制政权。",
+    "effect": "前赵与后赵对立。",
+    "examTip": "318年，刘曜，前赵。",
+    "people": [
+      "刘曜"
+    ],
+    "location": "长安",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "后赵建立"
+    ],
+    "wikiSlug": "前赵建立"
+  },
+  {
+    "title": "后赵建立",
+    "year": 319,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "后赵",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "319年，石勒在河北称赵王，建立后赵，定都襄国。",
+    "cause": "石勒脱离汉国，自立政权。",
+    "effect": "后赵逐渐统一北方大部。",
+    "examTip": "319年，石勒，后赵。",
+    "people": [
+      "石勒"
+    ],
+    "location": "襄国（今河北邢台）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "前赵建立",
+      "后赵灭前赵"
+    ],
+    "wikiSlug": "后赵建立"
+  },
+  {
+    "title": "王敦之乱",
+    "year": 322,
+    "yearMode": "range",
+    "yearRange": [
+      322,
+      324
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "322-324年，王敦两次起兵叛乱，攻入建康，后病死，叛乱平定。",
+    "cause": "司马睿猜忌王氏，王敦不满。",
+    "effect": "王氏势力受挫，但门阀政治继续。",
+    "examTip": "王与马，共天下，王敦之乱。",
+    "people": [
+      "王敦",
+      "司马睿",
+      "王导",
+      "刘隗",
+      "刁协"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "门阀",
+      "叛乱"
+    ],
+    "related": [
+      "东晋建立"
+    ],
+    "wikiSlug": "王敦之乱"
+  },
+  {
+    "title": "苏峻之乱",
+    "year": 327,
+    "yearMode": "range",
+    "yearRange": [
+      327,
+      329
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "327-329年，苏峻、祖约以讨庾亮为名起兵叛乱，攻入建康，后被陶侃、温峤等平定。",
+    "cause": "庾亮专权，征调苏峻，引发不满。",
+    "effect": "东晋局势稳定，但门阀继续控制朝政。",
+    "examTip": "苏峻之乱，陶侃平叛。",
+    "people": [
+      "苏峻",
+      "祖约",
+      "庾亮",
+      "陶侃",
+      "温峤"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "叛乱",
+      "门阀"
+    ],
+    "related": [],
+    "wikiSlug": "苏峻之乱"
+  },
+  {
+    "title": "后赵灭前赵",
+    "year": 329,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "329年，石勒在城皋之战中俘刘曜，灭前赵，统一北方大部。",
+    "cause": "前赵与后赵争霸。",
+    "effect": "后赵成为北方最强大的政权。",
+    "examTip": "329年，石勒灭前赵。",
+    "people": [
+      "石勒",
+      "刘曜"
+    ],
+    "location": "成皋（今河南荥阳）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "后赵建立",
+      "前赵建立"
+    ],
+    "wikiSlug": "后赵灭前赵"
+  },
+  {
+    "title": "石勒称帝",
+    "year": 330,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "后赵",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "330年，石勒即皇帝位，后赵达到全盛。",
+    "cause": "后赵统一北方，势力强大。",
+    "effect": "后赵进入鼎盛时期。",
+    "examTip": "330年，石勒称帝。",
+    "people": [
+      "石勒"
+    ],
+    "location": "襄国（今河北邢台）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "后赵灭前赵"
+    ],
+    "wikiSlug": "石勒称帝"
+  },
+  {
+    "title": "前燕建立",
+    "year": 337,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "前燕",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "337年，慕容皝自称燕王，建立前燕，迁都龙城。",
+    "cause": "慕容部强大，慕容皝称王建国。",
+    "effect": "前燕成为东北强大政权，后进入中原。",
+    "examTip": "337年，慕容皝，前燕。",
+    "people": [
+      "慕容皝"
+    ],
+    "location": "棘城（今辽宁义县北）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "前燕建立"
+  },
+  {
+    "title": "代国建立",
+    "year": 338,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "338年，拓跋什翼犍即代王位，建立代国，后为前秦所灭，北魏即其延续。",
+    "cause": "拓跋部崛起，什翼犍仿魏晋制度建国。",
+    "effect": "代国成为北魏前身。",
+    "examTip": "338年，什翼犍，代国，北魏前身。",
+    "people": [
+      "拓跋什翼犍"
+    ],
+    "location": "盛乐（今内蒙古和林格尔）",
+    "tags": [
+      "十六国",
+      "北魏"
+    ],
+    "related": [
+      "北魏建立"
+    ],
+    "wikiSlug": "代国建立"
+  },
+  {
+    "title": "桓温灭成汉",
+    "year": 347,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "347年，桓温率军伐蜀，灭成汉，收复益州。",
+    "cause": "成汉衰弱，桓温欲立功。",
+    "effect": "东晋控制益州，桓温声望大增。",
+    "examTip": "347年，桓温灭成汉。",
+    "people": [
+      "桓温"
+    ],
+    "location": "成都",
+    "tags": [
+      "东晋",
+      "成汉"
+    ],
+    "related": [
+      "桓温北伐"
+    ],
+    "wikiSlug": "桓温灭成汉"
+  },
+  {
+    "title": "梁犊起义",
+    "year": 349,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "后赵",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "349年，梁犊领导戍卒起义，攻下邺城，后赵统治动摇。",
+    "cause": "石虎暴政，戍卒起义。",
+    "effect": "后赵走向衰落。",
+    "examTip": "349年，梁犊起义，后赵。",
+    "people": [
+      "梁犊",
+      "石虎"
+    ],
+    "location": "雍城（今陕西凤翔县南）",
+    "tags": [
+      "起义"
+    ],
+    "related": [
+      "冉闵建魏"
+    ],
+    "wikiSlug": "梁犊起义"
+  },
+  {
+    "title": "冉闵建魏",
+    "year": 350,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "350年，冉闵杀石鉴，自立为帝，国号魏，史称冉魏。",
+    "cause": "冉闵控制后赵政权，屠杀胡人，自立。",
+    "effect": "冉魏建立，但很快被前燕所灭。",
+    "examTip": "350年，冉闵，杀胡令。",
+    "people": [
+      "冉闵"
+    ],
+    "location": "邺城（今河北临漳）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "前燕灭冉魏"
+    ],
+    "wikiSlug": "冉闵建魏"
+  },
+  {
+    "title": "前秦建立",
+    "year": 351,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "前秦",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "351年，氐族苻健在长安称天王，国号秦，史称前秦。",
+    "cause": "苻健率部入关，占据关中。",
+    "effect": "前秦成为北方重要政权，后统一北方。",
+    "examTip": "351年，苻健，前秦。",
+    "people": [
+      "苻健"
+    ],
+    "location": "长安",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "前秦统一北方"
+    ],
+    "wikiSlug": "前秦建立"
+  },
+  {
+    "title": "前燕灭冉魏",
+    "year": 352,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "352年，前燕慕容儁击败冉闵，灭冉魏，占据河北。",
+    "cause": "冉魏与后赵残部混战，前燕趁机南下。",
+    "effect": "前燕进入中原，势力扩大。",
+    "examTip": "352年，慕容儁灭冉魏。",
+    "people": [
+      "慕容儁",
+      "冉闵"
+    ],
+    "location": "魏昌城（今河北无极）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "冉闵建魏"
+    ],
+    "wikiSlug": "前燕灭冉魏"
+  },
+  {
+    "title": "桓温北伐",
+    "year": 354,
+    "yearMode": "range",
+    "yearRange": [
+      354,
+      369
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "桓温三次北伐（354年、356年、369年），一度收复洛阳，但最终失败。",
+    "cause": "桓温欲借北伐提高声望，取代东晋。",
+    "effect": "北伐失败，但桓温控制东晋朝政。",
+    "examTip": "桓温三次北伐，369年枋头之败。",
+    "people": [
+      "桓温"
+    ],
+    "location": "洛阳（今河南洛阳）",
+    "tags": [
+      "北伐"
+    ],
+    "related": [
+      "桓温灭成汉"
+    ],
+    "wikiSlug": "桓温北伐"
+  },
+  {
+    "title": "前秦苻坚王猛改革",
+    "year": 357,
+    "yearMode": "range",
+    "yearRange": [
+      357,
+      375
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "前秦",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "357年苻坚即位，任用王猛进行改革，提倡儒学，整顿吏治，发展经济，使前秦强大。",
+    "cause": "苻坚欲统一北方，需增强国力。",
+    "effect": "前秦迅速强大，统一北方。",
+    "examTip": "王猛改革，苻坚，前秦富强。",
+    "people": [
+      "苻坚",
+      "王猛"
+    ],
+    "location": "长安",
+    "tags": [
+      "改革",
+      "前秦"
+    ],
+    "related": [
+      "前秦统一北方",
+      "淝水之战"
+    ],
+    "wikiSlug": "前秦苻坚王猛改革"
+  },
+  {
+    "title": "前秦灭前燕",
+    "year": 370,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "370年，前秦苻坚派王猛攻灭前燕，俘慕容暐，占有关东六州。",
+    "cause": "前秦强大，前燕内乱。",
+    "effect": "前秦势力大增，加速统一北方。",
+    "examTip": "370年，王猛灭前燕。",
+    "people": [
+      "苻坚",
+      "王猛",
+      "慕容暐"
+    ],
+    "location": "邺城（今河北临漳）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "前秦统一北方"
+    ],
+    "wikiSlug": "前秦灭前燕"
+  },
+  {
+    "title": "前秦统一北方",
+    "year": 376,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "376年，前秦灭前凉、代国，统一北方，与东晋形成对峙。",
+    "cause": "前秦改革后国力强盛，苻坚欲统一天下。",
+    "effect": "北方暂时统一，但淝水之战后瓦解。",
+    "examTip": "376年，苻坚统一北方，代国灭，北魏前身。",
+    "people": [
+      "苻坚"
+    ],
+    "location": "",
+    "tags": [
+      "统一北方",
+      "前秦"
+    ],
+    "related": [
+      "前秦灭前燕",
+      "淝水之战"
+    ],
+    "wikiSlug": "前秦统一北方"
+  },
+  {
+    "title": "淝水之战",
+    "year": 383,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "383年，前秦苻坚率大军南征，东晋谢安派谢石、谢玄等率北府兵在淝水大败秦军，前秦政权瓦解。",
+    "cause": "苻坚企图统一南北，不顾王猛遗言冒然南征。",
+    "effect": "前秦崩溃，北方再次分裂，南北对峙继续。",
+    "examTip": "淝水之战，风声鹤唳，草木皆兵。",
+    "people": [
+      "苻坚",
+      "谢安",
+      "谢石",
+      "谢玄",
+      "刘牢之",
+      "朱序"
+    ],
+    "location": "淝水（今安徽寿县东南）",
+    "tags": [
+      "以少胜多",
+      "淝水之战"
+    ],
+    "related": [
+      "前秦统一北方"
+    ],
+    "wikiSlug": "淝水之战"
+  },
+  {
+    "title": "后燕建立",
+    "year": 384,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "后燕",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "384年，慕容垂乘前秦败亡，在中山称燕王，建立后燕。",
+    "cause": "淝水之战后前秦瓦解，慕容垂复国。",
+    "effect": "后燕成为河北强国。",
+    "examTip": "384年，慕容垂，后燕。",
+    "people": [
+      "慕容垂"
+    ],
+    "location": "中山（今河北定县）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "淝水之战"
+    ],
+    "wikiSlug": "后燕建立"
+  },
+  {
+    "title": "后秦建立",
+    "year": 384,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "后秦",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "384年，羌族姚苌在关中称秦王，建立后秦。",
+    "cause": "姚苌背叛苻坚，自立。",
+    "effect": "后秦占据关中，成为十六国后期重要政权。",
+    "examTip": "384年，姚苌，后秦。",
+    "people": [
+      "姚苌"
+    ],
+    "location": "长安",
+    "tags": [
+      "十六国"
+    ],
+    "related": [
+      "淝水之战"
+    ],
+    "wikiSlug": "后秦建立"
+  },
+  {
+    "title": "西秦建立",
+    "year": 385,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西秦",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "385年，乞伏国仁在陇西称大单于，建立西秦。",
+    "cause": "前秦瓦解，乞伏部独立。",
+    "effect": "西秦割据陇西。",
+    "examTip": "385年，乞伏国仁，西秦。",
+    "people": [
+      "乞伏国仁"
+    ],
+    "location": "苑川（今甘肃榆中）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "西秦建立"
+  },
+  {
+    "title": "后凉建立",
+    "year": 385,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "后凉",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "385年，吕光占据凉州，建立后凉。",
+    "cause": "前秦瓦解，吕光割据凉州。",
+    "effect": "后凉控制河西。",
+    "examTip": "385年，吕光，后凉。",
+    "people": [
+      "吕光"
+    ],
+    "location": "姑臧（今甘肃武威）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "后凉建立"
+  },
+  {
+    "title": "西燕建立",
+    "year": 385,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "十六国",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "385年，慕容冲在关中称帝，建立西燕。",
+    "cause": "鲜卑慕容部另建政权。",
+    "effect": "西燕短暂割据。",
+    "examTip": "385年，慕容冲，西燕。",
+    "people": [
+      "慕容冲"
+    ],
+    "location": "长安",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "西燕建立"
+  },
+  {
+    "title": "北魏建立",
+    "year": 386,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "386年，拓跋珪在盛乐重建代国，改国号为魏，史称北魏。",
+    "cause": "前秦瓦解，拓跋珪复兴部落。",
+    "effect": "北魏崛起，后统一北方。",
+    "examTip": "386年，拓跋珪，北魏建立。",
+    "people": [
+      "拓跋珪"
+    ],
+    "location": "盛乐（今内蒙古和林格尔）",
+    "tags": [
+      "北魏",
+      "北朝"
+    ],
+    "related": [
+      "代国建立",
+      "北魏统一北方"
+    ],
+    "wikiSlug": "北魏建立"
+  },
+  {
+    "title": "参合陂之战",
+    "year": 395,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "395年，北魏拓跋珪在参合陂大败后燕军，歼灭后燕主力。",
+    "cause": "后燕强迫北魏献马，关系恶化。",
+    "effect": "后燕元气大伤，北魏成为北方强国。",
+    "examTip": "395年，参合陂，北魏崛起。",
+    "people": [
+      "拓跋珪",
+      "慕容宝"
+    ],
+    "location": "参合陂（今山西大同西）",
+    "tags": [
+      "北魏"
+    ],
+    "related": [
+      "北魏建立"
+    ],
+    "wikiSlug": "参合陂之战"
+  },
+  {
+    "title": "南凉建立",
+    "year": 397,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南凉",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "397年，秃发乌孤在廉川堡称王，建立南凉。",
+    "cause": "后凉衰弱，秃发部独立。",
+    "effect": "南凉割据河西。",
+    "examTip": "397年，秃发乌孤，南凉。",
+    "people": [
+      "秃发乌孤"
+    ],
+    "location": "廉川堡（今青海民和西北）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "南凉建立"
+  },
+  {
+    "title": "北凉建立",
+    "year": 397,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北凉",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "397年，沮渠蒙逊起兵反后凉，建立北凉。",
+    "cause": "后凉统治残暴，沮渠蒙逊起兵。",
+    "effect": "北凉占据河西。",
+    "examTip": "397年，沮渠蒙逊，北凉。",
+    "people": [
+      "沮渠蒙逊"
+    ],
+    "location": "张掖",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "北凉建立"
+  },
+  {
+    "title": "南燕建立",
+    "year": 398,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南燕",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "398年，慕容德在广固称燕王，建立南燕。",
+    "cause": "后燕分裂，慕容德南迁。",
+    "effect": "南燕控制山东。",
+    "examTip": "398年，慕容德，南燕。",
+    "people": [
+      "慕容德"
+    ],
+    "location": "广固（今山东青州）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "南燕建立"
+  },
+  {
+    "title": "北魏道武帝封建化改革",
+    "year": 398,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "398年，拓跋珪迁都平城，称帝，离散部落，计口授田，仿汉制立官制礼仪，开始封建化。",
+    "cause": "北魏进入中原，需适应封建统治。",
+    "effect": "北魏开始向封建制过渡。",
+    "examTip": "398年，离散部落，计口授田。",
+    "people": [
+      "拓跋珪"
+    ],
+    "location": "平城（今山西大同）",
+    "tags": [
+      "改革",
+      "北魏"
+    ],
+    "related": [
+      "北魏建立"
+    ],
+    "wikiSlug": "北魏道武帝封建化改革"
+  },
+  {
+    "title": "孙恩卢循起义",
+    "year": 399,
+    "yearMode": "range",
+    "yearRange": [
+      399,
+      411
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "399-411年，孙恩、卢循以五斗米道聚众起义，转战东南，沉重打击东晋门阀。",
+    "cause": "东晋赋役繁重，征发奴客当兵。",
+    "effect": "门阀士族衰落，刘裕趁机崛起。",
+    "examTip": "孙恩卢循起义，五斗米道，399年。",
+    "people": [
+      "孙恩",
+      "卢循",
+      "刘裕"
+    ],
+    "location": "会稽（今浙江绍兴）",
+    "tags": [
+      "起义",
+      "东晋"
+    ],
+    "related": [
+      "刘裕建宋"
+    ],
+    "wikiSlug": "孙恩卢循起义"
+  },
+  {
+    "title": "法显西行",
+    "year": 399,
+    "yearMode": "range",
+    "yearRange": [
+      399,
+      413
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "文化",
+    "importance": 2,
+    "summary": "399年，法显从长安出发，西行取经，游历印度、斯里兰卡，413年回国，著《佛国记》。",
+    "cause": "法显为求佛法真经。",
+    "effect": "促进中印文化交流。",
+    "examTip": "法显西行，早于玄奘，399年。",
+    "people": [
+      "法显"
+    ],
+    "location": "长安",
+    "tags": [
+      "佛教",
+      "中外交流"
+    ],
+    "related": [],
+    "wikiSlug": "法显西行"
+  },
+  {
+    "title": "西凉建立",
+    "year": 400,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西凉",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "400年，李暠在敦煌称凉公，建立西凉。",
+    "cause": "北凉分裂，李暠自立。",
+    "effect": "西凉存在21年，后被北凉吞并。",
+    "examTip": "400年，李暠，西凉。",
+    "people": [
+      "李暠"
+    ],
+    "location": "敦煌",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "西凉建立"
+  },
+  {
+    "title": "桓玄之乱",
+    "year": 402,
+    "yearMode": "range",
+    "yearRange": [
+      402,
+      404
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "402年，桓玄攻入建康，控制朝政，403年称帝，国号楚，404年被刘裕击败。",
+    "cause": "桓玄坐大，取代东晋。",
+    "effect": "刘裕崛起，东晋名存实亡。",
+    "examTip": "桓玄称帝，刘裕讨伐，404年。",
+    "people": [
+      "桓玄",
+      "刘裕"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "篡位"
+    ],
+    "related": [
+      "刘裕建宋"
+    ],
+    "wikiSlug": "桓玄之乱"
+  },
+  {
+    "title": "夏建立",
+    "year": 407,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "大夏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "407年，赫连勃勃称天王，建立夏国，都统万城。",
+    "cause": "赫连勃勃背叛后秦。",
+    "effect": "夏割据关中，后为北魏所灭。",
+    "examTip": "407年，赫连勃勃，夏。",
+    "people": [
+      "赫连勃勃"
+    ],
+    "location": "高平（今宁夏固原）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "夏建立"
+  },
+  {
+    "title": "北燕建立",
+    "year": 409,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北燕",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "409年，冯跋建北燕，都龙城。",
+    "cause": "后燕内乱，冯跋夺权。",
+    "effect": "北燕割据辽东。",
+    "examTip": "409年，冯跋，北燕。",
+    "people": [
+      "冯跋"
+    ],
+    "location": "龙城（今辽宁朝阳）",
+    "tags": [
+      "十六国"
+    ],
+    "related": [],
+    "wikiSlug": "北燕建立"
+  },
+  {
+    "title": "刘裕灭南燕",
+    "year": 410,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "410年，刘裕北伐灭南燕，收复青州。",
+    "cause": "刘裕北伐，消灭割据。",
+    "effect": "刘裕声望提高。",
+    "examTip": "410年，刘裕灭南燕。",
+    "people": [
+      "刘裕"
+    ],
+    "location": "广固（今山东青州）",
+    "tags": [
+      "北伐"
+    ],
+    "related": [
+      "刘裕灭后秦"
+    ],
+    "wikiSlug": "刘裕灭南燕"
+  },
+  {
+    "title": "刘裕灭后秦",
+    "year": 417,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "417年，刘裕北伐攻灭后秦，收复洛阳、长安。",
+    "cause": "刘裕欲建功以代晋。",
+    "effect": "刘裕势力极盛，但长安得而复失。",
+    "examTip": "417年，刘裕灭后秦。",
+    "people": [
+      "刘裕"
+    ],
+    "location": "长安",
+    "tags": [
+      "北伐"
+    ],
+    "related": [
+      "刘裕建宋"
+    ],
+    "wikiSlug": "刘裕灭后秦"
+  },
+  {
+    "title": "刘裕建宋",
+    "year": 420,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南朝宋",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "420年，刘裕废晋恭帝，自立为帝，国号宋，东晋亡，南朝开始。",
+    "cause": "刘裕掌握军政大权，取代东晋条件成熟。",
+    "effect": "南朝开始，南北朝对峙。",
+    "examTip": "420年，刘裕建宋，南朝开始。",
+    "people": [
+      "刘裕"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "南朝",
+      "宋"
+    ],
+    "related": [
+      "元嘉之治"
+    ],
+    "wikiSlug": "刘裕建宋"
+  },
+  {
+    "title": "元嘉之治",
+    "year": 424,
+    "yearMode": "range",
+    "yearRange": [
+      424,
+      453
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南朝宋",
+    "period": "魏晋南北朝",
+    "type": "经济",
+    "importance": 2,
+    "summary": "宋文帝刘义隆在位期间，政治清明，经济恢复，社会安定，史称元嘉之治。",
+    "cause": "宋文帝继续刘裕的政策，休养生息。",
+    "effect": "刘宋前期强盛，但元嘉之战后衰落。",
+    "examTip": "元嘉之治，宋文帝，424-453年。",
+    "people": [
+      "刘义隆"
+    ],
+    "location": "",
+    "tags": [
+      "治世",
+      "南朝"
+    ],
+    "related": [
+      "元嘉之战"
+    ],
+    "wikiSlug": "元嘉之治"
+  },
+  {
+    "title": "寇谦之改革道教",
+    "year": 424,
+    "yearMode": "approx",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "文化",
+    "importance": 2,
+    "summary": "北魏太武帝时，寇谦之清整道教，创立新天师道，被尊为国教，促进道教官方化。",
+    "cause": "太武帝支持，寇谦之改造道教。",
+    "effect": "道教成为北魏国教，地位在佛教之上。",
+    "examTip": "寇谦之，新天师道，北魏太武帝。",
+    "people": [
+      "寇谦之",
+      "拓跋焘"
+    ],
+    "location": "平城",
+    "tags": [
+      "道教"
+    ],
+    "related": [
+      "北魏太武帝灭佛"
+    ],
+    "wikiSlug": "寇谦之改革道教"
+  },
+  {
+    "title": "北魏统一北方",
+    "year": 439,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "439年，北魏太武帝拓跋焘灭北凉，统一北方，南北朝对峙局面正式形成。",
+    "cause": "北魏国力强盛，逐步消灭各割据政权。",
+    "effect": "北方统一，南北朝对峙。",
+    "examTip": "439年，北魏统一北方，北朝开始。",
+    "people": [
+      "拓跋焘"
+    ],
+    "location": "",
+    "tags": [
+      "统一北方",
+      "北魏"
+    ],
+    "related": [
+      "北魏建立",
+      "元嘉之战"
+    ],
+    "wikiSlug": "北魏统一北方"
+  },
+  {
+    "title": "北魏太武帝灭佛",
+    "year": 446,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "文化",
+    "importance": 2,
+    "summary": "446年，北魏太武帝下诏灭佛，焚毁寺院佛像，令僧侣还俗，佛教受沉重打击。",
+    "cause": "太武帝受崔浩、寇谦之影响，抑制佛教。",
+    "effect": "佛教在北方遭受重创，但太武帝死后复兴。",
+    "examTip": "太武帝灭佛，三武一宗之一。",
+    "people": [
+      "拓跋焘",
+      "崔浩"
+    ],
+    "location": "",
+    "tags": [
+      "灭佛",
+      "北魏"
+    ],
+    "related": [
+      "寇谦之改革道教"
+    ],
+    "wikiSlug": "北魏太武帝灭佛"
+  },
+  {
+    "title": "国史案崔浩被杀",
+    "year": 450,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "450年，崔浩因修国史“备而不典”被诛，牵连数千人，汉化改革受挫。",
+    "cause": "鲜卑贵族不满崔浩汉化改革，借国史案打击。",
+    "effect": "汉化改革失败，民族矛盾加剧。",
+    "examTip": "国史案，崔浩被杀，450年。",
+    "people": [
+      "崔浩",
+      "拓跋焘"
+    ],
+    "location": "平城",
+    "tags": [
+      "北魏",
+      "汉化"
+    ],
+    "related": [
+      "北魏太武帝灭佛"
+    ],
+    "wikiSlug": "国史案崔浩被杀"
+  },
+  {
+    "title": "元嘉之战",
+    "year": 450,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南朝宋",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "450年，宋文帝北伐北魏，东线王玄谟败于滑台，魏军南下至瓜步，刘宋损失惨重，北强南弱态势形成。",
+    "cause": "宋文帝欲收复中原，北魏反击。",
+    "effect": "刘宋国力大损，防线南移，南北朝对峙北强南弱。",
+    "examTip": "450年，元嘉之战，封狼居胥的梦想破灭。",
+    "people": [
+      "刘义隆",
+      "拓跋焘",
+      "王玄谟",
+      "柳元景"
+    ],
+    "location": "瓜步（今江苏六合）",
+    "tags": [
+      "宋魏战争",
+      "元嘉之战"
+    ],
+    "related": [
+      "元嘉之治",
+      "北魏统一北方"
+    ],
+    "wikiSlug": "元嘉之战"
+  },
+  {
+    "title": "萧齐建立",
+    "year": 479,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南齐",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "479年，萧道成逼宋顺帝禅让，建立齐朝，史称南齐。",
+    "cause": "刘宋内乱，萧道成篡位。",
+    "effect": "南齐建立，但检籍政策引发唐寓之起义。",
+    "examTip": "479年，萧道成建齐。",
+    "people": [
+      "萧道成"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "南朝",
+      "齐"
+    ],
+    "related": [
+      "唐寓之起义"
+    ],
+    "wikiSlug": "萧齐建立"
+  },
+  {
+    "title": "北魏俸禄制改革",
+    "year": 484,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "制度",
+    "importance": 2,
+    "summary": "484年，北魏孝文帝颁行俸禄制，官吏由国家统一发放俸禄，严禁贪污，吏治为之一清。",
+    "cause": "北魏前期官吏无俸，贪污成风，需整顿吏治。",
+    "effect": "吏治改善，为改革创造条件。",
+    "examTip": "484年，俸禄制，孝文帝改革起步。",
+    "people": [
+      "孝文帝",
+      "冯太后"
+    ],
+    "location": "平城",
+    "tags": [
+      "改革",
+      "北魏"
+    ],
+    "related": [
+      "北魏均田制颁行"
+    ],
+    "wikiSlug": "北魏俸禄制改革"
+  },
+  {
+    "title": "北魏均田制颁行",
+    "year": 485,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "经济",
+    "importance": 3,
+    "summary": "485年，北魏冯太后采纳李安世建议，颁行均田制，按人口分配土地，限制土地兼并，保证了国家赋税。",
+    "cause": "土地兼并严重，国家需要将农民束缚于土地。",
+    "effect": "北方农业恢复，国家财政好转，为隋唐均田制奠基。",
+    "examTip": "485年，均田制，露田、桑田，奴婢受田，记住与占田制区别。",
+    "people": [
+      "冯太后",
+      "李安世"
+    ],
+    "location": "",
+    "tags": [
+      "土地制度",
+      "均田制"
+    ],
+    "related": [
+      "北魏三长制",
+      "北魏新租调制"
+    ],
+    "wikiSlug": "北魏均田制颁行"
+  },
+  {
+    "title": "唐寓之起义",
+    "year": 485,
+    "yearMode": "range",
+    "yearRange": [
+      485,
+      486
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南齐",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "485年，唐寓之因反对南齐检籍政策，在浙江起义，攻占钱塘，称帝，486年被镇压。",
+    "cause": "南齐检籍不当，却籍户不满。",
+    "effect": "南齐停止检籍，起义失败。",
+    "examTip": "唐寓之起义，检籍，485年。",
+    "people": [
+      "唐寓之"
+    ],
+    "location": "钱塘（今浙江杭州）",
+    "tags": [
+      "起义",
+      "检籍"
+    ],
+    "related": [
+      "萧齐建立"
+    ],
+    "wikiSlug": "唐寓之起义"
+  },
+  {
+    "title": "北魏三长制",
+    "year": 486,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "制度",
+    "importance": 3,
+    "summary": "486年，北魏李冲建议实行三长制，五家为邻，五邻为里，五里为党，取代宗主督护制，加强基层控制。",
+    "cause": "宗主督护制造成户口隐漏，政府收入减少。",
+    "effect": "政府控制的户口增加，租调收入增加，国家权力深入基层。",
+    "examTip": "三长制，486年，李冲，邻、里、党。",
+    "people": [
+      "李冲",
+      "冯太后"
+    ],
+    "location": "",
+    "tags": [
+      "基层制度",
+      "北魏"
+    ],
+    "related": [
+      "北魏均田制颁行",
+      "北魏新租调制"
+    ],
+    "wikiSlug": "北魏三长制"
+  },
+  {
+    "title": "北魏新租调制",
+    "year": 486,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "经济",
+    "importance": 2,
+    "summary": "486年，北魏颁行新租调制，一夫一妇出帛一匹、粟二石，减轻农民负担，废除九品混通。",
+    "cause": "配合均田制，调整赋税。",
+    "effect": "农民负担相对固定，促进生产。",
+    "examTip": "486年，新租调制，一夫一妇。",
+    "people": [
+      "李冲"
+    ],
+    "location": "",
+    "tags": [
+      "赋税制度",
+      "北魏"
+    ],
+    "related": [
+      "北魏均田制颁行",
+      "北魏三长制"
+    ],
+    "wikiSlug": "北魏新租调制"
+  },
+  {
+    "title": "北魏迁都洛阳",
+    "year": 494,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "494年，北魏孝文帝以南伐为名，迁都洛阳，以利汉化及控制中原。",
+    "cause": "平城偏北，粮食供应困难，不利经略南方，且保守势力强大。",
+    "effect": "为汉化改革铺平道路，洛阳成为北方政治文化中心。",
+    "examTip": "494年，孝文帝迁都洛阳，假装南伐。",
+    "people": [
+      "孝文帝"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "迁都",
+      "北魏"
+    ],
+    "related": [
+      "北魏孝文帝汉化改革"
+    ],
+    "wikiSlug": "北魏迁都洛阳"
+  },
+  {
+    "title": "北魏孝文帝汉化改革",
+    "year": 494,
+    "yearMode": "range",
+    "yearRange": [
+      494,
+      499
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "民族关系",
+    "importance": 3,
+    "summary": "494-499年，孝文帝推行汉化措施：禁胡服、断北语、改汉姓、定族姓，促进民族融合。",
+    "cause": "适应中原统治，减少民族隔阂。",
+    "effect": "加速鲜卑族封建化，促进民族大融合，但引入门阀制度。",
+    "examTip": "孝文帝汉化，改姓元，禁胡服，断北语。",
+    "people": [
+      "孝文帝"
+    ],
+    "location": "洛阳",
+    "tags": [
+      "汉化",
+      "民族融合"
+    ],
+    "related": [
+      "北魏迁都洛阳",
+      "北魏均田制颁行"
+    ],
+    "wikiSlug": "北魏孝文帝汉化改革"
+  },
+  {
+    "title": "萧梁建立",
+    "year": 502,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "萧梁",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "502年，萧衍代齐建梁，是为梁武帝，在位47年。",
+    "cause": "南齐内乱，萧衍夺权。",
+    "effect": "梁朝建立，前期较稳定，后期爆发侯景之乱。",
+    "examTip": "502年，萧衍建梁，梁武帝。",
+    "people": [
+      "萧衍"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "南朝",
+      "梁"
+    ],
+    "related": [
+      "侯景之乱"
+    ],
+    "wikiSlug": "萧梁建立"
+  },
+  {
+    "title": "范缜著《神灭论》",
+    "year": 507,
+    "yearMode": "approx",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "萧梁",
+    "period": "魏晋南北朝",
+    "type": "文化",
+    "importance": 2,
+    "summary": "约507年，范缜发表《神灭论》，提出形神相即、形谢神灭的无神论思想，批判佛教。",
+    "cause": "佛教盛行，范缜反对佛教因果报应说。",
+    "effect": "引发思想界大辩论，无神论思想发展。",
+    "examTip": "范缜，神灭论，形神相即。",
+    "people": [
+      "范缜",
+      "萧衍"
+    ],
+    "location": "",
+    "tags": [
+      "无神论",
+      "佛教"
+    ],
+    "related": [],
+    "wikiSlug": "范缜著《神灭论》"
+  },
+  {
+    "title": "六镇起义",
+    "year": 523,
+    "yearMode": "range",
+    "yearRange": [
+      523,
+      525
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "523年，破六韩拔陵在沃野镇起义，六镇军民响应，北魏统治动摇，后依靠柔然镇压。",
+    "cause": "边镇地位下降，镇兵待遇恶化。",
+    "effect": "北魏统治瓦解，继发河北大起义。",
+    "examTip": "六镇大起义，523年，破六韩拔陵。",
+    "people": [
+      "破六韩拔陵"
+    ],
+    "location": "沃野镇（今内蒙古五原东北）",
+    "tags": [
+      "起义",
+      "北魏"
+    ],
+    "related": [
+      "河北大起义",
+      "河阴之变"
+    ],
+    "wikiSlug": "六镇起义"
+  },
+  {
+    "title": "关陇起义",
+    "year": 524,
+    "yearMode": "range",
+    "yearRange": [
+      524,
+      531
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "524年，莫折大提在秦州起义，后万俟丑奴继续，530年失败。",
+    "cause": "北魏统治腐败，民族压迫。",
+    "effect": "起义失败，但加速北魏分裂。",
+    "examTip": "关陇起义，莫折大提，万俟丑奴。",
+    "people": [
+      "莫折大提",
+      "万俟丑奴"
+    ],
+    "location": "秦州（今甘肃天水）",
+    "tags": [
+      "起义"
+    ],
+    "related": [
+      "六镇起义"
+    ],
+    "wikiSlug": "关陇起义"
+  },
+  {
+    "title": "河北大起义",
+    "year": 525,
+    "yearMode": "range",
+    "yearRange": [
+      525,
+      528
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "525年，杜洛周、鲜于修礼等率六镇流民在河北起义，后葛荣统率，拥众数十万，528年被尔朱荣镇压。",
+    "cause": "六镇兵民被迁河北，生活无着。",
+    "effect": "沉重打击北魏，尔朱荣趁机崛起。",
+    "examTip": "河北大起义，葛荣，528年滏口之战。",
+    "people": [
+      "杜洛周",
+      "鲜于修礼",
+      "葛荣",
+      "尔朱荣"
+    ],
+    "location": "上谷（今河北怀来）",
+    "tags": [
+      "起义",
+      "北魏"
+    ],
+    "related": [
+      "六镇起义",
+      "河阴之变"
+    ],
+    "wikiSlug": "河北大起义"
+  },
+  {
+    "title": "邢杲起义",
+    "year": 528,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 2,
+    "summary": "528年，邢杲领导河北流民在山东起义，后被镇压。",
+    "cause": "流民被欺压。",
+    "effect": "起义失败。",
+    "examTip": "528年，邢杲，山东起义。",
+    "people": [
+      "邢杲"
+    ],
+    "location": "青州（今山东青州）",
+    "tags": [
+      "起义"
+    ],
+    "related": [
+      "河北大起义"
+    ],
+    "wikiSlug": "邢杲起义"
+  },
+  {
+    "title": "河阴之变",
+    "year": 528,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 3,
+    "summary": "528年，尔朱荣在河阴沉杀胡太后及元钊，屠杀王公大臣两千余人，控制北魏政权。",
+    "cause": "胡太后毒死孝明帝，尔朱荣以此为借口。",
+    "effect": "北魏政权落入尔朱氏手中，汉化士族遭毁灭性打击。",
+    "examTip": "河阴之变，528年，尔朱荣。",
+    "people": [
+      "尔朱荣",
+      "胡太后",
+      "元钊"
+    ],
+    "location": "河阴（今河南孟津东北）",
+    "tags": [
+      "政变",
+      "北魏"
+    ],
+    "related": [
+      "六镇起义",
+      "河北大起义"
+    ],
+    "wikiSlug": "河阴之变"
+  },
+  {
+    "title": "东魏建立",
+    "year": 534,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "东魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "534年，高欢立元善见为帝，迁都邺，建立东魏。",
+    "cause": "北魏分裂，高欢与宇文泰对立。",
+    "effect": "北魏分裂为东、西魏。",
+    "examTip": "534年，高欢，东魏。",
+    "people": [
+      "高欢",
+      "元善见"
+    ],
+    "location": "邺（今河北临漳）",
+    "tags": [
+      "东魏",
+      "北朝"
+    ],
+    "related": [
+      "西魏建立"
+    ],
+    "wikiSlug": "东魏建立"
+  },
+  {
+    "title": "西魏建立",
+    "year": 535,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西魏",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "535年，宇文泰立元宝炬为帝，都长安，建立西魏。",
+    "cause": "孝武帝西奔，宇文泰拥立。",
+    "effect": "西魏建立，与东魏对峙。",
+    "examTip": "535年，宇文泰，西魏。",
+    "people": [
+      "宇文泰",
+      "元宝炬"
+    ],
+    "location": "长安",
+    "tags": [
+      "西魏",
+      "北朝"
+    ],
+    "related": [
+      "东魏建立"
+    ],
+    "wikiSlug": "西魏建立"
+  },
+  {
+    "title": "侯景之乱",
+    "year": 548,
+    "yearMode": "range",
+    "yearRange": [
+      548,
+      552
+    ],
+    "era": "",
+    "eraSub": "",
+    "dynasty": "萧梁",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "548-552年，侯景叛乱，攻破建康，梁武帝饿死，江南社会经济遭毁灭性破坏，南朝衰落。",
+    "cause": "梁武帝接受侯景投降，又欲出卖，侯景反。",
+    "effect": "南朝衰弱，门阀士族受重创，北强南弱。",
+    "examTip": "侯景之乱，548年，梁武帝饿死。",
+    "people": [
+      "侯景",
+      "萧衍",
+      "王僧辩",
+      "陈霸先"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "叛乱",
+      "南朝"
+    ],
+    "related": [
+      "萧梁建立",
+      "陈朝建立"
+    ],
+    "wikiSlug": "侯景之乱"
+  },
+  {
+    "title": "西魏府兵制建立",
+    "year": 550,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "西魏",
+    "period": "魏晋南北朝",
+    "type": "制度",
+    "importance": 3,
+    "summary": "550年，宇文泰创立府兵制，设八柱国、十二大将军，兵农分离，后趋向兵农合一，成为隋唐府兵制前身。",
+    "cause": "宇文泰欲加强军事力量，笼络豪强。",
+    "effect": "西魏军事力量增强，为北周灭齐奠定基础。",
+    "examTip": "府兵制，八柱国，550年。",
+    "people": [
+      "宇文泰"
+    ],
+    "location": "",
+    "tags": [
+      "军事制度",
+      "府兵制"
+    ],
+    "related": [
+      "北周建立"
+    ],
+    "wikiSlug": "西魏府兵制建立"
+  },
+  {
+    "title": "北齐建立",
+    "year": 550,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北齐",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "550年，高洋废东魏孝静帝，建立北齐。",
+    "cause": "高氏专权，取代东魏。",
+    "effect": "北齐与北周对峙。",
+    "examTip": "550年，高洋建北齐。",
+    "people": [
+      "高洋"
+    ],
+    "location": "邺（今河北临漳）",
+    "tags": [
+      "北齐",
+      "北朝"
+    ],
+    "related": [
+      "东魏建立"
+    ],
+    "wikiSlug": "北齐建立"
+  },
+  {
+    "title": "北周建立",
+    "year": 557,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北周",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "557年，宇文觉废西魏恭帝，建立北周。",
+    "cause": "宇文氏专权，取代西魏。",
+    "effect": "北周建立，后灭北齐统一北方。",
+    "examTip": "557年，宇文觉，北周。",
+    "people": [
+      "宇文觉"
+    ],
+    "location": "长安",
+    "tags": [
+      "北周",
+      "北朝"
+    ],
+    "related": [
+      "西魏建立",
+      "北周灭北齐"
+    ],
+    "wikiSlug": "北周建立"
+  },
+  {
+    "title": "陈朝建立",
+    "year": 557,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "南朝陈",
+    "period": "魏晋南北朝",
+    "type": "政治",
+    "importance": 2,
+    "summary": "557年，陈霸先废梁敬帝，建立陈朝。",
+    "cause": "陈霸先平定侯景之乱，掌握大权。",
+    "effect": "陈朝建立，南朝最后一个政权。",
+    "examTip": "557年，陈霸先，陈朝。",
+    "people": [
+      "陈霸先"
+    ],
+    "location": "建康（今江苏南京）",
+    "tags": [
+      "南朝",
+      "陈"
+    ],
+    "related": [
+      "隋灭陈统一全国"
+    ],
+    "wikiSlug": "陈朝建立"
+  },
+  {
+    "title": "北周武帝灭佛",
+    "year": 574,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北周",
+    "period": "魏晋南北朝",
+    "type": "文化",
+    "importance": 2,
+    "summary": "574年，周武帝下诏禁断佛道二教，没收寺产，勒令僧尼还俗，以增强国力。",
+    "cause": "佛教寺院耗费大量财富，国家兵源财源不足。",
+    "effect": "国家收入增加，为灭齐奠定基础。",
+    "examTip": "周武帝灭佛，三武一宗之一。",
+    "people": [
+      "宇文邕"
+    ],
+    "location": "",
+    "tags": [
+      "灭佛"
+    ],
+    "related": [
+      "北周灭北齐"
+    ],
+    "wikiSlug": "北周武帝灭佛"
+  },
+  {
+    "title": "北周灭北齐",
+    "year": 577,
+    "yearMode": "exact",
+    "yearRange": null,
+    "era": "",
+    "eraSub": "",
+    "dynasty": "北周",
+    "period": "魏晋南北朝",
+    "type": "军事",
+    "importance": 3,
+    "summary": "577年，北周武帝宇文邕率军灭北齐，统一北方。",
+    "cause": "北周改革后国力强盛，北齐政治腐败。",
+    "effect": "北方统一，为隋朝统一全国奠定基础。",
+    "examTip": "577年，北周灭北齐，统一北方。",
+    "people": [
+      "宇文邕"
+    ],
+    "location": "邺（今河北临漳）",
+    "tags": [
+      "统一北方",
+      "北周"
+    ],
+    "related": [
+      "隋灭陈统一全国"
+    ],
+    "wikiSlug": "北周灭北齐"
+  }
+]
