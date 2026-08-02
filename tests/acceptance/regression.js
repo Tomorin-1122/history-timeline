@@ -123,10 +123,18 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.waitForTimeout(300);
   const preSlider = await page.locator('#yrSlider').evaluate(el => [Number(el.min), Number(el.max)]);
   check('原始社会模式滑块对数刻度', preSlider[0] >= 0 && preSlider[1] > 3 && preSlider[1] < 4, preSlider.join(','));
+  check('原始社会模式滑块 step=0.01', (await page.locator('#yrSlider').getAttribute('step')) === '0.01');
   check('原始社会模式按钮态', await page.locator('#rangePre.on').count() === 1);
   const preMarkers = await page.locator('#map path.leaflet-interactive').count();
   const preExpect = await page.evaluate(() => EVENTS.filter(e => e.ch === 0 && COORDS[e.title]).length);
   check('原始社会模式 marker = 史前坐标数', preMarkers === preExpect, '期望 ' + preExpect + ' 实际 ' + preMarkers);
+  // 史前播放进度推进（防 step 钳制卡死回归）
+  await page.click('#playBtn');
+  await page.waitForTimeout(1400);
+  const playingVal = Number(await page.locator('#yrSlider').inputValue());
+  check('史前播放进度推进', playingVal > 0.05, 'value=' + playingVal);
+  await page.click('#playBtn');
+  await page.waitForTimeout(200);
   await page.click('#filterToggle');   /* 展开筛选面板以点击分期链接 */
   await page.waitForTimeout(150);
   await page.click('.bar a.jump:has-text("原始社会")');

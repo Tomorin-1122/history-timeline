@@ -48,6 +48,7 @@ function setRange(mode){
   mapRange=mode;
   document.querySelectorAll(".range-btn").forEach(b=>b.classList.toggle("on",b.dataset.range===mode));
   const [ymin,ymax]=curY();
+  yrSlider.step=mapRange==='pre'?0.01:1;   /* 史前对数刻度小数步长（step=1 会钳制 0.05→0 卡死播放） */
   yrSlider.min=ymin; yrSlider.max=ymax; yrSlider.value=ymin;
   if(playing) togglePlay();               /* 切模式停播放，避免范围/步长混乱 */
   yrLabel.textContent=yrAll.classList.contains("on")?"全部年份":fmtYrLabel(+yrSlider.value);
