@@ -30,17 +30,19 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   const bands = await page.locator('.band').count();
   check('章节带 = 15', bands === 15, '实际 ' + bands);
 
-  // 4. 事件行：116（.row .title-row）
+  // 4. 事件行 = EVENTS 数（动态，接入新章免改）
   const rows = await page.locator('.row .title-row').count();
-  check('事件行 = 116', rows === 116, '实际 ' + rows);
+  const expRows = await page.evaluate(() => EVENTS.length);
+  check('事件行 = EVENTS 数', rows === expRows, '实际 ' + rows + ' 期望 ' + expRows);
 
-  // 5. 空章占位 = 12
+  // 5. 空章占位 = 15 - 有数据章数（动态）
   const placeholders = await page.locator('.row .body .summary', { hasText: '数据待生成' }).count();
-  check('空章占位 = 12', placeholders === 12, '实际 ' + placeholders);
+  const expEmpty = await page.evaluate(() => CHAPTERS.length - new Set(EVENTS.map(e => e.ch)).size);
+  check('空章占位 = 空章数', placeholders === expEmpty, '实际 ' + placeholders + ' 期望 ' + expEmpty);
 
   // 6. 计数
   const cnt0 = (await page.locator('#cnt').textContent()).trim();
-  check('计数 = 共 116 事', cnt0 === '共 116 事', cnt0);
+  check('计数 = 共 N 事', cnt0 === '共 ' + expRows + ' 事', cnt0);
 
   // 7. 搜索：商鞅 → 命中 = 数据中 matchEvent 匹配数（关联检索：摘要/考点提示也参与匹配）
   await page.fill('#q', '商鞅');

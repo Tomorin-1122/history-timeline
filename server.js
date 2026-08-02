@@ -20,6 +20,7 @@ const REQ_FIELDS = ['title','year','yearMode','yearRange','dynasty','period','ty
 // 与 js/gen_data.js 的 PILOTS 保持一致（新增章节录入后这里同步加行）
 const PILOTS = [
   ['原始社会', 'data/原始社会_pilot_20260802.json'],
+  ['夏商', 'data/夏商_pilot_20260802.json'],
   ['战国', 'data/战国_pilot_20260801.json'],
   ['元代', 'data/元代_pilot_20260802.json'],
 ];
