@@ -28,7 +28,7 @@ CHAPTERS.forEach((c,ci)=>{
     if(e.yearMode==="era"){
       yr.innerHTML=e.era
         ? '<span class="era">'+e.era+(e.eraSub?'<br>'+e.eraSub:'')+'</span>'
-        : '<span class="era">'+(e.period||'时代')+'</span>';  /* Q4 回填前暂显大分期 */
+        : '<span class="era">'+(e.dynasty||e.period||'时代')+'</span>';  /* Q4 回填前暂显朝代 */
     }else{
       yr.textContent=fmtShort(e);
     }
@@ -127,7 +127,7 @@ const overlay=document.getElementById("overlay");
 function openDrawer(idx){
   const e=EVENTS[idx];
   document.getElementById("dYear").textContent=e.yearMode==="era"
-    ? (e.era? (e.era+(e.eraSub?" · "+e.eraSub:"")) : (e.period||"时代"))
+    ? (e.era? (e.era+(e.eraSub?" · "+e.eraSub:"")) : (e.dynasty||e.period||"时代"))
     : fmt(e);
   document.getElementById("dTitle").textContent=e.title;
   document.getElementById("dMeta").innerHTML=

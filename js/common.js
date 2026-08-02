@@ -29,7 +29,7 @@ function fmt(e){
 
 /* 时间轴/地图短格式：前 632 / 约前 1600 / 前 579~546 / 1219~1224 / era 返回时段文案；史前同用"万年" */
 function fmtShort(e){
-  if(e.yearMode==="era") return e.era||e.period||"时代";
+  if(e.yearMode==="era") return e.era||e.dynasty||e.period||"时代";
   if(e.yearMode==="range"){
     const a=e.yearRange[0], b=e.yearRange[1];
     if(Math.abs(a)>=10000) return "距今"+fmtWan(Math.abs(a))+"~"+fmtWan(Math.abs(b));

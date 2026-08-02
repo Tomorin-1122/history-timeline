@@ -58,7 +58,7 @@ function drawMarkers(){
 }
 
 function popupHTML(e){
-  const yr=e.yearMode==="era"?(e.era?(e.era+" · "+e.eraSub):(e.period||"时代")):fmt(e);
+  const yr=e.yearMode==="era"?(e.era?(e.era+" · "+e.eraSub):(e.dynasty||e.period||"时代")):fmt(e);
   return '<div class="mp-t">'+e.title+'</div><div class="mp-y">'+yr+' · '+e.type+'</div><div class="mp-s">'+e.summary+'</div>';
 }
 
