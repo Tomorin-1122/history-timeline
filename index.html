@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国古代史时间轴 · 考研 313</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/900.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="topbar" id="topbar">
+  <div class="tb-inner">
+    <div class="tb-row1">
+      <h1>中国古代史时间轴</h1>
+      <div class="tb-tabs" id="viewTabs">
+        <button class="tab on" data-view="timeline">时间轴</button>
+        <button class="tab" data-view="map">地图</button>
+        <button class="tab" data-view="review">复习</button>
+      </div>
+    </div>
+    <div class="bar" id="bar">
+      <input type="search" class="search" id="q" placeholder="搜索事件…">
+      <button class="f toggle" id="filterToggle" title="展开/收起筛选">筛选</button>
+      <span class="chips" id="chips"></span>
+      <span class="cnt" id="cnt"></span>
+      <div class="filters" id="filters" hidden>
+        <span class="group" id="perGroup">
+          <span class="glabel">分期</span>
+        </span>
+        <span class="group" id="typeGroup">
+          <span class="glabel">门类</span>
+        </span>
+        <span class="group" id="impGroup">
+          <span class="glabel">等第</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="view" id="view-timeline">
+    <main id="main"></main>
+    <div class="empty" id="empty" hidden>当前筛选下没有事件。</div>
+  </div>
+  <div class="view mapview" id="view-map" hidden>
+    <div class="maptool">
+      <span class="yrlabel" id="yrLabel">全部年份</span>
+      <input type="range" id="yrSlider" step="1" aria-label="年代">
+      <button class="f on" id="yrAll">全部</button>
+      <button class="f" id="playBtn">▶ 播放</button>
+    </div>
+    <div class="mapwrap">
+      <div id="map"></div>
+    </div>
+  </div>
+  <div class="view review" id="view-review" hidden>
+    <div class="rv-setup" id="rvSetup">
+      <div class="rv-setup-title">复习设置</div>
+      <div class="rv-sec">
+        <div class="rv-sec-label">题目范围</div>
+        <div class="rv-fg"><span class="glabel">门类</span><span class="rv-btns" id="rvTypeBtns"></span></div>
+        <div class="rv-fg"><span class="glabel">等第</span><span class="rv-btns" id="rvImpBtns"></span></div>
+        <div class="rv-fg"><span class="glabel">分期</span><span class="rv-btns" id="rvPerBtns"></span></div>
+        <div class="rv-fg"><span class="glabel">搜索</span><input type="search" class="search rv-q" id="rvQ" placeholder="关键词…"></div>
+      </div>
+      <div class="rv-sec">
+        <div class="rv-sec-label">题目数量 <span class="rv-count" id="rvCount"></span></div>
+        <div class="rv-fg">
+          <button class="f on" id="rvAll">全部</button>
+          <input type="number" class="rv-num" id="rvNum" min="1" max="99" placeholder="自定义数量">
+        </div>
+      </div>
+      <div class="rv-sec">
+        <div class="rv-sec-label">模式</div>
+        <div class="rv-modes" id="rvModes">
+          <button class="rv-mode-btn on" data-mode="train"><b>针对训练</b><span>按范围抽题 · 记错题 · 自动重练</span></button>
+          <button class="rv-mode-btn" data-mode="wrong"><b>巩固错题</b><span>只练历史标记为「忘了」的题</span></button>
+          <button class="rv-mode-btn" data-mode="roam"><b>随机漫游</b><span>全库随机抽卡 · 不计错题</span></button>
+        </div>
+      </div>
+      <div class="rv-warn" id="rvWarn" hidden></div>
+      <button class="rv-btn ok rv-start" id="rvStart">开始复习</button>
+    </div>
+    <div class="rv-head">
+      <div class="rv-prog" id="rvProg"></div>
+      <div class="rv-fails" id="rvFails"></div>
+      <div class="rv-bar"><div class="rv-bar-in" id="rvBarIn"></div></div>
+      <button class="rv-exit" id="rvExit" title="退出本轮复习">退出</button>
+    </div>
+    <div class="rv-stage" id="rvStage">
+      <div class="rv-card" id="rvCard">
+        <div class="rv-inner" id="rvInner">
+          <div class="rv-face front">
+            <div class="rv-tags" id="rvFrontTags"></div>
+            <div class="rv-title" id="rvTitle"></div>
+            <div class="rv-hint">点下方按钮查看答案</div>
+          </div>
+          <div class="rv-face back">
+            <div class="rv-year" id="rvYear"></div>
+            <div class="rv-sum" id="rvSum"></div>
+            <div class="rv-tip" id="rvTip"></div>
+            <div class="rv-kv" id="rvKv"></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-actions">
+        <button class="rv-btn fail" id="rvFail" hidden>忘了</button>
+        <button class="rv-btn show" id="rvShow">显示答案</button>
+        <button class="rv-btn ok" id="rvOk" hidden>记住了</button>
+        <button class="rv-btn ok" id="rvNext" hidden>下一张</button>
+      </div>
+    </div>
+    <div class="rv-done" id="rvDone" hidden>
+      <div class="rv-done-title">本轮复习完成</div>
+      <div class="rv-done-stat" id="rvDoneStat"></div>
+      <button class="rv-btn ok" id="rvAgain">再来一轮</button>
+    </div>
+  </div>
+  <footer>
+    数据据朱绍侯《中国古代史》按章提取，试点覆盖 原始社会 / 战国 / 元代 三章凡 116 事，全 15 章推进中；年份与等第按教材口径。<br>
+    时间轴左列四种记号：实心方 = 精确年，虚线方 = 约年，长条 = 起止区间，圆圈 = 时代段。<br>
+    地图标记按门类分色：
+    <span class="fg">
+      <span class="fg-i" data-c="政治">政治</span><span class="fg-i" data-c="军事">军事</span><span class="fg-i" data-c="经济">经济</span><span class="fg-i" data-c="文化">文化</span><span class="fg-i" data-c="制度">制度</span>
+    </span>
+    ；空心圈 = 时代段，实心点 = 可考年份，坐标为打样值（正式坐标随数据推进补齐）。
+  </footer>
+</div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <button class="d-close" id="dClose">收 起</button>
+  <div class="d-year" id="dYear"></div>
+  <div class="d-title" id="dTitle"></div>
+  <div class="d-meta" id="dMeta"></div>
+  <div class="d-sec"><div class="d-label">概 要</div><div class="d-text" id="dSum"></div></div>
+  <div class="d-sec" id="secCau"><div class="d-label">前 因</div><div class="d-text" id="dCau"></div></div>
+  <div class="d-sec" id="secEff"><div class="d-label">后 果</div><div class="d-text" id="dEff"></div></div>
+  <div class="d-tip"><div class="d-label">备 考 钩</div><div class="d-text" id="dTip"></div></div>
+  <div class="d-sec" id="secPpl"><div class="d-label">人 物</div><div class="d-kv" id="dPpl"></div></div>
+  <div class="d-sec" id="secLoc"><div class="d-label">地 点</div><div class="d-kv" id="dLoc"></div></div>
+  <div class="d-sec" id="secTag"><div class="d-label">标 签</div><div class="d-kv" id="dTag"></div></div>
+  <div class="d-sec" id="secRel"><div class="d-label">关 联</div><div class="relchips" id="dRel"></div></div>
+  <div class="src" id="dSrc"></div>
+</aside>
+<div class="overlay" id="overlay" hidden></div>
+<button class="to-band" id="toBand" title="回到当前章节标题" hidden>↑</button>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/map.js"></script>
+<script src="js/review.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

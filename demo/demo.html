@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国古代史时间轴 · 打样</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/900.css">
+<style>
+:root{
+  --paper:#f5f1e6; --paper2:#faf7ee; --paper-dim:#efe9da;
+  --ink:#2e2a23; --ink2:#5c554a; --ink3:#8a8072;
+  --cin:#9e3d26; --cin-soft:#f4e9e3;
+  --line:#ddd3bf; --line2:#c9bda2;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--serif); font-size:16px; line-height:1.9;
+}
+body::after{
+  content:""; position:fixed; inset:0; z-index:80; pointer-events:none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(60,50,35,.018) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(60,50,35,.014) 0 1px, transparent 1px 4px);
+}
+@media (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+  .drawer{transition:transform .3s cubic-bezier(.2,.75,.25,1)}
+  .flash .body{animation:flashbg 1.4s ease-out}
+}
+@keyframes flashbg{0%{background:#efe2c8}100%{background:transparent}}
+.wrap{max-width:940px;margin:0 auto;padding:0 28px 110px}
+header{padding:56px 0 28px}
+.headrow{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.overline{font-size:12px;letter-spacing:.22em;color:var(--cin)}
+h1{font-size:30px;font-weight:900;letter-spacing:.06em;margin-top:10px}
+.sub{margin-top:8px;color:var(--ink2);font-size:14.5px}
+.count{text-align:right;font-size:13px;color:var(--ink3);line-height:1.7;flex:none}
+.bar{
+  position:sticky; top:0; z-index:40; background:var(--paper);
+  border-bottom:1px solid var(--line);
+  padding:10px 0; display:flex; flex-wrap:wrap; gap:6px 20px; align-items:center; font-size:13.5px;
+}
+.group{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.glabel{color:var(--ink3);letter-spacing:.2em;margin-right:4px;font-size:12.5px}
+button.f{
+  font-family:var(--serif); font-size:13.5px; background:none; cursor:pointer;
+  border:1px solid transparent; color:var(--ink2); padding:1px 8px; line-height:1.8;
+}
+button.f:hover{color:var(--cin)}
+button.f.on{background:var(--cin); color:var(--paper2); border-color:var(--cin)}
+a.jump{color:var(--ink2); text-decoration:none; border-bottom:1px solid var(--line2); padding-bottom:1px}
+a.jump:hover{color:var(--cin); border-color:var(--cin)}
+.bar .cnt{margin-left:auto; color:var(--ink3); font-size:12.5px}
+.band{margin:46px 0 2px; display:flex; align-items:center; gap:14px; scroll-margin-top:64px}
+.band .sq{width:9px; height:9px; background:var(--cin); flex:none}
+.band .no{font-size:12px; letter-spacing:.3em; color:var(--cin); flex:none}
+.band h2{font-size:21px; font-weight:900; letter-spacing:.08em; flex:none}
+.band .note{font-size:12.5px; color:var(--ink3); flex:none}
+.band .rule{flex:1; height:1px; background:var(--line)}
+.row{display:grid; grid-template-columns:8.5rem 1fr; cursor:pointer}
+.row:hover .body{background:var(--paper-dim)}
+.year{
+  padding:22px 1.4rem 22px 0; text-align:right;
+  font-size:14px; color:var(--ink2); line-height:1.7;
+  border-bottom:1px solid var(--line);
+  font-variant-numeric:tabular-nums;
+}
+.year .era{display:block; color:var(--ink3); font-size:12.5px; line-height:1.65}
+.body{
+  position:relative; border-left:1px solid var(--line);
+  padding:20px 0 20px 1.6rem; border-bottom:1px solid var(--line);
+}
+.body::before{
+  content:""; position:absolute; left:0; top:27px; transform:translateX(-50%);
+  width:7px; height:7px; background:var(--paper); border:1px solid var(--ink3);
+}
+.row.exact .body::before{background:var(--cin); border-color:var(--cin)}
+.row.era .body::before{border-radius:50%; background:var(--paper)}
+.row.approx .body::before{border-style:dashed; background:var(--paper)}
+.row.range .body::before{height:17px; width:5px; top:22px; border-color:var(--cin)}
+.title-row{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+h3{font-size:17.5px; font-weight:700}
+.stars{font-size:12px; letter-spacing:2px; color:var(--cin); flex:none}
+.stars .off{color:#cfc4ab}
+.tag{font-size:11.5px; color:var(--ink2); border:1px solid var(--line2); padding:0 6px; line-height:1.8; flex:none}
+.summary{margin-top:3px; color:var(--ink2); font-size:14.5px; max-width:70ch; line-height:1.85}
+.drawer{
+  position:fixed; top:0; right:0; height:100dvh; width:min(430px,94vw);
+  background:var(--paper2); border-left:1px solid var(--line2);
+  box-shadow:-16px 0 40px rgba(46,42,35,.10);
+  transform:translateX(105%); z-index:90; overflow-y:auto;
+  padding:24px 26px 64px;
+}
+.drawer.open{transform:none}
+.d-close{background:none; border:none; font-family:var(--serif); font-size:13px; color:var(--ink3); cursor:pointer; letter-spacing:.2em; padding:0}
+.d-close:hover{color:var(--cin)}
+.d-year{margin-top:20px; font-size:15px; color:var(--cin); letter-spacing:.05em}
+.d-title{font-size:25px; font-weight:900; margin-top:4px; letter-spacing:.04em}
+.d-meta{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; align-items:center}
+.d-sec{margin-top:22px}
+.d-label{font-size:12px; letter-spacing:.3em; color:var(--ink3); margin-bottom:5px}
+.d-text{font-size:14.5px; line-height:1.9}
+.d-kv{font-size:14px; color:var(--ink2); line-height:1.9}
+.d-tip{margin-top:24px; border-left:3px solid var(--cin); background:var(--cin-soft); padding:12px 14px}
+.d-tip .d-label{color:var(--cin)}
+.relchips{display:flex; flex-wrap:wrap; gap:6px}
+.relchips button{
+  font-family:var(--serif); font-size:13px; background:none; cursor:pointer;
+  border:1px solid var(--line2); color:var(--ink2); padding:2px 10px; line-height:1.8;
+}
+.relchips button:hover{color:var(--cin); border-color:var(--cin)}
+.src{margin-top:26px; padding-top:14px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink3)}
+.empty{padding:64px 0; text-align:center; color:var(--ink3); font-size:14px; letter-spacing:.1em}
+footer{margin-top:70px; font-size:12.5px; color:var(--ink3); line-height:1.8; border-top:1px solid var(--line); padding-top:16px}
+@media (max-width:760px){
+  .wrap{padding:0 18px 80px}
+  .row{grid-template-columns:1fr}
+  .year{text-align:left; padding:14px 0 0; border-bottom:none}
+  .year .era{display:inline; margin-left:8px}
+  .body{border-left:none; padding:2px 0 18px}
+  .body::before{display:none}
+  h1{font-size:25px}
+  .count{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="headrow">
+      <div>
+        <div class="overline">313 历史学统考 · 中国古代史</div>
+        <h1>中国古代史时间轴</h1>
+        <div class="sub">先秦两章打样，验证「前松后密」的精度阶梯两端。</div>
+      </div>
+      <div class="count" id="headCount">凡 33 事<br>自元谋人 讫越灭吴</div>
+    </div>
+  </header>
+  <div class="bar" id="bar">
+    <span class="group">
+      <span class="glabel">分期</span>
+      <a class="jump" href="#c1">原始社会</a>
+      <a class="jump" href="#c4">春秋</a>
+    </span>
+    <span class="group" id="typeGroup">
+      <span class="glabel">门类</span>
+    </span>
+    <span class="group" id="impGroup">
+      <span class="glabel">等第</span>
+    </span>
+    <span class="cnt" id="cnt"></span>
+  </div>
+  <main id="main"></main>
+  <div class="empty" id="empty" hidden>当前筛选下没有事件。</div>
+  <footer>
+    打样数据据朱绍侯《中国古代史》第01、04章编写，凡 33 事，年份与等第未经校雠，仅供界面验证。<br>
+    左列四种记号：实心方 = 精确年，虚线方 = 约年，长条 = 起止区间，圆圈 = 时代段。
+  </footer>
+</div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <button class="d-close" id="dClose">收 起</button>
+  <div class="d-year" id="dYear"></div>
+  <div class="d-title" id="dTitle"></div>
+  <div class="d-meta" id="dMeta"></div>
+  <div class="d-sec"><div class="d-label">概 要</div><div class="d-text" id="dSum"></div></div>
+  <div class="d-sec" id="secCau"><div class="d-label">前 因</div><div class="d-text" id="dCau"></div></div>
+  <div class="d-sec" id="secEff"><div class="d-label">后 果</div><div class="d-text" id="dEff"></div></div>
+  <div class="d-tip"><div class="d-label">备 考 钩</div><div class="d-text" id="dTip"></div></div>
+  <div class="d-sec" id="secPpl"><div class="d-label">人 物</div><div class="d-kv" id="dPpl"></div></div>
+  <div class="d-sec" id="secLoc"><div class="d-label">地 点</div><div class="d-kv" id="dLoc"></div></div>
+  <div class="d-sec" id="secTag"><div class="d-label">标 签</div><div class="d-kv" id="dTag"></div></div>
+  <div class="d-sec" id="secRel"><div class="d-label">关 联</div><div class="relchips" id="dRel"></div></div>
+  <div class="src" id="dSrc"></div>
+</aside>
+<script>
+const EVENTS=[
+{ch:0,t:"元谋人",y:null,m:"era",era:"旧石器时代早期",eraSub:"距今约170万年",dyn:"原始社会",per:"先秦",type:"文化",imp:1,
+ sum:"1965年于云南元谋发现两枚门齿化石，距今约170万年，为中国境内已知最早的人类化石，证明中国是人类起源的重要地区之一。",
+ cau:"",eff:"将中国境内人类活动的历史上溯至约170万年前，为「中国是人类起源地之一」提供了实物证据。",
+ tip:"「最早」的帽子归元谋人。题干问「境内已确认最早」，别按名气选北京人。",
+ ppl:[],loc:"云南元谋",tags:["旧石器时代","古人类化石"],rel:["蓝田人","北京人"],slug:"yuanmou-man"},
+{ch:0,t:"蓝田人",y:null,m:"era",era:"旧石器时代早期",eraSub:"距今约80至65万年",dyn:"原始社会",per:"先秦",type:"文化",imp:1,
+ sum:"发现于陕西蓝田公王岭与陈家窝，距今约80至65万年，体质特征较北京人更为原始，是黄河中游重要的直立人化石。",
+ cau:"",eff:"与元谋人、北京人共同构成中国境内直立人的连续发展序列。",
+ tip:"记地点配年份：云南元谋170万，陕西蓝田80万，周口店69万。考场上常把地点张冠李戴。",
+ ppl:[],loc:"陕西蓝田",tags:["旧石器时代","古人类化石"],rel:["元谋人","北京人"],slug:""},
+{ch:0,t:"北京人",y:null,m:"era",era:"旧石器时代早期",eraSub:"距今约69万年",dyn:"原始社会",per:"先秦",type:"文化",imp:2,
+ sum:"发现于北京周口店龙骨山，距今约69万年，遗址为猿人阶段资料最丰富者；已会使用天然火并保存火种，打制石器以砸击法、锤击法为主。",
+ cau:"",eff:"用火遗迹与大量石器为研究早期人类生活提供关键证据，印证了「劳动创造了人本身」的论断。",
+ tip:"北京人用的是天然火，会保存火种；「人工取火」是山顶洞人的功劳，选择题年年在这挖坑。",
+ ppl:[],loc:"北京周口店",tags:["旧石器时代","用火"],rel:["山顶洞人","蓝田人"],slug:"peking-man"},
+{ch:0,t:"山顶洞人",y:null,m:"era",era:"旧石器时代晚期",eraSub:"距今约3万年",dyn:"原始社会",per:"先秦",type:"文化",imp:1,
+ sum:"发现于周口店龙骨山顶部洞穴，距今约3万年，体质形态与现代人基本相同；已掌握钻孔、磨光技术，会人工取火，缝制衣服，并出现原始的审美与宗教观念。",
+ cau:"",eff:"标志人类进入晚期智人阶段，母系氏族公社由此逐渐形成。",
+ tip:"骨针、钻孔、装饰品，三件事一出就是山顶洞人；「有了爱美观念」也是它。",
+ ppl:[],loc:"北京周口店",tags:["晚期智人","人工取火"],rel:["北京人","仰韶文化"],slug:""},
+{ch:0,t:"仰韶文化",y:null,m:"era",era:"新石器时代",eraSub:"距今约7000至5000年",dyn:"原始社会",per:"先秦",type:"文化",imp:2,
+ sum:"分布于黄河中游，距今约7000至5000年，以磨制石器、彩陶与粟作农业为特征，半坡遗址的半地穴式房屋为其代表；其时母系氏族公社进入繁荣阶段。",
+ cau:"",eff:"展现了母系氏族社会繁荣期的经济生活图景，原始农业、制陶、纺织均有相当发展。",
+ tip:"黄河仰韶种粟、长江河姆渡种稻，南北千万别互换；彩陶归仰韶，黑陶归龙山。",
+ ppl:[],loc:"黄河中游",tags:["新石器时代","母系氏族"],rel:["河姆渡文化","大汶口文化"],slug:"yangshao-culture"},
+{ch:0,t:"河姆渡文化",y:null,m:"era",era:"新石器时代",eraSub:"距今约7000年",dyn:"原始社会",per:"先秦",type:"经济",imp:2,
+ sum:"发现于浙江余姚，距今约7000年，是长江流域稻作农业的代表；出土大量稻谷遗存与骨耜，住干栏式房屋，已会凿井。",
+ cau:"",eff:"证明长江流域与黄河流域同为中华文明的重要发源地。",
+ tip:"「干栏式」三个字就是河姆渡；「半地穴」就是半坡。房屋样式是命题人最爱。",
+ ppl:[],loc:"浙江余姚",tags:["新石器时代","稻作农业"],rel:["仰韶文化","良渚文化"],slug:"hemudu-culture"},
+{ch:0,t:"大汶口文化",y:null,m:"era",era:"新石器时代",eraSub:"距今约6000至4500年",dyn:"原始社会",per:"先秦",type:"文化",imp:1,
+ sum:"分布于黄河下游，距今约6000至4500年；中晚期墓葬随葬品多寡悬殊，表明私有制已经产生、贫富分化加剧，社会正由母系向父系过渡。",
+ cau:"",eff:"为研究私有制起源与氏族社会解体提供了典型材料。",
+ tip:"题干说「随葬品悬殊」「贫富分化」，答父系氏族，大汶口是最常用的例子。",
+ ppl:[],loc:"山东泰安",tags:["父系氏族","贫富分化"],rel:["龙山文化","仰韶文化"],slug:""},
+{ch:0,t:"龙山文化",y:null,m:"era",era:"新石器时代",eraSub:"距今约5000至4000年",dyn:"原始社会",per:"先秦",type:"文化",imp:2,
+ sum:"分布于黄河中下游，距今约5000至4000年，以轮制黑陶著称，出现冶铜业与多处城址；部落战争频繁，显贵阶层形成，氏族制度走向解体。",
+ cau:"",eff:"城址与贫富墓制的出现，预示国家雏形正在孕育。",
+ tip:"黑陶、城址、冶铜，龙山三件套；看到「蛋壳陶」也知道是它。",
+ ppl:[],loc:"黄河中下游",tags:["父系氏族","城址"],rel:["大汶口文化","良渚文化"],slug:"longshan-culture"},
+{ch:0,t:"良渚文化",y:null,m:"era",era:"新石器时代",eraSub:"距今约5300至4300年",dyn:"原始社会",per:"先秦",type:"文化",imp:2,
+ sum:"分布于长江下游太湖流域，距今约5300至4300年；以琮、璧等玉礼器、大型城址与外围水利系统为标志，社会分层明显，已具早期国家形态。",
+ cau:"",eff:"为中华五千年文明史提供了实证。",
+ tip:"玉琮加水利系统就是良渚；「实证中华五千年文明」这句评价语可以直接背。",
+ ppl:[],loc:"浙江余杭",tags:["玉礼制","早期国家"],rel:["河姆渡文化","龙山文化"],slug:"liangzhu-culture"},
+{ch:0,t:"尧舜禹禅让",y:null,m:"era",era:"传说时代",eraSub:"原始社会末期",dyn:"原始社会",per:"先秦",type:"制度",imp:2,
+ sum:"部落联盟时期，联盟首领经推举与考察相继传位于贤能，史称禅让；尧传舜、舜传禹为其典型，反映原始民主制的遗存。",
+ cau:"氏族公社之下公有制的经济基础，决定了首领权力的公共属性。",
+ eff:"禅让传说为后世儒家提供了理想政治的原型，也为「传贤」与「传子」之辨埋下伏笔。",
+ tip:"禅让是「传贤」，世袭是「传子」；禹传启一刀切断，出题就考这个转折点。",
+ ppl:["尧","舜","禹"],loc:"",tags:["禅让制","部落联盟"],rel:["禹传启家天下"],slug:"shanshan-system"},
+{ch:0,t:"禹传启家天下",y:-2070,m:"approx",era:"",eraSub:"",dyn:"原始社会",per:"先秦",type:"制度",imp:3,
+ sum:"约前2070年，禹建立夏朝；禹死后其子启袭位，世袭制代替禅让制，「公天下」变为「家天下」，原始社会告终，阶级社会开始。",
+ cau:"私有制发展与部落显贵权力固化，使首领职位由选贤转为家族承袭。",
+ eff:"中国历史上第一个王朝由此确立，国家取代氏族联盟成为基本政治形态。",
+ tip:"三个对应记死：启，世袭制，家天下。「约前2070」这个年份本身也常考。",
+ ppl:["禹","启"],loc:"阳城（传说）",tags:["世袭制","夏朝"],rel:["尧舜禹禅让"],slug:""},
+{ch:1,t:"周平王东迁洛邑",y:-770,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"政治",imp:3,
+ sum:"前770年，周平王在晋、郑等国护送下东迁洛邑，史称东周，春秋时期自此开始；此后王室衰微，政由方伯。",
+ cau:"犬戎攻破镐京，宗周残破，平王无力在旧都立足。",
+ eff:"周天子权威一落千丈，诸侯坐大，拉开大国争霸的序幕。",
+ tip:"东周分两截：春秋与战国。始年是前770平王东迁；被杀的那位是幽王，「烽火戏诸侯」的锅是他的。",
+ ppl:["周平王"],loc:"洛邑",tags:["东周","王室衰微"],rel:["葵丘会盟","城濮之战"],slug:""},
+{ch:1,t:"铁器与牛耕的推广",y:null,m:"era",era:"春秋时期",eraSub:"生产力之变",dyn:"春秋",per:"先秦",type:"经济",imp:3,
+ sum:"春秋时期铁制农具开始使用并逐步推广，牛耕随之出现；深耕细作成为可能，大量荒地被辟为私田，是社会生产力发展的划时代标志。",
+ cau:"冶铁技术的进步为农具革新提供了物质条件。",
+ eff:"井田制因之瓦解，赋税改革、阶级变动与思想争鸣皆由此引出，是春秋大变革的总根源。",
+ tip:"论述题的总开关：凡问春秋为何大变，先答铁器牛耕，再顺出井田瓦解、初税亩、百家争鸣。",
+ ppl:[],loc:"",tags:["铁器","牛耕","生产力"],rel:["初税亩","郑人铸刑书"],slug:""},
+{ch:1,t:"管仲相齐",y:-685,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"制度",imp:2,
+ sum:"前685年，齐桓公即位，任管仲为相；管仲对内整顿行政与军制，经济上「相地而衰征」，按土地肥瘠定赋税轻重，齐国力大增。",
+ cau:"齐桓公欲图霸业，需先富国强兵。",
+ eff:"齐桓公得以「尊王攘夷」为号九合诸侯，成为春秋首霸。",
+ tip:"「相地而衰征」是齐国管仲的，和鲁国初税亩分开记：一个看地好坏收税，一个公私田一律收。",
+ ppl:["齐桓公","管仲"],loc:"临淄",tags:["改革","首霸"],rel:["葵丘会盟","初税亩"],slug:""},
+{ch:1,t:"葵丘会盟",y:-651,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"政治",imp:2,
+ sum:"前651年，齐桓公大会诸侯于葵丘，周襄王遣使致胙，齐桓公霸业达于顶峰，其霸主地位获正式承认。",
+ cau:"齐国经管仲改革国富兵强，又以尊王攘夷赢得政治声望。",
+ eff:"确立了霸主代行天子征伐、会盟之权的政治惯例。",
+ tip:"葵丘就是齐桓公霸业顶点；周王派人送祭肉，等于官方盖章，这个细节常出。",
+ ppl:["齐桓公","周襄王"],loc:"葵丘（今河南民权一带）",tags:["会盟","霸业"],rel:["管仲相齐","城濮之战"],slug:""},
+{ch:1,t:"作爰田",y:-645,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"制度",imp:1,
+ sum:"前645年，晋惠公为争取国人支持而作爰田，把土地赏给国人并承认其长期占有，土地国有制出现松动。",
+ cau:"韩原之战晋败于秦，晋惠公被俘归国前后急需安定内部。",
+ eff:"与管仲「相地而衰征」、鲁「初税亩」同属井田制瓦解过程中的田制变革。",
+ tip:"爰田是晋国，初税亩是鲁国，相地而衰征是齐国。三国三件事，连线题最爱。",
+ ppl:["晋惠公"],loc:"晋",tags:["田制","井田瓦解"],rel:["初税亩","管仲相齐"],slug:""},
+{ch:1,t:"城濮之战",y:-632,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"军事",imp:3,
+ sum:"前632年，晋楚战于城濮。晋文公诱敌深入、各个击破，以少胜多大败楚军；战后践土会盟，周襄王策命晋文公为侯伯，晋国霸权确立。",
+ cau:"楚国北进争中原，宋国叛楚附晋，晋为救宋与楚决战。",
+ eff:"中原小国摆脱楚之控制归附于晋，晋文公成为继齐桓公之后又一代霸主。",
+ tip:"「退避三舍」出于此战，一舍三十里；对阵双方是晋楚，赢家是晋，别与崤之战颠倒。",
+ ppl:["晋文公","楚成王"],loc:"城濮（今山东鄄城西南）",tags:["以少胜多","晋楚争霸"],rel:["葵丘会盟","崤之战","邲之战"],slug:"城濮之战"},
+{ch:1,t:"崤之战",y:-627,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"军事",imp:2,
+ sum:"前627年，秦军千里袭郑未果，回师至崤山遭晋军伏击，全军覆没，孟明视等三帅被俘；秦国东进之势自此受挫。",
+ cau:"秦穆公乘晋文公新丧，欲东出争利。",
+ eff:"秦晋由联盟转为世仇，秦转而向西发展，遂霸西戎。",
+ tip:"弦高犒师就发生在秦军袭郑途中；崤之战秦国输得极惨，别记成秦胜。",
+ ppl:["秦穆公","晋襄公"],loc:"崤山（今河南渑池一带）",tags:["伏击","秦晋交恶"],rel:["城濮之战","楚庄王问鼎中原"],slug:""},
+{ch:1,t:"楚庄王问鼎中原",y:-606,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"政治",imp:2,
+ sum:"前606年，楚庄王伐陆浑之戎，陈兵于周王室境内，遣使问九鼎之大小轻重，意在窥伺周室。",
+ cau:"楚国长期经营南方后国势强盛，不甘久居蛮夷之位。",
+ eff:"「问鼎」成为觊觎最高权力的代称，楚庄王随即北上争霸，终成一代霸主。",
+ tip:"问鼎的是楚庄王，答话的是王孙满；选项里「楚武王」「周天子」都是干扰项。",
+ ppl:["楚庄王","王孙满"],loc:"洛邑近郊",tags:["问鼎","楚"],rel:["邲之战","崤之战"],slug:""},
+{ch:1,t:"邲之战",y:-597,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"军事",imp:1,
+ sum:"前597年，晋楚战于邲，晋军将帅不和、指挥失据而大败，楚庄王由此确立霸权。",
+ cau:"楚围郑，晋出兵救郑，两军遇于邲。",
+ eff:"楚国饮马黄河，中原诸侯多附于楚。",
+ tip:"城濮晋胜、邲楚胜，一前一后正好互换；记「晋文公赢城濮，楚庄王赢邲」。",
+ ppl:["楚庄王"],loc:"邲（今河南荥阳东北）",tags:["晋楚争霸"],rel:["城濮之战","楚庄王问鼎中原"],slug:""},
+{ch:1,t:"初税亩",y:-594,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"制度",imp:3,
+ sum:"前594年，鲁国实行初税亩，无论公田私田，一律按亩征税；此举从法律上承认了土地私有，是井田制瓦解的标志性事件。",
+ cau:"私田大量开垦而旧税制不及，鲁国财政所迫不得不改。",
+ eff:"加速井田制崩溃，封建土地私有关系由此获得合法身份。",
+ tip:"「初」者始也。性质大于内容：承认土地私有合法。春秋赋税改革里它的分量最重。",
+ ppl:[],loc:"鲁",tags:["赋税改革","土地私有"],rel:["作爰田","郑人铸刑书","铁器与牛耕的推广"],slug:""},
+{ch:1,t:"弭兵之会",y:-579,m:"range",yr:[-579,-546],era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"政治",imp:2,
+ sum:"前579年与前546年，宋国大夫华元、向戌先后两次发起弭兵之会，约合晋楚及诸小国罢兵；尤以第二次十四国与会为要，此后中原争战稍息。",
+ cau:"晋楚长期拉锯，中小诸侯不堪两属之赋与兵祸。",
+ eff:"晋楚达成暂时均势，争霸重心转向东南吴越。",
+ tip:"两次弭兵都要记，牵线人都是宋国人；考点多落在前546向戌那一次。",
+ ppl:["华元","向戌"],loc:"宋",tags:["会盟","晋楚均势"],rel:["邲之战","吴破楚入郢"],slug:""},
+{ch:1,t:"老子",y:-571,m:"approx",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"文化",imp:2,
+ sum:"老子姓李名耳字聃，约与孔子同时而稍长，著《道德经》五千言；以道为万物之本，主无为而治、祸福相倚，创立道家学派。",
+ cau:"社会剧变之下，一部分士人对礼乐征伐的现实取批判与退守姿态。",
+ eff:"道家与儒家互补，构成中国思想史上并峙的两大源头。",
+ tip:"「祸兮福所倚」是老子的辩证法；《道德经》五千言；传说孔子曾问礼于老聃。",
+ ppl:["老子"],loc:"苦县（今河南鹿邑）",tags:["道家","道德经"],rel:["孔子"],slug:""},
+{ch:1,t:"孔子",y:-551,m:"range",yr:[-551,-479],era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"文化",imp:3,
+ sum:"孔子名丘字仲尼，鲁国人，生于前551年，卒于前479年；首创私学，主张有教无类，删订六经，创立以仁与礼为核心的儒家学派，其言行辑为《论语》。",
+ cau:"春秋末世变乱，礼崩乐坏，士阶层兴起，学术由官府下移民间。",
+ eff:"儒家思想此后两千年成为中国文化的主干，私学之开亦打破学在官府之局。",
+ tip:"生卒年前551至前479，掐指正在春秋尾巴上；「有教无类」「学在官府到学在民间」都是现成答题语言。",
+ ppl:["孔子"],loc:"曲阜",tags:["儒家","私学"],rel:["老子","郑人铸刑书"],slug:""},
+{ch:1,t:"郑人铸刑书",y:-536,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"制度",imp:3,
+ sum:"前536年，郑国子产把刑书铸于鼎上公之于众，叔向致书反对；这是中国历史上首次公布成文法的记载。",
+ cau:"社会变动剧烈，旧贵族以秘密法任意断狱的做法难以为继。",
+ eff:"法律由秘密走向公开，贵族司法垄断被打破。",
+ tip:"子产铸刑书，叔向反对；二十三年后晋人也铸刑鼎，换孔子反对。两对人物别拧。",
+ ppl:["子产","叔向"],loc:"郑",tags:["成文法","法治萌芽"],rel:["晋铸刑鼎","初税亩"],slug:""},
+{ch:1,t:"晋铸刑鼎",y:-513,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"制度",imp:2,
+ sum:"前513年，晋赵鞅、中行寅铸刑鼎，著范宣子所为刑书；孔子闻之，批评其失却贵贱之度。",
+ cau:"郑铸刑书之后，公布成文法渐成趋势。",
+ eff:"成文法公开运动再进一步，旧贵族特权愈受冲击。",
+ tip:"孔子反对的是晋铸刑鼎，叔向反对的是郑铸刑书；两人态度其实一样，都是守旧立场。",
+ ppl:["赵鞅","孔子"],loc:"晋",tags:["成文法"],rel:["郑人铸刑书"],slug:""},
+{ch:1,t:"孙武与《孙子兵法》",y:-512,m:"approx",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"文化",imp:2,
+ sum:"孙武以兵法十三篇见吴王阖闾，助吴西破强楚；《孙子兵法》为现存最早的兵书，提出知己知彼、兵者诡道等系统军事理论。",
+ cau:"诸侯争战频仍，军事实践呼唤理论总结。",
+ eff:"奠定中国古典兵学的基础，其影响远及于今。",
+ tip:"孙武辅吴，孙膑辅齐，两人两书别混；「知己知彼，百战不殆」出于《孙子》。",
+ ppl:["孙武","阖闾"],loc:"吴",tags:["兵家","孙子兵法"],rel:["吴破楚入郢"],slug:""},
+{ch:1,t:"吴破楚入郢",y:-506,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"军事",imp:2,
+ sum:"前506年，吴王阖闾以孙武、伍子胥为将，柏举之战大败楚军，乘胜攻入楚都郢；楚昭王出奔，楚几亡。",
+ cau:"楚国内政腐败，又长年与吴相攻而师老兵疲。",
+ eff:"吴国威震中原，春秋争霸重心进一步移向东南。",
+ tip:"帮吴国的是孙武加伍子胥，战场叫柏举；救楚的是秦兵，还搭了一段申包胥哭秦庭。",
+ ppl:["阖闾","孙武","伍子胥"],loc:"郢（今湖北江陵）",tags:["吴楚战争"],rel:["孙武与《孙子兵法》","槜李之战","弭兵之会"],slug:""},
+{ch:1,t:"槜李之战",y:-496,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"军事",imp:1,
+ sum:"前496年，吴伐越，越王句践于槜李迎战，吴军败绩，阖闾伤趾而卒，吴越强仇益深。",
+ cau:"阖闾乘越允常新丧伐越。",
+ eff:"夫差即位后日夜谋报越，吴越战争进入新阶段。",
+ tip:"槜李之战死的是阖闾；继任者是夫差，别记成夫差死于此战。",
+ ppl:["阖闾","句践"],loc:"槜李（今浙江嘉兴一带）",tags:["吴越战争"],rel:["夫椒之战","吴破楚入郢"],slug:""},
+{ch:1,t:"夫椒之战",y:-494,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"军事",imp:2,
+ sum:"前494年，吴王夫差大败越军于夫椒，句践仅以五千人保会稽，请为臣妾；越国存亡系于一线。",
+ cau:"句践闻夫差日夜练兵欲报槜李之仇，遂先发制人伐吴。",
+ eff:"越国几亡，句践入臣于吴，此后忍辱图存，酝酿复仇。",
+ tip:"夫椒在太湖，赢的是夫差；「卧薪尝胆」的苦日子从这一败开始。",
+ ppl:["夫差","句践"],loc:"夫椒（今太湖中一带）",tags:["吴越战争"],rel:["槜李之战","越灭吴"],slug:""},
+{ch:1,t:"黄池会盟",y:-482,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"政治",imp:1,
+ sum:"前482年，夫差率精锐北上，会诸侯于黄池，与晋争先长；句践乘虚袭吴，夫差匆匆回师，霸业外强中干。",
+ cau:"夫差急于称霸中原，倾国北出，后方空虚。",
+ eff:"吴国实力大损，越国由此转守为攻。",
+ tip:"黄池之会表面是吴国高光，实际是越国翻盘的起点；读题要会读弦外之音。",
+ ppl:["夫差"],loc:"黄池（今河南封丘）",tags:["会盟","吴"],rel:["夫椒之战","越灭吴"],slug:""},
+{ch:1,t:"田常专齐政",y:-481,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"政治",imp:2,
+ sum:"前481年，齐大夫田常弑齐简公，立平公而专齐政；田氏数代以厚施薄敛争取民心，代齐之势已成。",
+ cau:"公室腐朽，田氏数代经营，以小斗进、大斗出收买民众。",
+ eff:"齐国政权实际落入田氏之手，为日后田氏代齐铺平道路。",
+ tip:"田常弑君在前481；田和正式列为诸侯在前386。一步一脚印，两步别合成一步。",
+ ppl:["田常","齐简公"],loc:"临淄",tags:["田氏代齐"],rel:["初税亩"],slug:""},
+{ch:1,t:"越灭吴",y:-473,m:"exact",era:"",eraSub:"",dyn:"春秋",per:"先秦",type:"军事",imp:2,
+ sum:"前473年，越军围姑苏，夫差求和不得自缢，吴国亡；句践随即北上会诸侯于徐州，致贡于周，号称霸王。",
+ cau:"句践生聚教训二十余年，又乘吴北上争霸、腹地空虚之机。",
+ eff:"春秋争霸战争至此落幕，历史渐入战国之局。",
+ tip:"句践灭吴在前473；「十年生聚，十年教训」是他的复盘口诀；徐州之会是春秋霸业的回光返照。",
+ ppl:["句践","夫差"],loc:"姑苏",tags:["吴越战争","春秋落幕"],rel:["黄池会盟","夫椒之战"],slug:""}
+];
+const CHAPTERS=[
+ {id:"c1",no:"第一章",name:"原始社会",note:"距今约一百七十万年 至 前2070年"},
+ {id:"c4",no:"第四章",name:"春秋",note:"前770年 至 前476年"}
+];
+const TYPES=["全部","政治","军事","经济","文化","制度"];
+const IMPS=[["全部",0],["★★★",3],["★★",2],["★",1]];
+const state={type:"全部",imp:0};
+function fmt(e){
+  if(e.m==="era") return null;
+  if(e.m==="range") return "前 "+(-e.yr[0])+" 至 "+(-e.yr[1]);
+  const abs=e.y<0?("前 "+(-e.y)):(""+e.y);
+  return (e.m==="approx"?"约":"")+abs;
+}
+function fmtShort(e){
+  if(e.m==="era") return e.era;
+  if(e.m==="range") return "前 "+(-e.yr[0])+"~"+(-e.yr[1]);
+  const abs=e.y<0?("前 "+(-e.y)):(""+e.y);
+  return (e.m==="approx"?"约":"")+abs;
+}
+function stars(n){
+  let s="";
+  for(let i=1;i<=3;i++) s+= i<=n ? "★" : '<span class="off">★</span>';
+  return s;
+}
+const main=document.getElementById("main");
+CHAPTERS.forEach((c,ci)=>{
+  const band=document.createElement("div");
+  band.className="band"; band.id=c.id;
+  band.innerHTML='<span class="sq"></span><span class="no">'+c.no+'</span><h2>'+c.name+'</h2><span class="note">'+c.note+'</span><span class="rule"></span>';
+  main.appendChild(band);
+  EVENTS.forEach((e,idx)=>{
+    if(e.ch!==ci) return;
+    const row=document.createElement("div");
+    row.className="row "+e.m; row.dataset.idx=idx; row.dataset.type=e.type; row.dataset.imp=e.imp;
+    const yr=document.createElement("div"); yr.className="year";
+    if(e.m==="era"){
+      yr.innerHTML='<span class="era">'+e.era+'<br>'+e.eraSub+'</span>';
+    }else{
+      yr.textContent=fmtShort(e);
+    }
+    const body=document.createElement("div"); body.className="body";
+    body.innerHTML='<div class="title-row"><span class="stars">'+stars(e.imp)+'</span><h3>'+e.t+'</h3><span class="tag">'+e.type+'</span></div><div class="summary">'+e.sum+'</div>';
+    body.addEventListener("click",()=>openDrawer(idx));
+    yr.addEventListener("click",()=>openDrawer(idx));
+    row.appendChild(yr); row.appendChild(body);
+    main.appendChild(row);
+  });
+});
+function mkBtns(groupId,items,key,render){
+  const g=document.getElementById(groupId);
+  items.forEach(it=>{
+    const label=render?it[0]:it, val=render?it[1]:it;
+    const b=document.createElement("button");
+    b.className="f"+(state[key]===val?" on":""); b.textContent=label;
+    b.addEventListener("click",()=>{state[key]=val;
+      g.querySelectorAll("button.f").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on"); applyFilter();});
+    g.appendChild(b);
+  });
+}
+mkBtns("typeGroup",TYPES,"type",false);
+mkBtns("impGroup",IMPS,"imp",true);
+function applyFilter(){
+  let n=0;
+  document.querySelectorAll(".row").forEach(r=>{
+    const ok=(state.type==="全部"||r.dataset.type===state.type)&&
+             (state.imp===0||Number(r.dataset.imp)===state.imp);
+    r.style.display=ok?"":"none"; if(ok)n++;
+  });
+  document.getElementById("cnt").textContent=(state.type==="全部"&&state.imp===0)?("共 "+EVENTS.length+" 事"):("筛得 "+n+" 事");
+  document.getElementById("empty").hidden=n>0;
+}
+document.getElementById("cnt").textContent="共 "+EVENTS.length+" 事";
+const drawer=document.getElementById("drawer");
+function openDrawer(idx){
+  const e=EVENTS[idx];
+  document.getElementById("dYear").textContent=e.m==="era"?(e.era+" · "+e.eraSub):fmt(e);
+  document.getElementById("dTitle").textContent=e.t;
+  document.getElementById("dMeta").innerHTML=
+    '<span class="tag">'+e.dyn+'</span><span class="tag">'+e.per+'</span><span class="tag">'+e.type+'</span><span class="stars">'+stars(e.imp)+'</span>';
+  document.getElementById("dSum").textContent=e.sum;
+  toggle("secCau",e.cau,"dCau"); toggle("secEff",e.eff,"dEff");
+  document.getElementById("dTip").textContent=e.tip;
+  toggle("secPpl",e.ppl.length?e.ppl.join("、"):null,"dPpl");
+  toggle("secLoc",e.loc||null,"dLoc");
+  toggle("secTag",e.tags.length?e.tags.join("、"):null,"dTag");
+  const rel=document.getElementById("dRel"); rel.innerHTML="";
+  document.getElementById("secRel").style.display=e.rel.length?"":"none";
+  e.rel.forEach(name=>{
+    const b=document.createElement("button"); b.textContent=name;
+    b.addEventListener("click",()=>jumpTo(name));
+    rel.appendChild(b);
+  });
+  document.getElementById("dSrc").textContent=e.slug?("wiki 溯源："+e.slug):"wiki 溯源：尚未归档";
+  drawer.classList.add("open"); drawer.setAttribute("aria-hidden","false");
+}
+function toggle(secId,val,txtId){
+  document.getElementById(secId).style.display=val?"":"none";
+  if(val)document.getElementById(txtId).textContent=val;
+}
+function closeDrawer(){drawer.classList.remove("open");drawer.setAttribute("aria-hidden","true")}
+document.getElementById("dClose").addEventListener("click",closeDrawer);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
+function jumpTo(title){
+  const idx=EVENTS.findIndex(e=>e.t===title);
+  if(idx<0)return;
+  closeDrawer();
+  const row=document.querySelector('.row[data-idx="'+idx+'"]');
+  if(!row)return;
+  row.style.display="";
+  row.scrollIntoView({block:"center"});
+  row.classList.remove("flash"); void row.offsetWidth;
+  row.classList.add("flash");
+  setTimeout(()=>row.classList.remove("flash"),1500);
+}
+</script>
+</body>
+</html>
