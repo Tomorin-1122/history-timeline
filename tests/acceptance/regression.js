@@ -104,7 +104,8 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   check('时间轴视图隐藏', await page.locator('#view-timeline[hidden]').count() === 1);
   check('Leaflet 初始化', await page.locator('#map.leaflet-container').count() === 1);
   const markerCount = await page.locator('#map path.leaflet-interactive').count();
-  check('地图 marker = COORDS 数(9)', markerCount === 9, '实际 ' + markerCount);
+  const expMarkers = await page.evaluate(() => Object.keys(COORDS).length);
+  check('地图 marker = COORDS 数', markerCount === expMarkers, '实际 ' + markerCount + ' 期望 ' + expMarkers);
   // 滑块范围：min/max 为历史范围
   const slider = await page.locator('#yrSlider').evaluate(el => [el.min, el.max, el.value]);
   check('滑块范围历史年份', Math.abs(Number(slider[0])) < 10000 && Math.abs(Number(slider[1])) < 10000, slider.join(','));

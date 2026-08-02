@@ -21,7 +21,11 @@ const REQ_FIELDS = ['title','year','yearMode','yearRange','dynasty','period','ty
 const PILOTS = [
   ['原始社会', 'data/原始社会_pilot_20260802.json'],
   ['夏商', 'data/夏商_pilot_20260802.json'],
+  ['西周', 'data/西周_pilot_20260802.json'],
+  ['春秋', 'data/春秋_pilot_20260802.json'],
   ['战国', 'data/战国_pilot_20260801.json'],
+  ['秦', 'data/秦_pilot_20260802.json'],
+  ['西汉', 'data/西汉_pilot_20260802.json'],
   ['元代', 'data/元代_pilot_20260802.json'],
 ];
 
