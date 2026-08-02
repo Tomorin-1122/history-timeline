@@ -114,7 +114,7 @@ function showCard(){
   document.getElementById("rvTitle").textContent=s.cur.e.title;
   document.getElementById("rvFrontTags").innerHTML='<span class="tag">'+s.cur.e.type+'</span><span class="stars">'+stars(s.cur.e.importance)+'</span>';
   document.getElementById("rvYear").textContent=s.cur.e.yearMode==="era"
-    ? (s.cur.e.era? (s.cur.e.era+(s.cur.e.eraSub?" · "+s.cur.e.eraSub:"")) : "时代")
+    ? (s.cur.e.era? (s.cur.e.era+(s.cur.e.eraSub?" · "+s.cur.e.eraSub:"")) : (s.cur.e.period||"时代"))
     : fmt(s.cur.e);
   document.getElementById("rvSum").textContent=s.cur.e.summary||"";
   const tip=document.getElementById("rvTip");

@@ -3,28 +3,15 @@
 
 let mapObj=null, markers=null, mapInited=false;
 
-/* ---- 时间滑块范围：由数据年份动态推算（不再写死 demo 值） ----
-   史前"距今X万年"事件（|year|>=10000）不纳入滑块：滑块面向历史时期可考年代，
-   史前/era 事件用"全部年份"查看；数据层 yearMode 复核见 F1 TODO。 */
-function yearExtent(){
-  const ys=[];
-  EVENTS.forEach(e=>{
-    const push=y=>{ if(y!=null && Math.abs(y)<10000) ys.push(y); };
-    if(e.yearMode==="exact"||e.yearMode==="approx") push(e.year);
-    else if(e.yearMode==="range" && Array.isArray(e.yearRange)) { push(e.yearRange[0]); push(e.yearRange[1]); }
-  });
-  return ys.length?[Math.min(...ys),Math.max(...ys)]:[null,null];
-}
-const [YMIN,YMAX]=yearExtent();
+/* ---- 主时间轴范围：固定 -2070（夏朝始）~ 1840（鸦片战争），老板定案 2026-08-02 ----
+   原始社会史前（|year|>=10000）不参与滑块——时间跨度太大挤压历史时期；
+   史前事件仅在"全部年份"模式以万年单位/空心圈呈现（数据层 yearMode 复核见 Q1）。 */
+const YMIN=-2070, YMAX=1840;
 
 const yrSlider=document.getElementById("yrSlider"),
       yrLabel=document.getElementById("yrLabel"),
       yrAll=document.getElementById("yrAll");
-if(YMIN!=null&&YMAX!=null){
-  yrSlider.min=YMIN; yrSlider.max=YMAX; yrSlider.value=YMIN;
-}else{
-  yrSlider.disabled=true; yrAll.disabled=true;
-}
+yrSlider.min=YMIN; yrSlider.max=YMAX; yrSlider.value=YMIN;
 
 /* ---- 初始化：免 key 高德公开端点（08-02 方向：不申请商业 key；天地图 tk 到位可切换） ---- */
 function initMap(){
@@ -71,7 +58,7 @@ function drawMarkers(){
 }
 
 function popupHTML(e){
-  const yr=e.yearMode==="era"?(e.era?(e.era+" · "+e.eraSub):"时代"):fmt(e);
+  const yr=e.yearMode==="era"?(e.era?(e.era+" · "+e.eraSub):(e.period||"时代")):fmt(e);
   return '<div class="mp-t">'+e.title+'</div><div class="mp-y">'+yr+' · '+e.type+'</div><div class="mp-s">'+e.summary+'</div>';
 }
 
