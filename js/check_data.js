@@ -7,6 +7,7 @@ const path = require('path');
 const src = fs.readFileSync(path.join(__dirname, 'data.js'), 'utf8');
 const CHECK = `
 const errs = [];
+const warns = [];
 const titles = new Set(EVENTS.map(e => e.title));
 const seen = new Set();
 for (const e of EVENTS) {
@@ -14,6 +15,7 @@ for (const e of EVENTS) {
   seen.add(e.title);
   if (!['exact','approx','era','range'].includes(e.yearMode)) errs.push('bad yearMode: ' + e.title);
   if (e.yearMode === 'era' && e.year !== null) errs.push('era year!=null: ' + e.title);
+  if (e.yearMode === 'era' && !e.era) warns.push('era 缺 era/eraSub（Q4 待回填）: ' + e.title);
   if ((e.yearMode === 'exact' || e.yearMode === 'approx') && typeof e.year !== 'number') errs.push('exact/approx year not int: ' + e.title);
   if (e.yearMode === 'range' && !Array.isArray(e.yearRange)) errs.push('range no yearRange: ' + e.title);
   if (e.ch === undefined || e.ch < 0 || e.ch >= CHAPTERS.length) errs.push('bad ch: ' + e.title);
@@ -34,6 +36,7 @@ console.log('EVENTS:', EVENTS.length);
 console.log('章覆盖:', cov.join(' / '));
 console.log('年份范围:', Math.min(...ys), '~', Math.max(...ys));
 console.log('COORDS:', Object.keys(COORDS).length);
+if (warns.length) { console.log('WARN (' + warns.length + ' 条，待复核 Q4）:'); warns.slice(0, 10).forEach(x => console.log('  -', x)); }
 if (errs.length) { console.log('ERRORS:'); errs.forEach(x => console.log(' -', x)); process.exit(1); }
 console.log('数据关卡: PASS');
 `;

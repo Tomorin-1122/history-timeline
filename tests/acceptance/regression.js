@@ -107,6 +107,14 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   const slider = await page.locator('#yrSlider').evaluate(el => [el.min, el.max, el.value]);
   check('滑块范围历史年份', Math.abs(Number(slider[0])) < 10000 && Math.abs(Number(slider[1])) < 10000, slider.join(','));
 
+  // 11b. 自动播放
+  await page.click('#playBtn');
+  await page.waitForTimeout(400);
+  check('播放启动', (await page.locator('#playBtn').textContent()).includes('暂停'));
+  await page.click('#playBtn');
+  await page.waitForTimeout(200);
+  check('播放停止', (await page.locator('#playBtn').textContent()).includes('播放'));
+
   // 12. 视图切换：复习
   await page.click('.tab[data-view="review"]');
   await page.waitForTimeout(300);
@@ -122,6 +130,31 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.click('#rvOk');
   await page.waitForTimeout(200);
   check('答对后进入下一张', await page.locator('#rvTitle').textContent() !== '');
+
+  // 12b. 退出二次确认（当前仍在复习轮中）
+  await page.click('#rvExit');
+  await page.waitForTimeout(150);
+  check('退出需二次确认', (await page.locator('#rvExit').textContent()).includes('确认退出'));
+  await page.click('#rvExit');
+  await page.waitForTimeout(300);
+  check('二次确认后回设置', await page.locator('#rvSetup:visible').count() === 1);
+
+  // 12c. 错题重练：数量 1，答错 → 自动第 2 轮 → 攻克完成
+  await page.fill('#rvNum', '1');
+  await page.waitForTimeout(150);
+  await page.click('#rvStart');
+  await page.waitForTimeout(300);
+  await page.click('#rvShow');
+  await page.waitForTimeout(200);
+  await page.click('#rvFail');
+  await page.waitForTimeout(400);
+  check('答错后进入第 2 轮重练', (await page.locator('#rvFails').textContent()).includes('第 2 轮'));
+  check('第 2 轮有题显示', (await page.locator('#rvTitle').textContent()) !== '');
+  await page.click('#rvShow');
+  await page.waitForTimeout(200);
+  await page.click('#rvOk');
+  await page.waitForTimeout(300);
+  check('错题攻克后本轮完成', await page.locator('#rvDone:visible').count() === 1);
 
   // 13. toBand 章节回顶按钮
   await page.click('.tab[data-view="timeline"]');
