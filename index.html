@@ -48,12 +48,13 @@
   </div>
   <div class="view mapview" id="view-map" hidden>
     <div class="maptool">
+      <button class="f range-btn" data-range="pre" id="rangePre" title="原始社会：史前（距今约800万年前）~ 夏朝前，非等距刻度">原始社会</button>
       <button class="f range-btn on" data-range="hist" id="rangeHist" title="主时间轴：夏朝（前2070）~ 鸦片战争（1840）">历史时期</button>
-      <button class="f range-btn" data-range="pre" id="rangePre" title="原始社会：史前（距今约800万年前）~ 夏朝前">原始社会</button>
       <span class="yrlabel" id="yrLabel">全部年份</span>
       <input type="range" id="yrSlider" step="1" aria-label="年代">
       <button class="f on" id="yrAll">全部</button>
       <button class="f" id="playBtn">▶ 播放</button>
+      <button class="f" id="speedBtn" title="播放速度，点击循环 1×/2×/4×/8×">1×</button>
     </div>
     <div class="mapwrap">
       <div id="map"></div>

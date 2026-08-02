@@ -1,36 +1,48 @@
 /* map.js — 地图视图：Leaflet + 免 key 瓦片、门类五色、双时间轴滑块/自动播放
    双时间轴（老板定案 2026-08-02）：
-     hist — 主时间轴 -2070（夏朝）~ 1840（鸦片战争），年单位，播放步长 5 年
-     pre  — 原始社会单独时间轴 -8000000（距今约800万年）~ -2070，万年单位，播放步长 50 万年 */
+     hist — 主时间轴 -2070（夏朝）~ 1840（鸦片战争），年单位，线性刻度
+     pre  — 原始社会单独时间轴，距今约800万年前 ~ 前2070，**对数（非等距）刻度**：
+            滑块值 = MAX_LOG - log10(距今绝对年)，晚近区间（事件密集）在滑块上占比更大 */
 'use strict';
 
 let mapObj=null, markers=null, mapInited=false;
 
 /* ---- 时间轴常量 ---- */
 const HIST_YMIN=-2070, HIST_YMAX=1840;      /* 主时间轴：夏朝始 ~ 鸦片战争 */
-const PRE_YMIN=-8000000, PRE_YMAX=-2070;    /* 原始社会：史前 ~ 夏朝前 */
-const STEP_HIST=5, STEP_PRE=500000;         /* 播放步长 */
-const R_HIST=50, R_PRE=500000;              /* 滑块过滤窗口（历史 50 年 / 史前 50 万年） */
+const PRE_MAX_LOG=Math.log10(8000000);       /* 距今约800万年前（对数上界） */
+const PRE_MIN_LOG=Math.log10(2070);          /* 前2070（对数下界） */
+const PRE_SPAN=PRE_MAX_LOG-PRE_MIN_LOG;      /* 对数跨度 ≈3.59 */
+const STEP_HIST=5, STEP_PRE=0.05;            /* 播放步长：历史 5 年 / 史前 0.05 对数单位 */
+const R_HIST=50, R_PRE=0.08;                 /* 过滤窗口：历史 50 年 / 史前 ±0.08 数量级(≈±20%年份差) */
+const SPEEDS=[1,2,4,8];                      /* 播放倍速档 */
 
 let mapRange='hist';                          /* 'hist' | 'pre' */
+let speedIdx=0;                               /* 当前倍速档索引 */
 
 const yrSlider=document.getElementById("yrSlider"),
       yrLabel=document.getElementById("yrLabel"),
       yrAll=document.getElementById("yrAll"),
-      playBtn=document.getElementById("playBtn");
+      playBtn=document.getElementById("playBtn"),
+      speedBtn=document.getElementById("speedBtn");
 yrSlider.min=HIST_YMIN; yrSlider.max=HIST_YMAX; yrSlider.value=HIST_YMIN;
 
-function curY(){ return mapRange==='pre'?[PRE_YMIN,PRE_YMAX]:[HIST_YMIN,HIST_YMAX]; }
-function curStep(){ return mapRange==='pre'?STEP_PRE:STEP_HIST; }
+/* 史前绝对年 → 滑块对数值：s = MAX_LOG - log10(absYear)（0=距今最远，PRE_SPAN=距今最近） */
+function logS(absYear){ return PRE_MAX_LOG - Math.log10(Math.max(absYear,1)); }
+
+function curY(){ return mapRange==='pre'?[0,PRE_SPAN]:[HIST_YMIN,HIST_YMAX]; }
+function curStep(){ return (mapRange==='pre'?STEP_PRE:STEP_HIST)*SPEEDS[speedIdx]; }
 function curR(){ return mapRange==='pre'?R_PRE:R_HIST; }
 
-/* 年份标签：历史"前 X 年 ±50"；史前"距今约 X 万年 前后" */
+/* 年份标签：历史"前 X 年 ±50"；史前"距今约 X 万年 前后"（对数刻度逆变换） */
 function fmtYrLabel(v){
-  if(mapRange==='pre') return "距今约 "+fmtWan(Math.abs(v))+" 前后";
+  if(mapRange==='pre'){
+    const absY=Math.round(Math.pow(10, PRE_MAX_LOG - v));
+    return "距今约 "+fmtWan(absY)+" 前后";
+  }
   return fmtYear(v)+" ±50";
 }
 
-/* 切换时间轴模式（历史时期 / 原始社会） */
+/* 切换时间轴模式（原始社会 / 历史时期） */
 function setRange(mode){
   if(mode===mapRange) return;
   mapRange=mode;
@@ -43,6 +55,12 @@ function setRange(mode){
 }
 document.querySelectorAll(".range-btn").forEach(b=>{
   b.addEventListener("click",()=>setRange(b.dataset.range));
+});
+
+/* 播放倍速：1×→2×→4×→8× 循环 */
+speedBtn.addEventListener("click",()=>{
+  speedIdx=(speedIdx+1)%SPEEDS.length;
+  speedBtn.textContent=SPEEDS[speedIdx]+"×";
 });
 
 /* ---- 初始化：免 key 高德公开端点（08-02 方向：不申请商业 key；天地图 tk 到位可切换） ---- */
@@ -71,7 +89,11 @@ function drawMarkers(){
     if(q && !matchEvent(e,q)) return;
     if(!allMode){
       if(e.year===null) return;            /* 播放/过滤时 era 不霸屏 */
-      if(Math.abs(e.year-cyr)>R) return;
+      if(pre){
+        if(Math.abs(logS(Math.abs(e.year))-cyr)>R) return;  /* 对数空间过滤 */
+      }else{
+        if(Math.abs(e.year-cyr)>R) return;
+      }
     }
     const g=wgs84ToGcj02(c[0],c[1]);       /* 高德瓦片需 gcj02，WGS84 源数据转一次 */
     const col=TYPE_COLORS[e.type]||"#9e3d26";

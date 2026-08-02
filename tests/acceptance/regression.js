@@ -118,10 +118,11 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   // 11c. 双时间轴：原始社会模式 + 地图界面分期链接不跳转
   await page.click('#yrAll');       /* 恢复"全部年份"（播放测试移除了 on 态） */
   await page.waitForTimeout(200);
+  check('工具栏原始社会在前', await page.locator('.range-btn').first().getAttribute('data-range') === 'pre');
   await page.click('#rangePre');
   await page.waitForTimeout(300);
   const preSlider = await page.locator('#yrSlider').evaluate(el => [Number(el.min), Number(el.max)]);
-  check('原始社会模式滑块范围史前', preSlider[0] <= -8000000 && preSlider[1] <= -2070, preSlider.join(','));
+  check('原始社会模式滑块对数刻度', preSlider[0] >= 0 && preSlider[1] > 3 && preSlider[1] < 4, preSlider.join(','));
   check('原始社会模式按钮态', await page.locator('#rangePre.on').count() === 1);
   const preMarkers = await page.locator('#map path.leaflet-interactive').count();
   const preExpect = await page.evaluate(() => EVENTS.filter(e => e.ch === 0 && COORDS[e.title]).length);
@@ -136,6 +137,17 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   check('点战国切回历史模式', await page.locator('#rangeHist.on').count() === 1);
   await page.click('#rangeHist');
   await page.waitForTimeout(200);
+
+  // 11d. 播放倍速调节
+  check('倍速初始 1×', (await page.locator('#speedBtn').textContent()) === '1×');
+  await page.click('#speedBtn');
+  check('倍速切 2×', (await page.locator('#speedBtn').textContent()) === '2×');
+  await page.click('#speedBtn');
+  check('倍速切 4×', (await page.locator('#speedBtn').textContent()) === '4×');
+  await page.click('#speedBtn');
+  check('倍速切 8×', (await page.locator('#speedBtn').textContent()) === '8×');
+  await page.click('#speedBtn');
+  check('倍速循环回 1×', (await page.locator('#speedBtn').textContent()) === '1×');
 
   // 12. 视图切换：复习
   await page.click('.tab[data-view="review"]');
