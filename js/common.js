@@ -1,20 +1,41 @@
 /* common.js — 通用工具函数（无 DOM 依赖，可被 timeline/map/review 共用） */
 'use strict';
 
-/* 年份展示：exact="前 632" approx="约前 1600" range="前 579 至 前 546" era=null */
-function fmt(e){
-  if(e.yearMode==="era") return null;
-  if(e.yearMode==="range") return "前 "+(-e.yearRange[0])+" 至 "+(-e.yearRange[1]);
-  const abs=e.year<0?("前 "+(-e.year)):(""+e.year);
-  return (e.yearMode==="approx"?"约":"")+abs;
+/* 史前年份"万年"格式化：1700000 → "170万年"；18000 → "1.8万年" */
+function fmtWan(absYear){
+  const w = absYear / 10000;
+  return (Number.isInteger(w) ? String(w) : w.toFixed(1)) + '万年';
 }
 
-/* 时间轴/地图短格式：前 632 / 约前 1600 / 前 579~546 / era 返回时段文案 */
+/* 年份展示：exact="前 632" approx="约前 1600" range="前 579 至 前 546" era=null
+   史前（|year|>=10000）统一用"距今约 X 万年"单位 */
+function fmt(e){
+  if(e.yearMode==="era") return null;
+  if(e.yearMode==="range"){
+    if(Math.abs(e.yearRange[0])>=10000) return "距今约 "+fmtWan(Math.abs(e.yearRange[0]))+" 至 "+fmtWan(Math.abs(e.yearRange[1]));
+    return "前 "+(-e.yearRange[0])+" 至 "+(-e.yearRange[1]);
+  }
+  if(e.year<0){
+    const abs=-e.year;
+    if(abs>=10000) return "距今约 "+fmtWan(abs);
+    return (e.yearMode==="approx"?"约":"")+"前 "+abs;
+  }
+  return (e.yearMode==="approx"?"约":"")+e.year;
+}
+
+/* 时间轴/地图短格式：前 632 / 约前 1600 / 前 579~546 / era 返回时段文案；史前同用"万年" */
 function fmtShort(e){
   if(e.yearMode==="era") return e.era||e.period||"时代";
-  if(e.yearMode==="range") return "前 "+(-e.yearRange[0])+"~"+(-e.yearRange[1]);
-  const abs=e.year<0?("前 "+(-e.year)):(""+e.year);
-  return (e.yearMode==="approx"?"约":"")+abs;
+  if(e.yearMode==="range"){
+    if(Math.abs(e.yearRange[0])>=10000) return "距今"+fmtWan(Math.abs(e.yearRange[0]))+"~"+fmtWan(Math.abs(e.yearRange[1]));
+    return "前 "+(-e.yearRange[0])+"~"+(-e.yearRange[1]);
+  }
+  if(e.year<0){
+    const abs=-e.year;
+    if(abs>=10000) return "距今约"+fmtWan(abs);
+    return (e.yearMode==="approx"?"约":"")+"前 "+abs;
+  }
+  return (e.yearMode==="approx"?"约":"")+e.year;
 }
 
 /* 星级：importance 1-3 */
