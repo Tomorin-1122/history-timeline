@@ -17,9 +17,17 @@ viewTabs.querySelectorAll(".tab").forEach(tb=>{
   tb.addEventListener("click",()=>switchView(tb.dataset.view));
 });
 
-/* ---- 分期链接：若在地图/复习视图，先切回时间轴再跳锚点 ---- */
+/* ---- 分期链接：时间轴视图跳锚点；地图视图不跳转，切换时间轴模式（原始社会→史前） ---- */
 document.querySelectorAll(".bar a.jump").forEach(a=>{
-  a.addEventListener("click",()=>switchView("timeline"));
+  a.addEventListener("click",(ev)=>{
+    const onMap=!document.getElementById("view-map").hidden;
+    if(onMap){
+      ev.preventDefault();               /* 地图界面：不再跳回时间轴 */
+      if(typeof setRange==="function") setRange(a.textContent==="原始社会"?"pre":"hist");
+      return;
+    }
+    switchView("timeline");             /* 时间轴界面：维持原跳锚点行为 */
+  });
 });
 
 /* ---- 抽屉：点击背景关闭 ---- */

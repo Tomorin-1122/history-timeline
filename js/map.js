@@ -1,17 +1,49 @@
-/* map.js — 地图视图：Leaflet + 免 key 瓦片、门类五色、时间滑块/自动播放 */
+/* map.js — 地图视图：Leaflet + 免 key 瓦片、门类五色、双时间轴滑块/自动播放
+   双时间轴（老板定案 2026-08-02）：
+     hist — 主时间轴 -2070（夏朝）~ 1840（鸦片战争），年单位，播放步长 5 年
+     pre  — 原始社会单独时间轴 -8000000（距今约800万年）~ -2070，万年单位，播放步长 50 万年 */
 'use strict';
 
 let mapObj=null, markers=null, mapInited=false;
 
-/* ---- 主时间轴范围：固定 -2070（夏朝始）~ 1840（鸦片战争），老板定案 2026-08-02 ----
-   原始社会史前（|year|>=10000）不参与滑块——时间跨度太大挤压历史时期；
-   史前事件仅在"全部年份"模式以万年单位/空心圈呈现（数据层 yearMode 复核见 Q1）。 */
-const YMIN=-2070, YMAX=1840;
+/* ---- 时间轴常量 ---- */
+const HIST_YMIN=-2070, HIST_YMAX=1840;      /* 主时间轴：夏朝始 ~ 鸦片战争 */
+const PRE_YMIN=-8000000, PRE_YMAX=-2070;    /* 原始社会：史前 ~ 夏朝前 */
+const STEP_HIST=5, STEP_PRE=500000;         /* 播放步长 */
+const R_HIST=50, R_PRE=500000;              /* 滑块过滤窗口（历史 50 年 / 史前 50 万年） */
+
+let mapRange='hist';                          /* 'hist' | 'pre' */
 
 const yrSlider=document.getElementById("yrSlider"),
       yrLabel=document.getElementById("yrLabel"),
-      yrAll=document.getElementById("yrAll");
-yrSlider.min=YMIN; yrSlider.max=YMAX; yrSlider.value=YMIN;
+      yrAll=document.getElementById("yrAll"),
+      playBtn=document.getElementById("playBtn");
+yrSlider.min=HIST_YMIN; yrSlider.max=HIST_YMAX; yrSlider.value=HIST_YMIN;
+
+function curY(){ return mapRange==='pre'?[PRE_YMIN,PRE_YMAX]:[HIST_YMIN,HIST_YMAX]; }
+function curStep(){ return mapRange==='pre'?STEP_PRE:STEP_HIST; }
+function curR(){ return mapRange==='pre'?R_PRE:R_HIST; }
+
+/* 年份标签：历史"前 X 年 ±50"；史前"距今约 X 万年 前后" */
+function fmtYrLabel(v){
+  if(mapRange==='pre') return "距今约 "+fmtWan(Math.abs(v))+" 前后";
+  return fmtYear(v)+" ±50";
+}
+
+/* 切换时间轴模式（历史时期 / 原始社会） */
+function setRange(mode){
+  if(mode===mapRange) return;
+  mapRange=mode;
+  document.querySelectorAll(".range-btn").forEach(b=>b.classList.toggle("on",b.dataset.range===mode));
+  const [ymin,ymax]=curY();
+  yrSlider.min=ymin; yrSlider.max=ymax; yrSlider.value=ymin;
+  if(playing) togglePlay();               /* 切模式停播放，避免范围/步长混乱 */
+  yrLabel.textContent=yrAll.classList.contains("on")?"全部年份":fmtYrLabel(+yrSlider.value);
+  drawMarkers();
+}
+document.querySelectorAll(".range-btn").forEach(b=>{
+  b.addEventListener("click",()=>setRange(b.dataset.range));
+});
 
 /* ---- 初始化：免 key 高德公开端点（08-02 方向：不申请商业 key；天地图 tk 到位可切换） ---- */
 function initMap(){
@@ -29,8 +61,10 @@ const TYPE_COLORS={"政治":"#9e3d26","军事":"#37474f","经济":"#4f6d3a","文
 function drawMarkers(){
   if(!markers) return;
   markers.clearLayers();
-  const allMode=yrAll.classList.contains("on"), cyr=+yrSlider.value, R=50, q=(state.q||"").toLowerCase();
+  const allMode=yrAll.classList.contains("on"), cyr=+yrSlider.value, R=curR(), q=(state.q||"").toLowerCase();
+  const pre=mapRange==='pre';
   EVENTS.forEach((e,idx)=>{
+    if(pre && e.ch!==0) return;            /* 原始社会模式只看原始社会章 */
     const c=COORDS[e.title]; if(!c) return;
     if(state.type!=="全部" && e.type!==state.type) return;
     if(state.imp!==0 && e.importance!==state.imp) return;
@@ -66,7 +100,6 @@ function fmtYear(v){return v<0?("前 "+(-v)+" 年"):(v+" 年");}
 
 /* ---- 自动播放 ---- */
 let playing=false, playTimer=null;
-const playBtn=document.getElementById("playBtn");
 function togglePlay(){
   playing=!playing;
   playBtn.textContent=playing?"⏸ 暂停":"▶ 播放";
@@ -74,10 +107,11 @@ function togglePlay(){
   if(playing){
     yrAll.classList.remove("on");
     playTimer=setInterval(()=>{
-      let v=+yrSlider.value+5;
-      if(YMAX!=null && v>YMAX) v=YMIN;
+      let v=+yrSlider.value+curStep();
+      const [ymin,ymax]=curY();
+      if(v>ymax) v=ymin;
       yrSlider.value=v;
-      yrLabel.textContent=fmtYear(v)+" ±50";
+      yrLabel.textContent=fmtYrLabel(v);
       drawMarkers();
     },600);
   }else{
@@ -85,6 +119,6 @@ function togglePlay(){
   }
 }
 playBtn.addEventListener("click",togglePlay);
-function pickYearFilter(){yrAll.classList.remove("on");yrLabel.textContent=fmtYear(+yrSlider.value)+" ±50";drawMarkers();}
+function pickYearFilter(){yrAll.classList.remove("on");yrLabel.textContent=fmtYrLabel(+yrSlider.value);drawMarkers();}
 yrSlider.addEventListener("input",()=>{if(playing)togglePlay();pickYearFilter();});
 yrAll.addEventListener("click",()=>{yrAll.classList.add("on");yrLabel.textContent="全部年份";drawMarkers();});

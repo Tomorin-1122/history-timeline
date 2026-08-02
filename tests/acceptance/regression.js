@@ -115,6 +115,28 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.waitForTimeout(200);
   check('播放停止', (await page.locator('#playBtn').textContent()).includes('播放'));
 
+  // 11c. 双时间轴：原始社会模式 + 地图界面分期链接不跳转
+  await page.click('#yrAll');       /* 恢复"全部年份"（播放测试移除了 on 态） */
+  await page.waitForTimeout(200);
+  await page.click('#rangePre');
+  await page.waitForTimeout(300);
+  const preSlider = await page.locator('#yrSlider').evaluate(el => [Number(el.min), Number(el.max)]);
+  check('原始社会模式滑块范围史前', preSlider[0] <= -8000000 && preSlider[1] <= -2070, preSlider.join(','));
+  check('原始社会模式按钮态', await page.locator('#rangePre.on').count() === 1);
+  const preMarkers = await page.locator('#map path.leaflet-interactive').count();
+  const preExpect = await page.evaluate(() => EVENTS.filter(e => e.ch === 0 && COORDS[e.title]).length);
+  check('原始社会模式 marker = 史前坐标数', preMarkers === preExpect, '期望 ' + preExpect + ' 实际 ' + preMarkers);
+  await page.click('#filterToggle');   /* 展开筛选面板以点击分期链接 */
+  await page.waitForTimeout(150);
+  await page.click('.bar a.jump:has-text("原始社会")');
+  await page.waitForTimeout(300);
+  check('地图界面点分期不跳回时间轴', await page.locator('#view-map:visible').count() === 1);
+  await page.click('.bar a.jump:has-text("战国")');
+  await page.waitForTimeout(200);
+  check('点战国切回历史模式', await page.locator('#rangeHist.on').count() === 1);
+  await page.click('#rangeHist');
+  await page.waitForTimeout(200);
+
   // 12. 视图切换：复习
   await page.click('.tab[data-view="review"]');
   await page.waitForTimeout(300);
