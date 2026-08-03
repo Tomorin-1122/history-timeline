@@ -103,7 +103,7 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   check('地图视图可见', await page.locator('#view-map:visible').count() === 1);
   check('时间轴视图隐藏', await page.locator('#view-timeline[hidden]').count() === 1);
   check('Leaflet 初始化', await page.locator('#map.leaflet-container').count() === 1);
-  const markerCount = await page.locator('#map path.leaflet-interactive').count();
+  const markerCount = await page.evaluate(() => markers.getLayers().length + plainMarkers.getLayers().length);
   const expMarkers = await page.evaluate(() => EVENTS.filter(e => e.ch !== 0 && COORDS[e.title]).length);
   check('地图 marker = 历史事件数（隔离原始社会）', markerCount === expMarkers, '实际 ' + markerCount + ' 期望 ' + expMarkers);
   // 滑块范围：min/max 为历史范围
@@ -192,7 +192,8 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.click('#keepN');
   check('保留数循环切 5 个', (await page.locator('#keepN').textContent()) === '保留 5 个');
   await page.click('#yrAll');     /* 历史模式全部年份 */
-  const domMarkers = await page.locator('#map path.leaflet-interactive').count();
+  /* 聚类会把重灾组（≥10 条重合城市）低 zoom 渲染为 divIcon 簇，path 计数会漏——用图层数据计数 */
+  const domMarkers = await page.evaluate(() => markers.getLayers().length + plainMarkers.getLayers().length);
   const expectMarkers = await page.evaluate(() => EVENTS.filter(e => e.ch !== 0 && COORDS[e.title]).length);
   check('历史模式与原始社会隔离', domMarkers === expectMarkers, domMarkers + ' vs ' + expectMarkers);
   // 11g. 步进随筛选联动：门类=军事时，步进只跳军事事件

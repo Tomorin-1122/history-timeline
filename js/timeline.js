@@ -123,6 +123,9 @@ function applyFilter(){
   if(typeof drawMarkers==="function") drawMarkers(); /* 地图视图联动：筛选同时作用于 marker */
 }
 document.getElementById("cnt").textContent="共 "+EVENTS.length+" 事";
+/* B2：footer 数据量动态生成（读 EVENTS/CHAPTERS，改数据后无需手动同步） */
+const footStat=document.getElementById("footStat");
+if(footStat) footStat.textContent="全 "+CHAPTERS.length+" 章 · "+EVENTS.length+" 事";
 
 /* ---- 详情抽屉 ---- */
 const drawer=document.getElementById("drawer");

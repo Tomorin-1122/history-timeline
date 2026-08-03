@@ -30,7 +30,10 @@ const PILOTS = [
   ['三国两晋南北朝', 'data/三国两晋南北朝.json'],
   ['隋', 'data/隋.json'],
   ['唐', 'data/唐.json'],
+  ['五代宋辽夏金', 'data/五代宋辽金西夏.json'],
   ['元代', 'data/元代_pilot_20260802.json'],
+  ['明', 'data/明.json'],
+  ['清', 'data/清前期.json'],
 ];
 
 function json(res, code, obj) { res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify(obj)); }
@@ -60,16 +63,27 @@ function validateEvent(e) {
   return errs;
 }
 
-/* 重建 data.js 并跑数据关卡（失败回滚：重生成一次不校验的？直接报错返回） */
-function rebuild() {
-  execSync('node js/gen_data.js', { cwd: ROOT, stdio: 'pipe' });
+/* 重建 data.js 并跑数据关卡。失败时若传入 backup（{file, raw}）则字节级还原 pilot 并重建 data.js，
+   保证坏数据不落盘（B1 修复：原实现 check_data 失败时 pilot 已写坏、data.js 已用坏数据重建） */
+function rebuild(backup) {
   try {
+    execSync('node js/gen_data.js', { cwd: ROOT, stdio: 'pipe' });
     execSync('node js/check_data.js', { cwd: ROOT, stdio: 'pipe' });
   } catch (e) {
-    // 数据关卡失败：不覆盖损坏状态，抛错由调用方处理
-    throw new Error('数据关卡未通过，请检查字段：' + (e.stderr || e.message).split('\n').slice(-8).join(' | '));
+    if (backup) {
+      fs.writeFileSync(path.join(ROOT, backup.file), backup.raw, 'utf8');   // 字节级还原 pilot
+      try { execSync('node js/gen_data.js', { cwd: ROOT, stdio: 'pipe' }); } catch (_) {}  // 干净数据重建 data.js
+    }
+    const msg = String(e.stdout || e.stderr || e.message || e).split('\n').slice(-8).join(' | ');  // check_data 错误走 stdout，须优先取
+    throw new Error('数据关卡未通过，已回滚原数据：' + msg);
   }
 }
+
+/* 修改 pilot 前备份磁盘原始字节（回滚时字节级还原，避免重序列化改变格式） */
+function backupOf(file) { return { file, raw: fs.readFileSync(path.join(ROOT, file), 'utf8') }; }
+
+/* pilot 排序：按年份升序；era 事件（year=null）排末尾，避免 (a.year??0) 使其混入公元前后之间 */
+function sortPilot(d) { return d.sort((a, b) => (a.year===null?Infinity:a.year) - (b.year===null?Infinity:b.year)); }
 
 function findPilotByTitle(title) {
   for (const [tag, file] of PILOTS) {
@@ -102,9 +116,10 @@ const server = http.createServer(async (req, res) => {
       const [, file] = hit;
       const d = loadPilot(file);
       if (d.some(x => x.title === e.title)) return json(res, 409, { ok: false, errors: ['已存在同名事件 ' + e.title] });
-      d.push(e); d.sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
+      const backup = backupOf(file);
+      d.push(e); sortPilot(d);
       savePilot(file, d);
-      rebuild();
+      rebuild(backup);
       return json(res, 200, { ok: true });
     } catch (err) { return json(res, 500, { ok: false, errors: [err.message] }); }
   }
@@ -121,9 +136,10 @@ const server = http.createServer(async (req, res) => {
         return json(res, 409, { ok: false, errors: ['已存在同名事件 ' + e.title] });
       }
       found.data[found.idx] = e;
-      found.data.sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
+      const backup = backupOf(found.file);
+      sortPilot(found.data);
       savePilot(found.file, found.data);
-      rebuild();
+      rebuild(backup);
       return json(res, 200, { ok: true });
     } catch (err) { return json(res, 500, { ok: false, errors: [err.message] }); }
   }
@@ -134,8 +150,9 @@ const server = http.createServer(async (req, res) => {
       const found = findPilotByTitle(title);
       if (!found) return json(res, 404, { ok: false, errors: ['未找到事件 ' + title] });
       found.data.splice(found.idx, 1);
+      const backup = backupOf(found.file);
       savePilot(found.file, found.data);
-      rebuild();
+      rebuild(backup);
       return json(res, 200, { ok: true });
     } catch (err) { return json(res, 500, { ok: false, errors: [err.message] }); }
   }

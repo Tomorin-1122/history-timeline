@@ -104,6 +104,14 @@ function startReview(){
   showCard();
 }
 
+/* V3：复习卡片背面年份——era 显示时代段；公元后 exact/approx 补"年"单位；其余（前 X / range）沿用 fmt */
+function rvYearFmt(e){
+  if(e.yearMode==="era") return e.era? (e.era+(e.eraSub?" · "+e.eraSub:"")) : (e.dynasty||e.period||"时代");
+  const s=fmt(e);
+  if(e.year>0 && (e.yearMode==="exact"||e.yearMode==="approx")) return s+" 年";
+  return s;
+}
+
 function showCard(){
   const s=rvState;
   if(s.queue.length===0){
@@ -113,9 +121,8 @@ function showCard(){
   s.cur=s.queue[0];
   document.getElementById("rvTitle").textContent=s.cur.e.title;
   document.getElementById("rvFrontTags").innerHTML='<span class="tag">'+s.cur.e.type+'</span><span class="stars">'+stars(s.cur.e.importance)+'</span>';
-  document.getElementById("rvYear").textContent=s.cur.e.yearMode==="era"
-    ? (s.cur.e.era? (s.cur.e.era+(s.cur.e.eraSub?" · "+s.cur.e.eraSub:"")) : (s.cur.e.dynasty||s.cur.e.period||"时代"))
-    : fmt(s.cur.e);
+  /* V3：背面年份展示——公元后 exact/approx 补"年"单位（"69"→"69 年"），避免裸数字像页码 */
+  document.getElementById("rvYear").textContent=rvYearFmt(s.cur.e);
   document.getElementById("rvSum").textContent=s.cur.e.summary||"";
   const tip=document.getElementById("rvTip");
   if(s.cur.e.examTip){tip.style.display="";tip.textContent=s.cur.e.examTip;}else{tip.style.display="none";}

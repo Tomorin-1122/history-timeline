@@ -58,9 +58,9 @@ function shuffle(a){
   }
 }
 
-/* 事件命中搜索词：标题/摘要/地点/考点提示/标签 */
+/* 事件命中搜索词：标题/摘要/地点/考点提示/标签/人物/朝代 */
 function matchEvent(e,q){
-  const hay=[e.title,e.summary||"",e.location||"",e.examTip||"",(e.tags||[]).join(" ")].join(" ").toLowerCase();
+  const hay=[e.title,e.summary||"",e.location||"",e.examTip||"",(e.tags||[]).join(" "),e.dynasty||"",(e.people||[]).join(" ")].join(" ").toLowerCase();
   return hay.indexOf(q)>=0;
 }
 

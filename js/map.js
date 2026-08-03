@@ -36,13 +36,13 @@ function curStep(){ return (mapRange==='pre'?STEP_PRE:STEP_HIST)*SPEEDS[speedIdx
 /* 过滤窗口：pre 始终原样（老板定案）；hist 步进后精准 ±0.5，拖动 ±50 */
 function curR(){ return mapRange==='pre'?R_PRE:(precise?0.5:R_HIST); }
 
-/* 年份标签：历史"前 X 年 ±50"；史前"距今约 X 万年 前后"（对数刻度逆变换） */
+/* 年份标签：历史"前 X 年 ±50"；步进/精准模式显示"前 X 年 · 精准定位"；史前"距今约 X 万年 前后"（对数刻度逆变换） */
 function fmtYrLabel(v){
   if(mapRange==='pre'){
     const absY=Math.round(Math.pow(10, PRE_MAX_LOG - v));
     return "距今约 "+fmtWan(absY)+" 前后";
   }
-  return fmtYear(v)+" ±50";
+  return precise ? fmtYear(v)+" · 精准定位" : fmtYear(v)+" ±50";
 }
 
 /* 切换时间轴模式（原始社会 / 历史时期） */
@@ -152,6 +152,19 @@ function addMarker(e, alpha, bold){
   (HEAVY_SET.has(e.title) && !playing && !precise && mapRange!=='pre' ? markers : plainMarkers).addLayer(m);
 }
 
+/* 共用筛选谓词：章隔离（pre/hist）+ 分期筛选 + 坐标 + 门类 + 等第 + 搜索
+   M1 修复：播放 / 普通渲染 / 步进三条路径统一走此谓词，避免重复过滤导致的回归 bug */
+function matchFilter(e, pre, q){
+  if(pre && e.ch!==0) return false;            /* 原始社会模式只看原始社会章 */
+  if(!pre && e.ch===0) return false;          /* 完全隔离：历史模式不看原始社会章 */
+  if(state.ch>=0 && e.ch!==state.ch) return false;
+  if(!COORDS[e.title]) return false;
+  if(state.type!=="全部" && e.type!==state.type) return false;
+  if(state.imp!==0 && e.importance!==state.imp) return false;
+  if(q && !matchEvent(e,q)) return false;
+  return true;
+}
+
 function drawMarkers(){
   if(!markers) return;
   markers.clearLayers(); plainMarkers.clearLayers();
@@ -161,12 +174,7 @@ function drawMarkers(){
   if(!pre && playing && !allMode){
     const keep=[];
     for(const e of EVENTS){
-      if(e.ch===0) continue;                      /* 完全隔离：历史模式不看原始社会章 */
-      if(state.ch>=0 && e.ch!==state.ch) continue;
-      if(!COORDS[e.title]) continue;
-      if(state.type!=="全部" && e.type!==state.type) continue;
-      if(state.imp!==0 && e.importance!==state.imp) continue;
-      if(q && !matchEvent(e,q)) continue;
+      if(!matchFilter(e,false,q)) continue;
       if(e.year===null || e.year>cyr) continue;   /* 未来事件不出现 */
       keep.push(e);
     }
@@ -177,13 +185,7 @@ function drawMarkers(){
     return;
   }
   EVENTS.forEach((e)=>{
-    if(pre && e.ch!==0) return;            /* 原始社会模式只看原始社会章 */
-    if(!pre && e.ch===0) return;          /* 完全隔离：历史模式不看原始社会章 */
-    if(state.ch>=0 && e.ch!==state.ch) return;  /* 分期筛选：只显示所选章 */
-    if(!COORDS[e.title]) return;
-    if(state.type!=="全部" && e.type!==state.type) return;
-    if(state.imp!==0 && e.importance!==state.imp) return;
-    if(q && !matchEvent(e,q)) return;
+    if(!matchFilter(e,pre,q)) return;
     if(!allMode){
       if(e.year===null) return;            /* 播放/过滤时 era 不霸屏 */
       if(pre){
@@ -237,13 +239,7 @@ function stepEvent(dir){
   const v=+yrSlider.value, pre=mapRange==='pre', q=(state.q||"").toLowerCase();
   let best=null;
   for(const e of EVENTS){
-    if(pre && e.ch!==0) continue;
-    if(!pre && e.ch===0) continue;         /* 完全隔离：历史模式步进不看原始社会章 */
-    if(state.ch>=0 && e.ch!==state.ch) continue;
-    if(!COORDS[e.title]) continue;
-    if(state.type!=="全部" && e.type!==state.type) continue;
-    if(state.imp!==0 && e.importance!==state.imp) continue;
-    if(q && !matchEvent(e,q)) continue;
+    if(!matchFilter(e,pre,q)) continue;
     if(e.year===null) continue;
     const y=pre?logS(Math.abs(e.year)):e.year;
     if(dir>0 && y>v && (best===null||y<best)) best=y;
@@ -253,7 +249,7 @@ function stepEvent(dir){
 }
 stepPrev.addEventListener("click",()=>stepEvent(-1));
 stepNext.addEventListener("click",()=>stepEvent(1));
-/* ---- 保留事件数：连续播放时屏幕同时存在 N 个（默认 10），点击循环 10/20/30/50 ---- */
+/* ---- 保留事件数：连续播放时屏幕同时存在 N 个（默认 10），点击循环 10/5/3/2/1 ---- */
 const keepBtn=document.getElementById("keepN");
 if(keepBtn){
   keepBtn.textContent="保留 "+keepN+" 个";
