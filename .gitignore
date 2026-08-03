@@ -3,3 +3,5 @@ data/obsolete/
 # Python 编译缓存
 __pycache__/
 *.pyc
+# 维护文档（本地保留，不进版本库/部署；部署站 vercel.json 已 404 docs/）
+docs/
