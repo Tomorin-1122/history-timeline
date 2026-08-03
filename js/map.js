@@ -83,10 +83,13 @@ const mapCtrlBtns={};      /* 地图内控件按钮引用（底图/全屏），�
 function buildTdtLayers(){
   tdtLayers.forEach(l=>mapObj.removeLayer(l));
   const b=TDT_BASES[tdtBaseIdx];
+  const cur=[];                              /* 当前批次图层：切换后旧批次事件忽略，防 abort 误触发回退 */
   const vec=L.tileLayer(TDT_URL(b.base),{subdomains:TDT_SUB,maxZoom:18,opacity:.78,attribution:"天地图"});
   const cva=L.tileLayer(TDT_URL(b.ann),{subdomains:TDT_SUB,maxZoom:18,opacity:1,attribution:"天地图"});
-  vec.on("tileerror",onTdtErr); cva.on("tileerror",onTdtErr);
-  tdtLayers=[vec,cva];
+  vec.on("tileerror",()=>{ if(tdtLayers!==cur) return; onTdtErr(); });
+  cva.on("tileerror",()=>{ if(tdtLayers!==cur) return; onTdtErr(); });
+  cur.push(vec,cva);
+  tdtLayers=cur;
   vec.addTo(mapObj); cva.addTo(mapObj);
 }
 function onTdtErr(){
@@ -95,7 +98,7 @@ function onTdtErr(){
     tdtLayers.forEach(l=>mapObj.removeLayer(l));
     tileMode="gaode";
     L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
-    if(mapCtrlBtns.base){ mapCtrlBtns.base.textContent="高"; mapCtrlBtns.base.title="底图已回退高德（天地图白名单外域名），不可切换"; }
+    if(mapCtrlBtns.base) updateBaseBtn();
     drawMarkers();                       /* 重绘：坐标改走 gcj02 */
   }
 }
@@ -150,11 +153,26 @@ function addMapControls(){
   ctrl.addTo(mapObj);
 }
 function swapTdtBase(){
-  if(tileMode!=="tdt") return;             /* 已回退高德：不切换 */
+  if(tileMode==="gaode"){
+    /* 从高德切回天地图（白名单外域名仍会 403 再回退，但不再锁死；按钮可反复尝试） */
+    tileMode="tdt"; tdtErr=0;
+    mapObj.eachLayer(l=>{ if(l instanceof L.TileLayer) mapObj.removeLayer(l); });
+    buildTdtLayers();
+    drawMarkers();                          /* 坐标切回 WGS84（免转换） */
+    updateBaseBtn();
+    return;
+  }
   tdtBaseIdx=(tdtBaseIdx+1)%TDT_BASES.length;
   tdtErr=0;
   buildTdtLayers();
-  if(mapCtrlBtns.base){
+  updateBaseBtn();
+}
+function updateBaseBtn(){
+  if(!mapCtrlBtns.base) return;
+  if(tileMode==="gaode"){
+    mapCtrlBtns.base.textContent="高";
+    mapCtrlBtns.base.title="底图已回退高德（天地图不可用）；点击可重试天地图";
+  }else{
     mapCtrlBtns.base.textContent=TDT_BASES[tdtBaseIdx].name.charAt(0);
     mapCtrlBtns.base.title="切换底图：矢量/影像/地形（当前："+TDT_BASES[tdtBaseIdx].name+"）";
   }
