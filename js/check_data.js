@@ -18,6 +18,7 @@ for (const e of EVENTS) {
   if (e.yearMode === 'era' && !e.era) warns.push('era 缺 era/eraSub（Q4 待回填）: ' + e.title);
   if ((e.yearMode === 'exact' || e.yearMode === 'approx') && typeof e.year !== 'number') errs.push('exact/approx year not int: ' + e.title);
   if (e.yearMode === 'range' && !Array.isArray(e.yearRange)) errs.push('range no yearRange: ' + e.title);
+  if (e.month != null && (e.month < 1 || e.month > 12 || !Number.isInteger(e.month))) errs.push('bad month: ' + e.title + ' (' + e.month + ')');
   if (e.ch === undefined || e.ch < 0 || e.ch >= CHAPTERS.length) errs.push('bad ch: ' + e.title);
   for (const r of e.related || []) { if (!titles.has(r)) errs.push('悬空 related: ' + e.title + ' -> ' + r); }
 }

@@ -85,6 +85,7 @@
   },
   {
     "title": "三司制度",
+    "month": 6,
     "year": 1376,
     "yearMode": "exact",
     "yearRange": null,
@@ -106,6 +107,7 @@
   },
   {
     "title": "胡惟庸案",
+    "month": 1,
     "year": 1380,
     "yearMode": "exact",
     "yearRange": null,
@@ -190,6 +192,7 @@
   },
   {
     "title": "都察院设立",
+    "month": 10,
     "year": 1382,
     "yearMode": "exact",
     "yearRange": null,
@@ -253,6 +256,7 @@
   },
   {
     "title": "《大诰》的颁行",
+    "month": 11,
     "year": 1385,
     "yearMode": "exact",
     "yearRange": null,
@@ -274,6 +278,7 @@
   },
   {
     "title": "郭桓案",
+    "month": 3,
     "year": 1385,
     "yearMode": "exact",
     "yearRange": null,
@@ -337,6 +342,7 @@
   },
   {
     "title": "靖难之役",
+    "month": 7,
     "year": 1399,
     "yearMode": "range",
     "yearRange": [1399, 1402],
@@ -547,6 +553,7 @@
   },
   {
     "title": "土木之变",
+    "month": 8,
     "year": 1449,
     "yearMode": "exact",
     "yearRange": null,
@@ -568,6 +575,7 @@
   },
   {
     "title": "北京保卫战",
+    "month": 10,
     "year": 1449,
     "yearMode": "exact",
     "yearRange": null,
@@ -589,6 +597,7 @@
   },
   {
     "title": "西厂设立",
+    "month": 1,
     "year": 1477,
     "yearMode": "exact",
     "yearRange": null,
@@ -652,6 +661,7 @@
   },
   {
     "title": "大礼议",
+    "month": 7,
     "year": 1524,
     "yearMode": "exact",
     "yearRange": null,
@@ -715,6 +725,7 @@
   },
   {
     "title": "庚戌之变",
+    "month": 8,
     "year": 1550,
     "yearMode": "exact",
     "yearRange": null,
@@ -1093,6 +1104,7 @@
   },
   {
     "title": "梃击案",
+    "month": 5,
     "year": 1615,
     "yearMode": "exact",
     "yearRange": null,
@@ -1261,6 +1273,7 @@
   },
   {
     "title": "澄城起义",
+    "month": 3,
     "year": 1627,
     "yearMode": "exact",
     "yearRange": null,
@@ -1303,6 +1316,7 @@
   },
   {
     "title": "张献忠谷城再起",
+    "month": 5,
     "year": 1639,
     "yearMode": "exact",
     "yearRange": null,
@@ -1387,6 +1401,7 @@
   },
   {
     "title": "大顺政权建立",
+    "month": 1,
     "year": 1644,
     "yearMode": "exact",
     "yearRange": null,
@@ -1408,6 +1423,7 @@
   },
   {
     "title": "大西政权建立",
+    "month": 11,
     "year": 1644,
     "yearMode": "exact",
     "yearRange": null,
@@ -1429,6 +1445,7 @@
   },
   {
     "title": "明朝灭亡",
+    "month": 3,
     "year": 1644,
     "yearMode": "exact",
     "yearRange": null,
@@ -1555,6 +1572,7 @@
   },
   {
     "title": "宁远之战",
+    "month": 1,
     "year": 1626,
     "yearMode": "exact",
     "yearRange": null,

@@ -104,6 +104,7 @@ function main() {
       events.push({
         title: it.title,
         year: it.year,
+        month: it.month || null,          /* 同年排序用：1-12，无则 null（排在有月份事件后） */
         yearMode: it.yearMode,
         yearRange: it.yearRange,
         era: it.era || '', eraSub: it.eraSub || '',   // 透传 pilot 的 era/eraSub（era 模式必填 era）

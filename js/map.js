@@ -273,7 +273,7 @@ function drawMarkers(){
       if(e.year===null || e.year>cyr) continue;   /* 未来事件不出现 */
       keep.push(e);
     }
-    keep.sort((a,b)=>b.year-a.year);
+    keep.sort((a,b)=> (b.year-a.year) || ((b.month||13)-(a.month||13)));   /* 同年按 month 降序：晚月事件最后添加置顶 */
     keep.slice(0,keepN).reverse().forEach((e,idx)=>{   /* 倒序：最旧先加、最新最后加 → 最新层级最高不被遮 */
       addMarker(e,1-((keepN-1-idx)/keepN)*0.85, idx===keepN-1);
     });
@@ -289,7 +289,7 @@ function drawMarkers(){
         if(Math.abs(e.year-cyr)>R) return;
       }
     }
-    addMarker(e,1);
+    addMarker(e,1, focusKey && e.title===focusKey);   /* 步进聚焦事件加粗（同年月序步进时滑块不动、聚焦切换） */
   });
 }
 
@@ -328,21 +328,27 @@ function togglePlay(){
   }
 }
 playBtn.addEventListener("click",togglePlay);
-/* ---- 步进：上一个/下一个事件（随当前筛选联动：章/门类/等第/搜索均生效，播放中则先停） ---- */
+/* ---- 步进：上一个/下一个事件（同年按 month 分先后；聚焦事件加粗，同年内步进滑块不动） ---- */
 const stepPrev=document.getElementById("stepPrev"), stepNext=document.getElementById("stepNext");
+let focusKey=null;                       /* 当前聚焦事件 title（步进定位基准） */
 function stepEvent(dir){
   if(playing) togglePlay();
   precise=true;
   const v=+yrSlider.value, pre=mapRange==='pre', q=(state.q||"").toLowerCase();
-  let best=null;
+  /* 复合时间：hist = year*13+month（无 month 记 13 排后）；pre 仍用对数刻度 */
+  const tv=e=>e.year*13+(e.month||13);
+  const yv=e=>pre?logS(Math.abs(e.year)):tv(e);
+  const f=focusKey?EVENTS.find(x=>x.title===focusKey&&matchFilter(x,pre,q)&&x.year!==null):null;
+  const base=f?yv(f):(pre?v:v*13+13);
+  let best=null, bestE=null;
   for(const e of EVENTS){
     if(!matchFilter(e,pre,q)) continue;
     if(e.year===null) continue;
-    const y=pre?logS(Math.abs(e.year)):e.year;
-    if(dir>0 && y>v && (best===null||y<best)) best=y;
-    if(dir<0 && y<v && (best===null||y>best)) best=y;
+    const y=yv(e);
+    if(dir>0 && y>base && (best===null||y<best)){best=y;bestE=e;}
+    if(dir<0 && y<base && (best===null||y>best)){best=y;bestE=e;}
   }
-  if(best!==null){ yrSlider.value=best; yrLabel.textContent=fmtYrLabel(best); drawMarkers(); }
+  if(bestE){ yrSlider.value=bestE.year; focusKey=bestE.title; yrLabel.textContent=fmtYrLabel(bestE.year); drawMarkers(); }
 }
 stepPrev.addEventListener("click",()=>stepEvent(-1));
 stepNext.addEventListener("click",()=>stepEvent(1));

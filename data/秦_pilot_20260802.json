@@ -585,6 +585,7 @@
   },
   {
     "title": "陈胜吴广起义",
+    "month": 7,
     "year": -209,
     "yearMode": "exact",
     "yearRange": null,
@@ -675,6 +676,7 @@
   },
   {
     "title": "项梁项羽吴中起兵",
+    "month": 9,
     "year": -209,
     "yearMode": "exact",
     "yearRange": null,
@@ -705,6 +707,7 @@
   },
   {
     "title": "楚怀王复立",
+    "month": 6,
     "year": -208,
     "yearMode": "exact",
     "yearRange": null,
@@ -736,6 +739,7 @@
   },
   {
     "title": "定陶之战",
+    "month": 9,
     "year": -208,
     "yearMode": "exact",
     "yearRange": null,
@@ -802,6 +806,7 @@
   },
   {
     "title": "秦朝灭亡",
+    "month": 10,
     "year": -207,
     "yearMode": "exact",
     "yearRange": null,

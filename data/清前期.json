@@ -22,6 +22,7 @@
   },
   {
     "title": "山海关之战",
+    "month": 4,
     "year": 1644,
     "yearMode": "exact",
     "yearRange": null,
@@ -43,6 +44,7 @@
   },
   {
     "title": "清军入关",
+    "month": 5,
     "year": 1644,
     "yearMode": "exact",
     "yearRange": null,
@@ -64,6 +66,7 @@
   },
   {
     "title": "弘光政权",
+    "month": 5,
     "year": 1644,
     "yearMode": "exact",
     "yearRange": null,
@@ -127,6 +130,7 @@
   },
   {
     "title": "剃发令",
+    "month": 6,
     "year": 1645,
     "yearMode": "exact",
     "yearRange": null,
@@ -211,6 +215,7 @@
   },
   {
     "title": "扬州之战",
+    "month": 4,
     "year": 1645,
     "yearMode": "exact",
     "yearRange": null,

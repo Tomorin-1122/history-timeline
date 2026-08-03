@@ -3,6 +3,7 @@ const EVENTS=[
  {
   "title": "腊玛古猿化石",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "腊玛古猿阶段",
@@ -30,6 +31,7 @@ const EVENTS=[
  {
   "title": "元谋人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代早期",
@@ -58,6 +60,7 @@ const EVENTS=[
  {
   "title": "西侯度遗址",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代早期",
@@ -85,6 +88,7 @@ const EVENTS=[
  {
   "title": "蓝田人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代早期",
@@ -113,6 +117,7 @@ const EVENTS=[
  {
   "title": "和县人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代早期",
@@ -140,6 +145,7 @@ const EVENTS=[
  {
   "title": "北京人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代早期",
@@ -170,6 +176,7 @@ const EVENTS=[
  {
   "title": "大荔人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代中期",
@@ -198,6 +205,7 @@ const EVENTS=[
  {
   "title": "许家窑人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代中期",
@@ -226,6 +234,7 @@ const EVENTS=[
  {
   "title": "丁村人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代中期",
@@ -254,6 +263,7 @@ const EVENTS=[
  {
   "title": "山顶洞人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代晚期",
@@ -283,6 +293,7 @@ const EVENTS=[
  {
   "title": "峙峪人",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "旧石器时代晚期",
@@ -310,6 +321,7 @@ const EVENTS=[
  {
   "title": "仰韶文化",
   "year": -7000,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -7000,
@@ -343,6 +355,7 @@ const EVENTS=[
  {
   "title": "半坡遗址",
   "year": -6000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -372,6 +385,7 @@ const EVENTS=[
  {
   "title": "姜寨遗址",
   "year": -6000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -400,6 +414,7 @@ const EVENTS=[
  {
   "title": "磁山文化",
   "year": -7000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -428,6 +443,7 @@ const EVENTS=[
  {
   "title": "裴李岗文化",
   "year": -7000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -456,6 +472,7 @@ const EVENTS=[
  {
   "title": "大地湾文化",
   "year": -7000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -484,6 +501,7 @@ const EVENTS=[
  {
   "title": "马家窑文化",
   "year": -5000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -512,6 +530,7 @@ const EVENTS=[
  {
   "title": "大汶口文化",
   "year": -6000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -541,6 +560,7 @@ const EVENTS=[
  {
   "title": "北辛文化",
   "year": -7000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -568,6 +588,7 @@ const EVENTS=[
  {
   "title": "河姆渡文化",
   "year": -7000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -598,6 +619,7 @@ const EVENTS=[
  {
   "title": "马家浜文化",
   "year": -6000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -625,6 +647,7 @@ const EVENTS=[
  {
   "title": "良渚文化",
   "year": -5000,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -5000,
@@ -657,6 +680,7 @@ const EVENTS=[
  {
   "title": "红山文化",
   "year": -5000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -685,6 +709,7 @@ const EVENTS=[
  {
   "title": "龙山文化",
   "year": -5000,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -5000,
@@ -718,6 +743,7 @@ const EVENTS=[
  {
   "title": "齐家文化",
   "year": -4100,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -4100,
@@ -749,6 +775,7 @@ const EVENTS=[
  {
   "title": "屈家岭文化",
   "year": -5000,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -776,6 +803,7 @@ const EVENTS=[
  {
   "title": "青龙泉三期文化",
   "year": -4400,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -803,6 +831,7 @@ const EVENTS=[
  {
   "title": "石峡文化",
   "year": -5000,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -5000,
@@ -833,6 +862,7 @@ const EVENTS=[
  {
   "title": "细石器文化",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "中石器至新石器时代",
@@ -861,6 +891,7 @@ const EVENTS=[
  {
   "title": "炎帝神农氏",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "传说时代",
@@ -892,6 +923,7 @@ const EVENTS=[
  {
   "title": "黄帝",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "传说时代（军事民主制时期）",
@@ -923,6 +955,7 @@ const EVENTS=[
  {
   "title": "涿鹿之战",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "传说时代",
@@ -955,6 +988,7 @@ const EVENTS=[
  {
   "title": "尧",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "传说时代（部落联盟时期）",
@@ -986,6 +1020,7 @@ const EVENTS=[
  {
   "title": "舜",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "传说时代（部落联盟时期）",
@@ -1018,6 +1053,7 @@ const EVENTS=[
  {
   "title": "大禹治水",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "传说时代末期",
@@ -1049,6 +1085,7 @@ const EVENTS=[
  {
   "title": "禅让制",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "原始社会后期",
@@ -1084,6 +1121,7 @@ const EVENTS=[
  {
   "title": "启世袭王权",
   "year": -2070,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -1116,6 +1154,7 @@ const EVENTS=[
  {
   "title": "农业革命",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "新石器时代",
@@ -1145,6 +1184,7 @@ const EVENTS=[
  {
   "title": "私有制与阶级萌芽",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "父系氏族社会",
@@ -1175,6 +1215,7 @@ const EVENTS=[
  {
   "title": "史前城址出现",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "父系氏族社会（龙山文化时期）",
@@ -1204,6 +1245,7 @@ const EVENTS=[
  {
   "title": "铜器冶炼出现",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "父系氏族社会（龙山文化时期）",
@@ -1233,6 +1275,7 @@ const EVENTS=[
  {
   "title": "涂山之会",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代初年",
@@ -1264,6 +1307,7 @@ const EVENTS=[
  {
   "title": "甘之战",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代初年",
@@ -1297,6 +1341,7 @@ const EVENTS=[
  {
   "title": "钧台之享",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代初年",
@@ -1327,6 +1372,7 @@ const EVENTS=[
  {
   "title": "太康失国",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代前期",
@@ -1359,6 +1405,7 @@ const EVENTS=[
  {
   "title": "少康中兴",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代前期",
@@ -1392,6 +1439,7 @@ const EVENTS=[
  {
   "title": "孔甲乱夏",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代后期",
@@ -1423,6 +1471,7 @@ const EVENTS=[
  {
   "title": "禹征三苗",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "传说时代末期",
@@ -1455,6 +1504,7 @@ const EVENTS=[
  {
   "title": "鸣条之战",
   "year": -1600,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -1486,6 +1536,7 @@ const EVENTS=[
  {
   "title": "二里头文化",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代中晚期",
@@ -1514,6 +1565,7 @@ const EVENTS=[
  {
   "title": "夏历（《夏小正》）",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代",
@@ -1544,6 +1596,7 @@ const EVENTS=[
  {
   "title": "《禹刑》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏代",
@@ -1575,6 +1628,7 @@ const EVENTS=[
  {
   "title": "商族兴起（契佐禹治水）",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商族兴起时期",
@@ -1607,6 +1661,7 @@ const EVENTS=[
  {
   "title": "商汤灭夏（商朝建立）",
   "year": -1600,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -1641,6 +1696,7 @@ const EVENTS=[
  {
   "title": "汤征葛国",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "夏商之际",
@@ -1672,6 +1728,7 @@ const EVENTS=[
  {
   "title": "伊尹放太甲（桐宫）",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代初期",
@@ -1704,6 +1761,7 @@ const EVENTS=[
  {
   "title": "九世之乱（仲丁迁隞）",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代中期",
@@ -1736,6 +1794,7 @@ const EVENTS=[
  {
   "title": "盘庚迁殷",
   "year": -1300,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -1766,6 +1825,7 @@ const EVENTS=[
  {
   "title": "武丁中兴",
   "year": null,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -1250,
@@ -1803,6 +1863,7 @@ const EVENTS=[
  {
   "title": "妇好征伐",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代晚期（武丁时期）",
@@ -1834,6 +1895,7 @@ const EVENTS=[
  {
   "title": "《汤刑》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代初期",
@@ -1864,6 +1926,7 @@ const EVENTS=[
  {
   "title": "商代官制（尹与百僚）",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代",
@@ -1895,6 +1958,7 @@ const EVENTS=[
  {
   "title": "商代青铜文明（司母戊鼎）",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代（青铜文明鼎盛）",
@@ -1924,6 +1988,7 @@ const EVENTS=[
  {
   "title": "甲骨文",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代",
@@ -1952,6 +2017,7 @@ const EVENTS=[
  {
   "title": "商代人殉与人祭",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代",
@@ -1980,6 +2046,7 @@ const EVENTS=[
  {
   "title": "贝币与商业",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代",
@@ -2010,6 +2077,7 @@ const EVENTS=[
  {
   "title": "商代历法（置闰）",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代",
@@ -2038,6 +2106,7 @@ const EVENTS=[
  {
   "title": "商纣暴政",
   "year": null,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -1075,
@@ -2075,6 +2144,7 @@ const EVENTS=[
  {
   "title": "商朝灭亡",
   "year": -1046,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -2106,6 +2176,7 @@ const EVENTS=[
  {
   "title": "三星堆文化",
   "year": -1500,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -1700,
@@ -2137,6 +2208,7 @@ const EVENTS=[
  {
   "title": "古公亶父迁岐",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代后期",
@@ -2165,6 +2237,7 @@ const EVENTS=[
  {
   "title": "文王治岐",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代末期",
@@ -2196,6 +2269,7 @@ const EVENTS=[
  {
   "title": "文王迁丰",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "商代末期",
@@ -2227,6 +2301,7 @@ const EVENTS=[
  {
   "title": "武王建镐京",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "周武王时期",
@@ -2258,6 +2333,7 @@ const EVENTS=[
  {
   "title": "孟津之誓",
   "year": -1048,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -2289,6 +2365,7 @@ const EVENTS=[
  {
   "title": "武王克商",
   "year": -1046,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -2321,6 +2398,7 @@ const EVENTS=[
  {
   "title": "三监之乱",
   "year": -1042,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -2355,6 +2433,7 @@ const EVENTS=[
  {
   "title": "周公东征",
   "year": -1042,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -1042,
@@ -2390,6 +2469,7 @@ const EVENTS=[
  {
   "title": "周公营建洛邑",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周成王时期",
@@ -2421,6 +2501,7 @@ const EVENTS=[
  {
   "title": "周初大分封",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周初年",
@@ -2453,6 +2534,7 @@ const EVENTS=[
  {
   "title": "宗法制",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周初年",
@@ -2484,6 +2566,7 @@ const EVENTS=[
  {
   "title": "井田制",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2513,6 +2596,7 @@ const EVENTS=[
  {
   "title": "周公制礼作乐",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周初年",
@@ -2544,6 +2628,7 @@ const EVENTS=[
  {
   "title": "九刑",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2572,6 +2657,7 @@ const EVENTS=[
  {
   "title": "工商食官",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2600,6 +2686,7 @@ const EVENTS=[
  {
   "title": "敬天保民思想",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周初年",
@@ -2630,6 +2717,7 @@ const EVENTS=[
  {
   "title": "五行思想",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2658,6 +2746,7 @@ const EVENTS=[
  {
   "title": "《周易》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2686,6 +2775,7 @@ const EVENTS=[
  {
   "title": "六艺",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2714,6 +2804,7 @@ const EVENTS=[
  {
   "title": "二十八宿",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2740,6 +2831,7 @@ const EVENTS=[
  {
   "title": "《诗经》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周时期",
@@ -2768,6 +2860,7 @@ const EVENTS=[
  {
   "title": "昭王南征",
   "year": -980,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -980,
@@ -2801,6 +2894,7 @@ const EVENTS=[
  {
   "title": "穆王西征",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "周穆王时期",
@@ -2832,6 +2926,7 @@ const EVENTS=[
  {
   "title": "徐偃王之乱",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "周穆王时期",
@@ -2863,6 +2958,7 @@ const EVENTS=[
  {
   "title": "西周土地私有化",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西周共王时期",
@@ -2893,6 +2989,7 @@ const EVENTS=[
  {
   "title": "国人暴动",
   "year": -841,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -2923,6 +3020,7 @@ const EVENTS=[
  {
   "title": "共和行政",
   "year": -841,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -841,
@@ -2960,6 +3058,7 @@ const EVENTS=[
  {
   "title": "宣王中兴",
   "year": -827,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -827,
@@ -2994,6 +3093,7 @@ const EVENTS=[
  {
   "title": "千亩之战",
   "year": -789,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3025,6 +3125,7 @@ const EVENTS=[
  {
   "title": "宣王料民",
   "year": -788,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -3055,6 +3156,7 @@ const EVENTS=[
  {
   "title": "西周灭亡",
   "year": -771,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3087,6 +3189,7 @@ const EVENTS=[
  {
   "title": "周平王东迁",
   "year": -770,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3118,6 +3221,7 @@ const EVENTS=[
  {
   "title": "繻葛之战",
   "year": -707,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3147,6 +3251,7 @@ const EVENTS=[
  {
   "title": "铁器牛耕的使用与推广",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋时期",
@@ -3175,6 +3280,7 @@ const EVENTS=[
  {
   "title": "井田制的瓦解",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋时期",
@@ -3205,6 +3311,7 @@ const EVENTS=[
  {
   "title": "封建生产关系的产生",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋中后期",
@@ -3235,6 +3342,7 @@ const EVENTS=[
  {
   "title": "管仲改革",
   "year": -685,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -3267,6 +3375,7 @@ const EVENTS=[
  {
   "title": "召陵之盟",
   "year": -656,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3300,6 +3409,7 @@ const EVENTS=[
  {
   "title": "葵丘之会",
   "year": -651,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3331,6 +3441,7 @@ const EVENTS=[
  {
   "title": "作爰田",
   "year": -645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3359,6 +3470,7 @@ const EVENTS=[
  {
   "title": "作州兵",
   "year": -645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3387,6 +3499,7 @@ const EVENTS=[
  {
   "title": "泓之战",
   "year": -638,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3418,6 +3531,7 @@ const EVENTS=[
  {
   "title": "城濮之战",
   "year": -632,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3450,6 +3564,7 @@ const EVENTS=[
  {
   "title": "践土之盟",
   "year": -632,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3481,6 +3596,7 @@ const EVENTS=[
  {
   "title": "崤之战",
   "year": -627,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3513,6 +3629,7 @@ const EVENTS=[
  {
   "title": "秦穆公霸西戎",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "秦穆公时期",
@@ -3543,6 +3660,7 @@ const EVENTS=[
  {
   "title": "哈雷彗星的最早记录",
   "year": -613,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3569,6 +3687,7 @@ const EVENTS=[
  {
   "title": "孙叔敖改革",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "楚庄王时期",
@@ -3601,6 +3720,7 @@ const EVENTS=[
  {
   "title": "问鼎中原",
   "year": -606,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3632,6 +3752,7 @@ const EVENTS=[
  {
   "title": "邲之战",
   "year": -597,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3663,6 +3784,7 @@ const EVENTS=[
  {
   "title": "初税亩",
   "year": -594,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3694,6 +3816,7 @@ const EVENTS=[
  {
   "title": "作丘甲",
   "year": -590,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3723,6 +3846,7 @@ const EVENTS=[
  {
   "title": "晋联吴制楚",
   "year": -584,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3754,6 +3878,7 @@ const EVENTS=[
  {
   "title": "华元弭兵",
   "year": -579,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3786,6 +3911,7 @@ const EVENTS=[
  {
   "title": "鄢陵之战",
   "year": -575,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3817,6 +3943,7 @@ const EVENTS=[
  {
   "title": "湛阪之战",
   "year": -557,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3844,6 +3971,7 @@ const EVENTS=[
  {
   "title": "轻天重民思想的形成",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋时期",
@@ -3876,6 +4004,7 @@ const EVENTS=[
  {
   "title": "老子与《道德经》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋末期至战国初年",
@@ -3908,6 +4037,7 @@ const EVENTS=[
  {
   "title": "孔子与《论语》",
   "year": -551,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -551,
@@ -3942,6 +4072,7 @@ const EVENTS=[
  {
   "title": "楚书土田",
   "year": -548,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -3973,6 +4104,7 @@ const EVENTS=[
  {
   "title": "向戌弭兵",
   "year": -546,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4004,6 +4136,7 @@ const EVENTS=[
  {
   "title": "作丘赋",
   "year": -538,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4035,6 +4168,7 @@ const EVENTS=[
  {
   "title": "周景王铸大钱",
   "year": -524,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4065,6 +4199,7 @@ const EVENTS=[
  {
   "title": "私商与独立手工业者的出现",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋中后期",
@@ -4096,6 +4231,7 @@ const EVENTS=[
  {
   "title": "萑苻之泽起义",
   "year": -522,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4124,6 +4260,7 @@ const EVENTS=[
  {
   "title": "晋铸刑鼎",
   "year": -513,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4154,6 +4291,7 @@ const EVENTS=[
  {
   "title": "吴王阖闾改革",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "吴王阖闾时期",
@@ -4187,6 +4325,7 @@ const EVENTS=[
  {
   "title": "孙武与《孙子兵法》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋末期",
@@ -4219,6 +4358,7 @@ const EVENTS=[
  {
   "title": "柏举之战",
   "year": -506,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4254,6 +4394,7 @@ const EVENTS=[
  {
   "title": "槜李之战",
   "year": -496,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4284,6 +4425,7 @@ const EVENTS=[
  {
   "title": "夫椒之战",
   "year": -494,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4317,6 +4459,7 @@ const EVENTS=[
  {
   "title": "越王勾践改革",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "越王勾践时期",
@@ -4350,6 +4493,7 @@ const EVENTS=[
  {
   "title": "铁之战",
   "year": -493,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4380,6 +4524,7 @@ const EVENTS=[
  {
   "title": "开凿邗沟",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "吴王夫差时期",
@@ -4410,6 +4555,7 @@ const EVENTS=[
  {
   "title": "用田赋",
   "year": -483,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4439,6 +4585,7 @@ const EVENTS=[
  {
   "title": "黄池之会",
   "year": -482,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4471,6 +4618,7 @@ const EVENTS=[
  {
   "title": "白公胜之乱",
   "year": -479,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4502,6 +4650,7 @@ const EVENTS=[
  {
   "title": "卫国工匠暴动",
   "year": -478,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -478,
@@ -4531,6 +4680,7 @@ const EVENTS=[
  {
   "title": "越王勾践灭吴",
   "year": -473,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4566,6 +4716,7 @@ const EVENTS=[
  {
   "title": "三家分晋",
   "year": -403,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4599,6 +4750,7 @@ const EVENTS=[
  {
   "title": "田氏代齐",
   "year": -386,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4630,6 +4782,7 @@ const EVENTS=[
  {
   "title": "春秋天文历法成就",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋时期",
@@ -4658,6 +4811,7 @@ const EVENTS=[
  {
   "title": "鲁班",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋末期",
@@ -4686,6 +4840,7 @@ const EVENTS=[
  {
   "title": "春秋医学成就",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "春秋时期",
@@ -4715,6 +4870,7 @@ const EVENTS=[
  {
   "title": "李悝变法",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国初期",
@@ -4747,6 +4903,7 @@ const EVENTS=[
  {
   "title": "武卒制",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国初期",
@@ -4779,6 +4936,7 @@ const EVENTS=[
  {
   "title": "吴起变法",
   "year": -382,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4812,6 +4970,7 @@ const EVENTS=[
  {
   "title": "西门豹治邺",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国初期",
@@ -4844,6 +5003,7 @@ const EVENTS=[
  {
   "title": "申不害变法",
   "year": -355,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4876,6 +5036,7 @@ const EVENTS=[
  {
   "title": "齐威王改革",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国中期",
@@ -4908,6 +5069,7 @@ const EVENTS=[
  {
   "title": "魏惠王迁都大梁",
   "year": -361,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -4939,6 +5101,7 @@ const EVENTS=[
  {
   "title": "商鞅变法",
   "year": -356,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -356,
@@ -4975,6 +5138,7 @@ const EVENTS=[
  {
   "title": "燕王哙让国",
   "year": -316,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5007,6 +5171,7 @@ const EVENTS=[
  {
   "title": "鸿沟",
   "year": -360,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -360,
@@ -5042,6 +5207,7 @@ const EVENTS=[
  {
   "title": "桂陵之战",
   "year": -353,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5076,6 +5242,7 @@ const EVENTS=[
  {
   "title": "马陵之战",
   "year": -341,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5110,6 +5277,7 @@ const EVENTS=[
  {
   "title": "逢泽之会",
   "year": -344,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5141,6 +5309,7 @@ const EVENTS=[
  {
   "title": "五国伐秦",
   "year": -318,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5172,6 +5341,7 @@ const EVENTS=[
  {
   "title": "秦灭巴蜀",
   "year": -318,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5204,6 +5374,7 @@ const EVENTS=[
  {
   "title": "秦楚丹阳蓝田之战",
   "year": -312,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5236,6 +5407,7 @@ const EVENTS=[
  {
   "title": "伊阙之战",
   "year": -293,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5267,6 +5439,7 @@ const EVENTS=[
  {
   "title": "苏秦合纵攻秦",
   "year": -288,
+  "month": 10,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5299,6 +5472,7 @@ const EVENTS=[
  {
   "title": "乐毅伐齐",
   "year": -284,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5332,6 +5506,7 @@ const EVENTS=[
  {
   "title": "田单复国",
   "year": -279,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5364,6 +5539,7 @@ const EVENTS=[
  {
   "title": "白起拔郢",
   "year": -278,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5396,6 +5572,7 @@ const EVENTS=[
  {
   "title": "阏与之战",
   "year": -270,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5428,6 +5605,7 @@ const EVENTS=[
  {
   "title": "长平之战",
   "year": -260,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5463,6 +5641,7 @@ const EVENTS=[
  {
   "title": "邯郸之战",
   "year": -259,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -259,
@@ -5500,6 +5679,7 @@ const EVENTS=[
  {
   "title": "秦灭二周",
   "year": -256,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -256,
@@ -5534,6 +5714,7 @@ const EVENTS=[
  {
   "title": "五国合纵攻秦",
   "year": -241,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5565,6 +5746,7 @@ const EVENTS=[
  {
   "title": "赵武灵王胡服骑射",
   "year": -307,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5595,6 +5777,7 @@ const EVENTS=[
  {
   "title": "秦统一六国",
   "year": -230,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -230,
@@ -5631,6 +5814,7 @@ const EVENTS=[
  {
   "title": "百家争鸣",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国时期",
@@ -5666,6 +5850,7 @@ const EVENTS=[
  {
   "title": "屈原",
   "year": -340,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -340,
@@ -5700,6 +5885,7 @@ const EVENTS=[
  {
   "title": "甘石星经",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国中期",
@@ -5732,6 +5918,7 @@ const EVENTS=[
  {
   "title": "司南的发明",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国时期",
@@ -5760,6 +5947,7 @@ const EVENTS=[
  {
   "title": "都江堰",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国后期",
@@ -5792,6 +5980,7 @@ const EVENTS=[
  {
   "title": "郑国渠",
   "year": -246,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -5824,6 +6013,7 @@ const EVENTS=[
  {
   "title": "战国中央集权制度确立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国时期",
@@ -5853,6 +6043,7 @@ const EVENTS=[
  {
   "title": "孟子",
   "year": -371,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -371,
@@ -5886,6 +6077,7 @@ const EVENTS=[
  {
   "title": "韩非",
   "year": -280,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -280,
@@ -5921,6 +6113,7 @@ const EVENTS=[
  {
   "title": "荀子",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国后期",
@@ -5950,6 +6143,7 @@ const EVENTS=[
  {
   "title": "墨家与墨子",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "战国初期",
@@ -5979,6 +6173,7 @@ const EVENTS=[
  {
   "title": "皇帝制度确立",
   "year": -221,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6008,6 +6203,7 @@ const EVENTS=[
  {
   "title": "三公九卿制确立",
   "year": -221,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6037,6 +6233,7 @@ const EVENTS=[
  {
   "title": "郡县制推行全国",
   "year": -221,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6067,6 +6264,7 @@ const EVENTS=[
  {
   "title": "统一文字",
   "year": -221,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -6096,6 +6294,7 @@ const EVENTS=[
  {
   "title": "统一货币",
   "year": -221,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -6123,6 +6322,7 @@ const EVENTS=[
  {
   "title": "统一度量衡",
   "year": -221,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -6150,6 +6350,7 @@ const EVENTS=[
  {
   "title": "统一车轨",
   "year": -221,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -6179,6 +6380,7 @@ const EVENTS=[
  {
   "title": "《秦律》颁行",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "秦代",
@@ -6208,6 +6410,7 @@ const EVENTS=[
  {
   "title": "秦攻百越",
   "year": -221,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -221,
@@ -6244,6 +6447,7 @@ const EVENTS=[
  {
   "title": "开凿灵渠",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "秦代",
@@ -6274,6 +6478,7 @@ const EVENTS=[
  {
   "title": "修筑驰道",
   "year": -220,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6305,6 +6510,7 @@ const EVENTS=[
  {
   "title": "使黔首自实田",
   "year": -216,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6332,6 +6538,7 @@ const EVENTS=[
  {
   "title": "蒙恬北击匈奴",
   "year": -215,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -215,
@@ -6366,6 +6573,7 @@ const EVENTS=[
  {
   "title": "修筑万里长城",
   "year": -213,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6397,6 +6605,7 @@ const EVENTS=[
  {
   "title": "焚书",
   "year": -213,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6429,6 +6638,7 @@ const EVENTS=[
  {
   "title": "修筑直道",
   "year": -212,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6461,6 +6671,7 @@ const EVENTS=[
  {
   "title": "修建阿房宫",
   "year": -212,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6491,6 +6702,7 @@ const EVENTS=[
  {
   "title": "修建骊山陵",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "秦代",
@@ -6521,6 +6733,7 @@ const EVENTS=[
  {
   "title": "坑儒",
   "year": -212,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6550,6 +6763,7 @@ const EVENTS=[
  {
   "title": "沙丘之变",
   "year": -210,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6583,6 +6797,7 @@ const EVENTS=[
  {
   "title": "陈胜吴广起义",
   "year": -209,
+  "month": 7,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6614,6 +6829,7 @@ const EVENTS=[
  {
   "title": "张楚政权建立",
   "year": -209,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6644,6 +6860,7 @@ const EVENTS=[
  {
   "title": "沛县起兵",
   "year": -209,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6676,6 +6893,7 @@ const EVENTS=[
  {
   "title": "项梁项羽吴中起兵",
   "year": -209,
+  "month": 9,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6707,6 +6925,7 @@ const EVENTS=[
  {
   "title": "楚怀王复立",
   "year": -208,
+  "month": 6,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6739,6 +6958,7 @@ const EVENTS=[
  {
   "title": "定陶之战",
   "year": -208,
+  "month": 9,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6770,6 +6990,7 @@ const EVENTS=[
  {
   "title": "钜鹿之战",
   "year": -208,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -208,
@@ -6807,6 +7028,7 @@ const EVENTS=[
  {
   "title": "秦朝灭亡",
   "year": -207,
+  "month": 10,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6840,6 +7062,7 @@ const EVENTS=[
  {
   "title": "统一多民族国家的形成",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "秦代",
@@ -6871,6 +7094,7 @@ const EVENTS=[
  {
   "title": "约法三章",
   "year": -206,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6903,6 +7127,7 @@ const EVENTS=[
  {
   "title": "鸿门宴",
   "year": -206,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -6936,6 +7161,7 @@ const EVENTS=[
  {
   "title": "楚汉战争",
   "year": -206,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -206,
@@ -6975,6 +7201,7 @@ const EVENTS=[
  {
   "title": "垓下之战",
   "year": -202,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7009,6 +7236,7 @@ const EVENTS=[
  {
   "title": "西汉建立",
   "year": -202,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7039,6 +7267,7 @@ const EVENTS=[
  {
   "title": "汉高祖稳定社会秩序的措施",
   "year": -202,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -202,
@@ -7072,6 +7301,7 @@ const EVENTS=[
  {
   "title": "剪除异姓王",
   "year": -202,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -202,
@@ -7108,6 +7338,7 @@ const EVENTS=[
  {
   "title": "分封同姓王",
   "year": -202,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -7139,6 +7370,7 @@ const EVENTS=[
  {
   "title": "文景之治",
   "year": -180,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -180,
@@ -7175,6 +7407,7 @@ const EVENTS=[
  {
   "title": "七国之乱",
   "year": -154,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7209,6 +7442,7 @@ const EVENTS=[
  {
   "title": "张骞通西域",
   "year": -138,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -138,
@@ -7244,6 +7478,7 @@ const EVENTS=[
  {
   "title": "唐蒙通夜郎",
   "year": -135,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7273,6 +7508,7 @@ const EVENTS=[
  {
   "title": "独尊儒术",
   "year": -134,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -7304,6 +7540,7 @@ const EVENTS=[
  {
   "title": "察举制",
   "year": -134,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -7334,6 +7571,7 @@ const EVENTS=[
  {
   "title": "漕渠开凿",
   "year": -129,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7363,6 +7601,7 @@ const EVENTS=[
  {
   "title": "龙首渠开凿",
   "year": -129,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -7389,6 +7628,7 @@ const EVENTS=[
  {
   "title": "推恩令",
   "year": -127,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7420,6 +7660,7 @@ const EVENTS=[
  {
   "title": "河南之战",
   "year": -127,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7452,6 +7693,7 @@ const EVENTS=[
  {
   "title": "河西之战",
   "year": -121,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7485,6 +7727,7 @@ const EVENTS=[
  {
   "title": "漠北之战",
   "year": -119,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7518,6 +7761,7 @@ const EVENTS=[
  {
   "title": "盐铁官营",
   "year": -119,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -7551,6 +7795,7 @@ const EVENTS=[
  {
   "title": "算缗告缗",
   "year": -119,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7583,6 +7828,7 @@ const EVENTS=[
  {
   "title": "汉武帝平南越设九郡",
   "year": -111,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7613,6 +7859,7 @@ const EVENTS=[
  {
   "title": "均输平准",
   "year": -110,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7644,6 +7891,7 @@ const EVENTS=[
  {
   "title": "治理黄河瓠子堵口",
   "year": -109,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7672,6 +7920,7 @@ const EVENTS=[
  {
   "title": "汉武帝设朝鲜四郡",
   "year": -108,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7702,6 +7951,7 @@ const EVENTS=[
  {
   "title": "太初历制定",
   "year": -104,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7734,6 +7984,7 @@ const EVENTS=[
  {
   "title": "司马迁著《史记》",
   "year": -104,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    -104,
@@ -7765,6 +8016,7 @@ const EVENTS=[
  {
   "title": "白渠开凿",
   "year": -95,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7791,6 +8043,7 @@ const EVENTS=[
  {
   "title": "代田法推广",
   "year": -90,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -7822,6 +8075,7 @@ const EVENTS=[
  {
   "title": "楼车发明",
   "year": -90,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -7852,6 +8106,7 @@ const EVENTS=[
  {
   "title": "乐府设立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西汉中期",
@@ -7880,6 +8135,7 @@ const EVENTS=[
  {
   "title": "丝绸之路开辟",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西汉中期",
@@ -7908,6 +8164,7 @@ const EVENTS=[
  {
   "title": "西域都护设立",
   "year": -60,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7940,6 +8197,7 @@ const EVENTS=[
  {
   "title": "昭君出塞",
   "year": -33,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -7970,6 +8228,7 @@ const EVENTS=[
  {
   "title": "经今古文之争",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西汉后期",
@@ -8001,6 +8260,7 @@ const EVENTS=[
  {
   "title": "造纸术发明",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "西汉",
@@ -8027,6 +8287,7 @@ const EVENTS=[
  {
   "title": "王莽改制",
   "year": 9,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8058,6 +8319,7 @@ const EVENTS=[
  {
   "title": "绿林赤眉起义",
   "year": 17,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    17,
@@ -8096,6 +8358,7 @@ const EVENTS=[
  {
   "title": "昆阳之战",
   "year": 23,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8131,6 +8394,7 @@ const EVENTS=[
  {
   "title": "白登之围",
   "year": -200,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8161,6 +8425,7 @@ const EVENTS=[
  {
   "title": "东汉建立",
   "year": 25,
+  "month": 6,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8190,6 +8455,7 @@ const EVENTS=[
  {
   "title": "刘秀统一战争",
   "year": 25,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    25,
@@ -8226,6 +8492,7 @@ const EVENTS=[
  {
   "title": "刘秀释放奴婢",
   "year": 26,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    26,
@@ -8258,6 +8525,7 @@ const EVENTS=[
  {
   "title": "废除内地郡国都尉",
   "year": 30,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8287,6 +8555,7 @@ const EVENTS=[
  {
   "title": "轻徭薄赋",
   "year": 30,
+  "month": 12,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8316,6 +8585,7 @@ const EVENTS=[
  {
   "title": "尚书台制度确立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉初期",
@@ -8343,6 +8613,7 @@ const EVENTS=[
  {
   "title": "东汉监察体系建立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉初期",
@@ -8371,6 +8642,7 @@ const EVENTS=[
  {
   "title": "州郡县三级制形成",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉初期",
@@ -8401,6 +8673,7 @@ const EVENTS=[
  {
   "title": "度田事件",
   "year": 39,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8431,6 +8704,7 @@ const EVENTS=[
  {
   "title": "退功臣进文吏",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉初期",
@@ -8460,6 +8734,7 @@ const EVENTS=[
  {
   "title": "桓谭《新论》批判谶纬",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉初期",
@@ -8489,6 +8764,7 @@ const EVENTS=[
  {
   "title": "杜诗发明水排",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉初期",
@@ -8516,6 +8792,7 @@ const EVENTS=[
  {
   "title": "匈奴分裂为南北匈奴",
   "year": 48,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8548,6 +8825,7 @@ const EVENTS=[
  {
   "title": "宣布图谶于天下",
   "year": 56,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8577,6 +8855,7 @@ const EVENTS=[
  {
   "title": "倭使来朝与金印赐封",
   "year": 57,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8604,6 +8883,7 @@ const EVENTS=[
  {
   "title": "佛教传入中国",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉初期",
@@ -8634,6 +8914,7 @@ const EVENTS=[
  {
   "title": "王景治河",
   "year": 69,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8663,6 +8944,7 @@ const EVENTS=[
  {
   "title": "窦固击北匈奴取伊吾卢",
   "year": 73,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8694,6 +8976,7 @@ const EVENTS=[
  {
   "title": "班超出使西域",
   "year": 73,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    73,
@@ -8729,6 +9012,7 @@ const EVENTS=[
  {
   "title": "白虎观会议",
   "year": 79,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8762,6 +9046,7 @@ const EVENTS=[
  {
   "title": "班固撰《汉书》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉明章时期",
@@ -8790,6 +9075,7 @@ const EVENTS=[
  {
   "title": "王充著《论衡》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉前期",
@@ -8820,6 +9106,7 @@ const EVENTS=[
  {
   "title": "窦宪大破北匈奴",
   "year": 89,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8851,6 +9138,7 @@ const EVENTS=[
  {
   "title": "金微山之战",
   "year": 90,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8881,6 +9169,7 @@ const EVENTS=[
  {
   "title": "郑众诛窦宪",
   "year": 92,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8914,6 +9203,7 @@ const EVENTS=[
  {
   "title": "甘英出使大秦",
   "year": 97,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8944,6 +9234,7 @@ const EVENTS=[
  {
   "title": "《说文解字》成书",
   "year": 100,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -8971,6 +9262,7 @@ const EVENTS=[
  {
   "title": "蔡伦改进造纸术",
   "year": 105,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -8998,6 +9290,7 @@ const EVENTS=[
  {
   "title": "羌人第一次大起义",
   "year": 107,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9026,6 +9319,7 @@ const EVENTS=[
  {
   "title": "豪强地主田庄",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉",
@@ -9053,6 +9347,7 @@ const EVENTS=[
  {
   "title": "张衡发明地动仪",
   "year": 132,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9080,6 +9375,7 @@ const EVENTS=[
  {
   "title": "张陵创立五斗米道",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉顺帝时期",
@@ -9110,6 +9406,7 @@ const EVENTS=[
  {
   "title": "羌人第二次大起义",
   "year": 140,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9138,6 +9435,7 @@ const EVENTS=[
  {
   "title": "马臻治理镜湖",
   "year": 141,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9167,6 +9465,7 @@ const EVENTS=[
  {
   "title": "桓帝诛梁冀",
   "year": 159,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9200,6 +9499,7 @@ const EVENTS=[
  {
   "title": "宦官五侯封侯",
   "year": 159,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9234,6 +9534,7 @@ const EVENTS=[
  {
   "title": "羌人第三次大起义",
   "year": 159,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9261,6 +9562,7 @@ const EVENTS=[
  {
   "title": "第一次党锢之祸",
   "year": 166,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9292,6 +9594,7 @@ const EVENTS=[
  {
   "title": "第二次党锢之祸",
   "year": 169,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9325,6 +9628,7 @@ const EVENTS=[
  {
   "title": "张角创立太平道",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉灵帝时期",
@@ -9355,6 +9659,7 @@ const EVENTS=[
  {
   "title": "熹平石经",
   "year": 175,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9385,6 +9690,7 @@ const EVENTS=[
  {
   "title": "黄巾起义",
   "year": 184,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9420,6 +9726,7 @@ const EVENTS=[
  {
   "title": "张鲁五斗米道政权",
   "year": 191,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    191,
@@ -9454,6 +9761,7 @@ const EVENTS=[
  {
   "title": "郑玄综合今古文经学",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉末年",
@@ -9484,6 +9792,7 @@ const EVENTS=[
  {
   "title": "张仲景著《伤寒杂病论》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉末年",
@@ -9511,6 +9820,7 @@ const EVENTS=[
  {
   "title": "华佗外科手术与麻沸散",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉末年",
@@ -9541,6 +9851,7 @@ const EVENTS=[
  {
   "title": "光武中兴",
   "year": 25,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    25,
@@ -9573,6 +9884,7 @@ const EVENTS=[
  {
   "title": "《九章算术》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东汉",
@@ -9600,6 +9912,7 @@ const EVENTS=[
  {
   "title": "董卓之乱",
   "year": 189,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9633,6 +9946,7 @@ const EVENTS=[
  {
   "title": "关东军讨伐董卓",
   "year": 190,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9664,6 +9978,7 @@ const EVENTS=[
  {
   "title": "曹操迎献帝都许",
   "year": 196,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9696,6 +10011,7 @@ const EVENTS=[
  {
   "title": "曹操募民屯田",
   "year": 196,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9726,6 +10042,7 @@ const EVENTS=[
  {
   "title": "官渡之战",
   "year": 200,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9760,6 +10077,7 @@ const EVENTS=[
  {
   "title": "曹操远征乌桓",
   "year": 207,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9788,6 +10106,7 @@ const EVENTS=[
  {
   "title": "赤壁之战",
   "year": 208,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9821,6 +10140,7 @@ const EVENTS=[
  {
   "title": "曹操平定凉州",
   "year": 211,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9852,6 +10172,7 @@ const EVENTS=[
  {
   "title": "曹操取汉中",
   "year": 215,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9881,6 +10202,7 @@ const EVENTS=[
  {
   "title": "刘备取汉中",
   "year": 219,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9914,6 +10236,7 @@ const EVENTS=[
  {
   "title": "孙权袭取荆州",
   "year": 219,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9945,6 +10268,7 @@ const EVENTS=[
  {
   "title": "曹丕称帝建魏",
   "year": 220,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -9973,6 +10297,7 @@ const EVENTS=[
  {
   "title": "九品中正制确立",
   "year": 220,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10001,6 +10326,7 @@ const EVENTS=[
  {
   "title": "刘备称帝建蜀汉",
   "year": 221,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10030,6 +10356,7 @@ const EVENTS=[
  {
   "title": "夷陵之战",
   "year": 222,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10060,6 +10387,7 @@ const EVENTS=[
  {
   "title": "孙权称吴王",
   "year": 222,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10088,6 +10416,7 @@ const EVENTS=[
  {
   "title": "蜀吴重新结盟",
   "year": 223,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10119,6 +10448,7 @@ const EVENTS=[
  {
   "title": "诸葛亮南征",
   "year": 225,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10149,6 +10479,7 @@ const EVENTS=[
  {
   "title": "朱应康泰出使南海",
   "year": 226,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10180,6 +10511,7 @@ const EVENTS=[
  {
   "title": "大秦商人秦论来华",
   "year": 226,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10208,6 +10540,7 @@ const EVENTS=[
  {
   "title": "诸葛亮北伐",
   "year": 228,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    228,
@@ -10244,6 +10577,7 @@ const EVENTS=[
  {
   "title": "孙权称帝建吴",
   "year": 229,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10273,6 +10607,7 @@ const EVENTS=[
  {
   "title": "吴国卫温诸葛直达夷洲",
   "year": 230,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10302,6 +10637,7 @@ const EVENTS=[
  {
   "title": "邪马台国遣使来魏",
   "year": 238,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10328,6 +10664,7 @@ const EVENTS=[
  {
   "title": "司马懿平辽东",
   "year": 238,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10355,6 +10692,7 @@ const EVENTS=[
  {
   "title": "高平陵事变",
   "year": 249,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10386,6 +10724,7 @@ const EVENTS=[
  {
   "title": "淮南三叛",
   "year": 251,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    251,
@@ -10423,6 +10762,7 @@ const EVENTS=[
  {
   "title": "魏灭蜀",
   "year": 263,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10456,6 +10796,7 @@ const EVENTS=[
  {
   "title": "西晋建立",
   "year": 265,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10487,6 +10828,7 @@ const EVENTS=[
  {
   "title": "西晋分封同姓王",
   "year": 265,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -10516,6 +10858,7 @@ const EVENTS=[
  {
   "title": "西晋设立国子学",
   "year": 276,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10541,6 +10884,7 @@ const EVENTS=[
  {
   "title": "西晋灭吴统一全国",
   "year": 280,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10573,6 +10917,7 @@ const EVENTS=[
  {
   "title": "西晋颁行占田制",
   "year": 280,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -10602,6 +10947,7 @@ const EVENTS=[
  {
   "title": "太康之治",
   "year": 280,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    280,
@@ -10635,6 +10981,7 @@ const EVENTS=[
  {
   "title": "八王之乱",
   "year": 291,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    291,
@@ -10676,6 +11023,7 @@ const EVENTS=[
  {
   "title": "前凉建立",
   "year": 301,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10702,6 +11050,7 @@ const EVENTS=[
  {
   "title": "李特起义",
   "year": 301,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10732,6 +11081,7 @@ const EVENTS=[
  {
   "title": "张昌起义",
   "year": 303,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10758,6 +11108,7 @@ const EVENTS=[
  {
   "title": "刘渊建汉",
   "year": 304,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10788,6 +11139,7 @@ const EVENTS=[
  {
   "title": "成汉建立",
   "year": 304,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10817,6 +11169,7 @@ const EVENTS=[
  {
   "title": "王如起义",
   "year": 310,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10843,6 +11196,7 @@ const EVENTS=[
  {
   "title": "永嘉之乱",
   "year": 311,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10876,6 +11230,7 @@ const EVENTS=[
  {
   "title": "杜弢起义",
   "year": 311,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10902,6 +11257,7 @@ const EVENTS=[
  {
   "title": "祖逖北伐",
   "year": 313,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    313,
@@ -10934,6 +11290,7 @@ const EVENTS=[
  {
   "title": "西晋灭亡",
   "year": 316,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10965,6 +11322,7 @@ const EVENTS=[
  {
   "title": "东晋建立",
   "year": 317,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -10996,6 +11354,7 @@ const EVENTS=[
  {
   "title": "前赵建立",
   "year": 318,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11024,6 +11383,7 @@ const EVENTS=[
  {
   "title": "后赵建立",
   "year": 319,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11053,6 +11413,7 @@ const EVENTS=[
  {
   "title": "王敦之乱",
   "year": 322,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    322,
@@ -11089,6 +11450,7 @@ const EVENTS=[
  {
   "title": "苏峻之乱",
   "year": 327,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    327,
@@ -11123,6 +11485,7 @@ const EVENTS=[
  {
   "title": "后赵灭前赵",
   "year": 329,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11153,6 +11516,7 @@ const EVENTS=[
  {
   "title": "石勒称帝",
   "year": 330,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11181,6 +11545,7 @@ const EVENTS=[
  {
   "title": "前燕建立",
   "year": 337,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11207,6 +11572,7 @@ const EVENTS=[
  {
   "title": "代国建立",
   "year": 338,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11236,6 +11602,7 @@ const EVENTS=[
  {
   "title": "桓温灭成汉",
   "year": 347,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11265,6 +11632,7 @@ const EVENTS=[
  {
   "title": "梁犊起义",
   "year": 349,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11294,6 +11662,7 @@ const EVENTS=[
  {
   "title": "冉闵建魏",
   "year": 350,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11322,6 +11691,7 @@ const EVENTS=[
  {
   "title": "前秦建立",
   "year": 351,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11350,6 +11720,7 @@ const EVENTS=[
  {
   "title": "前燕灭冉魏",
   "year": 352,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11379,6 +11750,7 @@ const EVENTS=[
  {
   "title": "桓温北伐",
   "year": 354,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    354,
@@ -11410,6 +11782,7 @@ const EVENTS=[
  {
   "title": "前秦苻坚王猛改革",
   "year": 357,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    357,
@@ -11444,6 +11817,7 @@ const EVENTS=[
  {
   "title": "前秦灭前燕",
   "year": 370,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11474,6 +11848,7 @@ const EVENTS=[
  {
   "title": "前秦统一北方",
   "year": 376,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11504,6 +11879,7 @@ const EVENTS=[
  {
   "title": "淝水之战",
   "year": 383,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11538,6 +11914,7 @@ const EVENTS=[
  {
   "title": "后燕建立",
   "year": 384,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11566,6 +11943,7 @@ const EVENTS=[
  {
   "title": "后秦建立",
   "year": 384,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11594,6 +11972,7 @@ const EVENTS=[
  {
   "title": "西秦建立",
   "year": 385,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11620,6 +11999,7 @@ const EVENTS=[
  {
   "title": "后凉建立",
   "year": 385,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11646,6 +12026,7 @@ const EVENTS=[
  {
   "title": "西燕建立",
   "year": 385,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11672,6 +12053,7 @@ const EVENTS=[
  {
   "title": "北魏建立",
   "year": 386,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11702,6 +12084,7 @@ const EVENTS=[
  {
   "title": "参合陂之战",
   "year": 395,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11731,6 +12114,7 @@ const EVENTS=[
  {
   "title": "南凉建立",
   "year": 397,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11757,6 +12141,7 @@ const EVENTS=[
  {
   "title": "北凉建立",
   "year": 397,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11783,6 +12168,7 @@ const EVENTS=[
  {
   "title": "南燕建立",
   "year": 398,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11809,6 +12195,7 @@ const EVENTS=[
  {
   "title": "北魏道武帝封建化改革",
   "year": 398,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11838,6 +12225,7 @@ const EVENTS=[
  {
   "title": "孙恩卢循起义",
   "year": 399,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    399,
@@ -11872,6 +12260,7 @@ const EVENTS=[
  {
   "title": "法显西行",
   "year": 399,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    399,
@@ -11902,6 +12291,7 @@ const EVENTS=[
  {
   "title": "西凉建立",
   "year": 400,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11928,6 +12318,7 @@ const EVENTS=[
  {
   "title": "桓玄之乱",
   "year": 402,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    402,
@@ -11960,6 +12351,7 @@ const EVENTS=[
  {
   "title": "夏建立",
   "year": 407,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -11986,6 +12378,7 @@ const EVENTS=[
  {
   "title": "北燕建立",
   "year": 409,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12012,6 +12405,7 @@ const EVENTS=[
  {
   "title": "刘裕灭南燕",
   "year": 410,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12040,6 +12434,7 @@ const EVENTS=[
  {
   "title": "刘裕灭后秦",
   "year": 417,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12068,6 +12463,7 @@ const EVENTS=[
  {
   "title": "刘裕建宋",
   "year": 420,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12097,6 +12493,7 @@ const EVENTS=[
  {
   "title": "元嘉之治",
   "year": 424,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    424,
@@ -12129,6 +12526,7 @@ const EVENTS=[
  {
   "title": "寇谦之改革道教",
   "year": 424,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -12158,6 +12556,7 @@ const EVENTS=[
  {
   "title": "北魏统一北方",
   "year": 439,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12188,6 +12587,7 @@ const EVENTS=[
  {
   "title": "北魏太武帝灭佛",
   "year": 446,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12218,6 +12618,7 @@ const EVENTS=[
  {
   "title": "国史案崔浩被杀",
   "year": 450,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12248,6 +12649,7 @@ const EVENTS=[
  {
   "title": "元嘉之战",
   "year": 450,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12281,6 +12683,7 @@ const EVENTS=[
  {
   "title": "萧齐建立",
   "year": 479,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12310,6 +12713,7 @@ const EVENTS=[
  {
   "title": "北魏俸禄制改革",
   "year": 484,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12340,6 +12744,7 @@ const EVENTS=[
  {
   "title": "北魏均田制颁行",
   "year": 485,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12371,6 +12776,7 @@ const EVENTS=[
  {
   "title": "唐寓之起义",
   "year": 485,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    485,
@@ -12403,6 +12809,7 @@ const EVENTS=[
  {
   "title": "北魏三长制",
   "year": 486,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12434,6 +12841,7 @@ const EVENTS=[
  {
   "title": "北魏新租调制",
   "year": 486,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12464,6 +12872,7 @@ const EVENTS=[
  {
   "title": "北魏迁都洛阳",
   "year": 494,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12493,6 +12902,7 @@ const EVENTS=[
  {
   "title": "北魏孝文帝汉化改革",
   "year": 494,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    494,
@@ -12526,6 +12936,7 @@ const EVENTS=[
  {
   "title": "萧梁建立",
   "year": 502,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12555,6 +12966,7 @@ const EVENTS=[
  {
   "title": "范缜著《神灭论》",
   "year": 507,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -12583,6 +12995,7 @@ const EVENTS=[
  {
   "title": "六镇起义",
   "year": 523,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    523,
@@ -12616,6 +13029,7 @@ const EVENTS=[
  {
   "title": "关陇起义",
   "year": 524,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    524,
@@ -12648,6 +13062,7 @@ const EVENTS=[
  {
   "title": "河北大起义",
   "year": 525,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    525,
@@ -12684,6 +13099,7 @@ const EVENTS=[
  {
   "title": "邢杲起义",
   "year": 528,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12712,6 +13128,7 @@ const EVENTS=[
  {
   "title": "河阴之变",
   "year": 528,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12744,6 +13161,7 @@ const EVENTS=[
  {
   "title": "东魏建立",
   "year": 534,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12774,6 +13192,7 @@ const EVENTS=[
  {
   "title": "西魏建立",
   "year": 535,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12804,6 +13223,7 @@ const EVENTS=[
  {
   "title": "侯景之乱",
   "year": 548,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    548,
@@ -12840,6 +13260,7 @@ const EVENTS=[
  {
   "title": "西魏府兵制建立",
   "year": 550,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12869,6 +13290,7 @@ const EVENTS=[
  {
   "title": "北齐建立",
   "year": 550,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12898,6 +13320,7 @@ const EVENTS=[
  {
   "title": "北周建立",
   "year": 557,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12928,6 +13351,7 @@ const EVENTS=[
  {
   "title": "陈朝建立",
   "year": 557,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12957,6 +13381,7 @@ const EVENTS=[
  {
   "title": "北周武帝灭佛",
   "year": 574,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -12985,6 +13410,7 @@ const EVENTS=[
  {
   "title": "北周灭北齐",
   "year": 577,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13014,6 +13440,7 @@ const EVENTS=[
  {
   "title": "门阀士族",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "魏晋南北朝",
@@ -13044,6 +13471,7 @@ const EVENTS=[
  {
   "title": "魏晋玄学",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "魏晋",
@@ -13076,6 +13504,7 @@ const EVENTS=[
  {
   "title": "祖冲之与圆周率",
   "year": 462,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -13106,6 +13535,7 @@ const EVENTS=[
  {
   "title": "王羲之与书法艺术",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东晋",
@@ -13133,6 +13563,7 @@ const EVENTS=[
  {
   "title": "顾恺之与绘画",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东晋",
@@ -13162,6 +13593,7 @@ const EVENTS=[
  {
   "title": "《齐民要术》",
   "year": 540,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -13191,6 +13623,7 @@ const EVENTS=[
  {
   "title": "郦道元《水经注》",
   "year": 527,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -13218,6 +13651,7 @@ const EVENTS=[
  {
   "title": "侨置郡县与土断",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "东晋南朝",
@@ -13248,6 +13682,7 @@ const EVENTS=[
  {
   "title": "隋朝建立",
   "year": 581,
+  "month": 2,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13278,6 +13713,7 @@ const EVENTS=[
  {
   "title": "颁布均田令",
   "year": 581,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13309,6 +13745,7 @@ const EVENTS=[
  {
   "title": "制定《开皇律》",
   "year": 581,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13343,6 +13780,7 @@ const EVENTS=[
  {
   "title": "元谐击吐谷浑",
   "year": 581,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13372,6 +13810,7 @@ const EVENTS=[
  {
   "title": "突厥分裂为东西突厥",
   "year": 582,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13404,6 +13843,7 @@ const EVENTS=[
  {
   "title": "营建大兴城",
   "year": 582,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13433,6 +13873,7 @@ const EVENTS=[
  {
   "title": "罢郡改行州县二级制",
   "year": 583,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13464,6 +13905,7 @@ const EVENTS=[
  {
   "title": "大索貌阅",
   "year": 583,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13495,6 +13937,7 @@ const EVENTS=[
  {
   "title": "隋文帝改定赋役",
   "year": 583,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13527,6 +13970,7 @@ const EVENTS=[
  {
   "title": "废除九品中正制",
   "year": 583,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13557,6 +14001,7 @@ const EVENTS=[
  {
   "title": "输籍定样",
   "year": 585,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13588,6 +14033,7 @@ const EVENTS=[
  {
   "title": "设立义仓",
   "year": 585,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13618,6 +14064,7 @@ const EVENTS=[
  {
   "title": "隋灭陈统一全国",
   "year": 589,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13652,6 +14099,7 @@ const EVENTS=[
  {
   "title": "府兵制改革",
   "year": 590,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13682,6 +14130,7 @@ const EVENTS=[
  {
   "title": "输庸停防",
   "year": 590,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13712,6 +14161,7 @@ const EVENTS=[
  {
   "title": "启民可汗降隋",
   "year": 599,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13744,6 +14194,7 @@ const EVENTS=[
  {
   "title": "陆法言《切韵》成书",
   "year": 601,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13774,6 +14225,7 @@ const EVENTS=[
  {
   "title": "刘焯制定《皇极历》",
   "year": 604,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13802,6 +14254,7 @@ const EVENTS=[
  {
   "title": "营建东都洛阳",
   "year": 605,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13833,6 +14286,7 @@ const EVENTS=[
  {
   "title": "隋炀帝开通大运河",
   "year": 605,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    605,
@@ -13867,6 +14321,7 @@ const EVENTS=[
  {
   "title": "日本遣隋使来华",
   "year": 607,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13896,6 +14351,7 @@ const EVENTS=[
  {
   "title": "朱宽流求之行",
   "year": 607,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13927,6 +14383,7 @@ const EVENTS=[
  {
   "title": "科举制创立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "隋炀帝时期",
@@ -13957,6 +14414,7 @@ const EVENTS=[
  {
   "title": "隋炀帝灭吐谷浑",
   "year": 609,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -13989,6 +14447,7 @@ const EVENTS=[
  {
   "title": "陈稜征流求",
   "year": 610,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14021,6 +14480,7 @@ const EVENTS=[
  {
   "title": "巢元方《诸病源候论》成书",
   "year": 610,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14049,6 +14509,7 @@ const EVENTS=[
  {
   "title": "王薄起义",
   "year": 611,
+  "month": 10,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14081,6 +14542,7 @@ const EVENTS=[
  {
   "title": "翟让瓦岗军起义",
   "year": 611,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -14115,6 +14577,7 @@ const EVENTS=[
  {
   "title": "窦建德起义",
   "year": 611,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -14148,6 +14611,7 @@ const EVENTS=[
  {
   "title": "隋炀帝三征高丽",
   "year": 612,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    612,
@@ -14184,6 +14648,7 @@ const EVENTS=[
  {
   "title": "杜伏威起义",
   "year": 613,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -14218,6 +14683,7 @@ const EVENTS=[
  {
   "title": "杨玄感起兵",
   "year": 613,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14249,6 +14715,7 @@ const EVENTS=[
  {
   "title": "江都兵变与隋朝灭亡",
   "year": 618,
+  "month": 3,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14281,6 +14748,7 @@ const EVENTS=[
  {
   "title": "安济桥建造",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "隋代",
@@ -14309,6 +14777,7 @@ const EVENTS=[
  {
   "title": "李渊太原起兵",
   "year": 617,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14342,6 +14811,7 @@ const EVENTS=[
  {
   "title": "唐朝建立",
   "year": 618,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14371,6 +14841,7 @@ const EVENTS=[
  {
   "title": "唐初三省六部制确立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "唐初",
@@ -14398,6 +14869,7 @@ const EVENTS=[
  {
   "title": "唐朝统一全国",
   "year": 618,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    618,
@@ -14432,6 +14904,7 @@ const EVENTS=[
  {
   "title": "均田制与租庸调制颁布",
   "year": 624,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14461,6 +14934,7 @@ const EVENTS=[
  {
   "title": "玄武门之变",
   "year": 626,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14493,6 +14967,7 @@ const EVENTS=[
  {
   "title": "贞观之治",
   "year": 626,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    626,
@@ -14529,6 +15004,7 @@ const EVENTS=[
  {
   "title": "唐太宗设史馆修前代史",
   "year": 629,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14558,6 +15034,7 @@ const EVENTS=[
  {
   "title": "唐灭东突厥",
   "year": 630,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14590,6 +15067,7 @@ const EVENTS=[
  {
   "title": "日本第一次遣唐使",
   "year": 631,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14615,6 +15093,7 @@ const EVENTS=[
  {
   "title": "唐太宗整顿府兵制",
   "year": 636,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14644,6 +15123,7 @@ const EVENTS=[
  {
   "title": "唐太宗修订《氏族志》",
   "year": 638,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14674,6 +15154,7 @@ const EVENTS=[
  {
   "title": "文成公主入藏",
   "year": 641,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14706,6 +15187,7 @@ const EVENTS=[
  {
   "title": "唐灭薛延陀",
   "year": 646,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14737,6 +15219,7 @@ const EVENTS=[
  {
   "title": "玄奘西行求法",
   "year": 627,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    627,
@@ -14769,6 +15252,7 @@ const EVENTS=[
  {
   "title": "安西四镇设置",
   "year": 648,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14799,6 +15283,7 @@ const EVENTS=[
  {
   "title": "松赞干布统一吐蕃",
   "year": 629,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    629,
@@ -14831,6 +15316,7 @@ const EVENTS=[
  {
   "title": "《永徽律》颁行",
   "year": 651,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14861,6 +15347,7 @@ const EVENTS=[
  {
   "title": "《唐律疏议》颁行",
   "year": 653,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14891,6 +15378,7 @@ const EVENTS=[
  {
   "title": "唐灭西突厥",
   "year": 657,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14921,6 +15409,7 @@ const EVENTS=[
  {
   "title": "武则天改修《姓氏录》",
   "year": 659,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14951,6 +15440,7 @@ const EVENTS=[
  {
   "title": "《唐新本草》编成",
   "year": 659,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -14978,6 +15468,7 @@ const EVENTS=[
  {
   "title": "唐灭高丽",
   "year": 668,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15006,6 +15497,7 @@ const EVENTS=[
  {
   "title": "后突厥汗国建立",
   "year": 682,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15035,6 +15527,7 @@ const EVENTS=[
  {
   "title": "徐敬业起兵",
   "year": 684,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15065,6 +15558,7 @@ const EVENTS=[
  {
   "title": "武则天称帝",
   "year": 690,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15095,6 +15589,7 @@ const EVENTS=[
  {
   "title": "武则天创立殿试",
   "year": 690,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15124,6 +15619,7 @@ const EVENTS=[
  {
   "title": "渤海国建立",
   "year": 698,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15151,6 +15647,7 @@ const EVENTS=[
  {
   "title": "北庭都护府设置",
   "year": 702,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15180,6 +15677,7 @@ const EVENTS=[
  {
   "title": "武则天创武举",
   "year": 702,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15209,6 +15707,7 @@ const EVENTS=[
  {
   "title": "神龙政变",
   "year": 705,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15241,6 +15740,7 @@ const EVENTS=[
  {
   "title": "金城公主入藏",
   "year": 710,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15272,6 +15772,7 @@ const EVENTS=[
  {
   "title": "唐隆政变",
   "year": 710,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15304,6 +15805,7 @@ const EVENTS=[
  {
   "title": "始设节度使",
   "year": 711,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15333,6 +15835,7 @@ const EVENTS=[
  {
   "title": "先天政变",
   "year": 712,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15364,6 +15867,7 @@ const EVENTS=[
  {
   "title": "开元之治",
   "year": 713,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    713,
@@ -15399,6 +15903,7 @@ const EVENTS=[
  {
   "title": "政事堂改为中书门下",
   "year": 723,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15429,6 +15934,7 @@ const EVENTS=[
  {
   "title": "唐玄宗改行募兵制",
   "year": 723,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15460,6 +15966,7 @@ const EVENTS=[
  {
   "title": "一行测量子午线",
   "year": 724,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15489,6 +15996,7 @@ const EVENTS=[
  {
   "title": "《大衍历》编成",
   "year": 727,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15518,6 +16026,7 @@ const EVENTS=[
  {
   "title": "唐玄宗设翰林学士院",
   "year": 738,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15547,6 +16056,7 @@ const EVENTS=[
  {
   "title": "南诏建国",
   "year": 738,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15577,6 +16087,7 @@ const EVENTS=[
  {
   "title": "唐玄宗令科举由礼部侍郎主持",
   "year": 736,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15606,6 +16117,7 @@ const EVENTS=[
  {
   "title": "回纥汗国建立",
   "year": 744,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15636,6 +16148,7 @@ const EVENTS=[
  {
   "title": "后突厥汗国灭亡",
   "year": 745,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15666,6 +16179,7 @@ const EVENTS=[
  {
   "title": "怛罗斯战役",
   "year": 751,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15693,6 +16207,7 @@ const EVENTS=[
  {
   "title": "唐征南诏失败",
   "year": 751,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15723,6 +16238,7 @@ const EVENTS=[
  {
   "title": "义净西行求法",
   "year": 671,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    671,
@@ -15755,6 +16271,7 @@ const EVENTS=[
  {
   "title": "鉴真东渡",
   "year": 754,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15784,6 +16301,7 @@ const EVENTS=[
  {
   "title": "安史之乱",
   "year": 755,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    755,
@@ -15821,6 +16339,7 @@ const EVENTS=[
  {
   "title": "马嵬驿兵变",
   "year": 756,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15853,6 +16372,7 @@ const EVENTS=[
  {
   "title": "第五琦榷盐法",
   "year": 758,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15882,6 +16402,7 @@ const EVENTS=[
  {
   "title": "河朔三镇割据形成",
   "year": 763,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15914,6 +16435,7 @@ const EVENTS=[
  {
   "title": "吐蕃攻陷长安",
   "year": 763,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -15944,6 +16466,7 @@ const EVENTS=[
  {
   "title": "刘晏财政改革",
   "year": 766,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    766,
@@ -15977,6 +16500,7 @@ const EVENTS=[
  {
   "title": "两税法实施",
   "year": 780,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16008,6 +16532,7 @@ const EVENTS=[
  {
   "title": "四镇之乱",
   "year": 781,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    781,
@@ -16043,6 +16568,7 @@ const EVENTS=[
  {
   "title": "泾原兵变",
   "year": 783,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16074,6 +16600,7 @@ const EVENTS=[
  {
   "title": "二王八司马事件",
   "year": 805,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16106,6 +16633,7 @@ const EVENTS=[
  {
   "title": "《通典》成书",
   "year": 801,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16133,6 +16661,7 @@ const EVENTS=[
  {
   "title": "牛李党争",
   "year": 808,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    808,
@@ -16167,6 +16696,7 @@ const EVENTS=[
  {
   "title": "李愬雪夜入蔡州",
   "year": 817,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16198,6 +16728,7 @@ const EVENTS=[
  {
   "title": "唐蕃会盟",
   "year": 821,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16228,6 +16759,7 @@ const EVENTS=[
  {
   "title": "甘露之变",
   "year": 835,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16260,6 +16792,7 @@ const EVENTS=[
  {
   "title": "唐武宗灭佛",
   "year": 845,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16287,6 +16820,7 @@ const EVENTS=[
  {
   "title": "张议潮收复河陇",
   "year": 848,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    848,
@@ -16319,6 +16853,7 @@ const EVENTS=[
  {
   "title": "裘甫起义",
   "year": 859,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16349,6 +16884,7 @@ const EVENTS=[
  {
   "title": "庞勋起义",
   "year": 868,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16379,6 +16915,7 @@ const EVENTS=[
  {
   "title": "雕版印刷《金刚经》",
   "year": 868,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16404,6 +16941,7 @@ const EVENTS=[
  {
   "title": "王仙芝起义",
   "year": 875,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16434,6 +16972,7 @@ const EVENTS=[
  {
   "title": "黄巢起义",
   "year": 875,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    875,
@@ -16469,6 +17008,7 @@ const EVENTS=[
  {
   "title": "唐朝灭亡",
   "year": 907,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16499,6 +17039,7 @@ const EVENTS=[
  {
   "title": "李白",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "盛唐",
@@ -16528,6 +17069,7 @@ const EVENTS=[
  {
   "title": "杜甫",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "盛唐至中唐",
@@ -16557,6 +17099,7 @@ const EVENTS=[
  {
   "title": "白居易与新乐府运动",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "中唐",
@@ -16587,6 +17130,7 @@ const EVENTS=[
  {
   "title": "古文运动",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "中唐",
@@ -16615,6 +17159,7 @@ const EVENTS=[
  {
   "title": "敦煌莫高窟",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "唐代",
@@ -16643,6 +17188,7 @@ const EVENTS=[
  {
   "title": "孙思邈与《千金方》",
   "year": 652,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -16672,6 +17218,7 @@ const EVENTS=[
  {
   "title": "曲辕犁与筒车",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "唐代",
@@ -16700,6 +17247,7 @@ const EVENTS=[
  {
   "title": "后梁建立",
   "year": 907,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16727,6 +17275,7 @@ const EVENTS=[
  {
   "title": "吴越修筑钱塘江石塘",
   "year": 910,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -16754,6 +17303,7 @@ const EVENTS=[
  {
   "title": "契丹建国",
   "year": 916,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16781,6 +17331,7 @@ const EVENTS=[
  {
   "title": "后唐建立",
   "year": 923,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16810,6 +17361,7 @@ const EVENTS=[
  {
   "title": "契丹灭渤海",
   "year": 926,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16838,6 +17390,7 @@ const EVENTS=[
  {
   "title": "石敬瑭割让幽云十六州",
   "year": 936,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16869,6 +17422,7 @@ const EVENTS=[
  {
   "title": "段思平建大理",
   "year": 937,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16896,6 +17450,7 @@ const EVENTS=[
  {
   "title": "辽设南北面官",
   "year": 938,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -16923,6 +17478,7 @@ const EVENTS=[
  {
   "title": "后汉建立",
   "year": 947,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16950,6 +17506,7 @@ const EVENTS=[
  {
   "title": "辽太宗改国号为辽",
   "year": 947,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -16977,6 +17534,7 @@ const EVENTS=[
  {
   "title": "后周建立",
   "year": 951,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17006,6 +17564,7 @@ const EVENTS=[
  {
   "title": "高平之战",
   "year": 954,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17035,6 +17594,7 @@ const EVENTS=[
  {
   "title": "周世宗抑佛",
   "year": 955,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17066,6 +17626,7 @@ const EVENTS=[
  {
   "title": "周世宗南征",
   "year": 955,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    955,
@@ -17098,6 +17659,7 @@ const EVENTS=[
  {
   "title": "周世宗颁均田图",
   "year": 958,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17128,6 +17690,7 @@ const EVENTS=[
  {
   "title": "周世宗颁《大周刑统》",
   "year": 958,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -17158,6 +17721,7 @@ const EVENTS=[
  {
   "title": "周世宗北伐",
   "year": 959,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17189,6 +17753,7 @@ const EVENTS=[
  {
   "title": "陈桥兵变",
   "year": 960,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17218,6 +17783,7 @@ const EVENTS=[
  {
   "title": "宋灭荆南",
   "year": 963,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17247,6 +17813,7 @@ const EVENTS=[
  {
   "title": "宋灭后蜀",
   "year": 965,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17277,6 +17844,7 @@ const EVENTS=[
  {
   "title": "宋灭南汉",
   "year": 970,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17307,6 +17875,7 @@ const EVENTS=[
  {
   "title": "广州设市舶司",
   "year": 971,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17335,6 +17904,7 @@ const EVENTS=[
  {
   "title": "殿试制度确立",
   "year": 973,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17365,6 +17935,7 @@ const EVENTS=[
  {
   "title": "宋灭南唐",
   "year": 974,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    974,
@@ -17399,6 +17970,7 @@ const EVENTS=[
  {
   "title": "吴越纳土",
   "year": 978,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17429,6 +18001,7 @@ const EVENTS=[
  {
   "title": "高梁河之战",
   "year": 979,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17460,6 +18033,7 @@ const EVENTS=[
  {
   "title": "宋灭北汉",
   "year": 979,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17490,6 +18064,7 @@ const EVENTS=[
  {
   "title": "杨业雁门之战",
   "year": 980,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17521,6 +18096,7 @@ const EVENTS=[
  {
   "title": "创殿前唱名赐及第之制",
   "year": 985,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17551,6 +18127,7 @@ const EVENTS=[
  {
   "title": "岐沟关之战",
   "year": 986,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17583,6 +18160,7 @@ const EVENTS=[
  {
   "title": "杨业殉国",
   "year": 986,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17614,6 +18192,7 @@ const EVENTS=[
  {
   "title": "王小波李顺起义",
   "year": 993,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    993,
@@ -17645,6 +18224,7 @@ const EVENTS=[
  {
   "title": "李继迁攻占灵州",
   "year": 1002,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17674,6 +18254,7 @@ const EVENTS=[
  {
   "title": "澶渊之盟",
   "year": 1004,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17708,6 +18289,7 @@ const EVENTS=[
  {
   "title": "宋夏和议",
   "year": 1006,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17740,6 +18322,7 @@ const EVENTS=[
  {
   "title": "交子发行",
   "year": 1023,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17766,6 +18349,7 @@ const EVENTS=[
  {
   "title": "元昊称帝",
   "year": 1038,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17796,6 +18380,7 @@ const EVENTS=[
  {
   "title": "三川口之战",
   "year": 1040,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17828,6 +18413,7 @@ const EVENTS=[
  {
   "title": "好水川之战",
   "year": 1041,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17859,6 +18445,7 @@ const EVENTS=[
  {
   "title": "毕昇发明活字印刷",
   "year": 1041,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1041,
@@ -17890,6 +18477,7 @@ const EVENTS=[
  {
   "title": "定川之战",
   "year": 1042,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17922,6 +18510,7 @@ const EVENTS=[
  {
   "title": "庆历新政",
   "year": 1043,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17951,6 +18540,7 @@ const EVENTS=[
  {
   "title": "王伦起义",
   "year": 1043,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -17978,6 +18568,7 @@ const EVENTS=[
  {
   "title": "张海郭邈山起义",
   "year": 1043,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18007,6 +18598,7 @@ const EVENTS=[
  {
   "title": "庆历和议",
   "year": 1044,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18040,6 +18632,7 @@ const EVENTS=[
  {
   "title": "王则起义",
   "year": 1047,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18067,6 +18660,7 @@ const EVENTS=[
  {
   "title": "侬智高起义",
   "year": 1052,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1052,
@@ -18099,6 +18693,7 @@ const EVENTS=[
  {
   "title": "王安石推行均输法",
   "year": 1069,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18130,6 +18725,7 @@ const EVENTS=[
  {
   "title": "王安石推行青苗法",
   "year": 1069,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18161,6 +18757,7 @@ const EVENTS=[
  {
   "title": "王安石推行农田水利法",
   "year": 1069,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18192,6 +18789,7 @@ const EVENTS=[
  {
   "title": "王安石推行募役法",
   "year": 1070,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18223,6 +18821,7 @@ const EVENTS=[
  {
   "title": "王安石推行置将法",
   "year": 1070,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18254,6 +18853,7 @@ const EVENTS=[
  {
   "title": "王安石推行保甲法",
   "year": 1070,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18284,6 +18884,7 @@ const EVENTS=[
  {
   "title": "王安石推行市易法",
   "year": 1072,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18315,6 +18916,7 @@ const EVENTS=[
  {
   "title": "王安石推行方田均税法",
   "year": 1072,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18346,6 +18948,7 @@ const EVENTS=[
  {
   "title": "元祐更化",
   "year": 1086,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18376,6 +18979,7 @@ const EVENTS=[
  {
   "title": "沈括完成《梦溪笔谈》",
   "year": 1088,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -18406,6 +19010,7 @@ const EVENTS=[
  {
   "title": "苏颂造水运仪象台",
   "year": 1090,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -18435,6 +19040,7 @@ const EVENTS=[
  {
   "title": "哲宗绍述",
   "year": 1093,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18466,6 +19072,7 @@ const EVENTS=[
  {
   "title": "李诫著《营造法式》",
   "year": 1100,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18494,6 +19101,7 @@ const EVENTS=[
  {
   "title": "金朝建立",
   "year": 1115,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18524,6 +19132,7 @@ const EVENTS=[
  {
   "title": "海上之盟",
   "year": 1120,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18557,6 +19166,7 @@ const EVENTS=[
  {
   "title": "方腊起义",
   "year": 1120,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1120,
@@ -18590,6 +19200,7 @@ const EVENTS=[
  {
   "title": "宋江起义",
   "year": 1120,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1120,
@@ -18622,6 +19233,7 @@ const EVENTS=[
  {
   "title": "辽灭亡",
   "year": 1125,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18653,6 +19265,7 @@ const EVENTS=[
  {
   "title": "靖康之变",
   "year": 1127,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18686,6 +19299,7 @@ const EVENTS=[
  {
   "title": "南宋建立",
   "year": 1127,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18715,6 +19329,7 @@ const EVENTS=[
  {
   "title": "苗刘兵变",
   "year": 1129,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18746,6 +19361,7 @@ const EVENTS=[
  {
   "title": "黄天荡之战",
   "year": 1130,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18779,6 +19395,7 @@ const EVENTS=[
  {
   "title": "钟相杨么起义",
   "year": 1130,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1130,
@@ -18812,6 +19429,7 @@ const EVENTS=[
  {
   "title": "绍兴和议",
   "year": 1141,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18845,6 +19463,7 @@ const EVENTS=[
  {
   "title": "岳飞被害",
   "year": 1142,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18877,6 +19496,7 @@ const EVENTS=[
  {
   "title": "采石之战",
   "year": 1161,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18909,6 +19529,7 @@ const EVENTS=[
  {
   "title": "隆兴和议",
   "year": 1164,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18941,6 +19562,7 @@ const EVENTS=[
  {
   "title": "开禧北伐",
   "year": 1206,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -18972,6 +19594,7 @@ const EVENTS=[
  {
   "title": "嘉定和议",
   "year": 1208,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19003,6 +19626,7 @@ const EVENTS=[
  {
   "title": "红袄军起义",
   "year": 1214,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19033,6 +19657,7 @@ const EVENTS=[
  {
   "title": "湖州之变",
   "year": 1225,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19063,6 +19688,7 @@ const EVENTS=[
  {
   "title": "端平入洛",
   "year": 1234,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19094,6 +19720,7 @@ const EVENTS=[
  {
   "title": "宋蒙联合灭金",
   "year": 1234,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19126,6 +19753,7 @@ const EVENTS=[
  {
   "title": "宋慈著《洗冤集录》",
   "year": 1247,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -19154,6 +19782,7 @@ const EVENTS=[
  {
   "title": "程朱理学确立正统地位",
   "year": 1251,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19182,6 +19811,7 @@ const EVENTS=[
  {
   "title": "襄樊之战",
   "year": 1267,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1267,
@@ -19219,6 +19849,7 @@ const EVENTS=[
  {
   "title": "丁家洲之战",
   "year": 1275,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19251,6 +19882,7 @@ const EVENTS=[
  {
   "title": "崖山之战",
   "year": 1279,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19285,6 +19917,7 @@ const EVENTS=[
  {
   "title": "文天祥就义",
   "year": 1283,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19315,6 +19948,7 @@ const EVENTS=[
  {
   "title": "杯酒释兵权",
   "year": 961,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19345,6 +19979,7 @@ const EVENTS=[
  {
   "title": "重文轻武与宋初集权",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "北宋初期",
@@ -19374,6 +20009,7 @@ const EVENTS=[
  {
   "title": "二府三司制",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "北宋",
@@ -19401,6 +20037,7 @@ const EVENTS=[
  {
   "title": "冗官冗兵冗费",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "北宋中期",
@@ -19431,6 +20068,7 @@ const EVENTS=[
  {
   "title": "经济重心南移",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "两宋时期",
@@ -19459,6 +20097,7 @@ const EVENTS=[
  {
   "title": "指南针的发明与应用",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "北宋",
@@ -19489,6 +20128,7 @@ const EVENTS=[
  {
   "title": "火药武器的发展",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "北宋",
@@ -19517,6 +20157,7 @@ const EVENTS=[
  {
   "title": "《资治通鉴》编纂",
   "year": 1084,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19546,6 +20187,7 @@ const EVENTS=[
  {
   "title": "宋词的繁荣",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "两宋",
@@ -19578,6 +20220,7 @@ const EVENTS=[
  {
   "title": "猛安谋克制",
   "year": 1114,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -19607,6 +20250,7 @@ const EVENTS=[
  {
   "title": "郾城大捷",
   "year": 1140,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19638,6 +20282,7 @@ const EVENTS=[
  {
   "title": "成吉思汗建立大蒙古国",
   "year": 1206,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19669,6 +20314,7 @@ const EVENTS=[
  {
   "title": "蒙古灭西夏",
   "year": 1227,
+  "month": 7,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19701,6 +20347,7 @@ const EVENTS=[
  {
   "title": "蒙古灭金",
   "year": 1234,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19734,6 +20381,7 @@ const EVENTS=[
  {
   "title": "成吉思汗第一次西征",
   "year": 1219,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1219,
@@ -19771,6 +20419,7 @@ const EVENTS=[
  {
   "title": "拔都西征",
   "year": 1235,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1235,
@@ -19808,6 +20457,7 @@ const EVENTS=[
  {
   "title": "旭烈兀西征",
   "year": 1253,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1253,
@@ -19843,6 +20493,7 @@ const EVENTS=[
  {
   "title": "四大汗国建立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "蒙古国时期（13世纪）",
@@ -19876,6 +20527,7 @@ const EVENTS=[
  {
   "title": "忽必烈称帝",
   "year": 1260,
+  "month": 3,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19908,6 +20560,7 @@ const EVENTS=[
  {
   "title": "忽必烈与阿里不哥之争",
   "year": 1260,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1260,
@@ -19943,6 +20596,7 @@ const EVENTS=[
  {
   "title": "元朝建立",
   "year": 1271,
+  "month": 11,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -19974,6 +20628,7 @@ const EVENTS=[
  {
   "title": "元灭南宋",
   "year": 1276,
+  "month": 2,
   "yearMode": "range",
   "yearRange": [
    1276,
@@ -20011,6 +20666,7 @@ const EVENTS=[
  {
   "title": "忽必烈灭大理",
   "year": 1253,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20043,6 +20699,7 @@ const EVENTS=[
  {
   "title": "行省制度确立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "元世祖时期",
@@ -20074,6 +20731,7 @@ const EVENTS=[
  {
   "title": "汉法之争",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "元朝初年",
@@ -20106,6 +20764,7 @@ const EVENTS=[
  {
   "title": "四等人制",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "元朝",
@@ -20137,6 +20796,7 @@ const EVENTS=[
  {
   "title": "李璮之叛",
   "year": 1262,
+  "month": 2,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20170,6 +20830,7 @@ const EVENTS=[
  {
   "title": "海都乃颜之乱",
   "year": 1268,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1268,
@@ -20206,6 +20867,7 @@ const EVENTS=[
  {
   "title": "凉州会谈",
   "year": 1247,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20239,6 +20901,7 @@ const EVENTS=[
  {
   "title": "澎湖巡检司设立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "元朝",
@@ -20268,6 +20931,7 @@ const EVENTS=[
  {
   "title": "驿站制度",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "元朝",
@@ -20299,6 +20963,7 @@ const EVENTS=[
  {
   "title": "司农司设立",
   "year": 1270,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20331,6 +20996,7 @@ const EVENTS=[
  {
   "title": "黄道婆革新棉纺",
   "year": 1295,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20361,6 +21027,7 @@ const EVENTS=[
  {
   "title": "中统钞发行",
   "year": 1260,
+  "month": 10,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20392,6 +21059,7 @@ const EVENTS=[
  {
   "title": "海运开辟",
   "year": 1282,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20424,6 +21092,7 @@ const EVENTS=[
  {
   "title": "京杭大运河贯通",
   "year": 1291,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1291,
@@ -20459,6 +21128,7 @@ const EVENTS=[
  {
   "title": "红巾军起义",
   "year": 1351,
+  "month": 5,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20492,6 +21162,7 @@ const EVENTS=[
  {
   "title": "贾鲁治河",
   "year": 1351,
+  "month": 4,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20523,6 +21194,7 @@ const EVENTS=[
  {
   "title": "高邮之战",
   "year": 1354,
+  "month": 11,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20555,6 +21227,7 @@ const EVENTS=[
  {
   "title": "鄱阳湖之战",
   "year": 1363,
+  "month": 7,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20587,6 +21260,7 @@ const EVENTS=[
  {
   "title": "朱元璋建立明朝",
   "year": 1368,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20619,6 +21293,7 @@ const EVENTS=[
  {
   "title": "元朝灭亡",
   "year": 1368,
+  "month": 7,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20652,6 +21327,7 @@ const EVENTS=[
  {
   "title": "理学成为官学",
   "year": 1314,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20684,6 +21360,7 @@ const EVENTS=[
  {
   "title": "宋辽金三史修撰",
   "year": 1343,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1343,
@@ -20718,6 +21395,7 @@ const EVENTS=[
  {
   "title": "授时历",
   "year": 1280,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20751,6 +21429,7 @@ const EVENTS=[
  {
   "title": "王祯农书",
   "year": 1313,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20782,6 +21461,7 @@ const EVENTS=[
  {
   "title": "元曲",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "元代",
@@ -20813,6 +21493,7 @@ const EVENTS=[
  {
   "title": "宣政院设立",
   "year": 1264,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20843,6 +21524,7 @@ const EVENTS=[
  {
   "title": "鱼鳞图册的编造",
   "year": 1368,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1368,
@@ -20875,6 +21557,7 @@ const EVENTS=[
  {
   "title": "明代科举制度",
   "year": 1370,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1370,
@@ -20909,6 +21592,7 @@ const EVENTS=[
  {
   "title": "开中法",
   "year": 1370,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20935,6 +21619,7 @@ const EVENTS=[
  {
   "title": "明朝对西藏的管辖",
   "year": 1373,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1373,
@@ -20969,6 +21654,7 @@ const EVENTS=[
  {
   "title": "三司制度",
   "year": 1376,
+  "month": 6,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -20999,6 +21685,7 @@ const EVENTS=[
  {
   "title": "胡惟庸案",
   "year": 1380,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21032,6 +21719,7 @@ const EVENTS=[
  {
   "title": "废除丞相制度",
   "year": 1380,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21062,6 +21750,7 @@ const EVENTS=[
  {
   "title": "卫所制度",
   "year": 1368,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1368,
@@ -21093,6 +21782,7 @@ const EVENTS=[
  {
   "title": "六科给事中制度",
   "year": 1380,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21123,6 +21813,7 @@ const EVENTS=[
  {
   "title": "都察院设立",
   "year": 1382,
+  "month": 10,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21152,6 +21843,7 @@ const EVENTS=[
  {
   "title": "空印案",
   "year": 1382,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21182,6 +21874,7 @@ const EVENTS=[
  {
   "title": "改土归流（明）",
   "year": 1382,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1382,
@@ -21215,6 +21908,7 @@ const EVENTS=[
  {
   "title": "《大诰》的颁行",
   "year": 1385,
+  "month": 11,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21245,6 +21939,7 @@ const EVENTS=[
  {
   "title": "郭桓案",
   "year": 1385,
+  "month": 3,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21278,6 +21973,7 @@ const EVENTS=[
  {
   "title": "蓝玉案",
   "year": 1393,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21309,6 +22005,7 @@ const EVENTS=[
  {
   "title": "《大明律》的颁行",
   "year": 1397,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21340,6 +22037,7 @@ const EVENTS=[
  {
   "title": "靖难之役",
   "year": 1399,
+  "month": 7,
   "yearMode": "range",
   "yearRange": [
    1399,
@@ -21376,6 +22074,7 @@ const EVENTS=[
  {
   "title": "建州三卫的设置",
   "year": 1403,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1403,
@@ -21410,6 +22109,7 @@ const EVENTS=[
  {
   "title": "郑和下西洋",
   "year": 1405,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1405,
@@ -21442,6 +22142,7 @@ const EVENTS=[
  {
   "title": "北京皇宫营建",
   "year": 1406,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1406,
@@ -21475,6 +22176,7 @@ const EVENTS=[
  {
   "title": "《永乐大典》的编纂",
   "year": 1408,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21507,6 +22209,7 @@ const EVENTS=[
  {
   "title": "奴儿干都司的设立",
   "year": 1409,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21538,6 +22241,7 @@ const EVENTS=[
  {
   "title": "东厂设立",
   "year": 1420,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -21568,6 +22272,7 @@ const EVENTS=[
  {
   "title": "明成祖迁都北京",
   "year": 1421,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21598,6 +22303,7 @@ const EVENTS=[
  {
   "title": "金花银",
   "year": 1436,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -21626,6 +22332,7 @@ const EVENTS=[
  {
   "title": "叶宗留、邓茂七起义",
   "year": 1447,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1447,
@@ -21658,6 +22365,7 @@ const EVENTS=[
  {
   "title": "土木之变",
   "year": 1449,
+  "month": 8,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21690,6 +22398,7 @@ const EVENTS=[
  {
   "title": "北京保卫战",
   "year": 1449,
+  "month": 10,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21722,6 +22431,7 @@ const EVENTS=[
  {
   "title": "西厂设立",
   "year": 1477,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21753,6 +22463,7 @@ const EVENTS=[
  {
   "title": "班匠银制度",
   "year": 1485,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1485,
@@ -21784,6 +22495,7 @@ const EVENTS=[
  {
   "title": "王守仁心学",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代中期",
@@ -21815,6 +22527,7 @@ const EVENTS=[
  {
   "title": "大礼议",
   "year": 1524,
+  "month": 7,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21845,6 +22558,7 @@ const EVENTS=[
  {
   "title": "昆曲的兴起",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代中期",
@@ -21874,6 +22588,7 @@ const EVENTS=[
  {
   "title": "泰州学派",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代中后期",
@@ -21905,6 +22620,7 @@ const EVENTS=[
  {
   "title": "庚戌之变",
   "year": 1550,
+  "month": 8,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21936,6 +22652,7 @@ const EVENTS=[
  {
   "title": "葡萄牙入居澳门",
   "year": 1553,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -21964,6 +22681,7 @@ const EVENTS=[
  {
   "title": "戚继光抗倭",
   "year": 1555,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1555,
@@ -21996,6 +22714,7 @@ const EVENTS=[
  {
   "title": "隆庆和议",
   "year": 1571,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22028,6 +22747,7 @@ const EVENTS=[
  {
   "title": "张居正改革",
   "year": 1572,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1572,
@@ -22063,6 +22783,7 @@ const EVENTS=[
  {
   "title": "潘季驯治河",
   "year": 1578,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22094,6 +22815,7 @@ const EVENTS=[
  {
   "title": "一条鞭法",
   "year": 1581,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22127,6 +22849,7 @@ const EVENTS=[
  {
   "title": "资本主义萌芽",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代中后期",
@@ -22156,6 +22879,7 @@ const EVENTS=[
  {
   "title": "努尔哈赤统一女真",
   "year": 1583,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1583,
@@ -22190,6 +22914,7 @@ const EVENTS=[
  {
   "title": "李贽思想",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代后期",
@@ -22221,6 +22946,7 @@ const EVENTS=[
  {
   "title": "《本草纲目》",
   "year": 1590,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -22249,6 +22975,7 @@ const EVENTS=[
  {
   "title": "万历三大征",
   "year": 1592,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1592,
@@ -22284,6 +23011,7 @@ const EVENTS=[
  {
   "title": "万历援朝之役",
   "year": 1592,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1592,
@@ -22321,6 +23049,7 @@ const EVENTS=[
  {
   "title": "矿监税使与市民斗争",
   "year": 1596,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1596,
@@ -22357,6 +23086,7 @@ const EVENTS=[
  {
   "title": "东林党",
   "year": 1604,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22390,6 +23120,7 @@ const EVENTS=[
  {
   "title": "争国本",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "万历年间",
@@ -22424,6 +23155,7 @@ const EVENTS=[
  {
   "title": "八旗制度",
   "year": 1601,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1601,
@@ -22457,6 +23189,7 @@ const EVENTS=[
  {
   "title": "后金建立",
   "year": 1616,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22489,6 +23222,7 @@ const EVENTS=[
  {
   "title": "梃击案",
   "year": 1615,
+  "month": 5,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22523,6 +23257,7 @@ const EVENTS=[
  {
   "title": "萨尔浒之战",
   "year": 1619,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22555,6 +23290,7 @@ const EVENTS=[
  {
   "title": "三饷加派",
   "year": 1618,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1618,
@@ -22586,6 +23322,7 @@ const EVENTS=[
  {
   "title": "红丸案",
   "year": 1620,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22619,6 +23356,7 @@ const EVENTS=[
  {
   "title": "移宫案",
   "year": 1620,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22652,6 +23390,7 @@ const EVENTS=[
  {
   "title": "徐鸿儒起义",
   "year": 1622,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22682,6 +23421,7 @@ const EVENTS=[
  {
   "title": "魏忠贤专权",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "天启年间",
@@ -22715,6 +23455,7 @@ const EVENTS=[
  {
   "title": "荷兰侵占台湾",
   "year": 1624,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -22741,6 +23482,7 @@ const EVENTS=[
  {
   "title": "澄城起义",
   "year": 1627,
+  "month": 3,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22771,6 +23513,7 @@ const EVENTS=[
  {
   "title": "崇祯历书的编修",
   "year": 1629,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1629,
@@ -22806,6 +23549,7 @@ const EVENTS=[
  {
   "title": "张献忠谷城再起",
   "year": 1639,
+  "month": 5,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22838,6 +23582,7 @@ const EVENTS=[
  {
   "title": "均田免粮口号",
   "year": 1640,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -22868,6 +23613,7 @@ const EVENTS=[
  {
   "title": "《天工开物》",
   "year": 1637,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22898,6 +23644,7 @@ const EVENTS=[
  {
   "title": "《农政全书》",
   "year": 1639,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22928,6 +23675,7 @@ const EVENTS=[
  {
   "title": "大顺政权建立",
   "year": 1644,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22961,6 +23709,7 @@ const EVENTS=[
  {
   "title": "大西政权建立",
   "year": 1644,
+  "month": 11,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -22993,6 +23742,7 @@ const EVENTS=[
  {
   "title": "明朝灭亡",
   "year": 1644,
+  "month": 3,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23024,6 +23774,7 @@ const EVENTS=[
  {
   "title": "明末农民战争",
   "year": 1627,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1627,
@@ -23060,6 +23811,7 @@ const EVENTS=[
  {
   "title": "利玛窦与西学东渐",
   "year": 1583,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1583,
@@ -23095,6 +23847,7 @@ const EVENTS=[
  {
   "title": "明代长篇小说的繁荣",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代中后期",
@@ -23126,6 +23879,7 @@ const EVENTS=[
  {
   "title": "九边防御体系",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代",
@@ -23154,6 +23908,7 @@ const EVENTS=[
  {
   "title": "《徐霞客游记》",
   "year": 1607,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1607,
@@ -23185,6 +23940,7 @@ const EVENTS=[
  {
   "title": "宁远之战",
   "year": 1626,
+  "month": 1,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23216,6 +23972,7 @@ const EVENTS=[
  {
   "title": "后金迁都沈阳",
   "year": 1625,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23246,6 +24003,7 @@ const EVENTS=[
  {
   "title": "皇太极称帝建清",
   "year": 1636,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23277,6 +24035,7 @@ const EVENTS=[
  {
   "title": "粮长制",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明初",
@@ -23308,6 +24067,7 @@ const EVENTS=[
  {
   "title": "黄册制度",
   "year": 1381,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23339,6 +24099,7 @@ const EVENTS=[
  {
   "title": "内阁制度形成",
   "year": 1420,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -23369,6 +24130,7 @@ const EVENTS=[
  {
   "title": "锦衣卫设立",
   "year": 1382,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23398,6 +24160,7 @@ const EVENTS=[
  {
   "title": "海禁政策",
   "year": 1371,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1371,
@@ -23430,6 +24193,7 @@ const EVENTS=[
  {
   "title": "朝贡贸易",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明代",
@@ -23457,6 +24221,7 @@ const EVENTS=[
  {
   "title": "理藩院设立",
   "year": 1638,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23484,6 +24249,7 @@ const EVENTS=[
  {
   "title": "山海关之战",
   "year": 1644,
+  "month": 4,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23515,6 +24281,7 @@ const EVENTS=[
  {
   "title": "清军入关",
   "year": 1644,
+  "month": 5,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23545,6 +24312,7 @@ const EVENTS=[
  {
   "title": "弘光政权",
   "year": 1644,
+  "month": 5,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23577,6 +24345,7 @@ const EVENTS=[
  {
   "title": "清初圈地",
   "year": 1644,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1644,
@@ -23607,6 +24376,7 @@ const EVENTS=[
  {
   "title": "逃人法",
   "year": 1644,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23635,6 +24405,7 @@ const EVENTS=[
  {
   "title": "剃发令",
   "year": 1645,
+  "month": 6,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23663,6 +24434,7 @@ const EVENTS=[
  {
   "title": "废除匠籍",
   "year": 1645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23690,6 +24462,7 @@ const EVENTS=[
  {
   "title": "江阴抗清",
   "year": 1645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23720,6 +24493,7 @@ const EVENTS=[
  {
   "title": "嘉定三屠",
   "year": 1645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23750,6 +24524,7 @@ const EVENTS=[
  {
   "title": "扬州之战",
   "year": 1645,
+  "month": 4,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23780,6 +24555,7 @@ const EVENTS=[
  {
   "title": "鲁王监国",
   "year": 1645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23811,6 +24587,7 @@ const EVENTS=[
  {
   "title": "隆武政权",
   "year": 1645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23842,6 +24619,7 @@ const EVENTS=[
  {
   "title": "大顺军余部联明抗清",
   "year": 1645,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23877,6 +24655,7 @@ const EVENTS=[
  {
   "title": "永历政权",
   "year": 1646,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23909,6 +24688,7 @@ const EVENTS=[
  {
   "title": "编定《赋役全书》",
   "year": 1646,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1646,
@@ -23939,6 +24719,7 @@ const EVENTS=[
  {
   "title": "《大清律》制定",
   "year": 1647,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23964,6 +24745,7 @@ const EVENTS=[
  {
   "title": "清初奖励垦荒",
   "year": 1649,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -23991,6 +24773,7 @@ const EVENTS=[
  {
   "title": "夔东十三家",
   "year": 1651,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1651,
@@ -24025,6 +24808,7 @@ const EVENTS=[
  {
   "title": "李定国抗清",
   "year": 1652,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24058,6 +24842,7 @@ const EVENTS=[
  {
   "title": "议政王大臣会议",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清前期",
@@ -24087,6 +24872,7 @@ const EVENTS=[
  {
   "title": "内阁设立",
   "year": 1658,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24114,6 +24900,7 @@ const EVENTS=[
  {
   "title": "郑成功北伐",
   "year": 1659,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24144,6 +24931,7 @@ const EVENTS=[
  {
   "title": "郑成功收复台湾",
   "year": 1661,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1661,
@@ -24179,6 +24967,7 @@ const EVENTS=[
  {
   "title": "明末清初三大思想家",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "明末清初",
@@ -24208,6 +24997,7 @@ const EVENTS=[
  {
   "title": "清代文字狱",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康雍乾时期",
@@ -24239,6 +25029,7 @@ const EVENTS=[
  {
   "title": "停止圈地",
   "year": 1669,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24269,6 +25060,7 @@ const EVENTS=[
  {
   "title": "更名田",
   "year": 1669,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24298,6 +25090,7 @@ const EVENTS=[
  {
   "title": "南书房设立",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康熙年间",
@@ -24328,6 +25121,7 @@ const EVENTS=[
  {
   "title": "平定三藩之乱",
   "year": 1673,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1673,
@@ -24362,6 +25156,7 @@ const EVENTS=[
  {
   "title": "博学鸿儒科",
   "year": 1678,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24391,6 +25186,7 @@ const EVENTS=[
  {
   "title": "清统一台湾",
   "year": 1683,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1683,
@@ -24424,6 +25220,7 @@ const EVENTS=[
  {
   "title": "雅克萨之战",
   "year": 1685,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1685,
@@ -24459,6 +25256,7 @@ const EVENTS=[
  {
   "title": "尼布楚条约",
   "year": 1689,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24490,6 +25288,7 @@ const EVENTS=[
  {
   "title": "三征噶尔丹",
   "year": 1690,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1690,
@@ -24524,6 +25323,7 @@ const EVENTS=[
  {
   "title": "多伦会盟",
   "year": 1691,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24555,6 +25355,7 @@ const EVENTS=[
  {
   "title": "皇舆全览图测绘",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康熙年间",
@@ -24586,6 +25387,7 @@ const EVENTS=[
  {
   "title": "苏州踹工斗争",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康熙年间",
@@ -24613,6 +25415,7 @@ const EVENTS=[
  {
   "title": "清初西学东渐",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清初",
@@ -24644,6 +25447,7 @@ const EVENTS=[
  {
   "title": "颜李学派",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清初",
@@ -24672,6 +25476,7 @@ const EVENTS=[
  {
   "title": "朱一贵起义",
   "year": 1721,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24701,6 +25506,7 @@ const EVENTS=[
  {
   "title": "平定罗卜藏丹津叛乱",
   "year": 1723,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1723,
@@ -24734,6 +25540,7 @@ const EVENTS=[
  {
   "title": "改土归流",
   "year": 1726,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1726,
@@ -24768,6 +25575,7 @@ const EVENTS=[
  {
   "title": "驻藏大臣设置",
   "year": 1727,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24796,6 +25604,7 @@ const EVENTS=[
  {
   "title": "布连斯奇条约",
   "year": 1727,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24827,6 +25636,7 @@ const EVENTS=[
  {
   "title": "恰克图条约",
   "year": 1728,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24858,6 +25668,7 @@ const EVENTS=[
  {
   "title": "军机处设立",
   "year": 1729,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1729,
@@ -24891,6 +25702,7 @@ const EVENTS=[
  {
   "title": "明史",
   "year": 1735,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -24921,6 +25733,7 @@ const EVENTS=[
  {
   "title": "古今图书集成编纂",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康熙雍正年间",
@@ -24951,6 +25764,7 @@ const EVENTS=[
  {
   "title": "清代小说",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康熙至乾隆年间",
@@ -24981,6 +25795,7 @@ const EVENTS=[
  {
   "title": "清代传奇《长生殿》《桃花扇》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康熙年间",
@@ -25009,6 +25824,7 @@ const EVENTS=[
  {
   "title": "戴震反理学思想",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "乾隆年间",
@@ -25038,6 +25854,7 @@ const EVENTS=[
  {
   "title": "乾嘉学派",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "乾隆嘉庆年间",
@@ -25070,6 +25887,7 @@ const EVENTS=[
  {
   "title": "章学诚《文史通义》",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "乾隆年间",
@@ -25096,6 +25914,7 @@ const EVENTS=[
  {
   "title": "扬州八怪",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清代中期",
@@ -25125,6 +25944,7 @@ const EVENTS=[
  {
   "title": "清代永佃权",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清代中期",
@@ -25152,6 +25972,7 @@ const EVENTS=[
  {
   "title": "清代资本主义萌芽",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清代前期",
@@ -25180,6 +26001,7 @@ const EVENTS=[
  {
   "title": "清代佃农抗租斗争",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清前期至中期",
@@ -25210,6 +26032,7 @@ const EVENTS=[
  {
   "title": "大小金川之役",
   "year": 1747,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1747,
@@ -25245,6 +26068,7 @@ const EVENTS=[
  {
   "title": "平定达瓦齐",
   "year": 1755,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25277,6 +26101,7 @@ const EVENTS=[
  {
   "title": "平定阿睦尔撒纳",
   "year": 1757,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25310,6 +26135,7 @@ const EVENTS=[
  {
   "title": "平定大小和卓之乱",
   "year": 1757,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1757,
@@ -25345,6 +26171,7 @@ const EVENTS=[
  {
   "title": "广州一口通商",
   "year": 1757,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25374,6 +26201,7 @@ const EVENTS=[
  {
   "title": "土尔扈特部回归",
   "year": 1771,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25405,6 +26233,7 @@ const EVENTS=[
  {
   "title": "四库全书编纂",
   "year": 1773,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1773,
@@ -25439,6 +26268,7 @@ const EVENTS=[
  {
   "title": "林爽文起义",
   "year": 1786,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1786,
@@ -25475,6 +26305,7 @@ const EVENTS=[
  {
   "title": "清军反击廓尔喀",
   "year": 1791,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1791,
@@ -25509,6 +26340,7 @@ const EVENTS=[
  {
   "title": "钦定西藏章程",
   "year": 1793,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25541,6 +26373,7 @@ const EVENTS=[
  {
   "title": "马戛尔尼使团来华",
   "year": 1793,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25573,6 +26406,7 @@ const EVENTS=[
  {
   "title": "川楚白莲教起义",
   "year": 1796,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1796,
@@ -25609,6 +26443,7 @@ const EVENTS=[
  {
   "title": "和珅案",
   "year": 1799,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25637,6 +26472,7 @@ const EVENTS=[
  {
   "title": "天理教起义",
   "year": 1813,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25669,6 +26505,7 @@ const EVENTS=[
  {
   "title": "阿美士德使团来华",
   "year": 1816,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25699,6 +26536,7 @@ const EVENTS=[
  {
   "title": "平定张格尔之乱",
   "year": 1826,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1826,
@@ -25733,6 +26571,7 @@ const EVENTS=[
  {
   "title": "林则徐广州禁烟",
   "year": 1839,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -25765,6 +26604,7 @@ const EVENTS=[
  {
   "title": "摊丁入亩",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "雍正年间",
@@ -25794,6 +26634,7 @@ const EVENTS=[
  {
   "title": "盟旗制度",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清前期",
@@ -25821,6 +26662,7 @@ const EVENTS=[
  {
   "title": "保甲制度",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清前期",
@@ -25846,6 +26688,7 @@ const EVENTS=[
  {
   "title": "八旗与绿营",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清前期",
@@ -25872,6 +26715,7 @@ const EVENTS=[
  {
   "title": "京察大计",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清前期",
@@ -25897,6 +26741,7 @@ const EVENTS=[
  {
   "title": "内务府",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "清初",
@@ -25922,6 +26767,7 @@ const EVENTS=[
  {
   "title": "圆明园营建",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康熙至乾隆年间",
@@ -25950,6 +26796,7 @@ const EVENTS=[
  {
   "title": "康乾盛世",
   "year": null,
+  "month": null,
   "yearMode": "era",
   "yearRange": null,
   "era": "康雍乾时期",
@@ -25982,6 +26829,7 @@ const EVENTS=[
  {
   "title": "闭关锁国政策",
   "year": 1757,
+  "month": null,
   "yearMode": "range",
   "yearRange": [
    1757,
@@ -26014,6 +26862,7 @@ const EVENTS=[
  {
   "title": "设伊犁将军",
   "year": 1762,
+  "month": null,
   "yearMode": "exact",
   "yearRange": null,
   "era": "",
@@ -26045,6 +26894,7 @@ const EVENTS=[
  {
   "title": "金瓶掣签制度",
   "year": 1793,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",
@@ -26075,6 +26925,7 @@ const EVENTS=[
  {
   "title": "京剧的形成",
   "year": 1790,
+  "month": null,
   "yearMode": "approx",
   "yearRange": null,
   "era": "",

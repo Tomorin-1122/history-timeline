@@ -12,16 +12,16 @@ CHAPTERS.forEach((c,ci)=>{
   band.className="band"; band.id=c.id;
   band.innerHTML='<span class="sq"></span><span class="no">'+c.no+'</span><h2>'+c.name+'</h2><span class="note">'+c.note+'</span><span class="rule"></span>';
   main.appendChild(band);
-  const rows=EVENTS.filter(e=>e.ch===ci);
-  if(rows.length===0){
+  const rowsInCh=EVENTS.map((e,i)=>({e,i})).filter(x=>x.e.ch===ci)
+    .sort((a,b)=> (a.e.year??1e9)-(b.e.year??1e9) || ((a.e.month||13)-(b.e.month||13)));  /* 同年按 month 二级排序，无 month 排后 */
+  if(rowsInCh.length===0){
     const empty=document.createElement("div");
     empty.className="row";
     empty.innerHTML='<div class="year"></div><div class="body"><div class="summary" style="color:var(--ink3)">（数据待生成）</div></div>';
     main.appendChild(empty);
     return;
   }
-  EVENTS.forEach((e,idx)=>{
-    if(e.ch!==ci) return;
+  rowsInCh.forEach(({e, i: idx})=>{   /* 解构重命名：map 产 {e,i}，idx 取 i（此前写 {e,idx} 导致 idx=undefined） */
     const row=document.createElement("div");
     row.className="row "+e.yearMode; row.dataset.idx=idx; row.dataset.type=e.type; row.dataset.imp=e.importance;
     const yr=document.createElement("div"); yr.className="year";

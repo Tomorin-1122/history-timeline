@@ -1,6 +1,7 @@
 [
   {
     "title": "东汉建立",
+    "month": 6,
     "year": 25,
     "yearMode": "exact",
     "yearRange": null,
@@ -123,6 +124,7 @@
   },
   {
     "title": "轻徭薄赋",
+    "month": 12,
     "year": 30,
     "yearMode": "exact",
     "yearRange": null,

@@ -1,6 +1,7 @@
 [
   {
     "title": "隋朝建立",
+    "month": 2,
     "year": 581,
     "yearMode": "exact",
     "yearRange": null,
@@ -359,6 +360,7 @@
   },
   {
     "title": "隋灭陈统一全国",
+    "month": 1,
     "year": 589,
     "yearMode": "exact",
     "yearRange": null,
@@ -776,6 +778,7 @@
   },
   {
     "title": "王薄起义",
+    "month": 10,
     "year": 611,
     "yearMode": "exact",
     "yearRange": null,
@@ -970,6 +973,7 @@
   },
   {
     "title": "江都兵变与隋朝灭亡",
+    "month": 3,
     "year": 618,
     "yearMode": "exact",
     "yearRange": null,

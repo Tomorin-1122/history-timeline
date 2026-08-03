@@ -61,13 +61,13 @@ history-timeline/
 ⑤ git add -A && git commit
 ```
 
-## 事件 Schema（17 字段 + 2 扩展）
+## 事件 Schema（17 字段 + 3 扩展）
 
-`title / year / yearMode / yearRange / dynasty / period / type / importance / summary / cause / effect / examTip / people / location / tags / related / wikiSlug`
+`title / year / month / yearMode / yearRange / dynasty / period / type / importance / summary / cause / effect / examTip / people / location / tags / related / wikiSlug`
 
 `type` 枚举 7 类：**政治 / 军事 / 经济 / 文化 / 制度 / 民族关系 / 对外关系**（2026-08-03 扩展；民族=境内政权交往治理、对外=外国交往；纯外国内政不收）。
 
-扩展字段：`era`、`eraSub`（yearMode=era 时的时代段描述；录入提示词已要求回填，旧试点待复核回填）。
+扩展字段：`month`（可选 1-12，同年事件按月份分先后，教材明确月份才填）；`era`、`eraSub`（yearMode=era 时的时代段描述；录入提示词已要求回填，旧试点待复核回填）。
 
 字段语义与判定规则见 `docs/提取事件提示词.md`。
 

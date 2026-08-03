@@ -29,6 +29,7 @@
   },
   {
     "title": "蒙古灭西夏",
+    "month": 7,
     "year": 1227,
     "yearMode": "exact",
     "yearRange": null,
@@ -58,6 +59,7 @@
   },
   {
     "title": "蒙古灭金",
+    "month": 1,
     "year": 1234,
     "yearMode": "exact",
     "yearRange": null,
@@ -220,6 +222,7 @@
   },
   {
     "title": "忽必烈称帝",
+    "month": 3,
     "year": 1260,
     "yearMode": "exact",
     "yearRange": null,
@@ -281,6 +284,7 @@
   },
   {
     "title": "元朝建立",
+    "month": 11,
     "year": 1271,
     "yearMode": "exact",
     "yearRange": null,
@@ -309,6 +313,7 @@
   },
   {
     "title": "元灭南宋",
+    "month": 2,
     "year": 1276,
     "yearMode": "range",
     "yearRange": [
@@ -463,6 +468,7 @@
   },
   {
     "title": "李璮之叛",
+    "month": 2,
     "year": 1262,
     "yearMode": "exact",
     "yearRange": null,
@@ -670,6 +676,7 @@
   },
   {
     "title": "中统钞发行",
+    "month": 10,
     "year": 1260,
     "yearMode": "exact",
     "yearRange": null,
@@ -759,6 +766,7 @@
   },
   {
     "title": "红巾军起义",
+    "month": 5,
     "year": 1351,
     "yearMode": "exact",
     "yearRange": null,
@@ -789,6 +797,7 @@
   },
   {
     "title": "贾鲁治河",
+    "month": 4,
     "year": 1351,
     "yearMode": "exact",
     "yearRange": null,
@@ -817,6 +826,7 @@
   },
   {
     "title": "高邮之战",
+    "month": 11,
     "year": 1354,
     "yearMode": "exact",
     "yearRange": null,
@@ -846,6 +856,7 @@
   },
   {
     "title": "鄱阳湖之战",
+    "month": 7,
     "year": 1363,
     "yearMode": "exact",
     "yearRange": null,
@@ -875,6 +886,7 @@
   },
   {
     "title": "朱元璋建立明朝",
+    "month": 1,
     "year": 1368,
     "yearMode": "exact",
     "yearRange": null,
@@ -904,6 +916,7 @@
   },
   {
     "title": "元朝灭亡",
+    "month": 7,
     "year": 1368,
     "yearMode": "exact",
     "yearRange": null,

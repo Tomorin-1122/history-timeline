@@ -59,6 +59,7 @@ function validateEvent(e) {
   if (e.yearMode === 'range' && !Array.isArray(e.yearRange)) errs.push('range 需要 yearRange 数组');
   if (e.yearMode === 'range' && e.yearRange && e.yearRange[0] > 0 && e.yearRange[0] > e.yearRange[1]) errs.push('range 起>止');
   if (e.yearMode === 'era' && !e.era) errs.push('era 模式应填 era（时代段名）');
+  if (e.month !== undefined && e.month !== null && (e.month < 1 || e.month > 12 || !Number.isInteger(e.month))) errs.push('month 应为 1-12 整数');
   for (const k of ['people','tags','related']) if (e[k] !== undefined && !Array.isArray(e[k])) errs.push(k + ' 应为数组');
   return errs;
 }
