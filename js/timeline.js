@@ -6,6 +6,14 @@ const IMPS=[["全部",0],["★★★",3],["★★",2],["★",1]];
 const state={type:"全部",imp:0,q:"",ch:-1};
 
 /* ---- 渲染：全 15 章章节带 + 事件行（空章占位） ---- */
+/* era 事件排序键：有 year 用 year；eraSub"距今约X万年"解析为负年（800万年→-8000000）参与排序；
+   无任何时间信息才排章末（修复：万年事件曾被一律排章末，与时间序倒挂） */
+function eraSortKey(e){
+  if(e.year != null) return e.year;
+  const m=String(e.eraSub||"").match(/距今约?([\d.]+)\s*万/);
+  return m ? -Math.round(parseFloat(m[1])*10000) : 1e9;
+}
+
 const main=document.getElementById("main");
 CHAPTERS.forEach((c,ci)=>{
   const band=document.createElement("div");
@@ -13,7 +21,7 @@ CHAPTERS.forEach((c,ci)=>{
   band.innerHTML='<span class="sq"></span><span class="no">'+c.no+'</span><h2>'+c.name+'</h2><span class="note">'+c.note+'</span><span class="rule"></span>';
   main.appendChild(band);
   const rowsInCh=EVENTS.map((e,i)=>({e,i})).filter(x=>x.e.ch===ci)
-    .sort((a,b)=> (a.e.year??1e9)-(b.e.year??1e9) || ((a.e.month||13)-(b.e.month||13)));  /* 同年按 month 二级排序，无 month 排后 */
+    .sort((a,b)=> eraSortKey(a.e)-eraSortKey(b.e) || ((a.e.month||13)-(b.e.month||13)));  /* eraSub 万年解析排序 */
   if(rowsInCh.length===0){
     const empty=document.createElement("div");
     empty.className="row";
