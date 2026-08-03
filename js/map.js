@@ -67,12 +67,34 @@ speedBtn.addEventListener("click",()=>{
   speedBtn.textContent=SPEEDS[speedIdx]+"×";
 });
 
-/* ---- 初始化：免 key 高德公开端点（08-02 方向：不申请商业 key；天地图 tk 到位可切换） ---- */
+/* ---- 底图双轨（2026-08-03 部署版）：天地图优先，瓦片 403（file:// 或白名单未配）自动回退高德 ----
+   天地图浏览器端 key：Referer 白名单防护（部署域名 timeline.yinyizhuan.cn）；file:// 下无 http Referer 必 403 → 回退高德 */
+const TDT_KEY="78aa1282ea7b6cabd336a205aada9e36";
+const TDT_SUB=["0","1","2","3","4","5","6","7"];
+const TDT_URL=function(layer){return "https://t{s}.tianditu.gov.cn/"+layer+"_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER="+layer+"&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk="+TDT_KEY;};
+const GAODE_URL="https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}";
+let tileMode="tdt";        /* 'tdt' 天地图（WGS84 免转换） | 'gaode' 高德（需 gcj02） */
+let tdtErr=0;              /* 天地图瓦片连续失败计数 */
+
+/* ---- 初始化：天地图优先；403 连续 3 次自动回退高德（本地 file:// 打开不白屏） ---- */
 function initMap(){
   if(mapInited) return; mapInited=true;
   mapObj=L.map("map",{zoomControl:true}).setView([34,110],5);
-  L.tileLayer("https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
-    {subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
+  if(tileMode==="tdt"){
+    const vec=L.tileLayer(TDT_URL("vec"),{subdomains:TDT_SUB,maxZoom:18,opacity:.78,attribution:"天地图"}).addTo(mapObj);
+    const cva=L.tileLayer(TDT_URL("cva"),{subdomains:TDT_SUB,maxZoom:18,opacity:1,attribution:"天地图"}).addTo(mapObj);
+    vec.on("tileerror",()=>{
+      tdtErr++;
+      if(tdtErr>=3 && tileMode==="tdt"){   /* 白名单未配 / file://：回退高德，不白屏 */
+        mapObj.removeLayer(vec); mapObj.removeLayer(cva);
+        tileMode="gaode";
+        L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
+        drawMarkers();                       /* 重绘：坐标改走 gcj02 */
+      }
+    });
+  }else{
+    L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
+  }
   markers=L.markerClusterGroup({
     maxClusterRadius:35,               /* 仅重灾组（≥10 条）进入：低 zoom 成簇 */
     showCoverageOnHover:false,
@@ -128,7 +150,8 @@ function jitterCoord(t,lat,lng){
 function addMarker(e, alpha, bold){
   const c=COORDS[e.title]; if(!c) return;
   const [jlat,jlng]=jitterCoord(e.title,c[0],c[1]);  /* 重合坐标确定性散开 ±550m */
-  const g=wgs84ToGcj02(jlat,jlng);       /* 高德瓦片需 gcj02，WGS84 源数据转一次 */
+  /* 底图双轨：天地图 WGS84 直接用（CGCS2000≈WGS84 免转换）；高德瓦片需转 gcj02 */
+  const g=tileMode==="tdt"?[jlat,jlng]:wgs84ToGcj02(jlat,jlng);
   const col=TYPE_COLORS[e.type]||"#9e3d26";
   const isEra=e.yearMode==="era";
   const a=alpha==null?1:alpha;
