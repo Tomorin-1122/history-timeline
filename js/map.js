@@ -67,34 +67,45 @@ speedBtn.addEventListener("click",()=>{
   speedBtn.textContent=SPEEDS[speedIdx]+"×";
 });
 
-/* ---- 底图双轨（2026-08-03 部署版）：天地图优先，瓦片 403（file:// 或白名单未配）自动回退高德 ----
-   天地图浏览器端 key：Referer 白名单防护（部署域名 timeline.yinyizhuan.cn）；file:// 下无 http Referer 必 403 → 回退高德 */
+/* ---- 底图双轨（2026-08-03 部署版）：天地图优先（矢量/影像/地形可切换），瓦片 403 自动回退高德 ----
+   天地图浏览器端 key：Referer 白名单防护（timeline.yinyizhuan.cn, history-timeline-vert.vercel.app）；file:// 无 http Referer 必 403 → 回退高德 */
 const TDT_KEY="78aa1282ea7b6cabd336a205aada9e36";
 const TDT_SUB=["0","1","2","3","4","5","6","7"];
 const TDT_URL=function(layer){return "https://t{s}.tianditu.gov.cn/"+layer+"_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER="+layer+"&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk="+TDT_KEY;};
 const GAODE_URL="https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}";
 let tileMode="tdt";        /* 'tdt' 天地图（WGS84 免转换） | 'gaode' 高德（需 gcj02） */
 let tdtErr=0;              /* 天地图瓦片连续失败计数 */
+/* 天地图三底图：矢量（默认）/ 影像（卫星）/ 地形（山川）——底图 + 注记图层名 */
+const TDT_BASES=[{base:"vec",ann:"cva",name:"矢量"},{base:"img",ann:"cia",name:"影像"},{base:"ter",ann:"cta",name:"地形"}];
+let tdtBaseIdx=0, tdtLayers=[];
+const mapCtrlBtns={};      /* 地图内控件按钮引用（底图/全屏），供回退时更新 */
+
+function buildTdtLayers(){
+  tdtLayers.forEach(l=>mapObj.removeLayer(l));
+  const b=TDT_BASES[tdtBaseIdx];
+  const vec=L.tileLayer(TDT_URL(b.base),{subdomains:TDT_SUB,maxZoom:18,opacity:.78,attribution:"天地图"});
+  const cva=L.tileLayer(TDT_URL(b.ann),{subdomains:TDT_SUB,maxZoom:18,opacity:1,attribution:"天地图"});
+  vec.on("tileerror",onTdtErr); cva.on("tileerror",onTdtErr);
+  tdtLayers=[vec,cva];
+  vec.addTo(mapObj); cva.addTo(mapObj);
+}
+function onTdtErr(){
+  tdtErr++;
+  if(tdtErr>=3 && tileMode==="tdt"){   /* 白名单未配 / file://：回退高德，不白屏 */
+    tdtLayers.forEach(l=>mapObj.removeLayer(l));
+    tileMode="gaode";
+    L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
+    if(mapCtrlBtns.base){ mapCtrlBtns.base.textContent="高"; mapCtrlBtns.base.title="底图已回退高德（天地图白名单外域名），不可切换"; }
+    drawMarkers();                       /* 重绘：坐标改走 gcj02 */
+  }
+}
 
 /* ---- 初始化：天地图优先；403 连续 3 次自动回退高德（本地 file:// 打开不白屏） ---- */
 function initMap(){
   if(mapInited) return; mapInited=true;
   mapObj=L.map("map",{zoomControl:true}).setView([34,110],5);
-  if(tileMode==="tdt"){
-    const vec=L.tileLayer(TDT_URL("vec"),{subdomains:TDT_SUB,maxZoom:18,opacity:.78,attribution:"天地图"}).addTo(mapObj);
-    const cva=L.tileLayer(TDT_URL("cva"),{subdomains:TDT_SUB,maxZoom:18,opacity:1,attribution:"天地图"}).addTo(mapObj);
-    vec.on("tileerror",()=>{
-      tdtErr++;
-      if(tdtErr>=3 && tileMode==="tdt"){   /* 白名单未配 / file://：回退高德，不白屏 */
-        mapObj.removeLayer(vec); mapObj.removeLayer(cva);
-        tileMode="gaode";
-        L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
-        drawMarkers();                       /* 重绘：坐标改走 gcj02 */
-      }
-    });
-  }else{
-    L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
-  }
+  if(tileMode==="tdt") buildTdtLayers();
+  else L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
   markers=L.markerClusterGroup({
     maxClusterRadius:35,               /* 仅重灾组（≥10 条）进入：低 zoom 成簇 */
     showCoverageOnHover:false,
@@ -117,8 +128,51 @@ function initMap(){
     }
   }).addTo(mapObj);
   plainMarkers=L.layerGroup().addTo(mapObj);   /* 少量重合/独立事件：jitter 散开，不聚类 */
+  addMapControls();                            /* 地图内控件：底图切换 + 全屏 */
   drawMarkers();
 }
+
+/* ---- 地图内控件（叠在左上角缩放按钮下，Leaflet 原生控件风格）：底图切换 + 全屏 ---- */
+function addMapControls(){
+  const ctrl=L.control({position:"topleft"});
+  ctrl.onAdd=function(){
+    const div=L.DomUtil.create("div","leaflet-bar map-ctrl");
+    const base=L.DomUtil.create("a","",div); base.href="#";
+    base.textContent=TDT_BASES[tdtBaseIdx].name.charAt(0);   /* 单字图标：矢/影/地（方形按钮不遮挡） */
+    base.title="切换底图：矢量/影像/地形（当前："+TDT_BASES[tdtBaseIdx].name+"）";
+    const full=L.DomUtil.create("a","",div); full.href="#"; full.title="全屏沉浸式（仅地图）"; full.textContent="⛶";
+    mapCtrlBtns.base=base; mapCtrlBtns.full=full;
+    L.DomEvent.disableClickPropagation(div).disableScrollPropagation(div);
+    L.DomEvent.on(base,"click",e=>{L.DomEvent.preventDefault(e);swapTdtBase();});
+    L.DomEvent.on(full,"click",e=>{L.DomEvent.preventDefault(e);toggleFullscreen();});
+    return div;
+  };
+  ctrl.addTo(mapObj);
+}
+function swapTdtBase(){
+  if(tileMode!=="tdt") return;             /* 已回退高德：不切换 */
+  tdtBaseIdx=(tdtBaseIdx+1)%TDT_BASES.length;
+  tdtErr=0;
+  buildTdtLayers();
+  if(mapCtrlBtns.base){
+    mapCtrlBtns.base.textContent=TDT_BASES[tdtBaseIdx].name.charAt(0);
+    mapCtrlBtns.base.title="切换底图：矢量/影像/地形（当前："+TDT_BASES[tdtBaseIdx].name+"）";
+  }
+}
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
+    const p=document.documentElement.requestFullscreen();
+    if(p && p.catch) p.catch(()=>{});
+    document.body.classList.add("immersive");
+  }else{
+    const p=document.exitFullscreen();
+    if(p && p.catch) p.catch(()=>{});
+    document.body.classList.remove("immersive");
+  }
+}
+document.addEventListener("fullscreenchange",()=>{
+  if(!document.fullscreenElement) document.body.classList.remove("immersive");
+});
 
 /* 门类配色（古籍五色：军事墨蓝、经济竹青、文化靛蓝、制度赭金、政治朱砂） */
 const TYPE_COLORS={"政治":"#9e3d26","军事":"#37474f","经济":"#4f6d3a","文化":"#3d5a80","制度":"#8a6d2c","民族关系":"#6d5a8e","对外关系":"#b4713b"};
@@ -280,24 +334,6 @@ if(keepBtn){
     keepN=KEEP_OPTS[(KEEP_OPTS.indexOf(keepN)+1)%KEEP_OPTS.length];
     keepBtn.textContent="保留 "+keepN+" 个";
     if(playing) drawMarkers();
-  });
-}
-/* ---- 全屏沉浸式：隐藏顶栏/页脚，仅地图占满（Fullscreen API） ---- */
-const fullBtn=document.getElementById("fullBtn");
-if(fullBtn){
-  fullBtn.addEventListener("click",()=>{
-    if(!document.fullscreenElement){
-      const p=document.documentElement.requestFullscreen();
-      if(p && p.catch) p.catch(()=>{});
-      document.body.classList.add("immersive");
-    }else{
-      const p=document.exitFullscreen();
-      if(p && p.catch) p.catch(()=>{});
-      document.body.classList.remove("immersive");
-    }
-  });
-  document.addEventListener("fullscreenchange",()=>{
-    if(!document.fullscreenElement) document.body.classList.remove("immersive");
   });
 }
 function pickYearFilter(){precise=false;yrAll.classList.remove("on");yrLabel.textContent=fmtYrLabel(+yrSlider.value);drawMarkers();}

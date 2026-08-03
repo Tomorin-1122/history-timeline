@@ -232,6 +232,9 @@ body.immersive #map{flex:1;height:100%;min-height:0;margin-top:6px;border-left:0
 .leaflet-bar a:hover{background:var(--paper-dim); color:var(--cin)}
 .leaflet-bar a.leaflet-disabled{color:var(--ink3); background:var(--paper-dim)}
 .leaflet-control-attribution{background:var(--paper2); color:var(--ink3); font-family:var(--serif); font-size:10px}
+/* 地图内控件（底图切换/全屏）：方形图标按钮，与缩放 +/- 同尺寸 */
+.map-ctrl a{width:30px; min-width:0; padding:0; font-size:14px; line-height:30px; text-align:center; text-decoration:none}
+.map-ctrl a:first-child{border-bottom:1px solid var(--line)}
 .leaflet-popup-content-wrapper{background:var(--paper2);color:var(--ink);border:1px solid var(--line2);border-radius:2px;font-family:var(--serif);box-shadow:0 4px 18px rgba(46,42,35,.14)}
 .leaflet-popup-content{margin:12px 16px;line-height:1.7}
 .leaflet-popup-tip{background:var(--paper2);border:1px solid var(--line2)}
