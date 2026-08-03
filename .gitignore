@@ -5,3 +5,5 @@ __pycache__/
 *.pyc
 # 维护文档（本地保留，不进版本库/部署；部署站 vercel.json 已 404 docs/）
 docs/
+# 打样 demo 资产（本地保留，不进版本库/部署）
+demo/
