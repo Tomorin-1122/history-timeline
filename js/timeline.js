@@ -177,6 +177,7 @@ function jumpTo(title){
 
 /* ---- 回到当前章节浮动按钮 ---- */
 const toBand=document.getElementById("toBand");
+const toNextBand=document.getElementById("toNextBand");
 const bands=[...document.querySelectorAll(".band")];
 let curBand=bands[0]||null;
 function trackBand(){
@@ -186,6 +187,9 @@ function trackBand(){
   bands.forEach(b=>{ if(b.getBoundingClientRect().top+window.scrollY<=mark) best=b; });
   if(best) curBand=best;
   toBand.hidden=!tlVisible||!curBand||window.scrollY<30;
+  /* ↓ 按钮：有下一章时才显示 */
+  const idx=curBand?bands.indexOf(curBand):-1;
+  toNextBand.hidden=!tlVisible||idx<0||idx>=bands.length-1||window.scrollY<30;
 }
 window.addEventListener("scroll",trackBand,{passive:true});
 window.addEventListener("resize",trackBand);
@@ -196,4 +200,13 @@ toBand.addEventListener("click",()=>{
   curBand.classList.remove("flash"); void curBand.offsetWidth;
   curBand.classList.add("flash");
   setTimeout(()=>curBand.classList.remove("flash"),1500);
+});
+toNextBand.addEventListener("click",()=>{
+  const idx=curBand?bands.indexOf(curBand):-1;
+  const next=idx>=0?bands[idx+1]:null;
+  if(!next) return;
+  next.scrollIntoView({block:"start"});
+  next.classList.remove("flash"); void next.offsetWidth;
+  next.classList.add("flash");
+  setTimeout(()=>next.classList.remove("flash"),1500);
 });

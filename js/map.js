@@ -5,7 +5,7 @@
             滑块值 = MAX_LOG - log10(距今绝对年)，晚近区间（事件密集）在滑块上占比更大 */
 'use strict';
 
-let mapObj=null, markers=null, mapInited=false;
+let mapObj=null, markers=null, plainMarkers=null, mapInited=false;
 
 /* ---- 时间轴常量 ---- */
 const HIST_YMIN=-2070, HIST_YMAX=1840;      /* 主时间轴：夏朝始 ~ 鸦片战争 */
@@ -73,24 +73,70 @@ function initMap(){
   mapObj=L.map("map",{zoomControl:true}).setView([34,110],5);
   L.tileLayer("https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
     {subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
-  markers=L.layerGroup().addTo(mapObj);
+  markers=L.markerClusterGroup({
+    maxClusterRadius:35,               /* 仅重灾组（≥10 条）进入：低 zoom 成簇 */
+    showCoverageOnHover:false,
+    spiderfyOnMaxZoom:true,            /* 最大 zoom 仍重合则蜘蛛展开 */
+    disableClusteringAtZoom:14,        /* zoom≥14 不再聚合，靠 jitter 精确散开 */
+    iconCreateFunction:function(cluster){   /* 簇色=簇内占比最高的门类色（与地点标记匹配） */
+      const count={};
+      cluster.getAllChildMarkers().forEach(m=>{
+        const t=m.options.clType||'政治';
+        count[t]=(count[t]||0)+1;
+      });
+      const top=Object.entries(count).sort((a,b)=>b[1]-a[1])[0][0];
+      const color=TYPE_COLORS[top]||"#8a6d2c";
+      const n=cluster.getChildCount();
+      return L.divIcon({
+        html:'<div style="background-color:'+color+';width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:'+(n>=100?12:14)+'px;color:#fff;border:2px solid rgba(255,255,255,.65);box-shadow:0 1px 4px rgba(0,0,0,.35)">'+n+'</div>',
+        className:'marker-cluster',
+        iconSize:L.point(38,38)
+      });
+    }
+  }).addTo(mapObj);
+  plainMarkers=L.layerGroup().addTo(mapObj);   /* 少量重合/独立事件：jitter 散开，不聚类 */
   drawMarkers();
 }
 
 /* 门类配色（古籍五色：军事墨蓝、经济竹青、文化靛蓝、制度赭金、政治朱砂） */
 const TYPE_COLORS={"政治":"#9e3d26","军事":"#37474f","经济":"#4f6d3a","文化":"#3d5a80","制度":"#8a6d2c","民族关系":"#6d5a8e","对外关系":"#b4713b"};
 
+/* ---- 共享坐标 jitter：完全重合的 marker 确定性散开 ±550m，避免互相压盖点不开 ----
+   只对"同一坐标 ≥2 条事件"的 title 偏移；同一 title 每次渲染偏移固定（哈希），刷新不跳位 */
+const COORD_KEYS={};
+Object.keys(COORDS).forEach(t=>{
+  const c=COORDS[t];
+  if(!Array.isArray(c)||c.length!==2) return;
+  const k=c[0].toFixed(4)+","+c[1].toFixed(4);
+  (COORD_KEYS[k]=COORD_KEYS[k]||[]).push(t);
+});
+const JITTER_SET=new Set();
+Object.values(COORD_KEYS).forEach(v=>{ if(v.length>1) v.forEach(t=>JITTER_SET.add(t)); });
+/* 重灾坐标组（≥10 条重合，如长安/北京/南京）才进聚类；少量重合靠 jitter 散开 */
+const HEAVY_SET=new Set();
+Object.values(COORD_KEYS).forEach(v=>{ if(v.length>=10) v.forEach(t=>HEAVY_SET.add(t)); });
+function hashStr(s){ let h=7; for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; } return h/4294967295; }
+function jitterCoord(t,lat,lng){
+  if(!JITTER_SET.has(t)) return [lat,lng];
+  const h=hashStr(t);
+  const dLat=(h*2-1)*0.0049;                       /* ±550m（纬度） */
+  const dLng=(((h*97)%1)*2-1)*0.0049/Math.max(Math.cos(lat*Math.PI/180),0.2);  /* 经度按纬度缩放 */
+  return [lat+dLat,lng+dLng];
+}
+
 /* 渲染单个 marker（alpha 透明度：keepN 播放时旧的渐透明；bold：最新事件标签加粗） */
 function addMarker(e, alpha, bold){
   const c=COORDS[e.title]; if(!c) return;
-  const g=wgs84ToGcj02(c[0],c[1]);       /* 高德瓦片需 gcj02，WGS84 源数据转一次 */
+  const [jlat,jlng]=jitterCoord(e.title,c[0],c[1]);  /* 重合坐标确定性散开 ±550m */
+  const g=wgs84ToGcj02(jlat,jlng);       /* 高德瓦片需 gcj02，WGS84 源数据转一次 */
   const col=TYPE_COLORS[e.type]||"#9e3d26";
   const isEra=e.yearMode==="era";
   const a=alpha==null?1:alpha;
   const m=L.circleMarker(g,{
     radius:(isEra?9:7)+(bold?3:0), color:col, weight:bold?3:1.5,
     fillColor:isEra?"#f5f1e6":col, fillOpacity:(isEra?.7:.78)*a, opacity:a,
-    dashArray:isEra?"3 3":null
+    dashArray:isEra?"3 3":null,
+    clType:e.type        /* 供聚类 iconCreateFunction 取门类色 */
   });
   if(yrAll.classList.contains("on")){
     m.bindTooltip(e.title);
@@ -102,12 +148,13 @@ function addMarker(e, alpha, bold){
     m.bindTooltip('<span'+stl+'>'+e.title+' '+fmtShort(e)+'</span>',{permanent:true,direction:"top",offset:[0,-7],className:"mp-label"});
   }
   m.bindPopup(popupHTML(e),{closeButton:false,offset:[0,-6]});
-  markers.addLayer(m);
+  /* 重灾组（≥10 条）进聚类；播放/步进/原始社会模式不聚类（事件少，直接显示） */
+  (HEAVY_SET.has(e.title) && !playing && !precise && mapRange!=='pre' ? markers : plainMarkers).addLayer(m);
 }
 
 function drawMarkers(){
   if(!markers) return;
-  markers.clearLayers();
+  markers.clearLayers(); plainMarkers.clearLayers();
   const allMode=yrAll.classList.contains("on"), cyr=+yrSlider.value, R=curR(), q=(state.q||"").toLowerCase();
   const pre=mapRange==='pre';
   /* 连续播放（hist）：保留 ≤当前年 的最近 keepN 个事件，越早越透明，最新置顶（事件到真实年份才出现，不提前） */

@@ -63,12 +63,14 @@ h1{font-size:20px;font-weight:900;letter-spacing:.06em}
 .chip .x{background:none;border:none;color:var(--cin);cursor:pointer;font-size:13px;line-height:1;padding:0 2px;font-family:var(--serif)}
 .chip .x:hover{color:var(--ink)}
 .to-band{
-  position:fixed; right:26px; bottom:26px; z-index:70;
+  position:fixed; right:26px; z-index:70;
   width:42px; height:42px; border-radius:50%;
   background:var(--paper2); border:1px solid var(--line2); color:var(--cin);
   font-size:20px; line-height:1; cursor:pointer; font-family:var(--serif);
   box-shadow:0 3px 12px rgba(46,42,35,.16);
 }
+#toBand{bottom:78px}
+#toNextBand{bottom:26px}
 .to-band:hover{background:var(--cin);color:var(--paper2);border-color:var(--cin)}
 .group{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .glabel{color:var(--ink3);letter-spacing:.2em;margin-right:4px;font-size:12.5px}

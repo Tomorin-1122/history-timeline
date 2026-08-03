@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/900.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -130,13 +132,9 @@
     </div>
   </div>
   <footer>
-    数据据朱绍侯《中国古代史》按章提取，试点覆盖 原始社会 / 战国 / 元代 三章凡 116 事，全 15 章推进中；年份与等第按教材口径。<br>
-    时间轴左列四种记号：实心方 = 精确年，虚线方 = 约年，长条 = 起止区间，圆圈 = 时代段。<br>
-    地图标记按门类分色：
-    <span class="fg">
-      <span class="fg-i" data-c="政治">政治</span><span class="fg-i" data-c="军事">军事</span><span class="fg-i" data-c="经济">经济</span><span class="fg-i" data-c="文化">文化</span><span class="fg-i" data-c="制度">制度</span><span class="fg-i" data-c="民族关系">民族关系</span><span class="fg-i" data-c="对外关系">对外关系</span>
-    </span>
-    ；空心圈 = 时代段，实心点 = 可考年份，坐标为打样值（正式坐标随数据推进补齐）。
+    据朱绍侯《中国古代史》按章提取 · 全 15 章 · 851 事 · 年份与等第按教材口径<br>
+    记号 ▣ 精确 · ▢ 约年 · ▬ 区间 · ◯ 时代段 · 地图标记按门类分色<br>
+    历史是时间的游戏，简洁是智慧的灵魂。
   </footer>
 </div>
 <aside class="drawer" id="drawer" aria-hidden="true">
@@ -160,6 +158,7 @@
 </aside>
 <div class="overlay" id="overlay" hidden></div>
 <button class="to-band" id="toBand" title="回到当前章节标题" hidden>↑</button>
+<button class="to-band" id="toNextBand" title="跳到下一章标题" hidden>↓</button>
 
 <!-- 编辑事件 modal（本地服务 http:// 下可用） -->
 <div class="modal" id="editModal" hidden>
@@ -198,6 +197,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
 <script src="js/timeline.js"></script>
