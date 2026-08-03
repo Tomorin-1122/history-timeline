@@ -200,6 +200,10 @@ h3{font-size:17.5px; font-weight:700}
 .rv-done-stat{margin:14px 0 26px;font-size:14px;color:var(--ink2);line-height:1.8}
 .mapview{padding-top:20px}
 .maptool{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 14px;border:1px solid var(--line);background:var(--paper2);font-size:13px}
+/* 工具栏分组（桌面平铺；移动端每组独立成行） */
+.mt-g{display:inline-flex;align-items:center;gap:10px}
+.mt-g-slider{flex:1;min-width:0}
+.mt-g-slider input[type=range]{flex:1}
 .maptool input[type=range]{flex:1;min-width:160px;accent-color:var(--cin)}
 .maptool .yrlabel{font-variant-numeric:tabular-nums;min-width:96px;color:var(--cin);font-size:14px;letter-spacing:.04em}
 .mapwrap{position:relative}
@@ -249,14 +253,24 @@ footer{margin-top:70px; font-size:12.5px; color:var(--ink3); line-height:1.8; bo
   .wrap{padding:0 18px 80px}
   .tb-inner{padding:0 18px}
   h1{font-size:18px}
-  /* B4：移动端章节带 note 过长（"距今约一百七十万年 至 前2070年"）允许换行不溢出 */
-  .band{flex-wrap:wrap; row-gap:4px}
-  .band .note{flex:1 1 auto; min-width:0; white-space:normal; line-height:1.5}
-  .row{grid-template-columns:1fr}
-  .year{text-align:left; padding:14px 0 0; border-bottom:none}
-  .year .era{display:inline; margin-left:8px}
-  .body{border-left:none; padding:2px 0 18px}
+  /* B4+：章节带 h2 与 note 同排（note 可收缩换行不溢出） */
+  .band{flex-wrap:nowrap; row-gap:0}
+  .band h2{font-size:18px}
+  .band .note{flex:1 1 auto; min-width:0; white-space:normal; line-height:1.5; font-size:11.5px}
+  /* 移动端事件行：年份并入标题首行（需求文档 §4.6："前 221 · 秦灭六国 ★★★"） */
+  .row{display:flex; flex-wrap:wrap; align-items:baseline}
+  .year{flex:0 0 auto; text-align:left; padding:14px 0 0; margin-right:10px; border-bottom:none; font-size:13px; color:var(--cin)}
+  .year .era{display:inline; margin-left:0; font-size:12px}
+  .body{flex:1 1 0; min-width:0; border-left:none; padding:2px 0 18px}
   .body::before{display:none}
+  /* 地图工具栏紧凑：模式/操作组内容自适应，滑块组独占一行 */
+  .maptool{gap:6px; padding:6px 10px}
+  .mt-g{gap:6px; flex-wrap:nowrap}
+  .mt-g-mode,.mt-g-ops{flex:0 0 auto}
+  .mt-g-slider{flex:1 1 100%}
+  .maptool button.f,.maptool .yrlabel{font-size:12px; padding:1px 6px}
+  .maptool input[type=range]{min-width:80px}
+  .maptool .yrlabel{min-width:0; font-size:12px}
   :root{--map-h-offset:262px}
   #map{height:calc(100dvh - var(--map-h-offset));min-height:340px}
   .to-band{right:16px;bottom:16px;width:38px;height:38px;font-size:17px}

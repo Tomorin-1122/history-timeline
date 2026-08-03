@@ -51,16 +51,22 @@
   </div>
   <div class="view mapview" id="view-map" hidden>
     <div class="maptool">
-      <button class="f range-btn" data-range="pre" id="rangePre" title="原始社会：史前（距今约800万年前）~ 夏朝前，非等距刻度">原始社会</button>
-      <button class="f range-btn on" data-range="hist" id="rangeHist" title="主时间轴：夏朝（前2070）~ 鸦片战争（1840）">历史时期</button>
-      <span class="yrlabel" id="yrLabel">全部年份</span>
-      <button class="f" id="stepPrev" title="上一个事件（精准定位）">◀</button>
-      <input type="range" id="yrSlider" step="1" aria-label="年代">
-      <button class="f" id="stepNext" title="下一个事件（精准定位）">▶</button>
-      <button class="f on" id="yrAll">全部</button>
-      <button class="f" id="playBtn">▶ 播放</button>
-      <button class="f" id="speedBtn" title="播放速度，点击循环 1×/2×/4×/8×/0.5×/0.1×">1×</button>
-      <button class="f" id="keepN" title="连续播放时屏幕保留最近事件数，点击循环 10/5/3/2/1">保留 10 个</button>
+      <span class="mt-g mt-g-mode">
+        <button class="f range-btn" data-range="pre" id="rangePre" title="原始社会：史前（距今约800万年前）~ 夏朝前，非等距刻度">原始社会</button>
+        <button class="f range-btn on" data-range="hist" id="rangeHist" title="主时间轴：夏朝（前2070）~ 鸦片战争（1840）">历史时期</button>
+      </span>
+      <span class="mt-g mt-g-slider">
+        <span class="yrlabel" id="yrLabel">全部年份</span>
+        <button class="f" id="stepPrev" title="上一个事件（精准定位）">◀</button>
+        <input type="range" id="yrSlider" step="1" aria-label="年代">
+        <button class="f" id="stepNext" title="下一个事件（精准定位）">▶</button>
+      </span>
+      <span class="mt-g mt-g-ops">
+        <button class="f on" id="yrAll">全部</button>
+        <button class="f" id="playBtn">▶ 播放</button>
+        <button class="f" id="speedBtn" title="播放速度，点击循环 1×/2×/4×/8×/0.5×/0.1×">1×</button>
+        <button class="f" id="keepN" title="连续播放时屏幕保留最近事件数，点击循环 10/5/3/2/1">保留 10 个</button>
+      </span>
     </div>
     <div class="mapwrap">
       <div id="map"></div>
