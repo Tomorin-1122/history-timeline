@@ -295,7 +295,9 @@ function drawMarkers(){
 
 function popupHTML(e){
   const yr=e.yearMode==="era"?(e.era?(e.era+" · "+e.eraSub):(e.dynasty||e.period||"时代")):fmt(e);
-  return '<div class="mp-t">'+e.title+'</div><div class="mp-y">'+yr+' · '+e.type+'</div><div class="mp-s">'+e.summary+'</div>';
+  /* XSS 加固：title/type/summary 数据字段转义后插入（防恶意事件名注入 HTML） */
+  const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  return '<div class="mp-t">'+esc(e.title)+'</div><div class="mp-y">'+esc(yr)+' · '+esc(e.type)+'</div><div class="mp-s">'+esc(e.summary)+'</div>';
 }
 
 function fmtYear(v){return v<0?("前 "+(-v)+" 年"):(v+" 年");}

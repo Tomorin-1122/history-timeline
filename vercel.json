@@ -1,10 +1,18 @@
 {
   "framework": null,
+  "routes": [
+    { "src": "/(server\\.js|启动\\.bat|package\\.json|package-lock\\.json)", "dest": "/404" },
+    { "src": "/(data|scripts|docs|tests|demo)(/.*)?", "dest": "/404" },
+    { "src": "/(.*)\\.md$", "dest": "/404" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache" }
+        { "key": "Cache-Control", "value": "no-cache" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://t0.tianditu.gov.cn https://t1.tianditu.gov.cn https://t2.tianditu.gov.cn https://t3.tianditu.gov.cn https://t4.tianditu.gov.cn https://t5.tianditu.gov.cn https://t6.tianditu.gov.cn https://t7.tianditu.gov.cn https://webrd01.is.autonavi.com https://webrd02.is.autonavi.com https://webrd03.is.autonavi.com https://webrd04.is.autonavi.com; font-src 'self' https://cdn.jsdelivr.net https://fastly.jsdelivr.net; connect-src 'self'" }
       ]
     }
   ]

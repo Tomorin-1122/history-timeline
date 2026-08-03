@@ -26,14 +26,23 @@ CHAPTERS.forEach((c,ci)=>{
     row.className="row "+e.yearMode; row.dataset.idx=idx; row.dataset.type=e.type; row.dataset.imp=e.importance;
     const yr=document.createElement("div"); yr.className="year";
     if(e.yearMode==="era"){
-      yr.innerHTML=e.era
-        ? '<span class="era">'+e.era+(e.eraSub?'<br>'+e.eraSub:'')+'</span>'
-        : '<span class="era">'+(e.dynasty||e.period||'时代')+'</span>';  /* Q4 回填前暂显朝代 */
+      const span=document.createElement("span"); span.className="era";
+      if(e.era){
+        span.textContent=e.era;
+        if(e.eraSub){ span.appendChild(document.createElement("br")); span.appendChild(document.createTextNode(e.eraSub)); }
+      }else span.textContent=e.dynasty||e.period||'时代';  /* Q4 回填前暂显朝代 */
+      yr.appendChild(span);
     }else{
       yr.textContent=fmtShort(e);
     }
     const body=document.createElement("div"); body.className="body";
-    body.innerHTML='<div class="title-row"><span class="stars">'+stars(e.importance)+'</span><h3>'+e.title+'</h3><span class="tag">'+e.type+'</span></div><div class="summary">'+e.summary+'</div>';
+    /* 数据字段一律 textContent（XSS 加固）：stars 为受控 HTML，title/type/summary 走文本节点 */
+    const tr=document.createElement("div"); tr.className="title-row";
+    tr.innerHTML='<span class="stars">'+stars(e.importance)+'</span>';
+    const h=document.createElement("h3"); h.textContent=e.title; tr.appendChild(h);
+    const tag=document.createElement("span"); tag.className="tag"; tag.textContent=e.type; tr.appendChild(tag);
+    const sum=document.createElement("div"); sum.className="summary"; sum.textContent=e.summary;
+    body.appendChild(tr); body.appendChild(sum);
     body.addEventListener("click",()=>openDrawer(idx));
     yr.addEventListener("click",()=>openDrawer(idx));
     row.appendChild(yr); row.appendChild(body);
@@ -136,8 +145,10 @@ function openDrawer(idx){
     ? (e.era? (e.era+(e.eraSub?" · "+e.eraSub:"")) : (e.dynasty||e.period||"时代"))
     : fmt(e);
   document.getElementById("dTitle").textContent=e.title;
-  document.getElementById("dMeta").innerHTML=
-    '<span class="tag">'+e.dynasty+'</span><span class="tag">'+e.period+'</span><span class="tag">'+e.type+'</span><span class="stars">'+stars(e.importance)+'</span>';
+  document.getElementById("dMeta").innerHTML='<span class="tag"></span><span class="tag"></span><span class="tag"></span><span class="stars">'+stars(e.importance)+'</span>';
+  /* XSS 加固：dynasty/period/type 数据字段走 textContent */
+  const dMetaTags=document.getElementById("dMeta").querySelectorAll("span.tag");
+  dMetaTags[0].textContent=e.dynasty; dMetaTags[1].textContent=e.period; dMetaTags[2].textContent=e.type;
   document.getElementById("dSum").textContent=e.summary;
   toggle("secCau",e.cause,"dCau"); toggle("secEff",e.effect,"dEff");
   document.getElementById("dTip").textContent=e.examTip;

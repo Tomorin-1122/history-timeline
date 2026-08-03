@@ -120,7 +120,8 @@ function showCard(){
   }
   s.cur=s.queue[0];
   document.getElementById("rvTitle").textContent=s.cur.e.title;
-  document.getElementById("rvFrontTags").innerHTML='<span class="tag">'+s.cur.e.type+'</span><span class="stars">'+stars(s.cur.e.importance)+'</span>';
+  document.getElementById("rvFrontTags").innerHTML='<span class="tag"></span><span class="stars">'+stars(s.cur.e.importance)+'</span>';
+  document.getElementById("rvFrontTags").querySelector(".tag").textContent=s.cur.e.type;  /* XSS 加固 */
   /* V3：背面年份展示——公元后 exact/approx 补"年"单位（"69"→"69 年"），避免裸数字像页码 */
   document.getElementById("rvYear").textContent=rvYearFmt(s.cur.e);
   document.getElementById("rvSum").textContent=s.cur.e.summary||"";
