@@ -1,8 +1,8 @@
 [
   {
     "title": "腊玛古猿化石",
-    "year": -8000000,
-    "yearMode": "approx",
+    "year": null,
+    "yearMode": "era",
     "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
@@ -21,12 +21,14 @@
     "related": [
       "元谋人"
     ],
-    "wikiSlug": "腊玛古猿化石"
+    "wikiSlug": "腊玛古猿化石",
+    "era": "腊玛古猿阶段",
+    "eraSub": "距今约800万年以上"
   },
   {
     "title": "元谋人",
-    "year": -1700000,
-    "yearMode": "approx",
+    "year": null,
+    "yearMode": "era",
     "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
@@ -46,12 +48,14 @@
       "蓝田人",
       "北京人"
     ],
-    "wikiSlug": "元谋人"
+    "wikiSlug": "元谋人",
+    "era": "旧石器时代早期",
+    "eraSub": "距今约170万年"
   },
   {
     "title": "西侯度遗址",
-    "year": -1800000,
-    "yearMode": "approx",
+    "year": null,
+    "yearMode": "era",
     "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
@@ -70,16 +74,15 @@
     "related": [
       "元谋人"
     ],
-    "wikiSlug": "西侯度遗址"
+    "wikiSlug": "西侯度遗址",
+    "era": "旧石器时代早期",
+    "eraSub": "距今约180万年"
   },
   {
     "title": "蓝田人",
-    "year": -800000,
-    "yearMode": "range",
-    "yearRange": [
-      -800000,
-      -650000
-    ],
+    "year": null,
+    "yearMode": "era",
+    "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
     "type": "文化",
@@ -98,7 +101,9 @@
       "元谋人",
       "北京人"
     ],
-    "wikiSlug": "蓝田人"
+    "wikiSlug": "蓝田人",
+    "era": "旧石器时代早期",
+    "eraSub": "距今约80万~65万年"
   },
   {
     "title": "和县人",
@@ -122,16 +127,15 @@
     "related": [
       "北京人"
     ],
-    "wikiSlug": "和县人"
+    "wikiSlug": "和县人",
+    "era": "旧石器时代早期",
+    "eraSub": ""
   },
   {
     "title": "北京人",
-    "year": -690000,
-    "yearMode": "range",
-    "yearRange": [
-      -690000,
-      -290000
-    ],
+    "year": null,
+    "yearMode": "era",
+    "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
     "type": "文化",
@@ -152,12 +156,14 @@
       "蓝田人",
       "山顶洞人"
     ],
-    "wikiSlug": "北京人"
+    "wikiSlug": "北京人",
+    "era": "旧石器时代早期",
+    "eraSub": "距今约69万年前后"
   },
   {
     "title": "大荔人",
-    "year": -200000,
-    "yearMode": "approx",
+    "year": null,
+    "yearMode": "era",
     "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
@@ -177,12 +183,14 @@
       "许家窑人",
       "丁村人"
     ],
-    "wikiSlug": "大荔人"
+    "wikiSlug": "大荔人",
+    "era": "旧石器时代中期",
+    "eraSub": "距今约20万年"
   },
   {
     "title": "许家窑人",
-    "year": -100000,
-    "yearMode": "approx",
+    "year": null,
+    "yearMode": "era",
     "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
@@ -202,12 +210,14 @@
       "大荔人",
       "丁村人"
     ],
-    "wikiSlug": "许家窑人"
+    "wikiSlug": "许家窑人",
+    "era": "旧石器时代中期",
+    "eraSub": "距今约10万年"
   },
   {
     "title": "丁村人",
-    "year": -100000,
-    "yearMode": "approx",
+    "year": null,
+    "yearMode": "era",
     "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
@@ -227,16 +237,15 @@
       "大荔人",
       "许家窑人"
     ],
-    "wikiSlug": "丁村人"
+    "wikiSlug": "丁村人",
+    "era": "旧石器时代中期",
+    "eraSub": "距今约10万年"
   },
   {
     "title": "山顶洞人",
-    "year": -30000,
-    "yearMode": "range",
-    "yearRange": [
-      -30000,
-      -10000
-    ],
+    "year": null,
+    "yearMode": "era",
+    "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
     "type": "文化",
@@ -256,12 +265,14 @@
       "北京人",
       "峙峪人"
     ],
-    "wikiSlug": "山顶洞人"
+    "wikiSlug": "山顶洞人",
+    "era": "旧石器时代晚期",
+    "eraSub": "距今约1.8万年"
   },
   {
     "title": "峙峪人",
-    "year": -28000,
-    "yearMode": "approx",
+    "year": null,
+    "yearMode": "era",
     "yearRange": null,
     "dynasty": "原始社会",
     "period": "先秦",
@@ -280,7 +291,9 @@
     "related": [
       "山顶洞人"
     ],
-    "wikiSlug": "峙峪人"
+    "wikiSlug": "峙峪人",
+    "era": "旧石器时代晚期",
+    "eraSub": "距今约2.8万年"
   },
   {
     "title": "仰韶文化",
@@ -774,7 +787,9 @@
     "related": [
       "龙山文化"
     ],
-    "wikiSlug": "细石器文化"
+    "wikiSlug": "细石器文化",
+    "era": "中石器至新石器时代",
+    "eraSub": ""
   },
   {
     "title": "炎帝神农氏",
@@ -802,7 +817,9 @@
       "黄帝",
       "涿鹿之战"
     ],
-    "wikiSlug": "炎帝神农氏"
+    "wikiSlug": "炎帝神农氏",
+    "era": "传说时代",
+    "eraSub": "距今约5000年前"
   },
   {
     "title": "黄帝",
@@ -830,7 +847,9 @@
       "炎帝神农氏",
       "涿鹿之战"
     ],
-    "wikiSlug": "黄帝"
+    "wikiSlug": "黄帝",
+    "era": "传说时代（军事民主制时期）",
+    "eraSub": "距今约5000年前"
   },
   {
     "title": "涿鹿之战",
@@ -859,7 +878,9 @@
       "黄帝",
       "炎帝神农氏"
     ],
-    "wikiSlug": "涿鹿之战"
+    "wikiSlug": "涿鹿之战",
+    "era": "传说时代",
+    "eraSub": "距今约5000年前"
   },
   {
     "title": "尧",
@@ -887,7 +908,9 @@
       "禅让制",
       "舜"
     ],
-    "wikiSlug": "尧"
+    "wikiSlug": "尧",
+    "era": "传说时代（部落联盟时期）",
+    "eraSub": "距今约4000多年前"
   },
   {
     "title": "舜",
@@ -916,7 +939,9 @@
       "大禹治水",
       "禅让制"
     ],
-    "wikiSlug": "舜"
+    "wikiSlug": "舜",
+    "era": "传说时代（部落联盟时期）",
+    "eraSub": "距今约4000多年前"
   },
   {
     "title": "大禹治水",
@@ -944,7 +969,9 @@
       "舜",
       "启世袭王权"
     ],
-    "wikiSlug": "大禹治水"
+    "wikiSlug": "大禹治水",
+    "era": "传说时代末期",
+    "eraSub": "距今约4000年前"
   },
   {
     "title": "禅让制",
@@ -976,7 +1003,9 @@
       "大禹治水",
       "启世袭王权"
     ],
-    "wikiSlug": "禅让制"
+    "wikiSlug": "禅让制",
+    "era": "原始社会后期",
+    "eraSub": "距今约4000多年前"
   },
   {
     "title": "启世袭王权",
@@ -1031,7 +1060,9 @@
       "仰韶文化",
       "河姆渡文化"
     ],
-    "wikiSlug": "农业革命"
+    "wikiSlug": "农业革命",
+    "era": "新石器时代",
+    "eraSub": "距今约1万年前后"
   },
   {
     "title": "私有制与阶级萌芽",
@@ -1058,7 +1089,9 @@
       "龙山文化",
       "良渚文化"
     ],
-    "wikiSlug": "私有制与阶级萌芽"
+    "wikiSlug": "私有制与阶级萌芽",
+    "era": "父系氏族社会",
+    "eraSub": "距今约5000年前后"
   },
   {
     "title": "史前城址出现",
@@ -1084,7 +1117,9 @@
       "龙山文化",
       "良渚文化"
     ],
-    "wikiSlug": "史前城址出现"
+    "wikiSlug": "史前城址出现",
+    "era": "父系氏族社会（龙山文化时期）",
+    "eraSub": "距今约5000~4000年前"
   },
   {
     "title": "铜器冶炼出现",
@@ -1110,6 +1145,8 @@
       "齐家文化",
       "龙山文化"
     ],
-    "wikiSlug": "铜器冶炼出现"
+    "wikiSlug": "铜器冶炼出现",
+    "era": "父系氏族社会（龙山文化时期）",
+    "eraSub": "距今约4000年前后"
   }
 ]
