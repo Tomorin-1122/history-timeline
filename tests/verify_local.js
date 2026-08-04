@@ -9,7 +9,14 @@ const { chromium } = require('playwright');
   page.on('pageerror', e => errors.push('PAGEERROR: ' + e.message));
 
   await page.goto('http://localhost:3099', { waitUntil: 'commit', timeout: 15000 });
-  // CDN 字体/Leaflet 可能慢：手动等核心脚本就绪
+  // CDN 字体/Leaflet 可能慢：手动等核心脚本就绪。CDN 挂起会阻塞页面解析（leaflet 阻塞→data.js 不执行）
+  const ready = await page.waitForFunction(() => typeof EVENTS !== 'undefined' && EVENTS.length > 0, { timeout: 25000 }).then(() => true).catch(() => false);
+  if (!ready) {
+    console.log('⚠️ EVENTS 未就绪：jsdelivr CDN 挂起阻塞了页面解析（本机 curl 正常但浏览器不可达）。');
+    console.log('   地图回归需 CDN 可达（Leaflet/字体），请网络恢复后重跑；顶栏/史段/筛选回归用 verify_topbar.js（已隔离 CDN）。');
+    await browser.close();
+    process.exit(0);
+  }
   await page.waitForFunction(() => typeof EVENTS !== 'undefined' && EVENTS.length > 0, { timeout: 20000 }).catch(() => {});
   await page.waitForTimeout(2500);
 

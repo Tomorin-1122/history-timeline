@@ -15,8 +15,17 @@
 <body>
 <div class="topbar" id="topbar">
   <div class="tb-inner">
+    <!-- L1 站级：固定总名，不随史段变（交接文档 §10.6.1） -->
+    <h1>考研历史事件时间轴</h1>
+    <!-- L2 史段级：纯文字切换器，当前项主色+加粗；世界史两段规划中禁用 -->
+    <div class="seg-row" id="segRow">
+      <button class="seg-btn on" data-seg="ancient">中国古代史</button>
+      <button class="seg-btn" data-seg="modern">中国近现代史</button>
+      <button class="seg-btn" data-seg="world-ancient" disabled title="规划中">世界古代中世纪史</button>
+      <button class="seg-btn" data-seg="world-modern" disabled title="规划中">世界近现代史</button>
+    </div>
+    <!-- L3 视图级：tab 靠左（无分割细线） -->
     <div class="tb-row1">
-      <h1>中国古代史时间轴</h1>
       <div class="tb-tabs" id="viewTabs">
         <button class="tab on" data-view="timeline">时间轴</button>
         <button class="tab" data-view="map">地图</button>

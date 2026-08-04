@@ -5,7 +5,29 @@
   --line:#ddd3bf; --line2:#c9bda2;
   --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
   /* S5：地图高度 = 100dvh - 上方占位（顶栏/工具栏合计）；顶栏换行变高时调此变量，勿写死 magic number */
-  --map-h-offset:226px;
+  --map-h-offset:272px;
+}
+/* ---- 史段主题（交接文档 §10.6.1，demo: modern_demo.html）---- */
+/* 近现代史：冷青蓝底 + 藏蓝主色（民国蓝调），与古籍暖黄形成冷暖区分 */
+body.seg-modern{
+  --paper:#e9edf2; --paper2:#f2f5f8; --paper-dim:#dde3ea;
+  --ink:#242a33; --ink2:#4a5563; --ink3:#77818f;
+  --cin:#1f5c8b; --cin-soft:#e2ebf3;
+  --line:#c6cfda; --line2:#aebac8;
+}
+/* 世界古代中世纪史：羊皮纸暖棕底 + 赭石主色（古卷调，区别于宣纸米黄）——预留 */
+body.seg-world-ancient{
+  --paper:#f3ead9; --paper2:#f8f2e6; --paper-dim:#eadfc8;
+  --ink:#33291f; --ink2:#5f5040; --ink3:#8d7c66;
+  --cin:#96613a; --cin-soft:#f3e6d8;
+  --line:#dccdb4; --line2:#c9b592;
+}
+/* 世界近现代史：钢蓝灰底 + 钢蓝主色（工业冷调，区别于中国青蓝）——预留 */
+body.seg-world-modern{
+  --paper:#e2e8ee; --paper2:#eef2f6; --paper-dim:#d5dde6;
+  --ink:#232a33; --ink2:#455263; --ink3:#738094;
+  --cin:#4a6b8a; --cin-soft:#e0e8f0;
+  --line:#c4cdd8; --line2:#aeb9c6;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 /* V4：键盘焦点可见（Tab 导航不迷路；鼠标点击不出现额外描边） */
@@ -13,6 +35,7 @@
 body{
   background:var(--paper); color:var(--ink);
   font-family:var(--serif); font-size:16px; line-height:1.9;
+  transition:background .4s; /* 史段切换底色渐变（demo） */
 }
 body::after{
   content:""; position:fixed; inset:0; z-index:80; pointer-events:none;
@@ -33,10 +56,21 @@ body::after{
   background:var(--paper); border-bottom:1px solid var(--line);
   box-shadow:0 2px 14px rgba(46,42,35,.06);
 }
-.tb-inner{max-width:940px;margin:0 auto;padding:0 28px}
-.tb-row1{display:flex;align-items:center;gap:16px;padding:10px 0 6px;flex-wrap:wrap}
-h1{font-size:20px;font-weight:900;letter-spacing:.06em}
-.tb-tabs{display:flex;gap:2px;margin-left:auto}
+.tb-inner{max-width:940px;margin:0 auto;padding:12px 28px 0}
+/* L1 站级总名：固定不随史段变，大字号与内容层级拉开 */
+h1{font-size:26px;font-weight:900;letter-spacing:.12em;padding:4px 0 10px}
+/* L2 史段切换器：纯文字，当前项主色加粗，无下划线无边框；世界史段禁用半透明 */
+.seg-row{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;padding:2px 0 10px}
+.seg-btn{
+  font-family:var(--serif);font-size:15px;letter-spacing:.05em;cursor:pointer;background:none;
+  border:none;color:var(--ink3);padding:2px 0;transition:color .2s;
+}
+.seg-btn:hover{color:var(--ink2)}
+.seg-btn.on{color:var(--cin);font-weight:700}
+.seg-btn:disabled{opacity:.35;cursor:not-allowed}
+.seg-btn:disabled:hover{color:var(--ink3)}
+.tb-row1{display:flex;align-items:center;gap:16px;padding:2px 0 0;flex-wrap:wrap}
+.tb-tabs{display:flex;gap:2px}
 .tb-tabs .tab{
   font-family:var(--serif); font-size:14px; letter-spacing:.12em; cursor:pointer;
   background:none; border:none; border-bottom:2px solid transparent;
@@ -47,6 +81,7 @@ h1{font-size:20px;font-weight:900;letter-spacing:.06em}
 .bar{
   border-top:1px solid var(--line);
   padding:8px 0 10px; display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; font-size:13.5px;
+  position:relative;  /* filters 浮层定位参照（需求文档 §4.6 抽屉式：展开不撑高顶栏） */
 }
 .search{
   font-family:var(--serif); font-size:13px; flex:1; min-width:180px;
@@ -55,8 +90,12 @@ h1{font-size:20px;font-weight:900;letter-spacing:.06em}
 }
 .search:focus{border-color:var(--cin)}
 .filters{
-  flex-basis:100%; display:flex; flex-direction:column; gap:8px;
-  padding:8px 0 2px; border-top:1px dashed var(--line); margin-top:2px;
+  /* 抽屉式浮层：absolute 定位于筛选栏下方，展开不撑高顶栏、不遮挡下面内容（老板要求，2026-08-04） */
+  position:absolute; top:100%; left:0; right:0; z-index:55;
+  display:flex; flex-direction:column; gap:8px;
+  padding:10px 14px; margin:0;
+  background:var(--paper2); border:1px solid var(--line); border-top:none;
+  box-shadow:0 10px 24px rgba(46,42,35,.14);
 }
 .filters[hidden]{display:none}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -87,7 +126,7 @@ button.f.on{background:var(--cin); color:var(--paper2); border-color:var(--cin)}
 a.jump{color:var(--ink2); text-decoration:none; border-bottom:1px solid var(--line2); padding-bottom:1px}
 a.jump:hover{color:var(--cin); border-color:var(--cin)}
 .bar .cnt{margin-left:auto; color:var(--ink3); font-size:12.5px}
-.band{margin:46px 0 2px; display:flex; align-items:center; gap:14px; scroll-margin-top:112px}
+.band{margin:46px 0 2px; display:flex; align-items:center; gap:14px; scroll-margin-top:210px}  /* 顶栏重构后约 195px 高，留 15px 余量 */
 .band .sq{width:9px; height:9px; background:var(--cin); flex:none}
 .band .no{font-size:12px; letter-spacing:.3em; color:var(--cin); flex:none}
 .band h2{font-size:21px; font-weight:900; letter-spacing:.08em; flex:none}
@@ -252,7 +291,9 @@ footer{margin-top:70px; font-size:12.5px; color:var(--ink3); line-height:1.8; bo
 @media (max-width:760px){
   .wrap{padding:0 18px 80px}
   .tb-inner{padding:0 18px}
-  h1{font-size:18px}
+  h1{font-size:17px}
+  .seg-row{gap:14px}
+  .seg-btn{font-size:13px}
   /* B4+：章节带 h2 与 note 同排（note 可收缩换行不溢出） */
   .band{flex-wrap:nowrap; row-gap:0}
   .band h2{font-size:18px}
@@ -271,7 +312,7 @@ footer{margin-top:70px; font-size:12.5px; color:var(--ink3); line-height:1.8; bo
   .maptool button.f,.maptool .yrlabel{font-size:12px; padding:1px 6px}
   .maptool input[type=range]{min-width:80px}
   .maptool .yrlabel{min-width:0; font-size:12px}
-  :root{--map-h-offset:262px}
+  :root{--map-h-offset:308px}
   #map{height:calc(100dvh - var(--map-h-offset));min-height:340px}
   .to-band{right:16px;bottom:16px;width:38px;height:38px;font-size:17px}
   .rv-face{padding:26px 20px}

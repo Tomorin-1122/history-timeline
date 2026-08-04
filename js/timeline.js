@@ -4,6 +4,18 @@
 const TYPES=["全部","政治","军事","经济","文化","制度","民族关系","对外关系"];
 const IMPS=[["全部",0],["★★★",3],["★★",2],["★",1]];
 const state={type:"全部",imp:0,q:"",ch:-1};
+/* ---- 史段（交接文档 §10.6.2）---- */
+let curSeg="ancient";  /* 'ancient' | 'modern' | 'world-ancient'(禁用) | 'world-modern'(禁用) */
+function segName(seg){return seg==="modern"?"中国近现代史":(seg==="world-ancient"?"世界古代中世纪史":(seg==="world-modern"?"世界近现代史":"中国古代史"));}
+function segPending(seg){
+  if(seg==="modern") return "近代史数据已提取（第01-07章 297 条），清洗接入数据管道后上线。";
+  return "内容规划中，敬请期待。";
+}
+/* ---- 章节带引用（↑↓ 浮动按钮用）：renderTimeline() 重渲染后由 refreshBands() 刷新（史段切换销毁旧 DOM）---- */
+const toBand=document.getElementById("toBand");
+const toNextBand=document.getElementById("toNextBand");
+let bands=[];
+let curBand=null;
 
 /* ---- 渲染：全 15 章章节带 + 事件行（空章占位） ---- */
 /* era 事件排序键：有 year 用 year；eraSub"距今约X万年"解析为负年（800万年→-8000000）参与排序；
@@ -15,7 +27,24 @@ function eraSortKey(e){
 }
 
 const main=document.getElementById("main");
-CHAPTERS.forEach((c,ci)=>{
+function renderTimeline(){
+  main.innerHTML="";
+  if(curSeg!=="ancient"){  /* 近代史/世界史数据未接入：占位提示（顶栏已预留，数据接入后替换此分支） */
+    const ph=document.createElement("div");
+    ph.className="band";
+    ph.innerHTML='<span class="sq"></span><span class="no">--</span><h2>'+segName(curSeg)+'</h2><span class="note">数据接入中</span><span class="rule"></span>';
+    main.appendChild(ph);
+    const row=document.createElement("div");
+    row.className="row";
+    const bd=document.createElement("div"); bd.className="body";
+    const sum=document.createElement("div"); sum.className="summary"; sum.style.color="var(--ink3)"; sum.textContent=segPending(curSeg);
+    bd.appendChild(sum);
+    row.appendChild(document.createElement("div")); row.appendChild(bd);
+    main.appendChild(row);
+    refreshBands();  /* 刷新 ↑↓ 的 bands 引用与显示状态 */
+    return;
+  }
+  CHAPTERS.forEach((c,ci)=>{
   const band=document.createElement("div");
   band.className="band"; band.id=c.id;
   band.innerHTML='<span class="sq"></span><span class="no">'+c.no+'</span><h2>'+c.name+'</h2><span class="note">'+c.note+'</span><span class="rule"></span>';
@@ -55,13 +84,23 @@ CHAPTERS.forEach((c,ci)=>{
     yr.addEventListener("click",()=>openDrawer(idx));
     row.appendChild(yr); row.appendChild(body);
     main.appendChild(row);
+    });
   });
-});
+  refreshBands();  /* 刷新 ↑↓ 的 bands 引用与显示状态（史段切换/重渲染后旧 DOM 已销毁） */
+}
+renderTimeline();
 
-/* ---- 分期筛选链接（按 CHAPTERS 动态生成；地图界面点按章过滤） ---- */
-(function(){
+/* ---- 分期筛选链接（按 CHAPTERS 动态生成；地图界面点按章过滤；史段切换重建） ---- */
+function renderPerLinks(){
   const perGroup=document.getElementById("perGroup");
   if(!perGroup) return;
+  perGroup.innerHTML="";
+  if(curSeg!=="ancient"){  /* 非古代史：分期占位（数据接入后按史段渲染 period 链接） */
+    const span=document.createElement("span");
+    span.className="glabel"; span.textContent=curSeg==="modern"?"近代史分期（11 段）待接入":"分期待定";
+    perGroup.appendChild(span);
+    return;
+  }
   const all=document.createElement("a");
   all.className="jump on"; all.href="#"; all.textContent="全部"; all.dataset.ch="-1";
   perGroup.appendChild(all);
@@ -70,7 +109,8 @@ CHAPTERS.forEach((c,ci)=>{
     a.className="jump"; a.href="#"+c.id; a.textContent=c.name; a.dataset.ch=i;
     perGroup.appendChild(a);
   });
-})();
+}
+renderPerLinks();
 
 /* ---- 顶框筛选按钮（门类/等第） ---- */
 function mkBtns(groupId,items,key,render){
@@ -124,6 +164,11 @@ qInput.addEventListener("input",()=>{state.q=qInput.value.trim();renderChips();a
 
 /* ---- 筛选应用（时间轴行 + 地图 marker 联动） ---- */
 function applyFilter(){
+  if(curSeg!=="ancient"){  /* 非古代史：数据未接入，计数占位 */
+    document.getElementById("cnt").textContent="共 0 事";
+    document.getElementById("empty").hidden=true;
+    return;
+  }
   let n=0;
   const q=(state.q||"").toLowerCase();
   document.querySelectorAll(".row").forEach(r=>{
@@ -198,10 +243,11 @@ function jumpTo(title){
 }
 
 /* ---- 回到当前章节浮动按钮 ---- */
-const toBand=document.getElementById("toBand");
-const toNextBand=document.getElementById("toNextBand");
-const bands=[...document.querySelectorAll(".band")];
-let curBand=bands[0]||null;
+function refreshBands(){
+  bands=[...main.querySelectorAll(".band")];
+  if(curBand && !bands.includes(curBand)) curBand=null;  /* 旧引用已销毁 → 重置 */
+  trackBand();
+}
 function trackBand(){
   const tlVisible=!document.getElementById("view-timeline").hidden;
   const mark=window.scrollY+window.innerHeight*0.5;
