@@ -296,6 +296,10 @@ body.immersive #map{flex:1;height:100%;min-height:0;margin-top:6px;border-left:0
 .mp-s{font-size:13px;color:var(--ink2);margin-top:6px;max-width:280px;line-height:1.8}
 .mp-label{background:var(--paper2);color:var(--ink);border:1px solid var(--line2);border-radius:2px;font-size:12px;font-family:var(--serif);padding:1px 7px;box-shadow:0 1px 4px rgba(46,42,35,.12)}
 .mp-label::before{display:none}
+/* 近代史重灾城市 period 分堆（2026-08-05）：子簇 divIcon（时段短标+数量）+ 聚焦恢复按钮 */
+.city-cluster>div{color:#fff;font-weight:700;font-size:10px;line-height:1.2;text-align:center;border-radius:8px;border:2px solid rgba(255,255,255,.75);box-shadow:0 1px 5px rgba(0,0,0,.4);padding:3px 5px;white-space:nowrap;cursor:pointer;font-family:var(--serif)}
+.city-back>div{background:#1f5c8b;color:#fff;font-size:11.5px;font-weight:700;text-align:center;line-height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.65);box-shadow:0 1px 5px rgba(0,0,0,.4);cursor:pointer;font-family:var(--serif);letter-spacing:.03em}
+.city-cluster,.city-back{background:transparent;border:none}
 .overlay{position:fixed;inset:0;z-index:85;background:rgba(46,42,35,.22)}
 footer{margin-top:70px; font-size:12.5px; color:var(--ink3); line-height:1.8; border-top:1px solid var(--line); padding-top:16px}
 @media (max-width:760px){

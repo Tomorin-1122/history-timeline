@@ -23,6 +23,28 @@ let speedIdx=0;                               /* 当前倍速档索引 */
 let keepN=10;                                 /* 连续播放时屏幕保留事件数（默认 10） */
 const KEEP_OPTS=[10,5,3,2,1];                /* 保留数循环档（默认 10 → 5 → 3 → 2 → 1） */
 
+/* ---- 近代史重灾城市 period 分堆（2026-08-05 老板定案：仅北京/上海/南京，zoom≥6 静态模式）
+   点击聚簇跳转后，三城事件不再挤成散点，而是按 period（11 时段）分堆，便于快速排查 ---- */
+const CITY_CLUSTER={
+  '北京':[39.9042,116.4074],
+  '上海':[31.2304,121.4737],
+  '南京':[32.0603,118.7969],
+};
+const CITY_R=0.4;                  /* 城市归属半径（度，覆盖城区+近郊如卢沟桥/宝山路） */
+const CITY_ZOOM=6;                 /* zoom≥6（城市级别可辨）启用分堆 */
+const PERIOD_COLORS=Array.from({length:CHAPTERS_MODERN.length},(_,i)=>`hsl(${(i*33)%360},62%,42%)`);  /* 11 时段色板（色相环等分） */
+let cityPeriodFocus=null;          /* {city, period} 点击 period 子簇后聚焦该时段散点（其他时段临时隐藏） */
+function inCity(c){
+  if(!c) return null;
+  for(const city of Object.keys(CITY_CLUSTER)){
+    const [lat,lng]=CITY_CLUSTER[city];
+    if(Math.abs(c[0]-lat)<CITY_R && Math.abs(c[1]-lng)<CITY_R) return city;
+  }
+  return null;
+}
+/* 时段短标：'1840-1864' → '40-64'（子簇 divIcon 用，紧凑） */
+function periodShort(note){ return String(note||'').replace(/^(\d{2})(\d{2})-(\d{2})(\d{2})$/,'$2-$4'); }
+
 const yrSlider=document.getElementById("yrSlider"),
       yrLabel=document.getElementById("yrLabel"),
       yrAll=document.getElementById("yrAll"),
@@ -60,13 +82,15 @@ function setRange(mode){
   if(mode===mapRange) return;
   mapRange=mode;
   rangeSel.value=mode;
-  state.ch=-1;                 /* 换地图清章/段过滤：pre/hist 是古代史章索引，modern 是近代史段索引 */
+  cityPeriodFocus=null;            /* 切模式清城市时段聚焦 */
+  /* 换地图 = 切换筛选上下文（map-pre/hist/modern 各自记忆 type/imp/q/ch，不再清 ch） */
   const [ymin,ymax]=curY();
   setStep();
   yrSlider.min=ymin; yrSlider.max=ymax; yrSlider.value=ymin;
   if(playing) togglePlay();               /* 切模式停播放，避免范围/步长混乱 */
   yrLabel.textContent=yrAll.classList.contains("on")?"全部年份":fmtYrLabel(+yrSlider.value);
   drawMarkers();
+  if(typeof syncFilterUI==="function") syncFilterUI();   /* 恢复该地图上下文的筛选记忆（多选 + 章高亮 + 搜索词） */
 }
 rangeSel.addEventListener("change",()=>setRange(rangeSel.value));
 
@@ -141,6 +165,11 @@ function initMap(){
   }).addTo(mapObj);
   plainMarkers=L.layerGroup().addTo(mapObj);   /* 少量重合/独立事件：jitter 散开，不聚类 */
   addMapControls();                            /* 地图内控件：底图切换 + 全屏 */
+  /* zoom 低于城市级别 → 退回普通聚簇，清城市时段聚焦（近代史分堆） */
+  mapObj.on("zoomend",()=>{
+    if(cityPeriodFocus && mapObj.getZoom()<CITY_ZOOM){ cityPeriodFocus=null; }
+    if(mapRange==='modern' && !playing && !precise) drawMarkers();
+  });
   drawMarkers();
 }
 
@@ -255,22 +284,23 @@ function addMarker(e, alpha, bold){
     m.bindTooltip('<span'+stl+'>'+e.title+' '+fmtShort(e)+'</span>',{permanent:true,direction:"top",offset:[0,-7],className:"mp-label"});
   }
   m.bindPopup(popupHTML(e),{closeButton:false,offset:[0,-6]});
-  /* 重灾组（≥10 条）进聚类；播放/步进/原始社会模式不聚类（事件少，直接显示） */
-  (HEAVY_SET.has(e.title) && !playing && !precise && mapRange!=='pre' ? markers : plainMarkers).addLayer(m);
+  /* 重灾组（≥10 条）进聚类；播放/步进/原始社会模式不聚类（事件少，直接显示）；城市时段聚焦态也强制散开（不聚簇） */
+  (HEAVY_SET.has(e.title) && !playing && !precise && mapRange!=='pre' && !cityPeriodFocus ? markers : plainMarkers).addLayer(m);
 }
 
-/* 共用筛选谓词：章隔离（pre/hist）+ 分期筛选 + 坐标 + 门类 + 等第 + 搜索
+/* 共用筛选谓词：章隔离（pre/hist）+ 分期筛选 + 坐标 + 门类 + 等第 + 搜索（type/imp/ch 多选 Set，空 Set=全部）
    M1 修复：播放 / 普通渲染 / 步进三条路径统一走此谓词，避免重复过滤导致的回归 bug
    modern：近代史数组 ch 0-10 是段索引（无"原始社会章"概念），跳过 ch0 隔离 */
 function matchFilter(e, pre, q){
+  const f=st();
   if(mapRange!=='modern'){
     if(pre && e.ch!==0) return false;            /* 原始社会模式只看原始社会章 */
     if(!pre && e.ch===0) return false;          /* 完全隔离：历史模式不看原始社会章 */
   }
-  if(state.ch>=0 && e.ch!==state.ch) return false;
+  if(f.ch.size && !f.ch.has(e.ch)) return false;
   if(!COORDS[e.title]) return false;
-  if(state.type!=="全部" && e.type!==state.type) return false;
-  if(state.imp!==0 && e.importance!==state.imp) return false;
+  if(f.type.size && !f.type.has(e.type)) return false;
+  if(f.imp.size && !f.imp.has(e.importance)) return false;
   if(q && !matchEvent(e,q)) return false;
   return true;
 }
@@ -279,7 +309,7 @@ function drawMarkers(){
   if(!markers) return;
   markers.clearLayers(); plainMarkers.clearLayers();
   const EV=segEV();
-  const allMode=yrAll.classList.contains("on"), cyr=+yrSlider.value, R=curR(), q=(state.q||"").toLowerCase();
+  const allMode=yrAll.classList.contains("on"), cyr=+yrSlider.value, R=curR(), q=(st().q||"").toLowerCase();
   const pre=mapRange==='pre';
   /* 连续播放（hist/modern）：保留 ≤当前年 的最近 keepN 个事件，越早越透明，最新置顶（事件到真实年份才出现，不提前） */
   if(!pre && playing && !allMode){
@@ -295,6 +325,11 @@ function drawMarkers(){
     });
     return;
   }
+  /* 近代史静态 + 城市级别 zoom：北京/上海/南京按 period 分堆（老板定案 2026-08-05），其余照常 */
+  if(mapRange==='modern' && mapObj.getZoom()>=CITY_ZOOM){
+    drawWithCityClusters(EV, cyr, R, allMode);
+    return;
+  }
   EV.forEach((e)=>{
     if(!matchFilter(e,pre,q)) return;
     if(!allMode){
@@ -307,6 +342,50 @@ function drawMarkers(){
     }
     addMarker(e,1, focusKey && e.title===focusKey);   /* 步进聚焦事件加粗（同年月序步进时滑块不动、聚焦切换） */
   });
+}
+
+/* ---- 近代史重灾城市 period 分堆绘制（2026-08-05）
+   北京/上海/南京：静态模式 zoom≥6 时，事件按 period 分组为子簇（divIcon 时段短标+数量）；
+   点击子簇 → zoom 到城市 + 仅显该时段散点（其他时段隐藏）+「× 全部时段」恢复按钮 ---- */
+function drawWithCityClusters(EV, cyr, R, allMode){
+  const q=(st().q||"").toLowerCase();
+  const cityGroups={};                 /* { city: { period: [e,...] } } */
+  const others=[];
+  for(const e of EV){
+    if(!matchFilter(e,false,q)) continue;
+    if(!allMode && (e.year===null || Math.abs(e.year-cyr)>R)) continue;
+    const city=inCity(COORDS[e.title]);
+    if(city){ (cityGroups[city]=cityGroups[city]||{}); (cityGroups[city][e.period]=cityGroups[city][e.period]||[]).push(e); }
+    else others.push(e);
+  }
+  /* 聚焦态：只显该时段散点 + 恢复按钮 */
+  if(cityPeriodFocus){
+    const {city, period}=cityPeriodFocus;
+    const g=(cityGroups[city]||{})[period]||[];
+    g.forEach(e=>addMarker(e,1, focusKey && e.title===focusKey));
+    const [lat,lng]=CITY_CLUSTER[city];
+    const back=L.marker([lat,lng],{icon:L.divIcon({className:'city-back',html:'<div>× 全部时段</div>',iconSize:[78,24],iconAnchor:[39,12]}),zIndexOffset:1000});
+    back.bindTooltip('恢复显示全部时段',{direction:'top'});
+    back.on('click',()=>{cityPeriodFocus=null;drawMarkers();});
+    plainMarkers.addLayer(back);
+  }else{
+    /* 分堆态：每城按 period 出子簇（时段色板 + 短标 + 数量），城市坐标周边环列 */
+    for(const [city,groups] of Object.entries(cityGroups)){
+      const [lat,lng]=CITY_CLUSTER[city];
+      for(const [period,evs] of Object.entries(groups)){
+        const idx=CHAPTERS_MODERN.findIndex(c=>c.name===period);
+        const pi=idx<0?0:idx;
+        const ang=pi*2*Math.PI/CHAPTERS_MODERN.length;
+        const pos=[lat+Math.sin(ang)*0.035, lng+Math.cos(ang)*0.035];
+        const m=L.marker(pos,{icon:L.divIcon({className:'city-cluster',html:'<div style="background:'+PERIOD_COLORS[pi]+'">'+periodShort(CHAPTERS_MODERN[pi].note)+'<br>·'+evs.length+'</div>',iconSize:[58,34],iconAnchor:[29,17]})});
+        m.bindTooltip(period+' · '+evs.length+' 事（点击查看该时段）',{direction:'top'});
+        m.on('click',()=>{cityPeriodFocus={city,period};mapObj.setView([lat,lng],11);drawMarkers();});
+        plainMarkers.addLayer(m);
+      }
+    }
+  }
+  /* 非三城事件照常渲染（含聚类/jitter） */
+  others.forEach(e=>addMarker(e,1, focusKey && e.title===focusKey));
 }
 
 function popupHTML(e){
@@ -324,6 +403,7 @@ let precise=false;                         /* hist 步进后精准 ±0.5；拖 s
 function setStep(){ yrSlider.step=mapRange==='pre'?(playing?0.001:0.01):(mapRange==='modern'?(playing?0.5:1):(playing?0.1:1)); }
 function togglePlay(){
   playing=!playing;
+  if(playing) cityPeriodFocus=null;      /* 播放走 keepN 路径，清城市时段聚焦 */
   playBtn.textContent=playing?"⏸ 暂停":"▶ 播放";
   playBtn.classList.toggle("on",playing);
   if(playing){
@@ -350,7 +430,7 @@ let focusKey=null;                       /* 当前聚焦事件 title（步进定
 function stepEvent(dir){
   if(playing) togglePlay();
   precise=true;
-  const v=+yrSlider.value, pre=mapRange==='pre', q=(state.q||"").toLowerCase();
+  const v=+yrSlider.value, pre=mapRange==='pre', q=(st().q||"").toLowerCase();
   const EV=segEV();
   /* 复合时间：modern = year*13*32+month*32+day（老板规则：无月排年首、无日排月首）；hist = year*13+month（无月记13排后）；pre 仍用对数刻度 */
   const tv=e=>mapRange==='modern'?e.year*13*32+(e.month||0)*32+(e.day||0):(e.year*13+(e.month||13));

@@ -3,7 +3,23 @@
 
 const TYPES=["全部","政治","军事","经济","文化","制度","民族关系","对外关系"];
 const IMPS=[["全部",0],["★★★",3],["★★",2],["★",1]];
-const state={type:"全部",imp:0,q:"",ch:-1};
+/* ---- 筛选状态：5 上下文独立多选（2026-08-05 老板定案：啥都可以多选，不同时间轴/不同地图隔离）
+   type/imp/ch 为 Set（空 Set = 全部）；q 搜索词。
+   tl-ancient / tl-modern：两个时间轴；map-pre / map-hist / map-modern：三种地图。切换即恢复各自记忆。 ---- */
+const FILTERS = {
+  'tl-ancient': { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  'tl-modern':  { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  'map-pre':    { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  'map-hist':   { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  'map-modern': { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+};
+/* 当前上下文：地图视图按 mapRange（pre/hist/modern），时间轴按 curSeg；typeof 兜底防 timeline 先加载 TDZ */
+function curCtx(){
+  const vm = typeof document !== 'undefined' && document.getElementById('view-map');
+  if (vm && !vm.hidden && typeof mapRange !== 'undefined') return 'map-' + mapRange;
+  return 'tl-' + (typeof curSeg !== 'undefined' ? curSeg : 'ancient');
+}
+function st(){ return FILTERS[curCtx()]; }
 /* ---- 史段（交接文档 §10.6.2）---- */
 let curSeg="ancient";  /* 'ancient' | 'modern' | 'world-ancient'(禁用) | 'world-modern'(禁用) */
 function segName(seg){return seg==="modern"?"中国近现代史":(seg==="world-ancient"?"世界古代中世纪史":(seg==="world-modern"?"世界近现代史":"中国古代史"));}
@@ -136,56 +152,85 @@ function renderPerLinks(){
   perGroup.innerHTML="";
   const {CH}=segData();
   const all=document.createElement("a");
-  all.className="jump on"; all.href="#"; all.textContent="全部"; all.dataset.ch="-1";
+  all.className="jump"; all.href="#"; all.textContent="全部"; all.dataset.ch="-1";
   perGroup.appendChild(all);
   CH.forEach((c,i)=>{
     const a=document.createElement("a");
     a.className="jump"; a.href="#"+c.id; a.textContent=c.name; a.dataset.ch=i;
     perGroup.appendChild(a);
   });
+  syncPerLinks();
+}
+/* 分期链接高亮（多选章）：「全部」on = ch Set 空；章 on = 在 Set 中（仅地图视图参与 ch 过滤；时间轴视图锚点跳转不高亮章） */
+function syncPerLinks(){
+  const g=document.getElementById("perGroup"); if(!g) return;
+  const onMap=!document.getElementById("view-map").hidden;
+  const s=st().ch;
+  g.querySelectorAll("a.jump").forEach(a=>{
+    const ch=parseInt(a.dataset.ch,10);
+    a.classList.toggle("on", onMap && (ch<0 ? s.size===0 : s.has(ch)));   /* data-ch=-1 为「全部」 */
+  });
 }
 renderPerLinks();
 
-/* ---- 顶框筛选按钮（门类/等第） ---- */
-function mkBtns(groupId,items,key,render){
+/* ---- 顶框筛选按钮（门类/等第，多选 toggle；「全部」= 清空该组） ---- */
+function mkBtns(groupId, items, key, render){
   const g=document.getElementById(groupId);
   items.forEach(it=>{
     const label=render?it[0]:it, val=render?it[1]:it;
     const b=document.createElement("button");
-    b.className="f"+(state[key]===val?" on":""); b.textContent=label;
-    b.addEventListener("click",()=>{state[key]=val;
-      g.querySelectorAll("button.f").forEach(x=>x.classList.remove("on"));
-      b.classList.add("on"); renderChips(); applyFilter();});
+    b.className="f"; b.textContent=label;
+    if(val===0 || val==="全部"){                     /* 「全部」按钮：清空该组（空 Set = 全部） */
+      b.addEventListener("click",()=>{ st()[key].clear(); syncBtns(); renderChips(); applyFilter(); });
+    }else{
+      b.addEventListener("click",()=>{               /* 多选 toggle：加入/移出 Set */
+        const s=st()[key];
+        if(s.has(val)) s.delete(val); else s.add(val);
+        syncBtns(); renderChips(); applyFilter();
+      });
+    }
     g.appendChild(b);
   });
+  syncBtns();
+}
+/* 按钮高亮同步：「全部」on = Set 空；具体项 on = 在 Set 中（key 区分数字/字符串比较） */
+function syncBtns(){
+  for(const [gid,key] of [["typeGroup","type"],["impGroup","imp"]]){
+    const g=document.getElementById(gid); if(!g) continue;
+    const s=st()[key];
+    g.querySelectorAll("button.f").forEach(b=>{
+      if(b.textContent==="全部"){ b.classList.toggle("on", s.size===0); return; }
+      const val=key==="imp"?b.textContent.length:b.textContent;   /* imp 按钮文本是 ★ 数 */
+      b.classList.toggle("on", s.has(val));
+    });
+  }
 }
 mkBtns("typeGroup",TYPES,"type",false);
 mkBtns("impGroup",IMPS,"imp",true);
 
-/* ---- 已选条件 chip ---- */
+/* ---- 已选条件 chip（多选：每项一个 chip，× 单独移除） ---- */
 function renderChips(){
   const c=document.getElementById("chips"); c.innerHTML="";
+  const f=st();
   const items=[];
-  if(state.type!=="全部") items.push({k:"type",v:state.type});
-  if(state.imp!==0) items.push({k:"imp",v:state.imp===3?"★★★":(state.imp===2?"★★":"★")});
-  if(state.q) items.push({k:"q",v:'"'+state.q+'"'});
+  [...f.type].forEach(v=>items.push({k:"type",v,raw:v}));
+  [...f.imp].sort((a,b)=>b-a).forEach(v=>items.push({k:"imp",v:v===3?"★★★":(v===2?"★★":"★"),raw:v}));
+  if(f.q) items.push({k:"q",v:'"'+f.q+'"',raw:f.q});
   items.forEach(it=>{
     const s=document.createElement("span");
     s.className="chip";
     s.innerHTML=it.v+'<button class="x" data-k="'+it.k+'">×</button>';
     s.querySelector(".x").addEventListener("click",()=>{
-      if(it.k==="type"){state.type="全部";setBtn("typeGroup",0);}
-      else if(it.k==="imp"){state.imp=0;setBtn("impGroup",0);}
-      else if(it.k==="q"){state.q="";qInput.value="";}
-      renderChips();applyFilter();
+      const f2=st();
+      if(it.k==="type") f2.type.delete(it.raw);
+      else if(it.k==="imp") f2.imp.delete(it.raw);
+      else if(it.k==="q"){ f2.q=""; document.getElementById("q").value=""; }
+      renderChips(); syncBtns(); applyFilter();
     });
     c.appendChild(s);
   });
 }
-function setBtn(gid,idx){
-  const g=document.getElementById(gid);
-  g.querySelectorAll("button.f").forEach((b,i)=>b.classList.toggle("on",i===idx));
-}
+function setBtn(gid,idx){ /* 旧单选高亮逻辑废弃（多选改 syncBtns），保留空实现防外部误调 */ }
 
 /* ---- 筛选面板展开/收起 + 关键词搜索 ---- */
 const filterToggle=document.getElementById("filterToggle"), filters=document.getElementById("filters");
@@ -194,9 +239,9 @@ filterToggle.addEventListener("click",()=>{
   filterToggle.textContent=filters.hidden?"筛选":"收起";
 });
 const qInput=document.getElementById("q");
-qInput.addEventListener("input",()=>{state.q=qInput.value.trim();renderChips();applyFilter();});
+qInput.addEventListener("input",()=>{st().q=qInput.value.trim();renderChips();applyFilter();});
 
-/* ---- 筛选应用（时间轴行 + 地图 marker 联动；按史段数据源） ---- */
+/* ---- 筛选应用（时间轴行 + 地图 marker 联动；按史段数据源；type/imp 多选 Set，空 Set = 全部） ---- */
 /* B2：footer 数据量动态生成（读当前史段 EVENTS/CHAPTERS，改数据后无需手动同步；声明须在 applyFilter 前，避免 TDZ） */
 const footStat=document.getElementById("footStat");
 function updFootStat(){
@@ -205,20 +250,28 @@ function updFootStat(){
 function applyFilter(){
   const {EV}=segData();
   updFootStat();
+  const f=st();
   let n=0;
-  const q=(state.q||"").toLowerCase();
+  const q=(f.q||"").toLowerCase();
   document.querySelectorAll(".row").forEach(r=>{
     if(!r.dataset.idx) return; /* 空章占位行不参与筛选 */
     const e=EV[Number(r.dataset.idx)];
-    const ok=(state.type==="全部"||r.dataset.type===state.type)&&
-             (state.imp===0||Number(r.dataset.imp)===state.imp)&&
+    if(!e) return;             /* 防御：史段切换间隙旧 row 与新 EV 索引错位（renderTimeline 后即恢复） */
+    const ok=(f.type.size===0||f.type.has(r.dataset.type))&&
+             (f.imp.size===0||f.imp.has(Number(r.dataset.imp)))&&
              (!q||matchEvent(e,q));
     r.style.display=ok?"":"none"; if(ok)n++;
   });
-  const filtered=(state.type!=="全部"||state.imp!==0||state.q);
+  const filtered=(f.type.size||f.imp.size||f.q);
   document.getElementById("cnt").textContent=filtered?("筛得 "+n+" 事"):("共 "+EV.length+" 事");
   document.getElementById("empty").hidden=n>0;
   if(typeof drawMarkers==="function") drawMarkers(); /* 地图视图联动：筛选同时作用于当前史段 marker（古代史/近代史） */
+}
+/* ---- 上下文切换后的 UI 整体同步（史段/视图/地图模式切换后调用：恢复该上下文记忆的筛选） ---- */
+function syncFilterUI(){
+  const f=st();
+  if(qInput) qInput.value=f.q;
+  syncBtns(); syncPerLinks(); renderChips(); applyFilter();
 }
 applyFilter();
 

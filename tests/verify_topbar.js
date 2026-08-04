@@ -111,18 +111,18 @@ const fs = require('fs');
   check('筛选面板展开不撑高顶栏', tbH0 === tbH1, tbH0 + 'px → ' + tbH1 + 'px');
 
   /* 4.6 分期链接点击（事件委托重构后仍生效）：
-     时间轴界面=跳锚点不筛（state.ch 不变）；地图界面=按章过滤（state.ch 设置）——浮层已由 4.5 展开 */
+     时间轴界面=跳锚点不筛（tl 上下文 ch Set 不变）；地图界面=按章多选过滤（map 上下文 ch Set）——浮层已由 4.5 展开 */
   await page.click('#perGroup a.jump:text-is("明")');
-  const chTimeline = await page.evaluate(() => state.ch);
-  check('时间轴界面点「明」=锚点跳转不筛选', chTimeline === -1, 'state.ch=' + chTimeline);
+  const chTimeline = await page.evaluate(() => FILTERS['tl-ancient'].ch.size);
+  check('时间轴界面点「明」=锚点跳转不筛选', chTimeline === 0, 'tl-ancient ch.size=' + chTimeline);
   await page.click('#viewTabs .tab[data-view="map"]');
   await page.waitForTimeout(400);
   await page.click('#perGroup a.jump:text-is("明")');
-  const chMap = await page.evaluate(() => state.ch);
-  check('地图界面点「明」=按章过滤', chMap === 13, 'state.ch=' + chMap);
+  const chMap = await page.evaluate(() => [...FILTERS['map-hist'].ch]);
+  check('地图界面点「明」=按章过滤', chMap.join(',') === '13', 'map-hist ch=' + chMap.join(','));
   await page.click('#perGroup a.jump:text-is("全部")');
-  const chAll = await page.evaluate(() => state.ch);
-  check('地图界面点「全部」→ch-1', chAll === -1, 'state.ch=' + chAll);
+  const chAll = await page.evaluate(() => FILTERS['map-hist'].ch.size);
+  check('地图界面点「全部」→清空', chAll === 0, 'map-hist ch.size=' + chAll);
   await page.click('#viewTabs .tab[data-view="timeline"]');
 
   /* 5. 地图 / 复习视图仍正常（CDN 已 abort，仅验证静态结构与视图切换；Leaflet 初始化由 verify_local.js 覆盖） */

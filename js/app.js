@@ -15,6 +15,8 @@ function switchView(v){
   viewTabs.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
   if(v==="map"){ try{ initMap(); }catch(e){ /* CDN 不可用时（回归测试 abort leaflet）静默，视图切换不受阻 */ } }
   if(v==="review") initReview();
+  /* 视图切换 = 筛选上下文切换（时间轴 ↔ 地图各自记忆），恢复该视图的筛选 UI（多选高亮/搜索词/章） */
+  if(typeof syncFilterUI==="function") syncFilterUI();
   if(typeof trackBand==="function") trackBand();
   window.scrollTo({top:0,behavior:"auto"}); /* 切换视图回到顶部，避免内容落在视口外 */
 }
@@ -28,17 +30,18 @@ document.getElementById("perGroup").addEventListener("click",(ev)=>{
   if(!a) return;
   const onMap=!document.getElementById("view-map").hidden;
   if(onMap){
-    ev.preventDefault();               /* 地图界面：不跳回时间轴，按章过滤事件 */
+    ev.preventDefault();               /* 地图界面：不跳回时间轴，按章过滤事件（多选 toggle；「全部」= 清空） */
     const ch=parseInt(a.dataset.ch,10);
-    state.ch=Number.isNaN(ch)?-1:ch;
-    document.querySelectorAll("#perGroup a.jump").forEach(x=>x.classList.toggle("on",x===a));
-    /* 地图模式跟随章/段（三态下拉，2026-08-05 修复）：
-       古代史点「原始社会」→ pre；pre 模式点非原始社会章/全部 → 回 hist；
-       modern 史段（段链接 0-10）与 hist 模式保持当前地图模式，仅按章/段过滤——勿再无条件 setRange("hist")（会跳回历史时期地图） */
-    if(typeof setRange==="function"){
-      if(state.ch===0 && curSeg!=="modern") setRange("pre");
-      else if(mapRange==="pre" && state.ch!==0) setRange("hist");
-    }
+    /* 地图模式跟随：点「原始社会」（古代史）自动进 pre；pre 模式点非原始社会章回 hist——先切模式（切换筛选上下文），再在新上下文操作 ch Set */
+    const had = ch>=0 && st().ch.has(ch);
+    let target = typeof mapRange !== 'undefined' ? mapRange : 'hist';
+    if(!had && ch===0 && curSeg!=="modern" && target!=="pre") target="pre";
+    else if(!had && ch>0 && target==="pre") target="hist";
+    if(target!==mapRange && typeof setRange==="function") setRange(target);
+    const s=st().ch;
+    if(ch<0) s.clear();                 /* 「全部」= 清空（data-ch=-1） */
+    else if(s.has(ch)) s.delete(ch); else s.add(ch);
+    if(typeof syncPerLinks==="function") syncPerLinks();
     if(typeof drawMarkers==="function") drawMarkers();
     return;
   }
@@ -57,13 +60,11 @@ function switchSeg(seg){
   document.body.classList.remove("seg-modern","seg-world-ancient","seg-world-modern");
   if(seg!=="ancient") document.body.classList.add("seg-"+seg);
   if(typeof rvState!=="undefined" && rvState && typeof showSetup==="function") showSetup();
-  /* 筛选状态重置为该史段默认（防跨史段串扰） */
-  state.type="全部"; state.imp=0; state.q=""; state.ch=-1;
-  setBtn("typeGroup",0); setBtn("impGroup",0);
-  qInput.value=""; renderChips();
-  /* 数据未接入前强制回时间轴视图（地图/复习不展示近代史内容） */
+  /* 筛选状态：上下文切换（tl-ancient ↔ tl-modern），恢复各自记忆（多选隔离，不再重置默认）
+     注意顺序：先重建 row（renderTimeline），再切视图触发 syncFilterUI——否则 applyFilter 用新 curSeg 遍历旧 row 会越界 */
+  renderPerLinks(); renderTimeline();
   switchView("timeline");
-  renderPerLinks(); renderTimeline(); applyFilter();
+  if(typeof syncFilterUI==="function") syncFilterUI();
 }
 segRow.querySelectorAll(".seg-btn").forEach(b=>{
   b.addEventListener("click",()=>switchSeg(b.dataset.seg));
