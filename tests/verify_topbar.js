@@ -24,7 +24,12 @@ const fs = require('fs');
 
   /* 1. 顶栏四层结构（L1 站级 / L2 史段 / L3 视图 / L4 内容） */
   const h1 = await page.textContent('h1');
-  check('L1 站级总名固定', h1.trim() === '考研历史事件时间轴', h1.trim());
+  check('L1 站级总名固定', h1.trim() === '考研历史时间轴', h1.trim());
+  const titleTag = await page.title();
+  const desc = await page.evaluate(() => document.querySelector('meta[name="description"]')?.content || '');
+  check('SEO title / description', titleTag === '考研历史时间轴' && desc.includes('备考时间轴') && !/\d+\s*章|\d+\s*事|条|上线|规划/.test(desc), 'title=' + titleTag + ' | desc 无事件数/进度');
+  const icon = await page.evaluate(() => document.querySelector('link[rel="icon"]')?.getAttribute('href') || '');
+  check('favicon link', icon === 'favicon.svg', icon);
 
   const segBtns = await page.$$eval('#segRow .seg-btn', bs => bs.map(b => ({ t: b.textContent.trim(), on: b.classList.contains('on'), dis: b.disabled })));
   check('L2 四个史段按钮', segBtns.length === 4, JSON.stringify(segBtns.map(b => b.t)));
