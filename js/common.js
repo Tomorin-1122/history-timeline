@@ -27,7 +27,8 @@ function fmt(e){
   return (e.yearMode==="approx"?"约":"")+e.year;
 }
 
-/* 时间轴/地图短格式：前 632 / 约前 1600 / 前 579~546 / 1219~1224 / era 返回时段文案；史前同用"万年" */
+/* 时间轴/地图短格式：前 632 / 约前 1600 / 前 579~546 / 1219~1224 / era 返回时段文案；史前同用"万年"
+   有 month 的事件显示到月（"1912年2月"），不显示具体日期（避免记忆负担；同月事件视为同时） */
 function fmtShort(e){
   if(e.yearMode==="era") return e.era||e.dynasty||e.period||"时代";
   if(e.yearMode==="range"){
@@ -38,9 +39,9 @@ function fmtShort(e){
   if(e.year<0){
     const abs=-e.year;
     if(abs>=10000) return "距今约"+fmtWan(abs);
-    return (e.yearMode==="approx"?"约":"")+"前 "+abs;
+    return (e.yearMode==="approx"?"约":"")+"前 "+abs+(e.month?("年"+e.month+"月"):"");
   }
-  return (e.yearMode==="approx"?"约":"")+e.year;
+  return (e.yearMode==="approx"?"约":"")+e.year+(e.month?("年"+e.month+"月"):"");
 }
 
 /* 星级：importance 1-3 */

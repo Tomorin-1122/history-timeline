@@ -26,6 +26,47 @@ const CHAPTERS = [
   { id: 'c15', no: '第十五章', name: '清',             note: '1644年 至 1840年' },
 ];
 
+// ---- 近现代史 11 段（period 最终命名定稿 2026-08-04，索引即近代史 ch）----
+const CHAPTERS_MODERN = [
+  { id: 'm1',  no: '第一段',   name: '外国武装侵略和国内农民战争',     note: '1840-1864' },
+  { id: 'm2',  no: '第二段',   name: '清朝自强运动及其失败',           note: '1865-1895' },
+  { id: 'm3',  no: '第三段',   name: '清末改革和清朝覆亡',             note: '1896-1912' },
+  { id: 'm4',  no: '第四段',   name: '北洋政府时期',                   note: '1912-1927' },
+  { id: 'm5',  no: '第五段',   name: '土地革命战争时期',               note: '1927-1937' },
+  { id: 'm6',  no: '第六段',   name: '全民族抗日战争时期',             note: '1937-1945' },
+  { id: 'm7',  no: '第七段',   name: '解放战争时期',                   note: '1946-1949' },
+  { id: 'm8',  no: '第八段',   name: '过渡时期（从新民主主义到社会主义）', note: '1949-1956' },
+  { id: 'm9',  no: '第九段',   name: '全面建设社会主义时期',           note: '1956-1966' },
+  { id: 'm10', no: '第十段',   name: '文化大革命时期',                 note: '1966-1976' },
+  { id: 'm11', no: '第十一段', name: '改革开放新时期',                 note: '1976-2012' },
+];
+
+// 事件年份 → 近代史段索引（严格按时间划分落座；1912 以清帝退位 2-12 为界）
+function modernSeg(e) {
+  const y = e.year;
+  if (y <= 1864) return 0;
+  if (y <= 1895) return 1;
+  if (y < 1912) return 2;
+  if (y === 1912) {
+    const m = e.month || 0, d = e.day || 0;
+    return (m < 2 || (m === 2 && d <= 12)) ? 2 : 3;   /* 清帝退位(1912-2-12)前归清末段 */
+  }
+  if (y <= 1927) return 3;
+  if (y <= 1937) return 4;
+  if (y <= 1945) return 5;
+  if (y <= 1949) return 6;
+  if (y <= 1956) return 7;
+  if (y <= 1966) return 8;
+  if (y <= 1976) return 9;
+  return 10;
+}
+
+// 近代史事件排序键：year*13*32 + (month||0)*32 + (day||0)
+// 同年无 month → 排该年开头；同月无 day → 排该月开头；有 day 按日期先后（显示仍只到月，日期仅排序）
+function modernSortKey(e) {
+  return e.year * 13 * 32 + (e.month || 0) * 32 + (e.day || 0);
+}
+
 // dynasty（pilot 值）→ ch 索引
 const DYN_TO_CH = {
   '原始社会': 0, '夏商': 1, '夏': 1, '商': 1, '西周': 2, '春秋': 3, '战国': 4, '秦': 5,
@@ -84,8 +125,20 @@ function todayName(loc) {
 const REQ = ['title', 'year', 'yearMode', 'yearRange', 'dynasty', 'period', 'type', 'importance',
   'summary', 'cause', 'effect', 'examTip', 'people', 'location', 'tags', 'related', 'wikiSlug'];
 
+// ---- 近代史 pilot 文件（第01-07章，period 落座按年份） ----
+const PILOTS_MODERN = [
+  ['第01章', 'data/第01章.json'],
+  ['第02章', 'data/第02章.json'],
+  ['第03章', 'data/第03章.json'],
+  ['第04章', 'data/第04章.json'],
+  ['第05章', 'data/第05章.json'],
+  ['第06章', 'data/06章.json'],
+  ['第07章', 'data/07章.json'],
+];
+
 function main() {
   const events = [];
+  const eventsModern = [];
   const errs = [];
   let chMiss = {};
 
@@ -126,12 +179,53 @@ function main() {
     });
   }
 
+  // 近现代史：落座按年份（modernSeg），period 覆盖为标准段名，dynasty 规范化（民国初年→民国）
+  for (const [tag, file] of PILOTS_MODERN) {
+    const p = path.join(ROOT, file);
+    let data;
+    try { data = JSON.parse(fs.readFileSync(p, 'utf8')); }
+    catch (e) { errs.push(`[${tag}] 读取失败: ${e.message}`); continue; }
+    if (!Array.isArray(data)) { errs.push(`[${tag}] 不是数组`); continue; }
+    data.forEach((it, i) => {
+      const missing = REQ.filter(k => !(k in it));
+      if (missing.length) { errs.push(`[${tag}#${i} ${it.title || '?'}] 缺字段 ${missing}`); return; }
+      if (it.year == null && !(Array.isArray(it.yearRange) && it.yearRange.length)) {
+        errs.push(`[${tag} ${it.title}] 无年份且无 yearRange，近代史必须可落座`); return;
+      }
+      const seg = modernSeg(it);
+      eventsModern.push({
+        title: it.title,
+        year: it.year,
+        month: it.month || null,
+        day: it.day || null,              /* 近代史 21 字段：日（同年同日排序） */
+        yearMode: it.yearMode,
+        yearRange: it.yearRange,
+        era: it.era || '', eraSub: it.eraSub || '',
+        ch: seg,
+        dynasty: it.dynasty === '民国初年' ? '民国' : it.dynasty,
+        period: CHAPTERS_MODERN[seg].name,   /* 落座后统一为标准段名 */
+        type: it.type,
+        importance: it.importance,
+        summary: it.summary,
+        cause: it.cause,
+        effect: it.effect,
+        examTip: it.examTip,
+        people: it.people,
+        location: it.location,
+        tags: it.tags,
+        related: it.related,
+        wikiSlug: it.wikiSlug,
+      });
+    });
+  }
+  eventsModern.sort((a, b) => modernSortKey(a) - modernSortKey(b));  /* 全库按复合时间排（落座后段内仍有序） */
+
   if (Object.keys(chMiss).length) errs.push(`未映射的 dynasty: ${JSON.stringify(chMiss)}`);
   if (errs.length) { console.error('ERRORS:\n - ' + errs.join('\n - ')); process.exit(1); }
 
-  // COORDS：历史坐标 > 今址表 > demo 打样
+  // COORDS：历史坐标 > 今址表 > demo 打样（近代史坐标已在 coords_resolved 按 title）
   const coords = {};
-  events.forEach(e => {
+  [...events, ...eventsModern].forEach(e => {
     if (histCoords[e.title]) { coords[e.title] = histCoords[e.title]; return; }
     const t = todayName(e.location);
     if (t && modernCoords[t]) { coords[e.title] = modernCoords[t]; return; }
@@ -141,12 +235,15 @@ function main() {
   const out = '// 自动生成，勿手改 — 由 js/gen_data.js 从 *_pilot_*.json 合并产出（F2 数据关卡前为试点基线）\n'
     + `const EVENTS=${JSON.stringify(events, null, 1)};\n\n`
     + `const CHAPTERS=${JSON.stringify(CHAPTERS, null, 1)};\n\n`
+    + `const EVENTS_MODERN=${JSON.stringify(eventsModern, null, 1)};\n\n`
+    + `const CHAPTERS_MODERN=${JSON.stringify(CHAPTERS_MODERN, null, 1)};\n\n`
     + `const COORDS=${JSON.stringify(coords, null, 1)};\n`;
   fs.writeFileSync(path.join(ROOT, 'js', 'data.js'), out, 'utf8');
 
-  console.log(`OK: ${events.length} 条事件 → js/data.js`);
-  console.log(`   章节覆盖: ${[...new Set(events.map(e => e.ch))].sort((a, b) => a - b).map(c => CHAPTERS[c].name).join(' / ')}`);
-  console.log(`   坐标复用: ${Object.keys(coords).length} 条（demo 打样）`);
+  console.log(`OK: 古代史 ${events.length} 条 + 近代史 ${eventsModern.length} 条 → js/data.js`);
+  console.log(`   古代史章节: ${[...new Set(events.map(e => e.ch))].sort((a, b) => a - b).map(c => CHAPTERS[c].name).join(' / ')}`);
+  console.log(`   近代史分段: ${[...new Set(eventsModern.map(e => e.ch))].sort((a, b) => a - b).map(c => CHAPTERS_MODERN[c].name).join(' / ')}`);
+  console.log(`   坐标复用: ${Object.keys(coords).length} 条`);
 }
 
 main();

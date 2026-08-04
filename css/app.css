@@ -243,10 +243,20 @@ h3{font-size:17.5px; font-weight:700}
 .mt-g{display:inline-flex;align-items:center;gap:10px}
 .mt-g-slider{flex:1;min-width:0}
 .mt-g-slider input[type=range]{flex:1}
+/* 地图下拉（2026-08-04 三态：原始社会/历史时期/中国近现代史） */
+.range-sel{
+  font-family:var(--serif); font-size:13.5px; background:var(--paper);
+  border:1px solid var(--line2); color:var(--ink2); padding:2px 6px;
+  cursor:pointer; outline:none; border-radius:2px; max-width:190px;
+}
+.range-sel:hover{border-color:var(--cin); color:var(--cin)}
+.range-sel:focus{border-color:var(--cin)}
 .maptool input[type=range]{flex:1;min-width:160px;accent-color:var(--cin)}
 .maptool .yrlabel{font-variant-numeric:tabular-nums;min-width:96px;color:var(--cin);font-size:14px;letter-spacing:.04em}
 .mapwrap{position:relative}
-#map{height:calc(100dvh - var(--map-h-offset));min-height:420px;border:1px solid var(--line);margin-top:10px;background:#e8e2d2}
+#map{height:calc(100dvh - var(--map-h-offset));min-height:420px;border:1px solid var(--line);margin-top:10px;background:#e8e2d2;z-index:0}
+/* 修复：Leaflet 内部 panes z-index 400-700 直接参与页面级层叠，会盖住 z-index 60 的顶栏/筛选浮层
+   （老板反馈"筛选栏被地图挡住"2026-08-04）→ map 容器 z-index:0 隔离内部层级，顶栏保持置顶 */
 footer .fg{display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 2px}
 footer .fg-i{display:inline-flex;align-items:center;gap:4px}
 footer .fg-i::before{content:"";width:8px;height:8px;border-radius:50%}

@@ -4,11 +4,16 @@
 /* ---- 视图切换：时间轴 / 地图 / 复习 ---- */
 const viewTabs=document.getElementById("viewTabs");
 function switchView(v){
+  if(v==="map"){
+    /* 地图史段与时间轴联动：近代史史段 → 近代史地图；古代史史段 → 切回 hist（若上次停在近代史地图） */
+    const want=curSeg==="modern"?"modern":(mapRange==="modern"?"hist":mapRange);
+    if(typeof setRange==="function" && mapRange!==want) setRange(want);
+  }
   document.getElementById("view-timeline").hidden=v!=="timeline";
   document.getElementById("view-map").hidden=v!=="map";
   document.getElementById("view-review").hidden=v!=="review";
   viewTabs.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
-  if(v==="map") initMap();
+  if(v==="map"){ try{ initMap(); }catch(e){ /* CDN 不可用时（回归测试 abort leaflet）静默，视图切换不受阻 */ } }
   if(v==="review") initReview();
   if(typeof trackBand==="function") trackBand();
   window.scrollTo({top:0,behavior:"auto"}); /* 切换视图回到顶部，避免内容落在视口外 */

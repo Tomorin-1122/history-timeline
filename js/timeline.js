@@ -7,9 +7,21 @@ const state={type:"全部",imp:0,q:"",ch:-1};
 /* ---- 史段（交接文档 §10.6.2）---- */
 let curSeg="ancient";  /* 'ancient' | 'modern' | 'world-ancient'(禁用) | 'world-modern'(禁用) */
 function segName(seg){return seg==="modern"?"中国近现代史":(seg==="world-ancient"?"世界古代中世纪史":(seg==="world-modern"?"世界近现代史":"中国古代史"));}
-function segPending(seg){
-  if(seg==="modern") return "近代史数据已提取（第01-07章 297 条），清洗接入数据管道后上线。";
-  return "内容规划中，敬请期待。";
+/* ---- 史段数据源：modern 用 EVENTS_MODERN/CHAPTERS_MODERN，其余用古代史（渲染/筛选/抽屉/跳转统一入口） ---- */
+function segData(){
+  return curSeg==="modern"
+    ? {EV: EVENTS_MODERN, CH: CHAPTERS_MODERN}
+    : {EV: EVENTS, CH: CHAPTERS};
+}
+/* ---- 事件排序键 ----
+   modern：year*13*32 + (month||0)*32 + (day||0)
+     —— 同年无 month 事件排该年开头（month=0）；同月无 day 事件排该月开头（day=0）；
+         有 day 的按日期先后（day 1..31）。显示仍只到月（fmtShort），日期仅用于排序。
+   ancient：保持原排序（年主导 + 同月并列保持源序），中国古代史不动 */
+function modernSortKey(e){ return e.year*13*32 + (e.month||0)*32 + (e.day||0); }
+function sortKey(e){
+  if(curSeg==="modern") return modernSortKey(e);
+  return eraSortKey(e)*13 + (e.month||13);
 }
 /* ---- 章节带引用（↑↓ 浮动按钮用）：renderTimeline() 重渲染后由 refreshBands() 刷新（史段切换销毁旧 DOM）---- */
 const toBand=document.getElementById("toBand");
@@ -70,28 +82,14 @@ function eraSortKey(e){
 const main=document.getElementById("main");
 function renderTimeline(){
   main.innerHTML="";
-  if(curSeg!=="ancient"){  /* 近代史/世界史数据未接入：占位提示（顶栏已预留，数据接入后替换此分支） */
-    const ph=document.createElement("div");
-    ph.className="band";
-    ph.innerHTML='<span class="sq"></span><span class="no">--</span><h2>'+segName(curSeg)+'</h2><span class="note">数据接入中</span><span class="rule"></span>';
-    main.appendChild(ph);
-    const row=document.createElement("div");
-    row.className="row";
-    const bd=document.createElement("div"); bd.className="body";
-    const sum=document.createElement("div"); sum.className="summary"; sum.style.color="var(--ink3)"; sum.textContent=segPending(curSeg);
-    bd.appendChild(sum);
-    row.appendChild(document.createElement("div")); row.appendChild(bd);
-    main.appendChild(row);
-    refreshBands();  /* 刷新 ↑↓ 的 bands 引用与显示状态 */
-    return;
-  }
-  CHAPTERS.forEach((c,ci)=>{
+  const {EV, CH}=segData();
+  CH.forEach((c,ci)=>{
   const band=document.createElement("div");
   band.className="band"; band.id=c.id;
   band.innerHTML='<span class="sq"></span><span class="no">'+c.no+'</span><h2>'+c.name+'</h2><span class="note">'+c.note+'</span><span class="rule"></span>';
   main.appendChild(band);
-  const rowsInCh=EVENTS.map((e,i)=>({e,i})).filter(x=>x.e.ch===ci)
-    .sort((a,b)=> eraSortKey(a.e)-eraSortKey(b.e) || ((a.e.month||13)-(b.e.month||13)));  /* eraSub 万年解析排序 */
+  const rowsInCh=EV.map((e,i)=>({e,i})).filter(x=>x.e.ch===ci)
+    .sort((a,b)=> sortKey(a.e)-sortKey(b.e));  /* modern 复合时间(年/月/日) + ancient 年/月；era 无时间排末 */
   if(rowsInCh.length===0){
     const empty=document.createElement("div");
     empty.className="row";
@@ -131,21 +129,16 @@ function renderTimeline(){
 }
 renderTimeline();
 
-/* ---- 分期筛选链接（按 CHAPTERS 动态生成；地图界面点按章过滤；史段切换重建） ---- */
+/* ---- 分期筛选链接（按史段 CHAPTERS/CHAPTERS_MODERN 动态生成；地图界面点按章过滤；史段切换重建） ---- */
 function renderPerLinks(){
   const perGroup=document.getElementById("perGroup");
   if(!perGroup) return;
   perGroup.innerHTML="";
-  if(curSeg!=="ancient"){  /* 非古代史：分期占位（数据接入后按史段渲染 period 链接） */
-    const span=document.createElement("span");
-    span.className="glabel"; span.textContent=curSeg==="modern"?"近代史分期（11 段）待接入":"分期待定";
-    perGroup.appendChild(span);
-    return;
-  }
+  const {CH}=segData();
   const all=document.createElement("a");
   all.className="jump on"; all.href="#"; all.textContent="全部"; all.dataset.ch="-1";
   perGroup.appendChild(all);
-  CHAPTERS.forEach((c,i)=>{
+  CH.forEach((c,i)=>{
     const a=document.createElement("a");
     a.className="jump"; a.href="#"+c.id; a.textContent=c.name; a.dataset.ch=i;
     perGroup.appendChild(a);
@@ -203,38 +196,37 @@ filterToggle.addEventListener("click",()=>{
 const qInput=document.getElementById("q");
 qInput.addEventListener("input",()=>{state.q=qInput.value.trim();renderChips();applyFilter();});
 
-/* ---- 筛选应用（时间轴行 + 地图 marker 联动） ---- */
+/* ---- 筛选应用（时间轴行 + 地图 marker 联动；按史段数据源） ---- */
+/* B2：footer 数据量动态生成（读当前史段 EVENTS/CHAPTERS，改数据后无需手动同步；声明须在 applyFilter 前，避免 TDZ） */
+const footStat=document.getElementById("footStat");
+function updFootStat(){
+  if(footStat){ const {EV,CH}=segData(); footStat.textContent="全 "+CH.length+" 章 · "+EV.length+" 事"; }
+}
 function applyFilter(){
-  if(curSeg!=="ancient"){  /* 非古代史：数据未接入，计数占位 */
-    document.getElementById("cnt").textContent="共 0 事";
-    document.getElementById("empty").hidden=true;
-    return;
-  }
+  const {EV}=segData();
+  updFootStat();
   let n=0;
   const q=(state.q||"").toLowerCase();
   document.querySelectorAll(".row").forEach(r=>{
     if(!r.dataset.idx) return; /* 空章占位行不参与筛选 */
-    const e=EVENTS[Number(r.dataset.idx)];
+    const e=EV[Number(r.dataset.idx)];
     const ok=(state.type==="全部"||r.dataset.type===state.type)&&
              (state.imp===0||Number(r.dataset.imp)===state.imp)&&
              (!q||matchEvent(e,q));
     r.style.display=ok?"":"none"; if(ok)n++;
   });
   const filtered=(state.type!=="全部"||state.imp!==0||state.q);
-  document.getElementById("cnt").textContent=filtered?("筛得 "+n+" 事"):("共 "+EVENTS.length+" 事");
+  document.getElementById("cnt").textContent=filtered?("筛得 "+n+" 事"):("共 "+EV.length+" 事");
   document.getElementById("empty").hidden=n>0;
-  if(typeof drawMarkers==="function") drawMarkers(); /* 地图视图联动：筛选同时作用于 marker */
+  if(typeof drawMarkers==="function") drawMarkers(); /* 地图视图联动：筛选同时作用于当前史段 marker（古代史/近代史） */
 }
-document.getElementById("cnt").textContent="共 "+EVENTS.length+" 事";
-/* B2：footer 数据量动态生成（读 EVENTS/CHAPTERS，改数据后无需手动同步） */
-const footStat=document.getElementById("footStat");
-if(footStat) footStat.textContent="全 "+CHAPTERS.length+" 章 · "+EVENTS.length+" 事";
+applyFilter();
 
 /* ---- 详情抽屉 ---- */
 const drawer=document.getElementById("drawer");
 const overlay=document.getElementById("overlay");
 function openDrawer(idx){
-  const e=EVENTS[idx];
+  const e=segData().EV[idx];
   document.getElementById("dYear").textContent=e.yearMode==="era"
     ? (e.era? (e.era+(e.eraSub?" · "+e.eraSub:"")) : (e.dynasty||e.period||"时代"))
     : fmt(e);
@@ -270,7 +262,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
 
 /* ---- related 跳转 + 闪烁 ---- */
 function jumpTo(title){
-  const idx=EVENTS.findIndex(e=>e.title===title);
+  const EV=segData().EV;
+  const idx=EV.findIndex(e=>e.title===title);
   if(idx<0)return;
   closeDrawer();
   if(typeof switchView==="function") switchView("timeline");
