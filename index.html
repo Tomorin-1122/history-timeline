@@ -11,9 +11,15 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/400.css" integrity="sha384-KnTh4qCHjvV+icYFQKXjjlKZu9alWMJzc6O8NrYYm0A0Wed8ec9ekCuLi4P9iGA6" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css" integrity="sha384-+VJ42QNJY5J0fJiq6GZfRN9yTBORo6g6f0X3RGTQ4Uz1HYnxpbjNIqfu6oLQ5/jF" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/900.css" integrity="sha384-S+CvOyAMc8HNWT+V9dBDPcoex0HSsHBuTBlB1ozd1ah31NYn98+T0OJZ1bQnedpR" crossorigin="anonymous">
+<!-- 字体异步加载（2026-08-05）：jsdelivr 挂起不阻塞渲染，页面先以系统字体显示，字体就绪后自动切换（font-display:swap） -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/400.css" media="print" onload="this.media='all'" integrity="sha384-KnTh4qCHjvV+icYFQKXjjlKZu9alWMJzc6O8NrYYm0A0Wed8ec9ekCuLi4P9iGA6" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css" media="print" onload="this.media='all'" integrity="sha384-+VJ42QNJY5J0fJiq6GZfRN9yTBORo6g6f0X3RGTQ4Uz1HYnxpbjNIqfu6oLQ5/jF" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/900.css" media="print" onload="this.media='all'" integrity="sha384-S+CvOyAMc8HNWT+V9dBDPcoex0HSsHBuTBlB1ozd1ah31NYn98+T0OJZ1bQnedpR" crossorigin="anonymous">
+<noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/400.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/700.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/900.css" crossorigin="anonymous">
+</noscript>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" integrity="sha384-pmjIAcz2bAn0xukfxADbZIb3t8oRT9Sv0rvO+BR5Csr6Dhqq+nZs59P0pPKQJkEV" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" integrity="sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+" crossorigin="anonymous">
@@ -96,14 +102,22 @@
     <div class="rv-setup" id="rvSetup">
       <div class="rv-setup-title">复习设置</div>
       <div class="rv-sec">
-        <div class="rv-sec-label">题目范围</div>
+        <div class="rv-sec-label">第一步 · 史段</div>
+        <div class="rv-modes" id="rvSegBtns">
+          <button class="rv-mode-btn on" data-seg="ancient"><b>中国古代史</b><span>15 章 · 851 事</span></button>
+          <button class="rv-mode-btn" data-seg="modern"><b>中国近现代史</b><span>11 段 · 866 事</span></button>
+          <button class="rv-mode-btn" data-seg="world" disabled title="规划中"><b>世界史</b><span>待接入</span></button>
+        </div>
+      </div>
+      <div class="rv-sec">
+        <div class="rv-sec-label">第二步 · 题目范围</div>
         <div class="rv-fg"><span class="glabel">门类</span><span class="rv-btns" id="rvTypeBtns"></span></div>
         <div class="rv-fg"><span class="glabel">等第</span><span class="rv-btns" id="rvImpBtns"></span></div>
         <div class="rv-fg"><span class="glabel">分期</span><span class="rv-btns" id="rvPerBtns"></span></div>
         <div class="rv-fg"><span class="glabel">搜索</span><input type="search" class="search rv-q" id="rvQ" placeholder="关键词…"></div>
       </div>
       <div class="rv-sec">
-        <div class="rv-sec-label">题目数量 <span class="rv-count" id="rvCount"></span></div>
+        <div class="rv-sec-label">第三步 · 题目数量 <span class="rv-count" id="rvCount"></span></div>
         <div class="rv-fg">
           <button class="f on" id="rvAll">全部</button>
           <input type="number" class="rv-num" id="rvNum" min="1" max="99" placeholder="自定义数量">
@@ -114,7 +128,14 @@
         <div class="rv-modes" id="rvModes">
           <button class="rv-mode-btn on" data-mode="train"><b>针对训练</b><span>按范围抽题 · 记错题 · 自动重练</span></button>
           <button class="rv-mode-btn" data-mode="wrong"><b>巩固错题</b><span>只练历史标记为「忘了」的题</span></button>
-          <button class="rv-mode-btn" data-mode="roam"><b>随机漫游</b><span>全库随机抽卡 · 不计错题</span></button>
+          <button class="rv-mode-btn" data-mode="roam"><b>随机漫游</b><span>全库/史段随机抽卡 · 不计错题</span></button>
+        </div>
+        <div class="rv-roam-scope" id="rvRoamScope" hidden>
+          <span class="glabel">漫游范围</span>
+          <span class="rv-btns" id="rvScopeBtns">
+            <button class="f on" data-scope="all">全随机</button>
+            <button class="f" data-scope="seg">选史段随机</button>
+          </span>
         </div>
       </div>
       <div class="rv-warn" id="rvWarn" hidden></div>

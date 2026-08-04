@@ -2,13 +2,27 @@
 'use strict';
 
 let rvInit=false, rvState=null;
-const rvCfg={type:"全部",imp:0,per:"全部",q:"",numMode:"all",num:10,mode:"train"};
+let rvSeg='ancient';   /* 复习史段（第一步）：ancient/modern；world 占位 disabled（2026-08-05） */
+const rvCfg={type:new Set(), imp:new Set(), per:new Set(), q:'', numMode:'all', num:10, mode:'train', roamScope:'all'};
 
 function initReview(){
   if(rvInit) return; rvInit=true;
-  rvBtns(document.getElementById("rvTypeBtns"),[["全部","全部"],["政治","政治"],["军事","军事"],["经济","经济"],["文化","文化"],["制度","制度"],["民族关系","民族关系"],["对外关系","对外关系"]],v=>{rvCfg.type=v;updateCount();},"全部");
-  rvBtns(document.getElementById("rvImpBtns"),[["全部",0],["★★★",3],["★★",2],["★",1]],v=>{rvCfg.imp=v;updateCount();},0);
-  rvBtns(document.getElementById("rvPerBtns"),[["全部","全部"],...CHAPTERS.map((c,i)=>[c.name,i])],v=>{rvCfg.per=v;updateCount();},"全部");
+  /* 第一步：史段选择（ancient/modern；world 占位 disabled，规划中） */
+  document.getElementById("rvSegBtns").querySelectorAll(".rv-mode-btn").forEach(b=>{
+    if(b.disabled) return;
+    b.addEventListener("click",()=>{
+      rvSeg=b.dataset.seg;
+      document.getElementById("rvSegBtns").querySelectorAll(".rv-mode-btn").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on");
+      rvCfg.per.clear();                 /* 分期随史段重建，清旧选择 */
+      renderRvPer();
+      rvSyncBtns(); updateCount();
+    });
+  });
+  /* 门类/等第：多选 toggle（「全部」=清空该组）；分期按史段动态生成 */
+  rvBtns(document.getElementById("rvTypeBtns"),[["全部","全部"],["政治","政治"],["军事","军事"],["经济","经济"],["文化","文化"],["制度","制度"],["民族关系","民族关系"],["对外关系","对外关系"]],"type");
+  rvBtns(document.getElementById("rvImpBtns"),[["全部",0],["★★★",3],["★★",2],["★",1]],"imp");
+  renderRvPer();
   document.getElementById("rvQ").addEventListener("input",e=>{rvCfg.q=e.target.value.trim();updateCount();});
   document.getElementById("rvAll").addEventListener("click",()=>{rvCfg.numMode="all";document.getElementById("rvAll").classList.add("on");document.getElementById("rvNum").disabled=true;});
   document.getElementById("rvNum").addEventListener("input",e=>{
@@ -16,7 +30,20 @@ function initReview(){
     document.getElementById("rvAll").classList.remove("on");document.getElementById("rvNum").disabled=false;
   });
   document.getElementById("rvModes").querySelectorAll(".rv-mode-btn").forEach(b=>{
-    b.addEventListener("click",()=>{document.getElementById("rvModes").querySelectorAll(".rv-mode-btn").forEach(x=>x.classList.remove("on"));b.classList.add("on");rvCfg.mode=b.dataset.mode;});
+    b.addEventListener("click",()=>{document.getElementById("rvModes").querySelectorAll(".rv-mode-btn").forEach(x=>x.classList.remove("on"));b.classList.add("on");rvCfg.mode=b.dataset.mode;
+      /* 随机漫游：显示漫游范围（全随机/选史段随机） */
+      document.getElementById("rvRoamScope").hidden=b.dataset.mode!=="roam";
+      updateCount();
+    });
+  });
+  /* 漫游范围：全随机（全部史段）/ 选史段随机（第一步所选） */
+  document.getElementById("rvScopeBtns").querySelectorAll("button.f").forEach(b=>{
+    b.addEventListener("click",()=>{
+      rvCfg.roamScope=b.dataset.scope;
+      document.getElementById("rvScopeBtns").querySelectorAll("button.f").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on");
+      updateCount();
+    });
   });
   document.getElementById("rvStart").addEventListener("click",startReview);
   document.getElementById("rvShow").addEventListener("click",()=>{
@@ -47,30 +74,62 @@ function initReview(){
   updateCount();
 }
 
-function rvBtns(el,items,onChange,active){
+/* 复习筛选按钮：多选 toggle（「全部」= 清空该组；空 Set = 全部）；key 为 rvCfg 字段名 */
+function rvBtns(el,items,key){
   el.innerHTML="";
   items.forEach(it=>{
+    const label=it[0], val=it[1];
     const b=document.createElement("button");
-    b.className="f"+(active===it[1]?" on":"");
-    b.textContent=it[0];
-    b.addEventListener("click",()=>{el.querySelectorAll(".f").forEach(x=>x.classList.remove("on"));b.classList.add("on");onChange(it[1]);});
+    b.className="f"; b.textContent=label; b.dataset.val=String(val);
+    if(val==="全部"||val===0){
+      b.addEventListener("click",()=>{rvCfg[key].clear();rvSyncBtns();updateCount();});
+    }else{
+      b.addEventListener("click",()=>{rvCfg[key].has(val)?rvCfg[key].delete(val):rvCfg[key].add(val);rvSyncBtns();updateCount();});
+    }
     el.appendChild(b);
   });
+  rvSyncBtns();
+}
+/* 分期按钮：按第一步所选史段重建（ancient=15 章 / modern=11 段） */
+function renderRvPer(){
+  const CH=rvSeg==="modern"?CHAPTERS_MODERN:CHAPTERS;
+  rvBtns(document.getElementById("rvPerBtns"),[["全部","全部"],...CH.map((c,i)=>[c.name,i])],"per");
+}
+/* 按钮高亮同步：「全部」on = Set 空；具体项 on = 在 Set 中（type 字符串 / imp·per 数字） */
+function rvSyncBtns(){
+  for(const [gid,key,conv] of [["rvTypeBtns","type",s=>s],["rvImpBtns","imp",Number],["rvPerBtns","per",Number]]){
+    const g=document.getElementById(gid); if(!g) continue;
+    const s=rvCfg[key];
+    g.querySelectorAll("button.f").forEach(b=>{
+      if(b.textContent==="全部"){ b.classList.toggle("on", s.size===0); return; }
+      b.classList.toggle("on", s.has(conv(b.dataset.val)));
+    });
+  }
+}
+
+/* 数据源：按史段；随机漫游「全随机」= 全库（ancient+modern 合并） */
+function rvEvents(){
+  if(rvCfg.mode==="roam" && rvCfg.roamScope==="all") return [...EVENTS, ...EVENTS_MODERN];
+  return rvSeg==="modern"?EVENTS_MODERN:EVENTS;
 }
 
 function poolFromFilters(){
+  const EV=rvEvents();
+  const allScope=(rvCfg.mode==="roam" && rvCfg.roamScope==="all");
   const q=rvCfg.q.toLowerCase();
-  return EVENTS.filter(e=>{
-    if(rvCfg.type!=="全部"&&e.type!==rvCfg.type)return false;
-    if(rvCfg.imp!==0&&e.importance!==rvCfg.imp)return false;
-    if(rvCfg.per!=="全部"&&e.ch!==rvCfg.per)return false;
-    if(q&&!matchEvent(e,q))return false;
+  return EV.filter(e=>{
+    if(rvCfg.type.size && !rvCfg.type.has(e.type)) return false;
+    if(rvCfg.imp.size && !rvCfg.imp.has(e.importance)) return false;
+    if(!allScope && rvCfg.per.size && !rvCfg.per.has(e.ch)) return false;  /* 全随机忽略分期（跨史段 ch 冲突） */
+    if(q && !matchEvent(e,q)) return false;
     return true;
   });
 }
 
 function wrongPool(){
-  return EVENTS.filter(e=>localStorage.getItem("ht-review-"+e.title)==="fail");
+  const EV=rvSeg==="modern"?EVENTS_MODERN:EVENTS;
+  const key="ht-review-"+rvSeg+"-";
+  return EV.filter(e=>localStorage.getItem(key+e.title)==="fail" || localStorage.getItem("ht-review-"+e.title)==="fail");  /* 兼容旧无前缀 key */
 }
 
 function updateCount(){
@@ -97,7 +156,7 @@ function startReview(){
     shuffle(pool); pool=pool.slice(0,max);
   }
   pool=pool.map(e=>({e})); /* 统一包装为 {e}，供 showCard/answer 使用 */
-  rvState={queue:pool,fails:[],processed:0,total:pool.length,round:1,okCount:0,failCount:0,mode:rvCfg.mode,roundTotal:pool.length,roundDone:0};
+  rvState={queue:pool,fails:[],processed:0,total:pool.length,round:1,okCount:0,failCount:0,mode:rvCfg.mode,roundTotal:pool.length,roundDone:0,seg:rvSeg};
   document.getElementById("rvSetup").style.display="none";
   document.getElementById("rvStage").style.display="";
   document.getElementById("rvDone").hidden=true;
@@ -151,8 +210,9 @@ function answer(ok){
   const s=rvState;
   const card=s.queue.shift();
   s.processed++; s.roundDone++;
-  if(ok){s.okCount++;localStorage.setItem("ht-review-"+card.e.title,"ok");}
-  else{s.failCount++;s.fails.push(card);localStorage.setItem("ht-review-"+card.e.title,"fail");}
+  const key="ht-review-"+(s.seg||"ancient")+"-"+card.e.title;   /* 错题 key 加史段前缀（ancient/modern 互不混淆） */
+  if(ok){s.okCount++;localStorage.setItem(key,"ok");}
+  else{s.failCount++;s.fails.push(card);localStorage.setItem(key,"fail");}
   showCard();
 }
 
