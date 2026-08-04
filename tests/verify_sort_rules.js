@@ -47,7 +47,7 @@ function ok(name, cond, extra) {
     y: r.querySelector('.year') ? r.querySelector('.year').textContent.trim() : '',
     t: r.querySelector('h3') ? r.querySelector('h3').textContent : ''
   })).find(x => x.t.includes('陈胜吴广起义')));
-  ok('古代史 15 bands / 851', bandsA === 15 && cntA.includes('851'), bandsA + ' / ' + cntA.trim());
+  ok('古代史 15 bands / 855', bandsA === 15 && cntA.includes('855'), bandsA + ' / ' + cntA.trim());
   ok('古代史月显示未变（前 209年7月）', chen && chen.y === '前 209年7月', JSON.stringify(chen));
 
   ok('无 JS 报错', errs.length === 0, errs.slice(0, 2).join(' | '));

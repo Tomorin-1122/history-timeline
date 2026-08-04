@@ -26,7 +26,7 @@ function ok(name, cond, extra) {
   let perN = await page.$$eval('#rvPerBtns button.f', els => els.length);
   ok('默认史段=古代史，分期 16 项（全部+15 章）', perN === 16, perN + ' 项');
   const cntA = await page.textContent('#rvCount');
-  ok('古代史计数 851', cntA.includes('851'), cntA);
+  ok('古代史计数 855', cntA.includes('855'), cntA);
 
   // 2. 切近代史史段 → 分期 12 项（全部+11 段）+ 计数 866
   await page.click('#rvSegBtns .rv-mode-btn[data-seg="modern"]');
@@ -62,11 +62,11 @@ function ok(name, cond, extra) {
   await page.waitForTimeout(300);
   const cntSeg = await page.textContent('#rvCount');
   ok('漫游选史段随机计数 = 近代史 866', cntSeg.includes('866'), cntSeg);
-  // 切回古代史史段 + 选史段随机 → 851
+  // 切回古代史史段 + 选史段随机 → 855
   await page.click('#rvSegBtns .rv-mode-btn[data-seg="ancient"]');
   await page.waitForTimeout(300);
   const cntSegA = await page.textContent('#rvCount');
-  ok('漫游选史段随机（古代史）= 851', cntSegA.includes('851'), cntSegA);
+  ok('漫游选史段随机（古代史）= 855', cntSegA.includes('855'), cntSegA);
 
   // 6. 世界史占位 disabled
   const worldDisabled = await page.evaluate(() => { const b = document.querySelector('#rvSegBtns .rv-mode-btn[data-seg="world"]'); return b && b.disabled; });

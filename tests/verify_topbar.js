@@ -48,7 +48,7 @@ const fs = require('fs');
   check('古代史时间轴渲染（15 章带）', bands0 === 15, bands0 + ' bands');
   check('古代史分期链接 16 个', perLinks0 === 16, perLinks0 + ' links');
   const cnt0 = await page.textContent('#cnt');
-  check('古代史计数', cnt0.includes('851'), cnt0.trim());
+  check('古代史计数', cnt0.includes('855'), cnt0.trim());
 
   /* 3. 切到近现代史 */
   await page.click('#segRow .seg-btn[data-seg="modern"]');

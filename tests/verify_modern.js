@@ -98,7 +98,7 @@ function ok(name, cond, extra) {
   await page.waitForTimeout(400);
   const bandsA = await page.$$eval('#main .band', els => els.length);
   ok('切回古代史 15 bands', bandsA === 15, bandsA + ' bands');
-  ok('古代史计数', (await page.textContent('#cnt')).includes('851'), await page.textContent('#cnt'));
+  ok('古代史计数', (await page.textContent('#cnt')).includes('855'), await page.textContent('#cnt'));
   await page.click('.tab[data-view="map"]');
   await page.waitForTimeout(400);
   const selVal2 = await page.$eval('#rangeSel', s => s.value);
