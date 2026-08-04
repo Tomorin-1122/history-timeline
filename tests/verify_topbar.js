@@ -61,7 +61,7 @@ const fs = require('fs');
   const perLabel1 = await page.textContent('#perGroup');
   check('modern 分期链接 12 个', perLinks1 === 12 && perLabel1.includes('外国武装侵略和国内农民战争'), perLabel1.trim().slice(0, 30));
   const cnt1 = await page.textContent('#cnt');
-  check('modern 计数', cnt1.includes('301'), cnt1.trim());
+  check('modern 计数', cnt1.includes('866'), cnt1.trim());
   const modernBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   check('modern 底色为冷青蓝', modernBg === 'rgb(233, 237, 242)', modernBg);
 

@@ -42,6 +42,7 @@ const CHAPTERS_MODERN = [
 ];
 
 // 事件年份 → 近代史段索引（严格按时间划分落座；1912 以清帝退位 2-12 为界）
+// 仅用于 period 非标准段名的旧数据（晚清 7 章）；新数据（民国/共和国）走 PERIOD_TO_CH
 function modernSeg(e) {
   const y = e.year;
   if (y <= 1864) return 0;
@@ -66,6 +67,23 @@ function modernSeg(e) {
 function modernSortKey(e) {
   return e.year * 13 * 32 + (e.month || 0) * 32 + (e.day || 0);
 }
+
+// period（标准段名）→ 近代史段索引。新数据（民国/共和国）period 已是老板定稿标准段名，
+// 按 period 落座可精确处理边界年份（1927.8 南昌起义/1937.7 七七事变/1945.9 抗战后/1949.10 建国后），
+// 与教材章内 period 标注一致（晚清旧数据 period 不规范，仍走 modernSeg）
+const PERIOD_TO_CH = {
+  '外国武装侵略和国内农民战争': 0,
+  '清朝自强运动及其失败': 1,
+  '清末改革和清朝覆亡': 2,
+  '北洋政府时期': 3,
+  '土地革命战争时期': 4,
+  '全民族抗日战争时期': 5,
+  '解放战争时期': 6,
+  '过渡时期（从新民主主义到社会主义）': 7,
+  '全面建设社会主义时期': 8,
+  '文化大革命时期': 9,
+  '改革开放新时期': 10,
+};
 
 // dynasty（pilot 值）→ ch 索引
 const DYN_TO_CH = {
@@ -125,7 +143,9 @@ function todayName(loc) {
 const REQ = ['title', 'year', 'yearMode', 'yearRange', 'dynasty', 'period', 'type', 'importance',
   'summary', 'cause', 'effect', 'examTip', 'people', 'location', 'tags', 'related', 'wikiSlug'];
 
-// ---- 近代史 pilot 文件（第01-07章，period 落座按年份） ----
+// ---- 近代史 pilot 文件 ----
+// 前 7 章：晚清（李侃《中国近代史》，period 录入值不规范，按年份 modernSeg 落座）
+// 后 12 章：民国/共和国（王桧林《中国现代史》上/下册，period 已是标准段名，按 PERIOD_TO_CH 落座）
 const PILOTS_MODERN = [
   ['第01章', 'data/第01章.json'],
   ['第02章', 'data/第02章.json'],
@@ -134,6 +154,18 @@ const PILOTS_MODERN = [
   ['第05章', 'data/第05章.json'],
   ['第06章', 'data/06章.json'],
   ['第07章', 'data/07章.json'],
+  ['民国第01章', 'data/民国第01章.json', true],
+  ['民国第02章', 'data/民国第02章.json', true],
+  ['民国第03章', 'data/民国第03章.json', true],
+  ['民国第04章', 'data/民国第04章.json', true],
+  ['民国第05章', 'data/民国第05章.json', true],
+  ['民国第06章', 'data/民国第06章.json', true],
+  ['下册第01章', 'data/下册第01章.json', true],
+  ['下册第02章', 'data/下册第02章.json', true],
+  ['下册第03章', 'data/下册第03章.json', true],
+  ['下册第04章', 'data/下册第04章.json', true],
+  ['下册第05章', 'data/下册第05章.json', true],
+  ['下册第06章', 'data/下册第06章.json', true],
 ];
 
 function main() {
@@ -179,8 +211,8 @@ function main() {
     });
   }
 
-  // 近现代史：落座按年份（modernSeg），period 覆盖为标准段名，dynasty 规范化（民国初年→民国）
-  for (const [tag, file] of PILOTS_MODERN) {
+  // 近现代史：落座按年份（modernSeg）或 period 映射（periodKnown），period 覆盖为标准段名，dynasty 规范化
+  for (const [tag, file, periodKnown] of PILOTS_MODERN) {
     const p = path.join(ROOT, file);
     let data;
     try { data = JSON.parse(fs.readFileSync(p, 'utf8')); }
@@ -192,7 +224,13 @@ function main() {
       if (it.year == null && !(Array.isArray(it.yearRange) && it.yearRange.length)) {
         errs.push(`[${tag} ${it.title}] 无年份且无 yearRange，近代史必须可落座`); return;
       }
-      const seg = modernSeg(it);
+      let seg;
+      if (periodKnown) {
+        seg = PERIOD_TO_CH[it.period];
+        if (seg === undefined) { errs.push(`[${tag} ${it.title}] period 非标准段名: ${it.period}`); return; }
+      } else {
+        seg = modernSeg(it);
+      }
       eventsModern.push({
         title: it.title,
         year: it.year,

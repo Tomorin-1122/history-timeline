@@ -32,7 +32,13 @@ document.getElementById("perGroup").addEventListener("click",(ev)=>{
     const ch=parseInt(a.dataset.ch,10);
     state.ch=Number.isNaN(ch)?-1:ch;
     document.querySelectorAll("#perGroup a.jump").forEach(x=>x.classList.toggle("on",x===a));
-    if(typeof setRange==="function") setRange(state.ch===0?"pre":"hist");
+    /* 地图模式跟随章/段（三态下拉，2026-08-05 修复）：
+       古代史点「原始社会」→ pre；pre 模式点非原始社会章/全部 → 回 hist；
+       modern 史段（段链接 0-10）与 hist 模式保持当前地图模式，仅按章/段过滤——勿再无条件 setRange("hist")（会跳回历史时期地图） */
+    if(typeof setRange==="function"){
+      if(state.ch===0 && curSeg!=="modern") setRange("pre");
+      else if(mapRange==="pre" && state.ch!==0) setRange("hist");
+    }
     if(typeof drawMarkers==="function") drawMarkers();
     return;
   }

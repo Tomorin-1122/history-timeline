@@ -41,9 +41,11 @@ const { chromium } = require('playwright');
   const linkTexts = await page.evaluate(() => [...document.querySelectorAll('#period-links a, .ch-link, a[data-ch]')].map(a => a.textContent.trim()).filter(Boolean).slice(0, 20));
   console.log('分期链接:', linkTexts.join(' | '));
 
-  // 4. 检查明章 marker 是否绘制（切到明章）
+  // 4. 检查明章 marker 是否绘制（先切地图视图，再按 data-ch 点章；text=明 在新顶栏下有歧义）
   try {
-    await page.click('text=明');
+    await page.evaluate(() => { const b = document.querySelector('button[data-view="map"]'); if (b) b.click(); });
+    await page.waitForTimeout(800);
+    await page.evaluate(c => { const a = document.querySelector(`[data-ch="${c}"]`); if (a) a.click(); }, 13);
     await page.waitForTimeout(1500);
     const markers = await page.evaluate(() => document.querySelectorAll('.leaflet-marker-icon').length);
     console.log('切到明章后 marker 数:', markers);

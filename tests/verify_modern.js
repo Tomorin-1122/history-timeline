@@ -28,7 +28,7 @@ function ok(name, cond, extra) {
   await page.click('.seg-btn[data-seg="modern"]');
   await page.waitForTimeout(400);
 
-  ok('modern 顶栏计数', (await page.textContent('#cnt')).includes('301'), await page.textContent('#cnt'));
+  ok('modern 顶栏计数', (await page.textContent('#cnt')).includes('866'), await page.textContent('#cnt'));
 
   // 11 段 band
   const bands = await page.$$eval('#main .band', els => els.map(e => e.querySelector('h2').textContent));
@@ -39,9 +39,9 @@ function ok(name, cond, extra) {
   const links = await page.$$eval('#perGroup a.jump', els => els.map(e => e.textContent));
   ok('分期链接 11+1', links.length === 12 && links[0] === '全部', links.length + ' 个');
 
-  // 空段占位（段4=土地革命战争时期 无数据 → 数据待生成）
+  // 空段占位（2026-08-05 民国/共和国 12 章并入后 11 段全部有数据 → 0 占位）
   const emptyRows = await page.$$eval('#main .row', els => els.filter(e => e.textContent.includes('数据待生成')).length);
-  ok('空段占位 7 个', emptyRows === 7, emptyRows + ' 个');
+  ok('空段占位 0 个（11 段全有数据）', emptyRows === 0, emptyRows + ' 个');
 
   // 段0 首事件 = 1838 黄爵滋上书（复合时间排序：1838-6）
   const firstRow = await page.$$eval('#main .row', els => {
@@ -84,6 +84,13 @@ function ok(name, cond, extra) {
   ok('近代史地图自动选中', selVal === 'modern', 'rangeSel=' + selVal);
   ok('近代史滑块范围 1838~2012', sliderR === '1838~2012', sliderR);
   ok('近代史地图有 marker', mapMarkers > 0, mapMarkers + ' 个');
+  // 2026-08-05 回归：近代史地图点分期段链接 → 保持 modern 模式（曾无条件 setRange("hist") 跳回历史时期地图）
+  await page.evaluate(() => { const a = document.querySelector('#perGroup a.jump[data-ch="4"]'); if (a) a.click(); });  // 第五段 土地革命战争时期
+  await page.waitForTimeout(400);
+  const selValAfterSeg = await page.$eval('#rangeSel', s => s.value);
+  ok('近代史地图点筛选保持 modern', selValAfterSeg === 'modern', 'rangeSel=' + selValAfterSeg);
+  await page.evaluate(() => { const a = document.querySelector('#perGroup a.jump[data-ch="-1"]'); if (a) a.click(); });  // 全部
+  await page.waitForTimeout(300);
   await page.click('.tab[data-view="timeline"]');
 
   // 切回古代史 → 15 bands 恢复
