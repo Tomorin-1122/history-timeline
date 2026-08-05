@@ -109,6 +109,11 @@ function setRange(mode){
   mapRange=mode;
   rangeSel.value=mode;
   cityPeriodFocus=null;            /* 切模式清城市时段聚焦 */
+  /* 视野随模式（2026-08-05 老板定案）：世界史两档 → 全球视野；pre/hist/modern → 中国视野 */
+  if(mapObj){
+    const world=mode==='world-ancient'||mode==='world-modern';
+    mapObj.setView(world?[20,15]:[34,110], world?2:5);
+  }
   /* 换地图 = 切换筛选上下文（map-pre/hist/modern 各自记忆 type/imp/q/ch，不再清 ch） */
   const [ymin,ymax]=curY();
   setStep();
@@ -166,7 +171,10 @@ function onTdtErr(){
 /* ---- 初始化：天地图优先；403 连续 3 次自动回退高德（本地 file:// 打开不白屏） ---- */
 function initMap(){
   if(mapInited) return; mapInited=true;
-  mapObj=L.map("map",{zoomControl:true}).setView([34,110],5);   /* attributionControl 默认开启：保留 Leaflet 署名链接（开源协议） */
+  mapObj=L.map("map",{zoomControl:true}).setView(
+    (mapRange==='world-ancient'||mapRange==='world-modern')?[20,15]:[34,110],
+    (mapRange==='world-ancient'||mapRange==='world-modern')?2:5
+  );   /* 初始视野：世界史全球 / 其余中国（2026-08-05）；attributionControl 默认开启：保留 Leaflet 署名链接（开源协议） */
   /* 来源声明放地图下方空白处（2026-08-05 老板定案：不放地图内）；底图切换/回退时更新 */
   const setAttr=(base)=>{
     const el=document.getElementById("mapAttr");
