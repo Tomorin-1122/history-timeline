@@ -12,9 +12,11 @@ function switchView(v){
   document.getElementById("view-timeline").hidden=v!=="timeline";
   document.getElementById("view-map").hidden=v!=="map";
   document.getElementById("view-review").hidden=v!=="review";
+  document.getElementById("view-relation").hidden=v!=="relation";
   viewTabs.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
   if(v==="map"){ try{ initMap(); }catch(e){ /* CDN 不可用时（回归测试 abort leaflet）静默，视图切换不受阻 */ } }
   if(v==="review") initReview();
+  if(v==="relation"){ try{ if(typeof initRelation==="function") initRelation(); }catch(e){ /* CDN 失败降级提示由 relation.js 内处理 */ } }
   /* 视图切换 = 筛选上下文切换（时间轴 ↔ 地图各自记忆），恢复该视图的筛选 UI（多选高亮/搜索词/章） */
   if(typeof syncFilterUI==="function") syncFilterUI();
   if(typeof trackBand==="function") trackBand();

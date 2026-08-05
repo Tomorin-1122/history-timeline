@@ -37,7 +37,7 @@ const fs = require('fs');
   check('L2 默认古代史 on', segBtns[0].on && !segBtns[1].on, '');
 
   const tabs = await page.$$eval('#viewTabs .tab', ts => ts.map(t => t.textContent.trim()));
-  check('L3 视图 tab 三个', tabs.join('/') === '时间轴/地图/复习', tabs.join('/'));
+  check('L3 视图 tab 四个', tabs.join('/') === '时间轴/地图/复习/关系', tabs.join('/'));
 
   const hasBar = await page.$('#bar');
   check('L4 内容级筛选条存在', !!hasBar, '');

@@ -364,3 +364,44 @@ footer{margin-top:70px; font-size:12.5px; color:var(--ink3); line-height:1.8; bo
 .modal-actions .f{border:1px solid var(--line2);padding:6px 18px;font-family:var(--serif);font-size:13.5px;background:none;color:var(--ink2);cursor:pointer}
 .modal-actions .f:hover{color:var(--cin);border-color:var(--cin)}
 .modal-actions .f.ok{background:var(--cin);color:var(--paper2);border-color:var(--cin)}
+
+/* ---- 关系图谱（relation.js，2026-08-05 接入 C1） ---- */
+.relation{padding-top:20px}
+.rel-tool{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 14px;border:1px solid var(--line);background:var(--paper2);font-size:13px}
+.rel-q{flex:0 1 220px}
+.rel-count{margin-left:auto;color:var(--ink3);font-size:12.5px;font-variant-numeric:tabular-nums}
+.rel-legend{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rel-lg{display:inline-flex;align-items:center;font-size:11.5px;color:var(--ink3)}
+.rel-wrap{position:relative}
+#relCanvas{height:calc(100dvh - var(--map-h-offset));min-height:600px;border:1px solid var(--line);margin-top:10px;background:var(--paper2);z-index:0}
+.rel-attr{margin-top:8px;font-size:11px;color:var(--ink3);letter-spacing:.03em;text-align:right}
+.rel-fallback{padding:60px 20px;text-align:center;color:var(--ink3);font-size:14px;line-height:2}
+/* 底部浮层卡片（点击节点弹出，古籍卡片风：左朱砂边 + 纸底） */
+.rel-card{
+  position:absolute; left:16px; right:16px; bottom:14px; z-index:30;
+  max-width:560px; margin:0 auto;
+  background:var(--paper2); border:1px solid var(--line2);
+  border-left:3px solid var(--cin); box-shadow:0 6px 24px rgba(46,42,35,.18);
+  padding:14px 18px;
+}
+.rel-card[hidden]{display:none}
+.rc-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.rc-head b{font-size:16px;font-weight:900;letter-spacing:.04em;color:var(--ink)}
+.rc-x{margin-left:auto;background:none;border:none;color:var(--ink3);font-size:18px;line-height:1;cursor:pointer;font-family:var(--serif);padding:2px 4px}
+.rc-x:hover{color:var(--cin)}
+.rc-year{font-size:12.5px;color:var(--cin);letter-spacing:.05em;margin-bottom:6px}
+.rc-sum{font-size:13.5px;color:var(--ink2);line-height:1.85;margin-bottom:6px}
+.rc-tip{font-size:12.5px;color:var(--ink3);line-height:1.7;margin-bottom:6px}
+.rc-rel{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12.5px;color:var(--ink3);margin-bottom:4px}
+.rc-chip{display:inline-block;font-size:12px;color:var(--cin);border:1px solid var(--line2);background:var(--paper);padding:1px 8px;cursor:pointer}
+.rc-chip:hover{background:var(--cin-soft);border-color:var(--cin)}
+.rc-foot{font-size:11px;color:var(--ink3);margin-top:6px;letter-spacing:.03em}
+/* 移动端 */
+@media (max-width:760px){
+  .rel-tool{gap:6px;padding:6px 10px}
+  .rel-q{flex:1 1 100%}
+  .rel-count{order:98}
+  .rel-legend{order:99}
+  #relCanvas{height:calc(100dvh - var(--map-h-offset));min-height:480px}
+  .rel-card{left:8px;right:8px;bottom:8px;padding:12px 14px}
+}

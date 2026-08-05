@@ -17,9 +17,13 @@ const FILTERS = {
   'tl-world-modern':  { type: new Set(), imp: new Set(), q: '', ch: new Set() },
   'map-world-ancient':{ type: new Set(), imp: new Set(), q: '', ch: new Set() },
   'map-world-modern': { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  /* 关系图谱（2026-08-05 接入）：独立上下文，只记搜索词（图谱自身还有 relQ 工具条） */
+  'rel': { type: new Set(), imp: new Set(), q: '', ch: new Set() },
 };
 /* 当前上下文：地图视图按 mapRange（pre/hist/modern），时间轴按 curSeg；typeof 兜底防 timeline 先加载 TDZ */
 function curCtx(){
+  const vr = document.getElementById('view-relation');
+  if (vr && !vr.hidden) return 'rel';            /* 关系图谱视图（2026-08-05） */
   const vm = typeof document !== 'undefined' && document.getElementById('view-map');
   if (vm && !vm.hidden && typeof mapRange !== 'undefined') return 'map-' + mapRange;
   return 'tl-' + (typeof curSeg !== 'undefined' ? curSeg : 'ancient');
