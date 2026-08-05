@@ -12,6 +12,11 @@ const FILTERS = {
   'map-pre':    { type: new Set(), imp: new Set(), q: '', ch: new Set() },
   'map-hist':   { type: new Set(), imp: new Set(), q: '', ch: new Set() },
   'map-modern': { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  /* 世界史（2026-08-05 接入）：两个史段 + 两种地图模式，各自独立记忆 */
+  'tl-world-ancient': { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  'tl-world-modern':  { type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  'map-world-ancient':{ type: new Set(), imp: new Set(), q: '', ch: new Set() },
+  'map-world-modern': { type: new Set(), imp: new Set(), q: '', ch: new Set() },
 };
 /* 当前上下文：地图视图按 mapRange（pre/hist/modern），时间轴按 curSeg；typeof 兜底防 timeline 先加载 TDZ */
 function curCtx(){
@@ -21,10 +26,12 @@ function curCtx(){
 }
 function st(){ return FILTERS[curCtx()]; }
 /* ---- 史段（交接文档 §10.6.2）---- */
-let curSeg="ancient";  /* 'ancient' | 'modern' | 'world-ancient'(禁用) | 'world-modern'(禁用) */
+let curSeg="ancient";  /* 'ancient' | 'modern' | 'world-ancient' | 'world-modern'（世界史 2026-08-05 接入） */
 function segName(seg){return seg==="modern"?"中国近现代史":(seg==="world-ancient"?"世界古代中世纪史":(seg==="world-modern"?"世界近现代史":"中国古代史"));}
-/* ---- 史段数据源：modern 用 EVENTS_MODERN/CHAPTERS_MODERN，其余用古代史（渲染/筛选/抽屉/跳转统一入口） ---- */
+/* ---- 史段数据源：modern 用近代史数组，world-* 用世界史（4+4 分段，ch 归一化），其余用古代史（渲染/筛选/抽屉/跳转统一入口） ---- */
 function segData(){
+  if(curSeg==="world-ancient") return {EV: EVENTS_WORLD.filter(e=>e.ch<4), CH: CHAPTERS_WORLD.slice(0,4)};
+  if(curSeg==="world-modern")  return {EV: EVENTS_WORLD.filter(e=>e.ch>=4).map(e=>({...e,ch:e.ch-4})), CH: CHAPTERS_WORLD.slice(4)};
   return curSeg==="modern"
     ? {EV: EVENTS_MODERN, CH: CHAPTERS_MODERN}
     : {EV: EVENTS, CH: CHAPTERS};
@@ -35,8 +42,13 @@ function segData(){
          有 day 的按日期先后（day 1..31）。显示仍只到月（fmtShort），日期仅用于排序。
    ancient：保持原排序（年主导 + 同月并列保持源序），中国古代史不动 */
 function modernSortKey(e){ return e.year*13*32 + (e.month||0)*32 + (e.day||0); }
+/* 世界史排序键：有 year 用复合时间（年/月/日）；era 无 year 用 eraSub"距今X万"解析为负年，无时间信息排末（1e9） */
+function worldSortKey(e){
+  if(e.year != null) return e.year*13*32 + (e.month||0)*32 + (e.day||0);
+  return eraSortKey(e);
+}
 function sortKey(e){
-  if(curSeg==="modern") return modernSortKey(e);
+  if(curSeg==="modern" || curSeg==="world-ancient" || curSeg==="world-modern") return worldSortKey(e);
   return eraSortKey(e)*13 + (e.month||13);
 }
 /* ---- 章节带引用（↑↓ 浮动按钮用）：renderTimeline() 重渲染后由 refreshBands() 刷新（史段切换销毁旧 DOM）---- */

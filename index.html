@@ -34,8 +34,8 @@
     <div class="seg-row" id="segRow">
       <button class="seg-btn on" data-seg="ancient">中国古代史</button>
       <button class="seg-btn" data-seg="modern">中国近现代史</button>
-      <button class="seg-btn" data-seg="world-ancient" disabled title="规划中">世界古代中世纪史</button>
-      <button class="seg-btn" data-seg="world-modern" disabled title="规划中">世界近现代史</button>
+      <button class="seg-btn" data-seg="world-ancient">世界古代中世纪史</button>
+      <button class="seg-btn" data-seg="world-modern">世界近现代史</button>
     </div>
     <!-- L3 视图级：tab 靠左（无分割细线） -->
     <div class="tb-row1">
@@ -75,10 +75,12 @@
     <div class="maptool">
       <span class="mt-g mt-g-mode">
         <span class="glabel">地图</span>
-        <select id="rangeSel" class="range-sel" title="选择地图：原始社会 / 历史时期 / 中国近现代史">
+        <select id="rangeSel" class="range-sel" title="选择地图：原始社会 / 历史时期 / 中国近现代史 / 世界古代 / 世界近现代">
           <option value="pre">原始社会（史前）</option>
           <option value="hist" selected>历史时期（夏~清）</option>
           <option value="modern">中国近现代史（1838-2012）</option>
+          <option value="world-ancient">世界古代中世纪史</option>
+          <option value="world-modern">世界近现代史</option>
         </select>
       </span>
       <span class="mt-g mt-g-slider">
@@ -107,7 +109,8 @@
         <div class="rv-modes" id="rvSegBtns">
           <button class="rv-mode-btn on" data-seg="ancient"><b>中国古代史</b><span>15 章 · 855 事</span></button>
           <button class="rv-mode-btn" data-seg="modern"><b>中国近现代史</b><span>11 段 · 866 事</span></button>
-          <button class="rv-mode-btn" data-seg="world" disabled title="规划中"><b>世界史</b><span>待接入</span></button>
+          <button class="rv-mode-btn" data-seg="world-ancient"><b>世界古代中世纪史</b><span>4 段 · 238 事</span></button>
+          <button class="rv-mode-btn" data-seg="world-modern"><b>世界近现代史</b><span>4 段 · 676 事</span></button>
         </div>
       </div>
       <div class="rv-sec">

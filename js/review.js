@@ -2,7 +2,7 @@
 'use strict';
 
 let rvInit=false, rvState=null;
-let rvSeg='ancient';   /* 复习史段（第一步）：ancient/modern；world 占位 disabled（2026-08-05） */
+let rvSeg='ancient';   /* 复习史段（第一步）：ancient/modern/world-ancient/world-modern（世界史 2026-08-05 接入） */
 const rvCfg={type:new Set(), imp:new Set(), per:new Set(), q:'', numMode:'all', num:10, mode:'train', roamScope:'all'};
 
 function initReview(){
@@ -90,9 +90,16 @@ function rvBtns(el,items,key){
   });
   rvSyncBtns();
 }
-/* 分期按钮：按第一步所选史段重建（ancient=15 章 / modern=11 段） */
+/* 复习史段数据源：与时间轴 segData 同构（world 4+4 分段 ch 归一化） */
+function rvSegData(){
+  if(rvSeg==="world-ancient") return {EV: EVENTS_WORLD.filter(e=>e.ch<4), CH: CHAPTERS_WORLD.slice(0,4)};
+  if(rvSeg==="world-modern")  return {EV: EVENTS_WORLD.filter(e=>e.ch>=4).map(e=>({...e,ch:e.ch-4})), CH: CHAPTERS_WORLD.slice(4)};
+  if(rvSeg==="modern") return {EV: EVENTS_MODERN, CH: CHAPTERS_MODERN};
+  return {EV: EVENTS, CH: CHAPTERS};
+}
+/* 分期按钮：按第一步所选史段重建（ancient=15 章 / modern=11 段 / world-*=4 段） */
 function renderRvPer(){
-  const CH=rvSeg==="modern"?CHAPTERS_MODERN:CHAPTERS;
+  const {CH}=rvSegData();
   rvBtns(document.getElementById("rvPerBtns"),[["全部","全部"],...CH.map((c,i)=>[c.name,i])],"per");
 }
 /* 按钮高亮同步：「全部」on = Set 空；具体项 on = 在 Set 中（type 字符串 / imp·per 数字） */
@@ -107,10 +114,10 @@ function rvSyncBtns(){
   }
 }
 
-/* 数据源：按史段；随机漫游「全随机」= 全库（ancient+modern 合并） */
+/* 数据源：按史段；随机漫游「全随机」= 全库（古代+近代+世界史合并） */
 function rvEvents(){
-  if(rvCfg.mode==="roam" && rvCfg.roamScope==="all") return [...EVENTS, ...EVENTS_MODERN];
-  return rvSeg==="modern"?EVENTS_MODERN:EVENTS;
+  if(rvCfg.mode==="roam" && rvCfg.roamScope==="all") return [...EVENTS, ...EVENTS_MODERN, ...EVENTS_WORLD];
+  return rvSegData().EV;
 }
 
 function poolFromFilters(){
@@ -127,7 +134,7 @@ function poolFromFilters(){
 }
 
 function wrongPool(){
-  const EV=rvSeg==="modern"?EVENTS_MODERN:EVENTS;
+  const EV=rvSegData().EV;
   const key="ht-review-"+rvSeg+"-";
   return EV.filter(e=>localStorage.getItem(key+e.title)==="fail" || localStorage.getItem("ht-review-"+e.title)==="fail");  /* 兼容旧无前缀 key */
 }

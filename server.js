@@ -18,20 +18,21 @@ const MIME = {
 const REQ_FIELDS = ['title','year','yearMode','yearRange','dynasty','period','type','importance','summary','cause','effect','examTip','people','location','tags','related','wikiSlug','era','eraSub'];
 
 // 与 js/gen_data.js 的 PILOTS 保持一致（新增章节录入后这里同步加行）
+// 2026-08-05 统一命名：章数据一律「章名.json」/「第XX章.json」，去 _pilot_ 后缀；coords_demo 移 obsolete
 const PILOTS = [
-  ['原始社会', 'data/原始社会_pilot_20260802.json'],
-  ['夏商', 'data/夏商_pilot_20260802.json'],
-  ['西周', 'data/西周_pilot_20260802.json'],
-  ['春秋', 'data/春秋_pilot_20260802.json'],
-  ['战国', 'data/战国_pilot_20260801.json'],
-  ['秦', 'data/秦_pilot_20260802.json'],
-  ['西汉', 'data/西汉_pilot_20260802.json'],
+  ['原始社会', 'data/原始社会.json'],
+  ['夏商', 'data/夏商.json'],
+  ['西周', 'data/西周.json'],
+  ['春秋', 'data/春秋.json'],
+  ['战国', 'data/战国.json'],
+  ['秦', 'data/秦.json'],
+  ['西汉', 'data/西汉.json'],
   ['东汉', 'data/东汉.json'],
   ['三国两晋南北朝', 'data/三国两晋南北朝.json'],
   ['隋', 'data/隋.json'],
   ['唐', 'data/唐.json'],
   ['五代宋辽夏金', 'data/五代宋辽金西夏.json'],
-  ['元代', 'data/元代_pilot_20260802.json'],
+  ['元代', 'data/元代.json'],
   ['明', 'data/明.json'],
   ['清', 'data/清前期.json'],
 ];

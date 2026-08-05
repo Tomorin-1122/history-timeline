@@ -41,6 +41,44 @@ const CHAPTERS_MODERN = [
   { id: 'm11', no: '第十一段', name: '改革开放新时期',                 note: '1976-2012' },
 ];
 
+// ---- 世界史 8 段（2026-08-05 老板定案：按标准时间边界硬切，事件按 year 落座不管教材章节）----
+// 分段映射：world-ancient = 史前时代~中古封建时代（ch 0-3），world-modern = 近代早期~当代（ch 4-7）
+const CHAPTERS_WORLD = [
+  { id: 'w1', no: '第一段', name: '史前时代',     note: '前3500年以前' },
+  { id: 'w2', no: '第二段', name: '早期文明',     note: '前3500 至 前1000' },
+  { id: 'w3', no: '第三段', name: '古典文明',     note: '前1000 至 500' },
+  { id: 'w4', no: '第四段', name: '中古封建时代', note: '500 至 1500' },
+  { id: 'w5', no: '第五段', name: '近代早期',     note: '1500 至 1650' },
+  { id: 'w6', no: '第六段', name: '革命与工业化', note: '1650 至 1900' },
+  { id: 'w7', no: '第七段', name: '现代',         note: '1900 至 1945' },
+  { id: 'w8', no: '第八段', name: '当代',         note: '1945 至 2012' },
+];
+
+// 世界史分段边界（整百/整数，老板定案）：year 硬切，不受教材章节影响
+const WORLD_SEGS = [
+  [-Infinity, -3500], [-3500, -1000], [-1000, 500], [500, 1500],
+  [1500, 1650], [1650, 1900], [1900, 1945], [1945, Infinity],
+];
+// era 无 year（史前概念事件）：eraSub"距今X万"解析为负年；无时间锚默认史前段（-900万）
+function worldSegYear(e){
+  if(e.year != null) return e.year;
+  const m=String(e.eraSub||'').match(/距今约?([\d.]+)\s*万/);
+  if(m) return -Math.round(parseFloat(m[1])*10000);
+  return -9000000;
+}
+function worldSeg(e){
+  const y=worldSegYear(e);
+  for(let i=0;i<WORLD_SEGS.length;i++){ if(y>=WORLD_SEGS[i][0] && y<WORLD_SEGS[i][1]) return i; }
+  return 7;
+}
+// 地理大发现跨时代事件（老板定案 2026-08-05）：虽 <1500（按年硬切落中古段），但标志近代开端，强制归世界近现代史近代早期段（ch=4）
+const WORLD_MOVE_TO_MODERN = new Set([
+  '地理大发现与新航路开辟',   // 1492
+  '哥伦布发现美洲',           // 1492
+  '托得西拉斯条约',           // 1494 西葡瓜分新大陆
+  '达·伽马开辟印度新航路',    // 1498
+]);
+
 // 事件年份 → 近代史段索引（严格按时间划分落座；1912 以清帝退位 2-12 为界）
 // 仅用于 period 非标准段名的旧数据（晚清 7 章）；新数据（民国/共和国）走 PERIOD_TO_CH
 function modernSeg(e) {
@@ -108,31 +146,31 @@ const DYN_TO_CH = {
 
 // ---- 试点 pilot 文件（位于 data/ 目录） ----
 const PILOTS = [
-  ['原始社会', 'data/原始社会_pilot_20260802.json'],
-  ['夏商', 'data/夏商_pilot_20260802.json'],
-  ['西周', 'data/西周_pilot_20260802.json'],
-  ['春秋', 'data/春秋_pilot_20260802.json'],
-  ['战国', 'data/战国_pilot_20260801.json'],
-  ['秦', 'data/秦_pilot_20260802.json'],
-  ['西汉', 'data/西汉_pilot_20260802.json'],
+  ['原始社会', 'data/原始社会.json'],
+  ['夏商', 'data/夏商.json'],
+  ['西周', 'data/西周.json'],
+  ['春秋', 'data/春秋.json'],
+  ['战国', 'data/战国.json'],
+  ['秦', 'data/秦.json'],
+  ['西汉', 'data/西汉.json'],
   ['东汉', 'data/东汉.json'],
   ['三国两晋南北朝', 'data/三国两晋南北朝.json'],
   ['隋', 'data/隋.json'],
   ['唐', 'data/唐.json'],
   ['五代宋辽夏金', 'data/五代宋辽金西夏.json'],
-  ['元代', 'data/元代_pilot_20260802.json'],
+  ['元代', 'data/元代.json'],
   ['明', 'data/明.json'],
   ['清', 'data/清前期.json'],
 ];
 
-// ---- 读坐标来源（优先级：coords_resolved 历史坐标 > coords_modern 今址表 > coords_demo 打样） ----
+// ---- 读坐标来源（优先级：coords_resolved 历史坐标 > coords_modern 今址表 > worldCoords 世界史表；coords_demo 已并入 resolved 并移 obsolete，2026-08-05） ----
 function loadJson(file) {
   try { return JSON.parse(fs.readFileSync(path.join(ROOT, file), 'utf8')); }
   catch (e) { console.warn(file + ' 读取失败:', e.message); return {}; }
 }
 const histCoords = loadJson('data/coords_resolved.json');   // CHGIS 历史坐标（按 title）
 const modernCoords = loadJson('data/coords_modern.json');   // 今址坐标表（按"今址"）
-const demoCoords = loadJson('data/coords_demo.json');       // demo 打样（按 title）
+const worldCoords = loadJson('data/世界史坐标表.json'); // 世界史坐标（title→[lat,lng]，912 条 WGS84，2026-08-05 复制入 data/ 进版本库）
 
 function todayName(loc) {
   const m = String(loc || '').match(/（(.+?)）/);
@@ -152,8 +190,8 @@ const PILOTS_MODERN = [
   ['第03章', 'data/第03章.json'],
   ['第04章', 'data/第04章.json'],
   ['第05章', 'data/第05章.json'],
-  ['第06章', 'data/06章.json'],
-  ['第07章', 'data/07章.json'],
+  ['第06章', 'data/第06章.json'],
+  ['第07章', 'data/第07章.json'],
   ['民国第01章', 'data/民国第01章.json', true],
   ['民国第02章', 'data/民国第02章.json', true],
   ['民国第03章', 'data/民国第03章.json', true],
@@ -168,9 +206,21 @@ const PILOTS_MODERN = [
   ['下册第06章', 'data/下册第06章.json', true],
 ];
 
+// ---- 世界史产物数据（53 个 JSON 定稿，2026-08-05 复制入 data/世界史/ 进版本库——extract_workspace/ 被 gitignore 不入库） ----
+const WORLD_DIR = 'data/世界史';
+
+// 世界史排序键：有 year 用复合时间（年/月/日，无月排年首）；era 无 year 用 eraSub"距今X万"解析为负年，失败排末
+function worldSortKey(e){
+  if(e.year != null) return e.year*13*32 + (e.month||0)*32 + (e.day||0);
+  const m=String(e.eraSub||'').match(/距今约?([\d.]+)\s*万/);
+  if(m) return -Math.round(parseFloat(m[1])*10000);
+  return 1e9;
+}
+
 function main() {
   const events = [];
   const eventsModern = [];
+  const eventsWorld = [];
   const errs = [];
   let chMiss = {};
 
@@ -258,16 +308,61 @@ function main() {
   }
   eventsModern.sort((a, b) => modernSortKey(a) - modernSortKey(b));  /* 全库按复合时间排（落座后段内仍有序） */
 
+  // 世界史：53 文件直接读产物目录（定稿），period 标准段名映射落座（ch 0-7），dynasty 透传国家/文明/政权
+  const worldDir = path.join(ROOT, WORLD_DIR);
+  let worldFiles = [];
+  try { worldFiles = fs.readdirSync(worldDir).filter(f => f.endsWith('.json')).sort(); }
+  catch (e) { errs.push('世界史目录读取失败: ' + e.message); }
+  for (const f of worldFiles) {
+    let data;
+    try { data = JSON.parse(fs.readFileSync(path.join(worldDir, f), 'utf8')); }
+    catch (e) { errs.push(`[世界史 ${f}] 读取失败: ${e.message}`); continue; }
+    if (!Array.isArray(data)) { errs.push(`[世界史 ${f}] 不是数组`); continue; }
+    data.forEach((it, i) => {
+      const missing = REQ.filter(k => !(k in it));
+      if (missing.length) { errs.push(`[世界史 ${f}#${i} ${it.title || '?'}] 缺字段 ${missing}`); return; }
+      const ch = (WORLD_MOVE_TO_MODERN.has(it.title) ? 4 : worldSeg(it));
+      if (ch === undefined) { errs.push(`[世界史 ${f} ${it.title}] 分段失败: ${it.period}`); return; }
+      eventsWorld.push({
+        title: it.title,
+        year: it.year,
+        month: it.month || null,
+        day: it.day || null,
+        yearMode: it.yearMode,
+        yearRange: it.yearRange,
+        era: it.era || '', eraSub: it.eraSub || '',
+        ch,
+        dynasty: it.dynasty,
+        period: CHAPTERS_WORLD[ch].name,   /* 落座后统一写标准段名（不再用提取时的 period 名） */
+        type: it.type,
+        importance: it.importance,
+        summary: it.summary,
+        cause: it.cause,
+        effect: it.effect,
+        examTip: it.examTip,
+        people: it.people,
+        location: it.location,
+        tags: it.tags,
+        related: it.related,
+        wikiSlug: it.wikiSlug,
+      });
+    });
+  }
+  eventsWorld.sort((a, b) => worldSortKey(a) - worldSortKey(b));
+
   if (Object.keys(chMiss).length) errs.push(`未映射的 dynasty: ${JSON.stringify(chMiss)}`);
   if (errs.length) { console.error('ERRORS:\n - ' + errs.join('\n - ')); process.exit(1); }
 
-  // COORDS：历史坐标 > 今址表 > demo 打样（近代史坐标已在 coords_resolved 按 title）
+  // COORDS：历史坐标 > 今址表 > 世界史坐标表 > demo 打样（近代史/世界史坐标均可在 coords_resolved 按 title）
+  // COORDS_EXCLUDE：老板定案不上地图的事件（长跨度制度/思想文化类，今址兜底仍会命中故显式排除）
+  const COORDS_EXCLUDE = new Set(['阿拉伯-伊斯兰文化', '启蒙运动']);
   const coords = {};
-  [...events, ...eventsModern].forEach(e => {
+  [...events, ...eventsModern, ...eventsWorld].forEach(e => {
+    if (COORDS_EXCLUDE.has(e.title)) return;
     if (histCoords[e.title]) { coords[e.title] = histCoords[e.title]; return; }
     const t = todayName(e.location);
     if (t && modernCoords[t]) { coords[e.title] = modernCoords[t]; return; }
-    if (demoCoords[e.title]) coords[e.title] = demoCoords[e.title];
+    if (worldCoords[e.title]) { coords[e.title] = worldCoords[e.title]; return; }
   });
 
   const out = '// 自动生成，勿手改 — 由 js/gen_data.js 从 *_pilot_*.json 合并产出（F2 数据关卡前为试点基线）\n'
@@ -275,12 +370,15 @@ function main() {
     + `const CHAPTERS=${JSON.stringify(CHAPTERS, null, 1)};\n\n`
     + `const EVENTS_MODERN=${JSON.stringify(eventsModern, null, 1)};\n\n`
     + `const CHAPTERS_MODERN=${JSON.stringify(CHAPTERS_MODERN, null, 1)};\n\n`
+    + `const EVENTS_WORLD=${JSON.stringify(eventsWorld, null, 1)};\n\n`
+    + `const CHAPTERS_WORLD=${JSON.stringify(CHAPTERS_WORLD, null, 1)};\n\n`
     + `const COORDS=${JSON.stringify(coords, null, 1)};\n`;
   fs.writeFileSync(path.join(ROOT, 'js', 'data.js'), out, 'utf8');
 
-  console.log(`OK: 古代史 ${events.length} 条 + 近代史 ${eventsModern.length} 条 → js/data.js`);
+  console.log(`OK: 古代史 ${events.length} 条 + 近代史 ${eventsModern.length} 条 + 世界史 ${eventsWorld.length} 条 → js/data.js`);
   console.log(`   古代史章节: ${[...new Set(events.map(e => e.ch))].sort((a, b) => a - b).map(c => CHAPTERS[c].name).join(' / ')}`);
   console.log(`   近代史分段: ${[...new Set(eventsModern.map(e => e.ch))].sort((a, b) => a - b).map(c => CHAPTERS_MODERN[c].name).join(' / ')}`);
+  console.log(`   世界史分段: ${[...new Set(eventsWorld.map(e => e.ch))].sort((a, b) => a - b).map(c => CHAPTERS_WORLD[c].name).join(' / ')}`);
   console.log(`   坐标复用: ${Object.keys(coords).length} 条`);
 }
 

@@ -5,8 +5,8 @@
 const viewTabs=document.getElementById("viewTabs");
 function switchView(v){
   if(v==="map"){
-    /* 地图史段与时间轴联动：近代史史段 → 近代史地图；古代史史段 → 切回 hist（若上次停在近代史地图） */
-    const want=curSeg==="modern"?"modern":(mapRange==="modern"?"hist":mapRange);
+    /* 地图史段与时间轴联动：近代史/世界史史段 → 对应地图模式；古代史史段 → 切回 hist（若上次停在近代史/世界史地图） */
+    const want=curSeg==="ancient"?(mapRange==="modern"||mapRange.startsWith("world")?"hist":mapRange):curSeg;
     if(typeof setRange==="function" && mapRange!==want) setRange(want);
   }
   document.getElementById("view-timeline").hidden=v!=="timeline";
@@ -35,7 +35,7 @@ document.getElementById("perGroup").addEventListener("click",(ev)=>{
     /* 地图模式跟随：点「原始社会」（古代史）自动进 pre；pre 模式点非原始社会章回 hist——先切模式（切换筛选上下文），再在新上下文操作 ch Set */
     const had = ch>=0 && st().ch.has(ch);
     let target = typeof mapRange !== 'undefined' ? mapRange : 'hist';
-    if(!had && ch===0 && curSeg!=="modern" && target!=="pre") target="pre";
+    if(!had && ch===0 && curSeg==="ancient" && target!=="pre") target="pre";
     else if(!had && ch>0 && target==="pre") target="hist";
     if(target!==mapRange && typeof setRange==="function") setRange(target);
     const s=st().ch;

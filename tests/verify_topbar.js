@@ -33,7 +33,7 @@ const fs = require('fs');
 
   const segBtns = await page.$$eval('#segRow .seg-btn', bs => bs.map(b => ({ t: b.textContent.trim(), on: b.classList.contains('on'), dis: b.disabled })));
   check('L2 四个史段按钮', segBtns.length === 4, JSON.stringify(segBtns.map(b => b.t)));
-  check('L2 世界史段 disabled', segBtns[2].dis && segBtns[3].dis, 'world-ancient/world-modern 半透明禁用');
+  check('L2 世界史段可用（2026-08-05 接入）', !segBtns[2].dis && !segBtns[3].dis, 'world-ancient/world-modern 已启用');
   check('L2 默认古代史 on', segBtns[0].on && !segBtns[1].on, '');
 
   const tabs = await page.$$eval('#viewTabs .tab', ts => ts.map(t => t.textContent.trim()));
@@ -132,7 +132,7 @@ const fs = require('fs');
   check('地图视图切换正常（容器存在）', !!mapViewVisible, '');
   const rangeOpts = await page.$$eval('#rangeSel option', os => os.map(o => o.value));
   const rangeSelVal = await page.$eval('#rangeSel', s => s.value);
-  check('地图下拉三态（pre/hist/modern）', rangeOpts.join('/') === 'pre/hist/modern' && rangeSelVal === 'hist', rangeOpts.join('/') + ' sel=' + rangeSelVal);
+  check('地图下拉五态（pre/hist/modern/world×2）', rangeOpts.join('/') === 'pre/hist/modern/world-ancient/world-modern' && rangeSelVal === 'hist', rangeOpts.join('/') + ' sel=' + rangeSelVal);
   await page.click('#viewTabs .tab[data-view="review"]');
   await page.waitForTimeout(800);
   const rvVisible = await page.evaluate(() => !document.getElementById('rvSetup').hidden);

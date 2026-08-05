@@ -55,8 +55,8 @@ function ok(name, cond, extra) {
   const roamVisible = await page.evaluate(() => !document.getElementById('rvRoamScope').hidden);
   ok('roam 模式显示漫游范围（全随机/选史段随机）', roamVisible, '');
   const cntRoam = await page.textContent('#rvCount');
-  const expAll = await page.evaluate(() => EVENTS.length + EVENTS_MODERN.length);
-  ok('漫游全随机计数 = 全库 1717', cntRoam.includes(String(expAll)), cntRoam + '（期望 ' + expAll + '）');
+  const expAll = await page.evaluate(() => EVENTS.length + EVENTS_MODERN.length + EVENTS_WORLD.length);
+  ok('漫游全随机计数 = 全库 2638', cntRoam.includes(String(expAll)), cntRoam + '（期望 ' + expAll + '）');
   // 选史段随机 → 当前史段（modern 866）
   await page.click('#rvScopeBtns button.f[data-scope="seg"]');
   await page.waitForTimeout(300);
@@ -68,9 +68,17 @@ function ok(name, cond, extra) {
   const cntSegA = await page.textContent('#rvCount');
   ok('漫游选史段随机（古代史）= 855', cntSegA.includes('855'), cntSegA);
 
-  // 6. 世界史占位 disabled
-  const worldDisabled = await page.evaluate(() => { const b = document.querySelector('#rvSegBtns .rv-mode-btn[data-seg="world"]'); return b && b.disabled; });
-  ok('世界史占位 disabled（规划中）', worldDisabled, '');
+  // 6. 世界史复习两段可用（2026-08-05 接入）
+  await page.click('#rvSegBtns .rv-mode-btn[data-seg="world-ancient"]');
+  await page.waitForTimeout(300);
+  const cntWorldA = await page.textContent('#rvCount');
+  ok('复习世界古代史段 = 238 事', cntWorldA.includes('238'), cntWorldA);
+  await page.click('#rvSegBtns .rv-mode-btn[data-seg="world-modern"]');
+  await page.waitForTimeout(300);
+  const cntWorldM = await page.textContent('#rvCount');
+  ok('复习世界近现代史段 = 676 事', cntWorldM.includes('676'), cntWorldM);
+  await page.click('#rvSegBtns .rv-mode-btn[data-seg="ancient"]');   // 切回古代史，保持第 7 步前提
+  await page.waitForTimeout(300);
 
   // 7. 开始复习（针对训练，古代史，1 题）→ 卡片显示 + 答题写带前缀 key
   await page.click('#rvModes .rv-mode-btn[data-mode="train"]');

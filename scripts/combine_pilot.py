@@ -57,7 +57,7 @@ if errors:
         print("  ", er)
     sys.exit(1)
 
-out = os.path.join(DATA, "夏商_pilot_20260802.json")
+out = os.path.join(DATA, "夏商.json")
 with open(out, "w", encoding="utf-8") as f:
     json.dump(events, f, ensure_ascii=False, indent=2)
 

@@ -107,7 +107,7 @@ save('明', dM);
 
 // ════════ 3. 元代_pilot（删除襄樊之战 + 修复引用） ════════
 // 注意：元代章原文件为数组展开格式，用 JSON.stringify 匹配，避免全量 diff
-let dY = load('元代_pilot_20260802');
+let dY = load('元代');
 const delY = find(dY, '襄樊之战');
 if (delY) {
   const i = arrOf(dY).indexOf(delY);

@@ -11,14 +11,18 @@ let mapObj=null, markers=null, plainMarkers=null, mapInited=false;
 /* ---- 时间轴常量 ---- */
 const HIST_YMIN=-2070, HIST_YMAX=1840;      /* 主时间轴：夏朝始 ~ 鸦片战争 */
 const MODERN_YMIN=1838, MODERN_YMAX=2012;   /* 近代史：黄爵滋上书(1838) ~ 2012，年份刻度 */
+const WORLD_ANCIENT_YMIN=-8000, WORLD_ANCIENT_YMAX=1500;  /* 世界古代中世纪史：史前~中古封建时代（标准边界 1500 止，2026-08-05） */
+const WORLD_MODERN_YMIN=1492, WORLD_MODERN_YMAX=2012;     /* 世界近现代史：近代早期~当代（1492 起——地理大发现哥伦布移入后最早年份，老板定案） */
 const PRE_MAX_LOG=Math.log10(8000000);       /* 距今约800万年前（对数上界） */
 const PRE_MIN_LOG=Math.log10(2070);          /* 前2070（对数下界） */
 const PRE_SPAN=PRE_MAX_LOG-PRE_MIN_LOG;      /* 对数跨度 ≈3.59 */
 const STEP_HIST=5, STEP_PRE=0.05, STEP_MODERN=0.5;  /* 播放步长：历史 5 年 / 史前 0.05 对数单位 / 近代史 0.5 年（细腻） */
+const STEP_WORLD_ANCIENT=25, STEP_WORLD_MODERN=1;     /* 播放步长：世界古代 25 年 / 世界近现代 1 年 */
 const R_HIST=50, R_PRE=0.08, R_MODERN=2;     /* 过滤窗口：历史 50 年 / 史前 ±0.08 数量级 / 近代史 ±2 年 */
+const R_WORLD_ANCIENT=50, R_WORLD_MODERN=2;  /* 过滤窗口：世界古代 ±50 年 / 世界近现代 ±2 年 */
 const SPEEDS=[1,2,4,8,0.5,0.1];                     /* 播放倍速档（1×→2×→4×→8×→0.5×→0.1× 循环） */
 
-let mapRange='hist';                          /* 'hist' | 'pre' | 'modern'（三态下拉） */
+let mapRange='hist';                          /* 'hist' | 'pre' | 'modern' | 'world-ancient' | 'world-modern'（五态下拉，2026-08-05 加世界史两段） */
 let speedIdx=0;                               /* 当前倍速档索引 */
 let keepN=10;                                 /* 连续播放时屏幕保留事件数（默认 10） */
 const KEEP_OPTS=[10,5,3,2,1];                /* 保留数循环档（默认 10 → 5 → 3 → 2 → 1） */
@@ -55,15 +59,19 @@ yrSlider.min=HIST_YMIN; yrSlider.max=HIST_YMAX; yrSlider.value=HIST_YMIN;
 /* 史前绝对年 → 滑块对数值：s = MAX_LOG - log10(absYear)（0=距今最远，PRE_SPAN=距今最近） */
 function logS(absYear){ return PRE_MAX_LOG - Math.log10(Math.max(absYear,1)); }
 
-/* 当前地图数据源：modern 用近代史数组，其余用古代史 */
-function segEV(){ return mapRange==='modern' ? EVENTS_MODERN : EVENTS; }
-/* 排序键（步进/播放 keepN 用）：modern 按老板规则(年/月/日，无月排年首、无日排月首)；hist 按 年*13+月；pre 对数刻度单独处理 */
-function mapSortKey(e){ return mapRange==='modern' ? e.year*13*32+(e.month||0)*32+(e.day||0) : e.year*13+(e.month||13); }
+/* 当前地图数据源：modern 用近代史数组，world-* 用世界史（4+4 分段 ch 归一化），其余用古代史 */
+function segEV(){
+  if(mapRange==='world-ancient') return EVENTS_WORLD.filter(e=>e.ch<4);
+  if(mapRange==='world-modern')  return EVENTS_WORLD.filter(e=>e.ch>=4).map(e=>({...e,ch:e.ch-4}));
+  return mapRange==='modern' ? EVENTS_MODERN : EVENTS;
+}
+/* 排序键（步进/播放 keepN 用）：modern/world-* 按老板规则(年/月/日，无月排年首、无日排月首)；hist 按 年*13+月；pre 对数刻度单独处理 */
+function mapSortKey(e){ return (mapRange==='modern'||mapRange==='world-ancient'||mapRange==='world-modern') ? e.year*13*32+(e.month||0)*32+(e.day||0) : e.year*13+(e.month||13); }
 
-function curY(){ return mapRange==='pre'?[0,PRE_SPAN]:mapRange==='modern'?[MODERN_YMIN,MODERN_YMAX]:[HIST_YMIN,HIST_YMAX]; }
-function curStep(){ return (mapRange==='pre'?STEP_PRE:mapRange==='modern'?STEP_MODERN:STEP_HIST)*SPEEDS[speedIdx]; }
-/* 过滤窗口：pre 始终原样（老板定案）；hist 步进后精准 ±0.5，拖动 ±50；modern 步进精准 ±0.5，拖动 ±2 */
-function curR(){ return mapRange==='pre'?R_PRE:(precise?0.5:(mapRange==='modern'?R_MODERN:R_HIST)); }
+function curY(){ return mapRange==='pre'?[0,PRE_SPAN]:mapRange==='modern'?[MODERN_YMIN,MODERN_YMAX]:mapRange==='world-ancient'?[WORLD_ANCIENT_YMIN,WORLD_ANCIENT_YMAX]:mapRange==='world-modern'?[WORLD_MODERN_YMIN,WORLD_MODERN_YMAX]:[HIST_YMIN,HIST_YMAX]; }
+function curStep(){ return (mapRange==='pre'?STEP_PRE:mapRange==='modern'?STEP_MODERN:mapRange==='world-ancient'?STEP_WORLD_ANCIENT:mapRange==='world-modern'?STEP_WORLD_MODERN:STEP_HIST)*SPEEDS[speedIdx]; }
+/* 过滤窗口：pre 始终原样（老板定案）；hist 步进后精准 ±0.5，拖动 ±50；modern/world-modern 步进精准 ±0.5，拖动 ±2；world-ancient 步进精准 ±0.5，拖动 ±50 */
+function curR(){ return mapRange==='pre'?R_PRE:(precise?0.5:(mapRange==='modern'||mapRange==='world-modern'?R_MODERN:mapRange==='world-ancient'?R_WORLD_ANCIENT:R_HIST)); }
 
 /* 年份标签：历史"前 X 年 ±50"；步进/精准模式显示"前 X 年 · 精准定位"；史前"距今约 X 万年 前后"（对数刻度逆变换）；
    modern"1838 年 ±2"（年份刻度） */
@@ -72,7 +80,7 @@ function fmtYrLabel(v){
     const absY=Math.round(Math.pow(10, PRE_MAX_LOG - v));
     return "距今约 "+fmtWan(absY)+" 前后";
   }
-  if(mapRange==='modern') return precise ? fmtYear(v)+" · 精准定位" : fmtYear(v)+" ±2";
+  if(mapRange==='modern'||mapRange==='world-modern') return precise ? fmtYear(v)+" · 精准定位" : fmtYear(v)+" ±2";
   return precise ? fmtYear(v)+" · 精准定位" : fmtYear(v)+" ±50";
 }
 
@@ -319,7 +327,8 @@ function addMarker(e, alpha, bold){
    modern：近代史数组 ch 0-10 是段索引（无"原始社会章"概念），跳过 ch0 隔离 */
 function matchFilter(e, pre, q){
   const f=st();
-  if(mapRange!=='modern'){
+  const isCN=mapRange==='pre'||mapRange==='hist';   /* 原始社会章隔离仅限中国古代史 pre/hist（modern 无"原始社会章"概念；world ch=0 是史前时代段也不隔离） */
+  if(isCN){
     if(pre && e.ch!==0) return false;            /* 原始社会模式只看原始社会章 */
     if(!pre && e.ch===0) return false;          /* 完全隔离：历史模式不看原始社会章 */
   }
@@ -429,7 +438,7 @@ function fmtYear(v){return v<0?("前 "+(-v)+" 年"):(v+" 年");}
 /* ---- 自动播放：连续播放（pre 原样；hist 播放时显示最近 keepN 个事件渐透明，事件到点出现不提前） ---- */
 let playing=false, playTimer=null;
 let precise=false;                         /* hist 步进后精准 ±0.5；拖 slider 恢复 ±50 */
-function setStep(){ yrSlider.step=mapRange==='pre'?(playing?0.001:0.01):(mapRange==='modern'?(playing?0.5:1):(playing?0.1:1)); }
+function setStep(){ yrSlider.step=mapRange==='pre'?(playing?0.001:0.01):(mapRange==='modern'||mapRange==='world-modern'?(playing?0.5:1):(mapRange==='world-ancient'?(playing?2.5:5):(playing?0.1:1))); }
 function togglePlay(){
   playing=!playing;
   if(playing) cityPeriodFocus=null;      /* 播放走 keepN 路径，清城市时段聚焦 */
@@ -461,11 +470,11 @@ function stepEvent(dir){
   precise=true;
   const v=+yrSlider.value, pre=mapRange==='pre', q=(st().q||"").toLowerCase();
   const EV=segEV();
-  /* 复合时间：modern = year*13*32+month*32+day（老板规则：无月排年首、无日排月首）；hist = year*13+month（无月记13排后）；pre 仍用对数刻度 */
-  const tv=e=>mapRange==='modern'?e.year*13*32+(e.month||0)*32+(e.day||0):(e.year*13+(e.month||13));
+  /* 复合时间：modern/world-* = year*13*32+month*32+day（老板规则：无月排年首、无日排月首）；hist = year*13+month（无月记13排后）；pre 仍用对数刻度 */
+  const tv=e=>mapRange==='modern'||mapRange==='world-ancient'||mapRange==='world-modern'?e.year*13*32+(e.month||0)*32+(e.day||0):(e.year*13+(e.month||13));
   const yv=e=>pre?logS(Math.abs(e.year)):tv(e);
   const f=focusKey?EV.find(x=>x.title===focusKey&&matchFilter(x,pre,q)&&x.year!==null):null;
-  const base=f?yv(f):(pre?v:(mapRange==='modern'?v*416+416:v*13+13));   /* 无聚焦：从"该年底之后"起找 */
+  const base=f?yv(f):(pre?v:(mapRange==='modern'||mapRange==='world-ancient'||mapRange==='world-modern'?v*416+416:v*13+13));   /* 无聚焦：从"该年底之后"起找 */
   let best=null, bestE=null;
   for(const e of EV){
     if(!matchFilter(e,pre,q)) continue;
