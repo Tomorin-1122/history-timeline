@@ -160,7 +160,8 @@ const server = http.createServer(async (req, res) => {
   }
 
   /* ---- 静态文件 ---- */
-  let filePath = p === '/' ? '/index.html' : p;
+  /* 中文文件名（data/images/北京人.jpg 等）：pathname 是百分号编码，须 decodeURIComponent 才能读到文件（2026-08-05 抽屉头图试点发现） */
+  let filePath = p === '/' ? '/index.html' : decodeURIComponent(p);
   const full = path.normalize(path.join(ROOT, filePath));
   if (!full.startsWith(ROOT)) return json(res, 403, { ok: false, errors: ['forbidden'] });
   fs.readFile(full, (err, buf) => {
