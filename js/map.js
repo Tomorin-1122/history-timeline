@@ -78,6 +78,24 @@ function fmtYrLabel(v){
 
 /* 切换地图（三态下拉：原始社会/历史时期/中国近现代史） */
 const rangeSel=document.getElementById("rangeSel");
+/* ---- 清代 1820 省界线层（2026-08-05 试水：hist 模式滑块 1644-1820 显示，全数据 data/borders.js） ---- */
+const BORDER_YEARS=[1644,1820];
+let borderLayer=null, borderShown=false;
+function drawBorder(){
+  if(mapRange!=='hist' || yrAll.classList.contains("on")){ hideBorder(); return; }
+  const cyr=+yrSlider.value;
+  if(!(cyr>=BORDER_YEARS[0] && cyr<=BORDER_YEARS[1])){ hideBorder(); return; }
+  if(!borderLayer){
+    if(typeof BORDER_QING1820==="undefined") return;
+    borderLayer=L.geoJSON(BORDER_QING1820,{
+      style:{color:"#b45309",weight:1.2,fillColor:"#f59e0b",fillOpacity:.15},
+      onEachFeature:(f,l)=>l.bindTooltip(f.properties.NAME_CH||"",{direction:"top"})
+    });
+  }
+  if(!borderShown){ mapObj.addLayer(borderLayer); borderShown=true; }
+}
+function hideBorder(){ if(borderLayer && borderShown){ mapObj.removeLayer(borderLayer); borderShown=false; } }
+
 function setRange(mode){
   if(mode===mapRange) return;
   mapRange=mode;
@@ -140,6 +158,10 @@ function onTdtErr(){
 function initMap(){
   if(mapInited) return; mapInited=true;
   mapObj=L.map("map",{zoomControl:true}).setView([34,110],5);
+  /* 底部来源声明（2026-08-05）：底图 + 清代省界；去掉 Leaflet 默认前缀 */
+  mapObj.attributionControl.setPrefix(false);
+  mapObj.attributionControl.addAttribution('底图 © 天地图·国家基础地理信息中心');
+  mapObj.attributionControl.addAttribution('清代省界 © CHGIS V6（复旦史地所/哈佛，地图书转换）');
   if(tileMode==="tdt") buildTdtLayers();
   else L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
   markers=L.markerClusterGroup({
@@ -323,11 +345,13 @@ function drawMarkers(){
     keep.slice(0,keepN).reverse().forEach((e,idx)=>{   /* 倒序：最旧先加、最新最后加 → 最新层级最高不被遮 */
       addMarker(e,1-((keepN-1-idx)/keepN)*0.85, idx===keepN-1);
     });
+    drawBorder();
     return;
   }
   /* 近代史静态 + 城市级别 zoom：北京/上海/南京按 period 分堆（老板定案 2026-08-05），其余照常 */
   if(mapRange==='modern' && mapObj.getZoom()>=CITY_ZOOM){
     drawWithCityClusters(EV, cyr, R, allMode);
+    drawBorder();
     return;
   }
   EV.forEach((e)=>{
@@ -342,6 +366,7 @@ function drawMarkers(){
     }
     addMarker(e,1, focusKey && e.title===focusKey);   /* 步进聚焦事件加粗（同年月序步进时滑块不动、聚焦切换） */
   });
+  drawBorder();   /* 清代省界线：hist + 滑块 1644-1820 + 非全部年份时显示（2026-08-05 试水） */
 }
 
 /* ---- 近代史重灾城市 period 分堆绘制（2026-08-05）

@@ -6,7 +6,14 @@
   const isLocal = location.protocol === 'http:';
   const editToggle = document.getElementById('editToggle');
   if (!editToggle) return;
-  if (!isLocal) return;                      /* file:// 直开：编辑 UI 保持隐藏 */
+  if (!isLocal) {
+    /* 线上（https 部署）：编辑/删除按钮点击 → 无权限提示（数据只读） */
+    const noPerm = () => alert('无权限：编辑功能仅限本地服务使用（本地启动 server.js 后访问 http://localhost:3099）');
+    const dEdit = document.getElementById('dEdit'), dDel = document.getElementById('dDel');
+    if (dEdit) dEdit.addEventListener('click', noPerm);
+    if (dDel) dDel.addEventListener('click', noPerm);
+    return;
+  }
 
   let editMode = false;
   let curIdx = -1;                            /* 当前抽屉事件索引 */
