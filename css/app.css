@@ -260,6 +260,8 @@ h3{font-size:17.5px; font-weight:700}
 .maptool .yrlabel{font-variant-numeric:tabular-nums;min-width:96px;color:var(--cin);font-size:14px;letter-spacing:.04em}
 .mapwrap{position:relative}
 #map{height:calc(100dvh - var(--map-h-offset));min-height:420px;border:1px solid var(--line);margin-top:10px;background:#e8e2d2;z-index:0}
+/* 地图下方来源声明（2026-08-05：放空白处不放地图内） */
+.map-attr{margin-top:8px;font-size:11px;color:var(--ink3);letter-spacing:.03em;text-align:right}
 /* 修复：Leaflet 内部 panes z-index 400-700 直接参与页面级层叠，会盖住 z-index 60 的顶栏/筛选浮层
    （老板反馈"筛选栏被地图挡住"2026-08-04）→ map 容器 z-index:0 隔离内部层级，顶栏保持置顶 */
 footer .fg{display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 2px}

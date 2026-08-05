@@ -135,8 +135,8 @@ function buildTdtLayers(){
   tdtLayers.forEach(l=>mapObj.removeLayer(l));
   const b=TDT_BASES[tdtBaseIdx];
   const cur=[];                              /* 当前批次图层：切换后旧批次事件忽略，防 abort 误触发回退 */
-  const vec=L.tileLayer(TDT_URL(b.base),{subdomains:TDT_SUB,maxZoom:18,opacity:.78,attribution:"天地图"});
-  const cva=L.tileLayer(TDT_URL(b.ann),{subdomains:TDT_SUB,maxZoom:18,opacity:1,attribution:"天地图"});
+  const vec=L.tileLayer(TDT_URL(b.base),{subdomains:TDT_SUB,maxZoom:18,opacity:.78});
+  const cva=L.tileLayer(TDT_URL(b.ann),{subdomains:TDT_SUB,maxZoom:18,opacity:1});
   vec.on("tileerror",()=>{ if(tdtLayers!==cur) return; onTdtErr(); });
   cva.on("tileerror",()=>{ if(tdtLayers!==cur) return; onTdtErr(); });
   cur.push(vec,cva);
@@ -148,7 +148,8 @@ function onTdtErr(){
   if(tdtErr>=3 && tileMode==="tdt"){   /* 白名单未配 / file://：回退高德，不白屏 */
     tdtLayers.forEach(l=>mapObj.removeLayer(l));
     tileMode="gaode";
-    L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
+    L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78}).addTo(mapObj);
+    if(typeof _setMapAttr==="function") _setMapAttr("高德地图");   /* 底部来源声明同步 */
     if(mapCtrlBtns.base) updateBaseBtn();
     drawMarkers();                       /* 重绘：坐标改走 gcj02 */
   }
@@ -157,13 +158,16 @@ function onTdtErr(){
 /* ---- 初始化：天地图优先；403 连续 3 次自动回退高德（本地 file:// 打开不白屏） ---- */
 function initMap(){
   if(mapInited) return; mapInited=true;
-  mapObj=L.map("map",{zoomControl:true}).setView([34,110],5);
-  /* 底部来源声明（2026-08-05）：底图 + 清代省界；去掉 Leaflet 默认前缀 */
-  mapObj.attributionControl.setPrefix(false);
-  mapObj.attributionControl.addAttribution('底图 © 天地图·国家基础地理信息中心');
-  mapObj.attributionControl.addAttribution('清代省界 © CHGIS V6（复旦史地所/哈佛，地图书转换）');
+  mapObj=L.map("map",{zoomControl:true}).setView([34,110],5);   /* attributionControl 默认开启：保留 Leaflet 署名链接（开源协议） */
+  /* 来源声明放地图下方空白处（2026-08-05 老板定案：不放地图内）；底图切换/回退时更新 */
+  const setAttr=(base)=>{
+    const el=document.getElementById("mapAttr");
+    if(el) el.innerHTML='底图 © '+base+' ｜ 清代省界 © CHGIS V6（复旦史地所/哈佛，地图书转换）';
+  };
+  window._setMapAttr=setAttr;
+  setAttr(tileMode==="tdt"?"天地图·国家基础地理信息中心":"高德地图");
   if(tileMode==="tdt") buildTdtLayers();
-  else L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78,attribution:"高德地图"}).addTo(mapObj);
+  else L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78}).addTo(mapObj);
   markers=L.markerClusterGroup({
     maxClusterRadius:35,               /* 仅重灾组（≥10 条）进入：低 zoom 成簇 */
     showCoverageOnHover:false,
