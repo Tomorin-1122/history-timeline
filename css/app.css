@@ -368,6 +368,8 @@ footer{margin-top:70px; font-size:12.5px; color:var(--ink3); line-height:1.8; bo
 /* ---- 关系图谱（relation.js，2026-08-05 接入 C1） ---- */
 .relation{padding-top:20px}
 .rel-tool{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 14px;border:1px solid var(--line);background:var(--paper2);font-size:13px}
+.rel-seg{border:1px solid var(--line2);background:var(--paper2);color:var(--ink2);font-family:var(--serif);font-size:13px;padding:4px 8px;cursor:pointer;max-width:150px}
+.rel-seg:hover{border-color:var(--cin)}
 .rel-q{flex:0 1 220px}
 .rel-count{margin-left:auto;color:var(--ink3);font-size:12.5px;font-variant-numeric:tabular-nums}
 .rel-legend{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap}

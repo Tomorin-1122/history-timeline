@@ -282,6 +282,8 @@ function applyFilter(){
   document.getElementById("cnt").textContent=filtered?("筛得 "+n+" 事"):("共 "+EV.length+" 事");
   document.getElementById("empty").hidden=n>0;
   if(typeof drawMarkers==="function") drawMarkers(); /* 地图视图联动：筛选同时作用于当前史段 marker（古代史/近代史） */
+  /* 关系图谱联动（2026-08-05）：关系视图可见时顶栏 type/imp/q 筛选同时作用于图谱（高亮匹配/降透明不匹配） */
+  if(typeof relApplyFilters==="function" && !document.getElementById('view-relation').hidden) relApplyFilters();
 }
 /* ---- 上下文切换后的 UI 整体同步（史段/视图/地图模式切换后调用：恢复该上下文记忆的筛选） ---- */
 function syncFilterUI(){

@@ -183,8 +183,15 @@
   </div>
   <div class="view relation" id="view-relation" hidden>
     <div class="rel-tool">
+      <select class="rel-seg" id="relSeg" title="切换关系图谱的史段（不离开图谱视图）">
+        <option value="ancient">中国古代史</option>
+        <option value="modern">中国近现代史</option>
+        <option value="world-ancient">世界古代中世纪史</option>
+        <option value="world-modern">世界近现代史</option>
+      </select>
       <input type="search" class="search rel-q" id="relQ" placeholder="搜索事件…">
       <button class="f" id="relIso" title="显示/隐藏无关联事件的孤立节点">孤立：隐藏</button>
+      <button class="f on" id="relAnim" title="呼吸动画开关：开=节点缓慢自适应排布；关=静止（低配机卡顿保障）">呼吸：开</button>
       <span class="mt-g">
         <button class="f rel-zoom" id="relZoomOut" title="缩小（也可按 - 键）">－</button>
         <button class="f rel-zoom" id="relZoomIn" title="放大（也可按 = 键）">＋</button>
@@ -272,7 +279,6 @@
 <script src="js/map.js"></script>
 <script src="js/review.js"></script>
 <script src="js/app.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/standalone/umd/vis-network.min.js" integrity="sha384-yxKDWWf0wwdUj/gPeuL11czrnKFQROnLgY8ll7En9NYoXibgg3C6NK/UDHNtUgWJ" crossorigin="anonymous"></script>
 <script src="js/relation.js"></script>
 <script src="js/edit.js"></script>
 </body>

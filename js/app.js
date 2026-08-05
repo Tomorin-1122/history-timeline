@@ -16,7 +16,11 @@ function switchView(v){
   viewTabs.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
   if(v==="map"){ try{ initMap(); }catch(e){ /* CDN 不可用时（回归测试 abort leaflet）静默，视图切换不受阻 */ } }
   if(v==="review") initReview();
-  if(v==="relation"){ try{ if(typeof initRelation==="function") initRelation(); }catch(e){ /* CDN 失败降级提示由 relation.js 内处理 */ } }
+  if(v==="relation"){ try{ if(typeof initRelation==="function") initRelation(); }catch(e){ /* CDN 失败降级提示由 relation.js 内处理 */ }
+    if(typeof relResume==="function") relResume();   /* 切回关系视图：恢复呼吸 physics */
+  } else {
+    if(typeof relPause==="function") relPause();     /* 切走关系视图：暂停 physics，省 CPU（卡顿保障） */
+  }
   /* 视图切换 = 筛选上下文切换（时间轴 ↔ 地图各自记忆），恢复该视图的筛选 UI（多选高亮/搜索词/章） */
   if(typeof syncFilterUI==="function") syncFilterUI();
   if(typeof trackBand==="function") trackBand();
@@ -64,8 +68,14 @@ function switchSeg(seg){
   if(typeof rvState!=="undefined" && rvState && typeof showSetup==="function") showSetup();
   /* 筛选状态：上下文切换（tl-ancient ↔ tl-modern），恢复各自记忆（多选隔离，不再重置默认）
      注意顺序：先重建 row（renderTimeline），再切视图触发 syncFilterUI——否则 applyFilter 用新 curSeg 遍历旧 row 会越界 */
-  renderPerLinks(); renderTimeline();
-  switchView("timeline");
+  renderPerLinks();
+  const relView=document.getElementById("view-relation");
+  if(relView && !relView.hidden){
+    /* 关系视图下切史段（顶栏按钮/下拉）：保持图谱视图，只重建图谱（2026-08-05 老板要求不跳回时间轴） */
+    if(typeof initRelation==="function") initRelation();
+  } else {
+    renderTimeline(); switchView("timeline");
+  }
   if(typeof syncFilterUI==="function") syncFilterUI();
 }
 segRow.querySelectorAll(".seg-btn").forEach(b=>{

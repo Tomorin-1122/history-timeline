@@ -20,6 +20,11 @@ function relIndex(){
     });
   });
 }
+/* 按 title+seg 取事件对象（跨段节点也命中——REL_TITLE 全库索引） */
+function relEventOf(title, seg){
+  const hit = (REL_TITLE[title] || []).find(x => x.seg === seg) || (REL_TITLE[title] || [])[0];
+  return hit && hit.ev;
+}
 
 /* ---- 图谱状态 ---- */
 let relNetwork = null;          /* vis.Network 实例 */
@@ -27,8 +32,13 @@ let relShowIso = false;         /* 孤立事件显示开关（默认隐藏防噪
 let relBuiltSeg = null;         /* 已构建的史段（切 tab 回来不重建，保布局） */
 let relClickTimer = null;       /* 单击/双击防抖 */
 let relLabelsShown = false;     /* 当前 label 是否显示（zoom 阈值控制，中文 fillText 是 canvas 重绘最大成本） */
+let relAnimOn = true;           /* 呼吸动画开关（卡顿保障：关=physics 静止） */
+let relTabPaused = false;       /* 切 tab 暂停标记（视图不可见时 physics 关，省 CPU） */
 const relIsolatedIds = [];      /* 孤立事件节点 id（hidden 动态控制用） */
 const REL_LABEL_MIN_SCALE = 0.22;  /* zoom 超过此阈值才显示 label（fit 后约 0.12 隐藏，放大 2 倍后显示） */
+const REL_PHY = { gravitationalConstant: -6000, springLength: 150, springConstant: 0.06, damping: 0.09, centralGravity: 0.6 };
+/* 力导参数 2026-08-05 demo 调参定稿（老板验收）：斥力 -8000→-6000、弹簧 0.04→0.06、springLength 130→150、
+   centralGravity 0.3→0.5→0.6（老板三轮反馈逐步加强向心力） */
 
 /* ---- 小工具 ---- */
 function relTypeColor(t){ return (typeof TYPE_COLORS !== 'undefined' && TYPE_COLORS[t]) || '#8a6d2c'; }
@@ -115,42 +125,40 @@ function buildRelation(){
   /* level 验证（老板要求）：只打 min/max/去重层级数，不打印 855 个 level 列表（刷屏） */
   const lvls = nodes.map(n => n.level);
   if (lvls.length) console.log('[relation] level 分布: min=' + Math.min.apply(null, lvls) + ' max=' + Math.max.apply(null, lvls) + ' 去重层级数=' + new Set(lvls).size + ' 节点=' + nodes.length + ' 边=' + edges.length);
-  /* 布局 = 力导（Obsidian Graph View 同款）：barnesHut 60 次预稳定（秒出图，比 300 次快 5 倍）+ 完成后冻结（防点击乱飞）
-     老板确认：方向是力导（矩阵是开倒车），"卡"的根因是 300 次同步阻塞 stabilization（实测首次 10-17s 白屏），降迭代解决 */
+  /* 布局 = 纯异步力导（Obsidian Graph View 同款，老板 demo ② 验收定稿）：stabilization 关 → 秒出图不阻塞，
+     physics 持续异步收敛（呼吸感）；不冻结（点击/搜索的 update 触发轻微扰动属正常呼吸，不再乱飞——
+     remove+add 全量重建已删、hover 数据更新已禁，见经验 37-41） */
   const net = new vis.Network(canvas, { nodes, edges }, relOptions());
   relNetwork = net;
   relBuiltSeg = seg;
   relBind();
-  /* iterationsDone（60 次力导收敛）后冻结 physics + fit——冻结后点击/搜索只改样式不再扰动（防乱飞）
-     闭包捕获局部 net 并校验 relNetwork===net：rebuild 后旧定时器不得作用于新实例 */
-  net.once('stabilizationIterationsDone', () => {
-    try {
-      if (relNetwork !== net) return;
-      net.setOptions({ physics: { enabled: false } });
-      net.fit({ animation: true });
-    } catch (e) { /* 重建间隙 */ }
-  });
-  setTimeout(() => { try { if (relNetwork === net) net.fit({ animation: true }); } catch (e) { /* 重建间隙 network 已销毁则跳过 */ } }, 60);
+  /* 渐进 fit（60ms 初出 + 500/2000/4000ms 跟随散开过程，视口一直看到全图）——闭包捕获局部 net 防 rebuild 竞态 */
+  [60, 500, 2000, 4000].forEach(d => setTimeout(() => { try { if (relNetwork === net) net.fit({ animation: true }); } catch (e) { /* 重建间隙 */ } }, d));
   relCount(nodes.length, edges.length);
 }
-/* 布局配置：力导（barnesHut + stabilization 60 次预稳定，iterationsDone 后冻结，见 buildRelation handler）；
-   不设 stabilization.fit（自动 fit 与手动 fit 打架）；keyboard 缩放键 + 工具条 ＋/－ 按钮 */
+/* 布局配置：纯异步力导（stabilization 关 → 不阻塞秒出图；physics 持续 = Obsidian 呼吸感）；
+   keyboard 缩放键 + 工具条 ＋/－ 按钮；拖拽开启（老板 demo ② 验收：力导联动交互） */
 function relOptions(){
   return {
     layout: { randomSeed: 1 },
-    physics: { enabled: true, barnesHut: { gravitationalConstant: -8000, springLength: 130, springConstant: 0.04, damping: 0.09 },
-      stabilization: { enabled: true, iterations: 60 } },
+    physics: { enabled: true, barnesHut: REL_PHY, stabilization: { enabled: false } },
     configure: { enabled: false },
     interaction: {
       hover: false,                                  /* 悬停高亮触发连续全量重绘 → 高分屏 DPI 下整图抖动（老板反馈 2026-08-05），禁掉 */
-      zoomView: true, dragView: true,                /* 保留滚轮缩放与空白平移（一次性变换，非连续重绘） */
-      dragNodes: false,                              /* 拖拽节点连续重绘 + physics 联动 → 抖动，禁掉 */
+      zoomView: true, dragView: true,                /* 保留滚轮缩放与空白平移 */
+      dragNodes: true,                               /* 拖拽节点：异步力导下为 Obsidian 同款联动交互（老板 demo ② 验收开启） */
       keyboard: { enabled: true, speed: { x: 40, y: 40, zoom: 0.06 } },
     },
     nodes: { borderWidth: 1, borderWidthSelected: 2, labelHighlightBold: false },
     edges: { smooth: { enabled: false } },
   };
 }
+/* ---- 卡顿保障：切 tab 暂停 / 呼吸开关（physics 开关，省 CPU 兜底） ---- */
+function relSetPhysics(on){ if (relNetwork) relNetwork.setOptions({ physics: { enabled: on } }); }
+function relPause(){ relTabPaused = true; if (relAnimOn) relSetPhysics(false); }   /* 切走视图：暂停呼吸 */
+function relResume(){ relTabPaused = false; if (relAnimOn) relSetPhysics(true); }  /* 切回视图：恢复呼吸 */
+window.relPause = relPause;
+window.relResume = relResume;
 /* 可见缩放按钮（工具条 ＋/－）：相对当前 scale 放大/缩小 25%，并平移保持视口中心。
    moveTo 不触发 vis 的 zoom 事件 → 动画后手动 relUpdateLabels（label 阈值显隐） */
 function relZoomBy(factor){
@@ -188,11 +196,16 @@ function relBind(){
 function relUpdateLabels(){
   if (!relNetwork) return;
   const show = relNetwork.getScale() >= REL_LABEL_MIN_SCALE;
-  if (show === relLabelsShown) return;
-  relLabelsShown = show;
+  /* 以 DataSet 真实 font.size 为判据（不用内存标志——曾因 fit 触发 zoom 时 update 失败导致标志与数据脱节，
+     后续调用永远提前 return，label 卡在显示态）。采样第一个有 label 的节点即可 */
+  let cur = null;
+  relNetwork.body.data.nodes.forEach(n => { if (cur === null && n.label) cur = n.font.size; });
+  if (cur >= 1 === show) return;
   const upd = [];
   relNetwork.body.data.nodes.forEach(n => {
-    if (n.label) upd.push({ id: n.id, font: { size: show ? 11 : 0.01, color: relInk(), face: relFont() } });
+    /* 只改 font.size（label 显隐）；不带 color/face——带完整 font 对象的批量 update 会被 vis 拒掉（实测 855 项 update 后 font 不变），
+       且省略可避免字体切换触发额外重绘 */
+    if (n.label) upd.push({ id: n.id, font: { size: show ? 11 : 0.01 } });
   });
   if (upd.length) relNetwork.body.data.nodes.update(upd);
 }
@@ -211,9 +224,12 @@ function relHandleClick(id){
   if (id.startsWith('p:')) return relHighlightPerson(nodeTitleOf(id));
   const isExt = !id.startsWith('e:' + curSeg + ':');
   const nb = relNeighbors(id), upd = [];
+  const f = FILTERS['rel'], ql = (f.q || '').toLowerCase().trim();
+  const filt = relFilterActive();
   relNetwork.body.data.nodes.forEach(n => {
     if (n.id === id || nb.has(n.id)) upd.push({ id: n.id, opacity: 1, borderWidth: n.id === id ? 3 : 2 });
-    else upd.push({ id: n.id, opacity: 0.15 });
+    /* 筛选激活时非邻居保持筛选透明（0.12），否则用点击态 0.15——两者共存不打架 */
+    else upd.push({ id: n.id, opacity: filt && !relNodeMatches(n, ql, f) ? 0.12 : 0.15 });
   });
   relNetwork.body.data.nodes.update(upd);
   /* 人物不再 add 图谱节点（855 节点下 add 触发全量重建 → 点击后卡死/点不了其他节点，老板反馈）；
@@ -329,45 +345,87 @@ function relJumpTo(t){
   }
 }
 
-/* ---- 搜索：matchEvent 高亮 + selectNodes + focus 聚焦（顶栏/工具条搜索均走此；与时间轴同口径） ---- */
-function relSearch(q){
+/* ---- 搜索/筛选：顶栏 type/imp 多选 + 搜索词 q 组合作用于图谱（2026-08-05 老板检查筛选栏逻辑后统一——
+   关系视图下顶栏门类/重要度筛选不再"点了没反应"，与搜索一样高亮匹配/降透明不匹配；ch 无 UI 入口不参与） ---- */
+function relFilterActive(){
+  const f = FILTERS['rel'];
+  return !!(f && (f.q || f.type.size || f.imp.size));
+}
+/* 节点是否命中筛选（当前段与跨段节点都从全库索引取事件对象） */
+function relNodeMatches(n, ql, f){
+  const title = nodeTitleOf(n.id), seg = nodeSegOf(n.id);
+  const e = relEventOf(title, seg);
+  if (!e) return false;
+  if (f.type.size && !f.type.has(e.type)) return false;
+  if (f.imp.size && !f.imp.has(e.importance)) return false;
+  if (ql && !matchEvent(e, ql)) return false;
+  return true;
+}
+function relApplyFilters(){
   if (!relNetwork) return;
-  const ql = (q || '').toLowerCase().trim();
-  const { EV } = segData();
-  const hitIds = [];
-  EV.forEach(e => { if (ql && matchEvent(e, ql)) hitIds.push(evNodeId(e.title)); });
-  const hitSet = new Set(hitIds);
-  const upd = [];
+  const f = FILTERS['rel'];
+  const ql = (f.q || '').toLowerCase().trim();
+  const active = relFilterActive();
+  const hitIds = [], upd = [];
   relNetwork.body.data.nodes.forEach(n => {
-    if (ql){
-      if (hitSet.has(n.id)) upd.push({ id: n.id, opacity: 1, borderWidth: 3 });
-      else upd.push({ id: n.id, opacity: 0.12 });
-    } else {
-      upd.push({ id: n.id, opacity: 1, borderWidth: 1 });
-    }
+    if (!active){ upd.push({ id: n.id, opacity: 1, borderWidth: 1 }); return; }
+    if (relNodeMatches(n, ql, f)){ upd.push({ id: n.id, opacity: 1, borderWidth: 3 }); if (n.id.startsWith('e:' + curSeg + ':')) hitIds.push(n.id); }
+    else upd.push({ id: n.id, opacity: 0.12 });
   });
   relNetwork.body.data.nodes.update(upd);
   if (hitIds.length){
-    relNetwork.selectNodes(hitIds.slice(0, 60), true);                  /* 高亮选中（含边） */
-    relNetwork.focus(hitIds[0], { scale: 1.2, animation: { duration: 400, easingFunction: 'easeInOutQuad' } });  /* 聚焦首个命中居中放大 */
+    relNetwork.selectNodes(hitIds.slice(0, 60), true);
+    relNetwork.focus(hitIds[0], { scale: 1.2, animation: { duration: 400, easingFunction: 'easeInOutQuad' } });
   } else {
     relNetwork.unselectAll();
   }
+}
+/* relSearch 兼容保留（测试钩子 window.__rel.search 用）：写 FILTERS.rel.q 后统一走 relApplyFilters */
+function relSearch(q){
+  if (typeof FILTERS !== 'undefined' && FILTERS['rel']) FILTERS['rel'].q = q || '';
+  relApplyFilters();
+}
+window.relApplyFilters = relApplyFilters;   /* timeline.js applyFilter 钩子（typeof 检查调用） */
+
+/* ---- 加载 vis-network：本地化（js/vendor/vis-network.min.js，688KB 同源秒开）——彻底摆脱 jsdelivr CDN
+   间歇挂起问题（2026-08-05 实测：同步 script 挂起阻塞整页解析；CDN 动态加载也时好时坏）。
+   本地文件加载极快且离线可用；保留 onerror 降级兜底（文件缺失时提示） ---- */
+const REL_LIB_URL = 'js/vendor/vis-network.min.js';
+let relLibPromise = null;
+function relLoadLib(){
+  if (window.vis && window.vis.Network) return Promise.resolve();
+  if (relLibPromise) return relLibPromise;
+  relLibPromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = REL_LIB_URL;   /* 相对路径：http(s) 服务与 file:// 直开均可用 */
+    s.onload = () => { clearTimeout(relLibTimer); window.vis && window.vis.Network ? resolve() : reject(new Error('vis 未定义')); };
+    s.onerror = () => { clearTimeout(relLibTimer); reject(new Error('本地文件缺失')); };
+    document.head.appendChild(s);
+    /* 兜底超时（本地加载一般 <100ms，10s 防极端卡死） */
+    var relLibTimer = setTimeout(() => reject(new Error('图谱组件加载超时')), 10000);
+  }).catch(err => { relLibPromise = null; throw err; });   /* 失败置空允许下次重试 */
+  return relLibPromise;
+}
+function relFallback(msg){
+  const canvas = document.getElementById('relCanvas'); if (!canvas) return;
+  if (relNetwork){ relNetwork.destroy(); relNetwork = null; }
+  relBuiltSeg = null;
+  canvas.innerHTML = '<div class="rel-fallback">' + msg + ' 时间轴 / 地图 / 复习不受影响。</div>';
 }
 
 /* ---- 入口（app.js switchView('relation') 调用；CDN 失败降级） ---- */
 function initRelation(){
   const canvas = document.getElementById('relCanvas');
   if (!canvas) return;
-  if (typeof vis === 'undefined' || !vis.Network){
-    canvas.innerHTML = '<div class="rel-fallback">图谱组件加载失败（vis-network CDN 不可用），请联网后刷新。时间轴 / 地图 / 复习不受影响。</div>';
-    relNetwork = null; relBuiltSeg = null;
-    return;
-  }
-  if (relNetwork && relBuiltSeg === curSeg){ relNetwork.redraw(); relNetwork.fit(); return; }  /* 切 tab 回来不重建，保布局 */
-  if (relNetwork){ relNetwork.destroy(); relNetwork = null; }
-  try { buildRelation(); }
-  catch (err){ canvas.innerHTML = '<div class="rel-fallback">图谱构建失败：' + err.message + '</div>'; }
+  const sel = document.getElementById('relSeg'); if (sel && sel.value !== curSeg) sel.value = curSeg;  /* 顶栏切史段后同步下拉 */
+  relLoadLib()
+    .then(() => {
+      if (relNetwork && relBuiltSeg === curSeg){ relNetwork.redraw(); relNetwork.fit(); relApplyFilters(); return; }  /* 切 tab 回来不重建，保布局 */
+      if (relNetwork){ relNetwork.destroy(); relNetwork = null; }
+      try { buildRelation(); setTimeout(relApplyFilters, 50); }   /* 重建后重放顶栏筛选（type/imp/q） */
+      catch (err){ relFallback('图谱构建失败：' + err.message); }
+    })
+    .catch(err => relFallback('图谱组件加载失败（' + err.message + '），请联网后刷新。'));
 }
 window.initRelation = initRelation;   /* 供 app.js switchView 调用（typeof 检查） */
 function relCount(n, e){
@@ -394,25 +452,64 @@ function relCount(n, e){
   g.appendChild(ext);
 })();
 
-/* ---- 工具条事件（孤立开关/搜索；顶栏搜索联动；布局按钮已删除——力导唯一视图） ---- */
+/* ---- 史段下拉切换（关系视图内直接切，不离开图谱视图；与顶栏 seg-btn 行为一致但轻量） ---- */
+function switchRelSeg(seg){
+  if (seg === curSeg) return;
+  if (typeof rvState !== 'undefined' && rvState && !confirm('复习进行中，切换史段将终止本轮并回到设置界面。')){
+    const sel = document.getElementById('relSeg'); if (sel) sel.value = curSeg;
+    return;
+  }
+  curSeg = seg;
+  const segRow = document.getElementById('segRow');
+  if (segRow) segRow.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('on', b.dataset.seg === seg));
+  document.body.classList.remove('seg-modern', 'seg-world-ancient', 'seg-world-modern');
+  if (seg !== 'ancient') document.body.classList.add('seg-' + seg);
+  if (typeof renderPerLinks === 'function') renderPerLinks();
+  /* 只重建图谱（不重渲染时间轴/不切视图）；重建后重放筛选 */
+  if (relNetwork){ relNetwork.destroy(); relNetwork = null; }
+  relBuiltSeg = null;
+  try { buildRelation(); } catch (e) { relFallback('图谱构建失败：' + e.message); }
+  setTimeout(relApplyFilters, 50);
+}
+window.switchRelSeg = switchRelSeg;
+
+/* ---- 工具条事件（史段下拉/孤立开关/搜索；顶栏搜索联动；布局按钮已删除——力导唯一视图） ---- */
 (function relUI(){
   const q = document.getElementById('relQ');
-  q.addEventListener('input', () => relSearch(q.value));
+  /* 史段下拉：切图谱不切视图 */
+  document.getElementById('relSeg').addEventListener('change', function(){
+    switchRelSeg(this.value);
+  });
+  /* 工具条搜索：写 FILTERS.rel.q（切走再切回顶栏恢复搜索词）+ 同步顶栏输入框 + 驱动图谱 */
+  q.addEventListener('input', () => {
+    if (typeof FILTERS !== 'undefined' && FILTERS['rel']) FILTERS['rel'].q = q.value.trim();
+    const tq = document.getElementById('q');
+    if (tq && tq.value !== q.value) tq.value = q.value;
+    relApplyFilters();
+  });
   document.getElementById('relIso').addEventListener('click', function(){
     relShowIso = !relShowIso;
     this.textContent = '孤立：' + (relShowIso ? '显示' : '隐藏');
     this.classList.toggle('on', relShowIso);
     if (relNetwork){ relNetwork.destroy(); relNetwork = null; }
     buildRelation();
+    setTimeout(relApplyFilters, 50);   /* rebuild 后重放筛选 */
+  });
+  /* 呼吸开关：开=physics 持续（异步力导呼吸感）；关=physics 静止（低配机卡顿保障，仍可缩放/拖拽/平移） */
+  document.getElementById('relAnim').addEventListener('click', function(){
+    relAnimOn = !relAnimOn;
+    this.textContent = '呼吸：' + (relAnimOn ? '开' : '关');
+    this.classList.toggle('on', relAnimOn);
+    if (!relTabPaused) relSetPhysics(relAnimOn);
   });
   /* 可见缩放按钮（＋/－）；键盘 = / - 由 interaction.keyboard 处理 */
   document.getElementById('relZoomIn').addEventListener('click', () => relZoomBy(1.25));
   document.getElementById('relZoomOut').addEventListener('click', () => relZoomBy(0.8));
-  /* 顶栏搜索：关系视图可见时同步驱动图谱（与工具条搜索一致） */
+  /* 顶栏搜索：关系视图可见时同步驱动图谱（与工具条搜索一致；timeline.js 已写 FILTERS.rel.q） */
   document.getElementById('q').addEventListener('input', ev => {
     if (!document.getElementById('view-relation').hidden){
       document.getElementById('relQ').value = ev.target.value;
-      relSearch(ev.target.value);
+      relApplyFilters();
     }
   });
 })();
@@ -423,4 +520,6 @@ window.__rel = {
   click: relHandleClick,
   dbl: relHandleDouble,
   search: relSearch,
+  labels: relUpdateLabels,
+  labelsShown: () => relLabelsShown,
 };
