@@ -34,14 +34,18 @@ const { chromium } = require('playwright');
     const noFallback = await page.evaluate(() => !document.querySelector('#relCanvas .rel-fallback'));
     check('CDN 全断时图谱正常渲染（本地化）', nodes > 0 && noFallback, nodes + ' 节点 / ' + edges + ' 边');
 
-    /* 同段关联边完整校验（防时间序丢失回归）：实际边数 = 数据中同段 related 去重后的唯一边数
-       （审查发现曾 550 vs 692 丢一半——单遍遍历时早→晚的边被 ids.has 跳过） */
+    /* 关联边完整校验（防时间序丢失回归）：实际边数 = 数据中同段 related 去重唯一边 + 跨段 related 边
+       （曾 550 vs 692 丢一半——单遍遍历时早→晚的边被 ids.has 跳过；2026-08-05 加选官制度链后 ancient 段出现首条跨段边，
+         期望须含跨段，见经验 51） */
     const edgeCheck = await page.evaluate(() => {
       const n = window.__rel.net;
       const set = new Set(EVENTS.map(e => e.title));
-      const keys = new Set();
-      EVENTS.forEach(e => (e.related || []).forEach(t => { if (set.has(t)){ const k = e.title < t ? e.title + '|' + t : t + '|' + e.title; keys.add(k); } }));
-      return { expect: keys.size, actual: n.body.data.edges.length };
+      const keys = new Set(); const cross = new Set();
+      EVENTS.forEach(e => (e.related || []).forEach(t => {
+        const k = e.title < t ? e.title + '|' + t : t + '|' + e.title;
+        if (set.has(t)) keys.add(k); else cross.add(k);   /* 同段按 from|to 去重；跨段同样去重（mkEdge 同口径） */
+      }));
+      return { expect: keys.size + cross.size, actual: n.body.data.edges.length };
     });
     check('同段关联边完整（无时间序丢失）', edgeCheck.expect === edgeCheck.actual, edgeCheck.actual + ' = 期望 ' + edgeCheck.expect);
     const cnt = await page.textContent('#relCount');
@@ -65,13 +69,13 @@ const { chromium } = require('playwright');
       return { level: nd.level, shape: nd.shape };
     });
     check('事件节点 level=章索引', lvlInfo && lvlInfo.level >= 0 && lvlInfo.level <= 14 && lvlInfo.shape === 'dot', JSON.stringify(lvlInfo));
-    /* 孤立默认 hidden（ancient 孤立 131 条） */
+    /* 孤立默认 hidden：2026-08-06 子代理批量补边后孤立已清零（0 个）——断言从 >0 改为 ===0（未来新增孤立事件会暴露） */
     const hidden1 = await page.evaluate(() => {
       const n = window.__rel.net; if (!n) return -1;
       let c = 0; n.body.data.nodes.getIds().forEach(id => { if (n.body.data.nodes.get(id).hidden) c++; });
       return c;
     });
-    check('孤立默认 hidden（>0）', hidden1 > 0, hidden1 + ' 个');
+    check('孤立事件已全部连入（hidden=0）', hidden1 === 0, hidden1 + ' 个');
 
     /* 力导 fit（唯一视图，默认即力导）：渐进 fit 链（60/500/2000/4000ms）后 scale 应 < 0.5（视图已 fit 到画布，非 scale 1 空白）
        先等 fit 链稳定（4s 后），再做点击测试 */
