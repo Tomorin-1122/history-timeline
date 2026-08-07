@@ -54,7 +54,7 @@ function ok(name, cond, extra) {
   await page.click('#segRow .seg-btn[data-seg="modern"]');
   await page.waitForTimeout(400);
   ok('切 modern 时间轴隔离（筛选空）', (await onBtns('typeGroup')).join('/') === '全部' && (await chipsN()) === 0 && (await page.$eval('#q', i => i.value)) === '', (await onBtns('typeGroup')).join('/') || '空');
-  ok('modern 计数恢复全量', (await cnt()).includes('866'), await cnt());
+  ok('modern 计数恢复全量（2026-08-07 后 867）', (await cnt()).includes('867'), await cnt());
   await page.click('#segRow .seg-btn[data-seg="ancient"]');
   await page.waitForTimeout(400);
   ok('切回 ancient 恢复筛选记忆', (await onBtns('typeGroup')).join('/') === '政治/军事' && (await page.$eval('#q', i => i.value)) === '起义', (await onBtns('typeGroup')).join('/') + ' q=' + (await page.$eval('#q', i => i.value)));

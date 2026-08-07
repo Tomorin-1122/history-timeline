@@ -28,12 +28,12 @@ function ok(name, cond, extra) {
   const cntA = await page.textContent('#rvCount');
   ok('古代史计数 855', cntA.includes('855'), cntA);
 
-  // 2. 切近代史史段 → 分期 12 项（全部+11 段）+ 计数 866
+  // 2. 切近代史史段 → 分期 12 项（全部+11 段）+ 计数 867（2026-08-07 中国恢复联合国席位移入）
   await page.click('#rvSegBtns .rv-mode-btn[data-seg="modern"]');
   await page.waitForTimeout(300);
   perN = await page.$$eval('#rvPerBtns button.f', els => els.length);
   const cntM = await page.textContent('#rvCount');
-  ok('切近代史史段 → 分期 12 项 + 计数 866', perN === 12 && cntM.includes('866'), perN + ' 项 / ' + cntM);
+  ok('切近代史史段 → 分期 12 项 + 计数 867', perN === 12 && cntM.includes('867'), perN + ' 项 / ' + cntM);
 
   // 3. 多选：门类政治+军事 → 并集计数
   await page.click('#rvTypeBtns button.f:text-is("政治")');
@@ -57,11 +57,11 @@ function ok(name, cond, extra) {
   const cntRoam = await page.textContent('#rvCount');
   const expAll = await page.evaluate(() => EVENTS.length + EVENTS_MODERN.length + EVENTS_WORLD.length);
   ok('漫游全随机计数 = 全库 2638', cntRoam.includes(String(expAll)), cntRoam + '（期望 ' + expAll + '）');
-  // 选史段随机 → 当前史段（modern 866）
+  // 选史段随机 → 当前史段（modern 867）
   await page.click('#rvScopeBtns button.f[data-scope="seg"]');
   await page.waitForTimeout(300);
   const cntSeg = await page.textContent('#rvCount');
-  ok('漫游选史段随机计数 = 近代史 866', cntSeg.includes('866'), cntSeg);
+  ok('漫游选史段随机计数 = 近代史 867', cntSeg.includes('867'), cntSeg);
   // 切回古代史史段 + 选史段随机 → 855
   await page.click('#rvSegBtns .rv-mode-btn[data-seg="ancient"]');
   await page.waitForTimeout(300);
@@ -76,7 +76,7 @@ function ok(name, cond, extra) {
   await page.click('#rvSegBtns .rv-mode-btn[data-seg="world-modern"]');
   await page.waitForTimeout(300);
   const cntWorldM = await page.textContent('#rvCount');
-  ok('复习世界近现代史段 = 676 事', cntWorldM.includes('676'), cntWorldM);
+  ok('复习世界近现代史段 = 675 事（2026-08-07 后 676→675）', cntWorldM.includes('675'), cntWorldM);
   await page.click('#rvSegBtns .rv-mode-btn[data-seg="ancient"]');   // 切回古代史，保持第 7 步前提
   await page.waitForTimeout(300);
 

@@ -20,7 +20,7 @@ const { chromium } = require('playwright');
 
   /* 1. 数据注入 */
   const counts = await page.evaluate(() => ({ a: EVENTS.length, m: EVENTS_MODERN.length, w: EVENTS_WORLD.length, ch: CHAPTERS_WORLD.length }));
-  check('世界史数据注入（914 条 / 8 段）', counts.w === 914 && counts.ch === 8, JSON.stringify(counts));
+  check('世界史数据注入（913 条 / 8 段，2026-08-07 中国恢复联合国席位移至近代史后 914→913）', counts.w === 913 && counts.ch === 8, JSON.stringify(counts));
   const chNames = await page.evaluate(() => CHAPTERS_WORLD.map(c => c.name).join('/'));
   check('世界史 8 段标准名', chNames === '史前时代/早期文明/古典文明/中古封建时代/近代早期/革命与工业化/现代/当代', chNames);
 
@@ -41,7 +41,7 @@ const { chromium } = require('playwright');
   const bandsM = await page.$$eval('#main .band', bs => bs.map(b => b.querySelector('h2').textContent).join('/'));
   const cntM = await page.textContent('#cnt');
   check('世界近现代史时间轴（4 段带）', bandsM === '近代早期/革命与工业化/现代/当代', bandsM);
-  check('世界近现代史计数 676', cntM.includes('676'), cntM);
+  check('世界近现代史计数 675（2026-08-07 后 676→675）', cntM.includes('675'), cntM);
 
   /* 3. 排序：史前时代（-8000）在最前段，且段内按年月日复合排序 */
   const sortOk = await page.evaluate(() => {

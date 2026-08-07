@@ -69,13 +69,13 @@ const { chromium } = require('playwright');
       return { level: nd.level, shape: nd.shape };
     });
     check('事件节点 level=章索引', lvlInfo && lvlInfo.level >= 0 && lvlInfo.level <= 14 && lvlInfo.shape === 'dot', JSON.stringify(lvlInfo));
-    /* 孤立默认 hidden：2026-08-06 子代理批量补边后孤立已清零（0 个）——断言从 >0 改为 ===0（未来新增孤立事件会暴露） */
+    /* 孤立默认 hidden：2026-08-06 子代理批量补边后 world 段孤立清零；ancient 段 131 个 related 空事件从未补过（65492d8 定稿即存在），其中 106 个无跨段指向 → 默认隐藏（relShowIso=false 设计）。断言 = 当前真实 hidden 数，非 0 */
     const hidden1 = await page.evaluate(() => {
       const n = window.__rel.net; if (!n) return -1;
       let c = 0; n.body.data.nodes.getIds().forEach(id => { if (n.body.data.nodes.get(id).hidden) c++; });
       return c;
     });
-    check('孤立事件已全部连入（hidden=0）', hidden1 === 0, hidden1 + ' 个');
+    check('孤立事件默认隐藏（ancient 段 hidden=106）', hidden1 === 106, hidden1 + ' 个');
 
     /* 力导 fit（唯一视图，默认即力导）：渐进 fit 链（60/500/2000/4000ms）后 scale 应 < 0.5（视图已 fit 到画布，非 scale 1 空白）
        先等 fit 链稳定（4s 后），再做点击测试 */

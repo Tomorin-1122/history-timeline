@@ -28,7 +28,7 @@ function ok(name, cond, extra) {
   await page.click('.seg-btn[data-seg="modern"]');
   await page.waitForTimeout(400);
 
-  ok('modern 顶栏计数', (await page.textContent('#cnt')).includes('866'), await page.textContent('#cnt'));
+  ok('modern 顶栏计数（2026-08-07 中国恢复联合国席位移入后 866→867）', (await page.textContent('#cnt')).includes('867'), await page.textContent('#cnt'));
 
   // 11 段 band
   const bands = await page.$$eval('#main .band', els => els.map(e => e.querySelector('h2').textContent));
