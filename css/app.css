@@ -169,6 +169,9 @@ h3{font-size:17.5px; font-weight:700}
 .drawer.open{transform:none}
 .d-close{background:none; border:none; font-family:var(--serif); font-size:13px; color:var(--ink3); cursor:pointer; letter-spacing:.2em; padding:0}
 .d-close:hover{color:var(--cin)}
+.d-img-wrap{margin-top:16px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--paper-dim);text-align:center}
+.d-img{display:block;width:100%;height:auto;object-fit:contain;margin:0 auto}
+.d-credit{font-size:11px;color:var(--ink3);text-align:center;padding:5px 8px;background:var(--paper);border-top:1px solid var(--line);line-height:1.5}
 .d-year{margin-top:20px; font-size:15px; color:var(--cin); letter-spacing:.05em}
 .d-title{font-size:25px; font-weight:900; margin-top:4px; letter-spacing:.04em}
 .d-meta{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; align-items:center}

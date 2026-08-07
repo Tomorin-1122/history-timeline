@@ -298,6 +298,19 @@ const drawer=document.getElementById("drawer");
 const overlay=document.getElementById("overlay");
 function openDrawer(idx){
   const e=segData().EV[idx];
+  /* 抽屉头图：有图显示 + 填充 credit，无图隐藏不占位 */
+  const dImgWrap=document.getElementById("dImgWrap");
+  const dImg=document.getElementById("dImg");
+  const dCredit=document.getElementById("dCredit");
+  if(e.image){
+    dImgWrap.style.display="block";
+    dImg.src="data/images/"+encodeURI(e.image);
+    dCredit.textContent=e.credit||"";
+    dCredit.style.display=e.credit?"block":"none";
+  }else{
+    dImgWrap.style.display="none"; dImg.removeAttribute("src");
+    dCredit.style.display="none";
+  }
   document.getElementById("dYear").textContent=e.yearMode==="era"
     ? (e.era? (e.era+(e.eraSub?" · "+e.eraSub:"")) : (e.dynasty||e.period||"时代"))
     : fmt(e);

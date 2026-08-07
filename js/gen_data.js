@@ -172,6 +172,26 @@ const histCoords = loadJson('data/coords_resolved.json');   // CHGIS 历史坐�
 const modernCoords = loadJson('data/coords_modern.json');   // 今址坐标表（按"今址"）
 const worldCoords = loadJson('data/世界史坐标表.json'); // 世界史坐标（title→[lat,lng]，912 条 WGS84，2026-08-05 复制入 data/ 进版本库）
 
+// ---- 抽屉头图映射（title → {file, author, work}）：extract_workspace 产物，接入主库用 ----
+// 图片文件命名 = 主库事件 title 的 clean 形式（《》→[]、·→-、Windows 非法字符→_）
+const imgMap = loadJson('extract_workspace/产物/图片事件映射.json');
+const IMG_BY_TITLE = {};
+if (Array.isArray(imgMap)) {
+  for (const r of imgMap) {
+    if (r && r.title && r.file) IMG_BY_TITLE[r.title] = r;
+  }
+}
+console.log(`   配图映射: ${Object.keys(IMG_BY_TITLE).length} 张可挂靠`);
+
+// 注入 image/credit（无图不带字段省体积）
+function imgFields(it) {
+  const r = IMG_BY_TITLE[it.title];
+  if (!r) return {};
+  const f = { image: r.file };
+  if (r.work || r.author) f.credit = [r.work, r.author].filter(Boolean).join(' · ');
+  return f;
+}
+
 function todayName(loc) {
   const m = String(loc || '').match(/（(.+?)）/);
   return m ? m[1] : null;
@@ -257,6 +277,7 @@ function main() {
         tags: it.tags,
         related: it.related,
         wikiSlug: it.wikiSlug,
+        ...imgFields(it),
       });
     });
   }
@@ -303,6 +324,7 @@ function main() {
         tags: it.tags,
         related: it.related,
         wikiSlug: it.wikiSlug,
+        ...imgFields(it),
       });
     });
   }
@@ -345,6 +367,7 @@ function main() {
         tags: it.tags,
         related: it.related,
         wikiSlug: it.wikiSlug,
+        ...imgFields(it),
       });
     });
   }
