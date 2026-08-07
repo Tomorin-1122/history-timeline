@@ -2,7 +2,11 @@
   "framework": null,
   "routes": [
     { "src": "/(server|启动)\\.(js|bat)$", "status": 404 },
-    { "src": "/(data|scripts|docs|tests|demo)(/.*)?$", "status": 404 },
+    { "src": "/data/.+\\.(json|csv)$", "status": 404 },
+    { "src": "/scripts(/.*)?$", "status": 404 },
+    { "src": "/docs(/.*)?$", "status": 404 },
+    { "src": "/tests(/.*)?$", "status": 404 },
+    { "src": "/demo(/.*)?$", "status": 404 },
     { "src": "/.*\\.md$", "status": 404 }
   ],
   "headers": [
