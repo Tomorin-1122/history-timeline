@@ -44,6 +44,7 @@
         <button class="tab" data-view="map">地图</button>
         <button class="tab" data-view="review">复习</button>
         <button class="tab" data-view="relation">关系</button>
+        <button class="tab" data-view="parallel">对照</button>
       </div>
       <button class="f edit-toggle" id="editToggle" title="可视化编辑事件（本地服务）" hidden>编辑</button>
     </div>
@@ -181,7 +182,7 @@
       <button class="rv-btn ok" id="rvAgain">再来一轮</button>
     </div>
   </div>
-  <div class="view relation" id="view-relation" hidden>
+    <div class="view relation" id="view-relation" hidden>
     <div class="rel-tool">
       <select class="rel-seg" id="relSeg" title="切换关系图谱的史段（不离开图谱视图）">
         <option value="ancient">中国古代史</option>
@@ -204,6 +205,21 @@
       <div class="rel-attr" id="relAttr"></div>
     </div>
     <div class="rel-card" id="relCard" hidden></div>
+  </div>
+  <div class="view" id="view-parallel" hidden>
+    <div id="chart"></div>
+    <div id="zoomUI">
+      <button title="回到全览" onclick="ptReset()">⟲</button>
+      <span class="sep"></span>
+      <button title="左移" onclick="ptPan(-0.18)">←</button>
+      <button title="右移" onclick="ptPan(0.18)">→</button>
+      <span class="sep"></span>
+      <button title="缩小" onclick="ptZoom(1.6)">−</button>
+      <button title="放大" onclick="ptZoom(0.6)">＋</button>
+      <span class="sep"></span>
+      <input id="ptYearInput" type="text" placeholder="年份 · 前221" title="输入年份跳转并显示游标线，如 前221 / 1912 / -221；留空回车清除" onkeydown="if(event.key==='Enter')ptGo()">
+      <button title="跳转年份并显示游标线" onclick="ptGo()">定位</button>
+    </div>
   </div>
   <footer>
     据朱绍侯《中国古代史》按章提取 · <span id="footStat"></span> · 年份与等第按教材口径<br>
@@ -283,5 +299,7 @@
 <script src="js/app.js"></script>
 <script src="js/relation.js"></script>
 <script src="js/edit.js"></script>
+<script src="parallel/echarts.min.js"></script>
+<script src="js/parallel.js"></script>
 </body>
 </html>

@@ -13,6 +13,8 @@ function switchView(v){
   document.getElementById("view-map").hidden=v!=="map";
   document.getElementById("view-review").hidden=v!=="review";
   document.getElementById("view-relation").hidden=v!=="relation";
+  document.getElementById("view-parallel").hidden=v!=="parallel";
+  if(v==="parallel"&&typeof initParallel==="function") initParallel();   /* 对照视图：惰性初始化平行时间轴（原生渲染） */
   viewTabs.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.view===v));
   if(v==="map"){ try{ initMap(); }catch(e){ /* CDN 不可用时（回归测试 abort leaflet）静默，视图切换不受阻 */ } }
   if(v==="review") initReview();
