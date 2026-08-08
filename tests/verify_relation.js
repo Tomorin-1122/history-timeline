@@ -36,12 +36,13 @@ const { chromium } = require('playwright');
 
     /* 关联边完整校验（防时间序丢失回归）：实际边数 = 数据中同段 related 去重唯一边 + 跨段 related 边
        （曾 550 vs 692 丢一半——单遍遍历时早→晚的边被 ids.has 跳过；2026-08-05 加选官制度链后 ancient 段出现首条跨段边，
-         期望须含跨段，见经验 51） */
+         期望须含跨段，见经验 51；2026-08-08 自引用=跨段同名指示，不再计同段自环边——排除 t===e.title 防 self-loop） */
     const edgeCheck = await page.evaluate(() => {
       const n = window.__rel.net;
       const set = new Set(EVENTS.map(e => e.title));
       const keys = new Set(); const cross = new Set();
       EVENTS.forEach(e => (e.related || []).forEach(t => {
+        if (t === e.title) return;   /* 自引用=跨段同名指示：同段不画（跨段边由 REL_TITLE 定位，本段数据不产生边） */
         const k = e.title < t ? e.title + '|' + t : t + '|' + e.title;
         if (set.has(t)) keys.add(k); else cross.add(k);   /* 同段按 from|to 去重；跨段同样去重（mkEdge 同口径） */
       }));

@@ -109,10 +109,10 @@ function buildRelation(){
   ordered.forEach(e => {
     const id = evNodeId(e.title);
     (e.related || []).forEach(t => {
-      if (evByTitle[t]){                                   /* 同段：实线 */
+      if (evByTitle[t] && t !== e.title){                    /* 同段（排除自引用=跨段同名指示）：实线 */
         const tid = evNodeId(t);
         if (ids.has(tid)) mkEdge(edges, edgeKey, id, tid, false);
-      } else {                                             /* 跨段：目标建外部节点（方形）+ 虚线 */
+      } else {                                             /* 跨段（含同名自引用→REL_TITLE 定位另一史段）：目标建外部节点（方形）+ 虚线 */
         const hit = (REL_TITLE[t] || []).find(x => x.seg !== seg) || (REL_TITLE[t] || [])[0];
         if (hit && hit.seg !== seg){
           const xid = extNodeId(hit.seg, t);
@@ -323,6 +323,7 @@ function relShowCard(id, isExt){
   if (e.related && e.related.length){
     const r = document.createElement('div'); r.className = 'rc-rel'; r.textContent = '关联：';
     e.related.forEach(t => {
+      if (t === e.title) return;   /* 跨段同名自引用：虚线边已画，chip 不重复显示 */
       const c = document.createElement('span'); c.className = 'rc-chip'; c.textContent = t;
       c.addEventListener('click', () => relJumpTo(t));
       r.appendChild(c);

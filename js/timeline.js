@@ -328,6 +328,7 @@ function openDrawer(idx){
   const rel=document.getElementById("dRel"); rel.innerHTML="";
   document.getElementById("secRel").style.display=e.related.length?"":"none";
   e.related.forEach(name=>{
+    if (name === e.title) return;   /* 跨段同名自引用：仅关系图谱虚线用，抽屉不显示（会跳自己） */
     const b=document.createElement("button"); b.textContent=name;
     b.addEventListener("click",()=>jumpTo(name));
     rel.appendChild(b);
