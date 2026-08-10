@@ -544,6 +544,17 @@ window.ptGo = function(){
 };
 window.ptCursorClear = function(){ markYear = null; chart.setOption({ graphic: [{ id: 'ptCursor', invisible: true }] }); };
 chart.on('dataZoom', function(){ if (markYear !== null) updateCursor(); });   /* 缩放/平移后游标线跟随年份像素位置 */
+
+/* 按钮绑定：addEventListener（不用内联 onclick——线上 CSP script-src 禁 unsafe-inline 会拦截） */
+function bindBtn(id, fn){ const el = document.getElementById(id); if (el) el.addEventListener('click', fn); }
+bindBtn('ptResetBtn', function(){ window.ptReset(); });
+bindBtn('ptPanL', function(){ window.ptPan(-0.18); });
+bindBtn('ptPanR', function(){ window.ptPan(0.18); });
+bindBtn('ptZoomOut', function(){ window.ptZoom(1.6); });
+bindBtn('ptZoomIn', function(){ window.ptZoom(0.6); });
+bindBtn('ptGoBtn', function(){ window.ptGo(); });
+const yearInp = document.getElementById('ptYearInput');
+if (yearInp) yearInp.addEventListener('keydown', function(e){ if (e.key === 'Enter') window.ptGo(); });
 chart.setOption(option);
 /* 测试钩子 */
 window.__pt = {

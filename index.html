@@ -209,16 +209,16 @@
   <div class="view" id="view-parallel" hidden>
     <div id="chart"></div>
     <div id="zoomUI">
-      <button title="回到全览" onclick="ptReset()">⟲</button>
+      <button id="ptResetBtn" title="回到全览">⟲</button>
       <span class="sep"></span>
-      <button title="左移" onclick="ptPan(-0.18)">←</button>
-      <button title="右移" onclick="ptPan(0.18)">→</button>
+      <button id="ptPanL" title="左移">←</button>
+      <button id="ptPanR" title="右移">→</button>
       <span class="sep"></span>
-      <button title="缩小" onclick="ptZoom(1.6)">−</button>
-      <button title="放大" onclick="ptZoom(0.6)">＋</button>
+      <button id="ptZoomOut" title="缩小">−</button>
+      <button id="ptZoomIn" title="放大">＋</button>
       <span class="sep"></span>
-      <input id="ptYearInput" type="text" placeholder="年份 · 前221" title="输入年份跳转并显示游标线，如 前221 / 1912 / -221；留空回车清除" onkeydown="if(event.key==='Enter')ptGo()">
-      <button title="跳转年份并显示游标线" onclick="ptGo()">定位</button>
+      <input id="ptYearInput" type="text" placeholder="年份 · 前221" title="输入年份跳转并显示游标线，如 前221 / 1912 / -221；留空回车清除">
+      <button id="ptGoBtn" title="跳转年份并显示游标线">定位</button>
     </div>
   </div>
   <footer>
