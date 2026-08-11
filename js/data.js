@@ -30326,7 +30326,8 @@ const EVENTS_MODERN=[
    "中英《藏印条约》签订"
   ],
   "wikiSlug": "中英《烟台条约》",
-  "image": "中英[烟台条约].jpg"
+  "image": "中英[烟台条约].jpg",
+  "credit": "中英《烟台条约》 · Chefoo from the south (Public domain)"
  },
  {
   "title": "丁戊奇荒",
@@ -55165,7 +55166,8 @@ const EVENTS_MODERN=[
    "中共十二大"
   ],
   "wikiSlug": "1982年宪法通过",
-  "image": "1982年宪法通过.jpg"
+  "image": "1982年宪法通过.jpg",
+  "credit": "1982年宪法通过 · 中华人民共和国全国人民代表大会"
  },
  {
   "title": "中共十二届三中全会",
@@ -70093,7 +70095,8 @@ const EVENTS_WORLD=[
    "明治维新"
   ],
   "wikiSlug": "自由民权运动与明治宪法",
-  "image": "自由民权运动与明治宪法.jpg"
+  "image": "自由民权运动与明治宪法.jpg",
+  "credit": "自由民权运动与明治宪法 · Kantei"
  },
  {
   "title": "英国社会立法",
@@ -75360,7 +75363,8 @@ const EVENTS_WORLD=[
    "华夫脱运动"
   ],
   "wikiSlug": "埃及1922年宪法颁布",
-  "image": "埃及1922年宪法颁布.jpg"
+  "image": "埃及1922年宪法颁布.jpg",
+  "credit": "埃及1922年宪法颁布 · Time Magazine"
  },
  {
   "title": "墨索里尼上台执政",
@@ -78447,7 +78451,8 @@ const EVENTS_WORLD=[
    "农业全盘集体化运动"
   ],
   "wikiSlug": "1936年苏联宪法制定",
-  "image": "1936年苏联宪法制定.jpg"
+  "image": "1936年苏联宪法制定.jpg",
+  "credit": "1936年苏联宪法制定 · Shakko"
  },
  {
   "title": "反共产国际协定签订",
@@ -86429,7 +86434,8 @@ const EVENTS_WORLD=[
    "欧元现金流通"
   ],
   "wikiSlug": "欧盟成立",
-  "image": "欧盟成立.jpg"
+  "image": "欧盟成立.jpg",
+  "credit": "欧盟成立 · European Union (YouTube)"
  },
  {
   "title": "北美自由贸易协定生效",
