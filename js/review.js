@@ -1,9 +1,9 @@
-/* review.js — 复习模式：设置界面、三模式（针对训练/巩固错题/随机漫游）、错题重练 */
+/* review.js — 复习模式：设置界面、三模式 + 题型专练（quiz）、错题重练 */
 'use strict';
 
 let rvInit=false, rvState=null;
 let rvSeg='ancient';   /* 复习史段（第一步）：ancient/modern/world-ancient/world-modern（世界史 2026-08-05 接入） */
-const rvCfg={type:new Set(), imp:new Set(), per:new Set(), q:'', numMode:'all', num:10, mode:'train', roamScope:'all'};
+const rvCfg={type:new Set(), imp:new Set(), per:new Set(), q:'', numMode:'all', num:10, mode:'train', roamScope:'all', qz:'judge'};
 
 function initReview(){
   if(rvInit) return; rvInit=true;
@@ -32,8 +32,9 @@ function initReview(){
   });
   document.getElementById("rvModes").querySelectorAll(".rv-mode-btn").forEach(b=>{
     b.addEventListener("click",()=>{document.getElementById("rvModes").querySelectorAll(".rv-mode-btn").forEach(x=>x.classList.remove("on"));b.classList.add("on");rvCfg.mode=b.dataset.mode;
-      /* 随机漫游：显示漫游范围（全随机/选史段随机） */
+      /* 随机漫游：显示漫游范围（全随机/选史段随机）；题型专练：显示题型选择 */
       document.getElementById("rvRoamScope").hidden=b.dataset.mode!=="roam";
+      document.getElementById("rvQuizSec").hidden=b.dataset.mode!=="quiz";
       updateCount();
     });
   });
@@ -44,6 +45,15 @@ function initReview(){
       document.getElementById("rvScopeBtns").querySelectorAll("button.f").forEach(x=>x.classList.remove("on"));
       b.classList.add("on");
       updateCount();
+    });
+  });
+  /* 题型选择（quiz）：P1 仅判断题，其余 disabled 占位 */
+  document.getElementById("rvQuizTypes").querySelectorAll("button.f").forEach(b=>{
+    if(b.disabled) return;
+    b.addEventListener("click",()=>{
+      rvCfg.qz=b.dataset.qz;
+      document.getElementById("rvQuizTypes").querySelectorAll("button.f").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on");
     });
   });
   document.getElementById("rvStart").addEventListener("click",startReview);
@@ -167,18 +177,29 @@ function showSetup(){
 
 function startReview(){
   const warn=document.getElementById("rvWarn");
-  let pool;
-  if(rvCfg.mode==="wrong"){
-    pool=wrongPool();
-    if(pool.length===0){warn.textContent="暂无错题，先去「针对训练」练几轮。";warn.hidden=false;return;}
+  let cards;
+  if(rvCfg.mode==="quiz"){
+    /* 题型专练：判断题（P1）。复用筛选池 → genJudgment 同世纪配对 */
+    const src=poolFromFilters(rvEvents());
+    if(src.length<2){warn.textContent="该范围内题目太少，请调整筛选条件。";warn.hidden=false;return;}
+    const max=rvCfg.numMode==="all"?Math.min(src.length,10):Math.min(rvCfg.num,src.length);
+    const qz=rvCfg.qz==="judge" ? genJudgment(src,max) : [];
+    if(qz.length===0){warn.textContent="该范围内无法生成判断题（需同世纪两事件），请扩大范围。";warn.hidden=false;return;}
+    cards=qz.map(x=>({quiz:x}));   /* 包装为 {quiz}，与 {e} 区分 */
   }else{
-    pool=poolFromFilters(rvEvents());
-    if(pool.length===0){warn.textContent="该范围内没有题目，请调整筛选条件。";warn.hidden=false;return;}
-    const max=rvCfg.numMode==="all"?pool.length:Math.min(rvCfg.num,pool.length);
-    shuffle(pool); pool=pool.slice(0,max);
+    let pool;
+    if(rvCfg.mode==="wrong"){
+      pool=wrongPool();
+      if(pool.length===0){warn.textContent="暂无错题，先去「针对训练」练几轮。";warn.hidden=false;return;}
+    }else{
+      pool=poolFromFilters(rvEvents());
+      if(pool.length===0){warn.textContent="该范围内没有题目，请调整筛选条件。";warn.hidden=false;return;}
+      const max=rvCfg.numMode==="all"?pool.length:Math.min(rvCfg.num,pool.length);
+      shuffle(pool); pool=pool.slice(0,max);
+    }
+    cards=pool.map(e=>({e}));
   }
-  pool=pool.map(e=>({e})); /* 统一包装为 {e}，供 showCard/answer 使用 */
-  rvState={queue:pool,fails:[],processed:0,total:pool.length,round:1,okCount:0,failCount:0,mode:rvCfg.mode,roundTotal:pool.length,roundDone:0,seg:rvSeg};
+  rvState={queue:cards,fails:[],processed:0,total:cards.length,round:1,okCount:0,failCount:0,mode:rvCfg.mode,qz:rvCfg.qz,roundTotal:cards.length,roundDone:0,seg:rvSeg};
   document.getElementById("rvSetup").style.display="none";
   document.getElementById("rvStage").style.display="";
   document.getElementById("rvDone").hidden=true;
@@ -200,6 +221,11 @@ function showCard(){
     finishRound();return;
   }
   s.cur=s.queue[0];
+  const isQz=s.mode==="quiz";
+  document.getElementById("rvCard").style.display=isQz?"none":"";
+  document.getElementById("rvQuiz").hidden=!isQz;
+  document.querySelector("#rvStage .rv-actions").hidden=isQz;
+  if(isQz){ renderQuizCard(s.cur.quiz); updateProg(); return; }
   document.getElementById("rvTitle").textContent=s.cur.e.title;
   document.getElementById("rvFrontTags").innerHTML='<span class="tag"></span><span class="stars">'+stars(s.cur.e.importance)+'</span>';
   document.getElementById("rvFrontTags").querySelector(".tag").textContent=s.cur.e.type;  /* XSS 加固 */
@@ -223,9 +249,27 @@ function showCard(){
 function updateProg(){
   const s=rvState;
   const rt=s.roundTotal||s.total;
-  document.getElementById("rvProg").textContent=(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"))+" 第 "+Math.min(s.roundDone+1,rt)+" / "+rt+" 张";
+  const mn=s.mode==="quiz"?(s.qz==="judge"?"判断题":"题型"):(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"));
+  document.getElementById("rvProg").textContent=mn+" 第 "+Math.min(s.roundDone+1,rt)+" / "+rt+" 张";
   document.getElementById("rvFails").textContent=s.mode==="roam"?"不计错题":((s.failCount>0?("错题 "+s.failCount+" · "):"")+(s.round>1?("第 "+s.round+" 轮"):""));
   document.getElementById("rvBarIn").style.width=(s.processed/s.total*100)+"%";
+}
+
+/* ---- 题型专练（quiz）答题：选择即判（无翻牌） ---- */
+function quizAnswer(pick){
+  const s=rvState, cur=s.cur.quiz;
+  const ok=pick===cur.answer;
+  const key="ht-review-qz-"+(s.seg||"ancient")+"-"+cur.hash;   /* 错题 key：题型独立，不复用事件错题 */
+  if(ok){s.okCount++;localStorage.setItem(key,"ok");}
+  else{s.failCount++;s.fails.push(s.cur);localStorage.setItem(key,"fail");}
+  s.processed++; s.roundDone++;
+  showQuizResult(ok,pick);
+  updateProg();
+}
+function quizNext(){
+  const s=rvState;
+  s.queue.shift();
+  showCard();
 }
 
 function answer(ok){

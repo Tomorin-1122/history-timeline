@@ -135,12 +135,21 @@
           <button class="rv-mode-btn on" data-mode="train"><b>针对训练</b><span>按范围抽题 · 记错题 · 自动重练</span></button>
           <button class="rv-mode-btn" data-mode="wrong"><b>巩固错题</b><span>只练历史标记为「忘了」的题</span></button>
           <button class="rv-mode-btn" data-mode="roam"><b>随机漫游</b><span>全库/史段随机抽卡 · 不计错题</span></button>
+          <button class="rv-mode-btn" data-mode="quiz"><b>题型专练</b><span>判断题 / 选择题 / 排序题</span></button>
         </div>
         <div class="rv-roam-scope" id="rvRoamScope" hidden>
           <span class="glabel">漫游范围</span>
           <span class="rv-btns" id="rvScopeBtns">
             <button class="f on" data-scope="all">全随机</button>
             <button class="f" data-scope="seg">选史段随机</button>
+          </span>
+        </div>
+        <div class="rv-roam-scope" id="rvQuizSec" hidden>
+          <span class="glabel">题型</span>
+          <span class="rv-btns" id="rvQuizTypes">
+            <button class="f on" data-qz="judge">判断题</button>
+            <button class="f" data-qz="choiceA" disabled title="规划中">选择题</button>
+            <button class="f" data-qz="sort" disabled title="规划中">排序题</button>
           </span>
         </div>
       </div>
@@ -175,6 +184,7 @@
         <button class="rv-btn ok" id="rvOk" hidden>记住了</button>
         <button class="rv-btn ok" id="rvNext" hidden>下一张</button>
       </div>
+      <div class="rv-quiz" id="rvQuiz" hidden></div>
     </div>
     <div class="rv-done" id="rvDone" hidden>
       <div class="rv-done-title">本轮复习完成</div>
@@ -296,6 +306,7 @@
 <script src="js/timeline.js"></script>
 <script src="js/map.js"></script>
 <script src="js/review.js"></script>
+<script src="js/quiz.js"></script>
 <script src="js/app.js"></script>
 <script src="js/relation.js"></script>
 <script src="js/edit.js"></script>

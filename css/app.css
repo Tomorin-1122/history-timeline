@@ -221,6 +221,7 @@ h3{font-size:17.5px; font-weight:700}
 .rv-mode-btn:disabled{opacity:.45;cursor:not-allowed}
 /* 漫游范围：随机漫游模式下的附属选项卡片（2026-08-05 美化，与模式卡片协调） */
 .rv-roam-scope{margin-top:10px;padding:10px 14px;border:1px dashed var(--line2);border-radius:10px;background:var(--paper2);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rv-roam-scope[hidden]{display:none}   /* 显式 display:flex 会覆盖 hidden 默认的 display:none，须补回（2026-08-12） */
 .rv-roam-scope .glabel{font-size:12.5px;color:var(--ink3);letter-spacing:.05em}
 .rv-roam-scope .rv-btns{display:flex;gap:6px}
 .rv-start{display:block;margin:4px auto 0;min-width:200px}
@@ -257,6 +258,17 @@ h3{font-size:17.5px; font-weight:700}
 .rv-done{max-width:520px;margin:60px auto 0;text-align:center;background:var(--paper2);border:1px solid var(--line2);padding:48px 34px}
 .rv-done-title{font-size:26px;font-weight:900;letter-spacing:.1em}
 .rv-done-stat{margin:14px 0 26px;font-size:14px;color:var(--ink2);line-height:1.8}
+/* 题型专练（quiz，2026-08-12 P1 判断题） */
+.rv-quiz{max-width:520px;margin:0 auto;padding-top:8px}
+.rv-quiz .qz-q{font-size:18px;font-weight:900;letter-spacing:.08em;text-align:center;margin:20px 0}
+.rv-quiz .qz-opts{display:flex;flex-direction:column;gap:10px}
+.rv-quiz .qz-opt{text-align:left;padding:12px 18px;font-size:14.5px;letter-spacing:.05em}
+.rv-quiz .qz-opt:hover{border-color:var(--cin);color:var(--cin)}
+.rv-quiz .qz-opt.right{border-color:var(--cin);background:var(--cin-soft);color:var(--cin)}
+.rv-quiz .qz-opt.wrong{border-color:#b04a3a;background:#f3e2de;color:#8c3a2c}
+.rv-quiz .qz-res{margin-top:18px;padding:12px 14px;font-size:13.5px;line-height:1.8;border-left:3px solid var(--cin);background:var(--cin-soft);color:var(--ink2)}
+.rv-quiz .qz-res.no{border-color:#b04a3a;background:#f3e2de}
+.rv-quiz .qz-next{display:block;margin:20px auto 0}
 .mapview{padding-top:20px}
 .maptool{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 14px;border:1px solid var(--line);background:var(--paper2);font-size:13px}
 /* 工具栏分组（桌面平铺；移动端每组独立成行） */
