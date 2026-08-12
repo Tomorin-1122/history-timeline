@@ -24,7 +24,7 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   check('无 JS 错误', errors.length === 0, errors.join(' | '));
 
   // 2. 标题
-  check('标题', (await page.title()).includes('中国古代史时间轴'));
+  check('标题', (await page.title()).includes('考研历史时间轴'));
 
   // 3. 章节带：15 个
   const bands = await page.locator('.band').count();
@@ -121,13 +121,13 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   // 11c. 双时间轴：原始社会模式 + 地图界面分期链接不跳转
   await page.click('#yrAll');       /* 恢复"全部年份"（播放测试移除了 on 态） */
   await page.waitForTimeout(200);
-  check('工具栏原始社会在前', await page.locator('.range-btn').first().getAttribute('data-range') === 'pre');
-  await page.click('#rangePre');
+  check('工具栏首个地图模式为原始社会', (await page.locator('#rangeSel option').first().getAttribute('value')) === 'pre');
+  await page.selectOption('#rangeSel', 'pre');
   await page.waitForTimeout(300);
   const preSlider = await page.locator('#yrSlider').evaluate(el => [Number(el.min), Number(el.max)]);
   check('原始社会模式滑块对数刻度', preSlider[0] >= 0 && preSlider[1] > 3 && preSlider[1] < 4, preSlider.join(','));
   check('原始社会模式滑块 step=0.01', (await page.locator('#yrSlider').getAttribute('step')) === '0.01');
-  check('原始社会模式按钮态', await page.locator('#rangePre.on').count() === 1);
+  check('原始社会模式下拉态', (await page.locator('#rangeSel').inputValue()) === 'pre');
   const preMarkers = await page.locator('#map path.leaflet-interactive').count();
   const preExpect = await page.evaluate(() => EVENTS.filter(e => e.ch === 0 && COORDS[e.title]).length);
   check('原始社会模式 marker = 史前坐标数', preMarkers === preExpect, '期望 ' + preExpect + ' 实际 ' + preMarkers);
@@ -145,9 +145,9 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   check('地图界面点分期不跳回时间轴', await page.locator('#view-map:visible').count() === 1);
   await page.click('.bar a.jump:has-text("战国")');
   await page.waitForTimeout(200);
-  check('点战国切回历史模式', await page.locator('#rangeHist.on').count() === 1);
-  await page.click('#rangeHist');
-  await page.waitForTimeout(200);
+  check('点战国切回历史模式', (await page.locator('#rangeSel').inputValue()) === 'hist');
+  await page.click('#filterToggle');   /* 收起筛选浮层（展开会盖住 maptool，挡住后续按钮点击） */
+  await page.waitForTimeout(150);
 
   // 11d. 播放倍速调节
   check('倍速初始 1×', (await page.locator('#speedBtn').textContent()) === '1×');
@@ -176,7 +176,11 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   const s3 = Number(await page.locator('#yrSlider').inputValue());
   check('步进回上一个事件', s3 >= s1 && s3 < s2, s2 + '→' + s3);
   // 11f. 连续播放保留最近 N 个事件（默认 10，渐透明；事件到点出现不提前）
-  await page.click('.bar a.jump:has-text("全部")');   /* 清章过滤 */
+  await page.click('#filterToggle');   /* 展开浮层以点击「全部」清章 */
+  await page.waitForTimeout(150);
+  await page.click('.bar a.jump:has-text("全部")');
+  await page.click('#filterToggle');   /* 收起浮层，继续地图操作 */
+  await page.waitForTimeout(150);
   await page.locator('#yrSlider').evaluate(el => { el.value = '0'; el.dispatchEvent(new Event('input')); });
   await page.click('#playBtn');
   await page.waitForTimeout(1500);
@@ -197,13 +201,21 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   const expectMarkers = await page.evaluate(() => EVENTS.filter(e => e.ch !== 0 && COORDS[e.title]).length);
   check('历史模式与原始社会隔离', domMarkers === expectMarkers, domMarkers + ' vs ' + expectMarkers);
   // 11g. 步进随筛选联动：门类=军事时，步进只跳军事事件
+  await page.click('#filterToggle');   /* 展开浮层以点击门类按钮 */
+  await page.waitForTimeout(150);
   await page.click('#typeGroup button:has-text("军事")');
+  await page.click('#filterToggle');   /* 收起浮层再步进（浮层会挡 maptool） */
+  await page.waitForTimeout(150);
   await page.locator('#yrSlider').evaluate(el => { el.value = '-300'; el.dispatchEvent(new Event('input')); });
   await page.click('#stepNext');
   const mv = Number(await page.locator('#yrSlider').inputValue());
   const hasMil = await page.evaluate((y) => EVENTS.some(e => e.type === '军事' && e.year === y && COORDS[e.title]), mv);
   check('步进随军事筛选联动', hasMil, 'v=' + mv);
-  await page.click('#typeGroup button:has-text("全部")');   /* 恢复门类筛选 */
+  await page.click('#filterToggle');   /* 展开浮层以点「全部」恢复 */
+  await page.waitForTimeout(150);
+  await page.click('#typeGroup button:has-text("全部")');
+  await page.click('#filterToggle');   /* 收起浮层，进复习视图 */
+  await page.waitForTimeout(150);
 
   // 12. 视图切换：复习
   await page.click('.tab[data-view="review"]');
@@ -245,6 +257,33 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.click('#rvOk');
   await page.waitForTimeout(300);
   check('错题攻克后本轮完成', await page.locator('#rvDone:visible').count() === 1);
+
+  // 12d. 复习收敛后 rvState 已清理（切史段不再误弹「复习进行中」）
+  check('复习完成后 rvState 已清空', await page.evaluate(() => rvState === null));
+
+  // 12d2. 答题中切视图 → 进度保留
+  await page.click('#rvAgain');
+  await page.waitForTimeout(200);
+  await page.click('#rvStart');
+  await page.waitForTimeout(300);
+  const rvTitleBefore = await page.locator('#rvTitle').textContent();
+  await page.click('.tab[data-view="timeline"]');
+  await page.waitForTimeout(200);
+  await page.click('.tab[data-view="review"]');
+  await page.waitForTimeout(300);
+  check('切视图后仍在答题舞台', await page.locator('#rvStage:visible').count() === 1);
+  check('切视图后当前题不变', (await page.locator('#rvTitle').textContent()) === rvTitleBefore);
+  await page.click('#rvExit');
+  await page.waitForTimeout(150);
+  await page.click('#rvExit');
+  await page.waitForTimeout(300);
+  check('切视图测试后退回设置', await page.locator('#rvSetup:visible').count() === 1);
+
+  // 12d3. 史段按钮条数动态填充（数据量免手改）
+  check('史段按钮条数动态', await page.evaluate(() => {
+    const el = document.getElementById('rvSegN-ancient');
+    return el && el.textContent.includes(EVENTS.length + ' 事');
+  }));
 
   // 13. toBand 章节回顶按钮
   await page.click('.tab[data-view="timeline"]');

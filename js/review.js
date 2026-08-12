@@ -7,6 +7,7 @@ const rvCfg={type:new Set(), imp:new Set(), per:new Set(), q:'', numMode:'all', 
 
 function initReview(){
   if(rvInit) return; rvInit=true;
+  renderRvSegCounts();
   /* 第一步：史段选择（ancient/modern；world 占位 disabled，规划中） */
   document.getElementById("rvSegBtns").querySelectorAll(".rv-mode-btn").forEach(b=>{
     if(b.disabled) return;
@@ -90,12 +91,23 @@ function rvBtns(el,items,key){
   });
   rvSyncBtns();
 }
-/* 复习史段数据源：与时间轴 segData 同构（world 4+4 分段 ch 归一化） */
-function rvSegData(){
-  if(rvSeg==="world-ancient") return {EV: EVENTS_WORLD.filter(e=>e.ch<4), CH: CHAPTERS_WORLD.slice(0,4)};
-  if(rvSeg==="world-modern")  return {EV: EVENTS_WORLD.filter(e=>e.ch>=4).map(e=>({...e,ch:e.ch-4})), CH: CHAPTERS_WORLD.slice(4)};
-  if(rvSeg==="modern") return {EV: EVENTS_MODERN, CH: CHAPTERS_MODERN};
+/* 复习史段数据源：与时间轴 segData 同构（world 4+4 分段 ch 归一化）；rvSegDataFor 显式指定史段 */
+function rvSegDataFor(seg){
+  if(seg==="world-ancient") return {EV: EVENTS_WORLD.filter(e=>e.ch<4), CH: CHAPTERS_WORLD.slice(0,4)};
+  if(seg==="world-modern")  return {EV: EVENTS_WORLD.filter(e=>e.ch>=4).map(e=>({...e,ch:e.ch-4})), CH: CHAPTERS_WORLD.slice(4)};
+  if(seg==="modern") return {EV: EVENTS_MODERN, CH: CHAPTERS_MODERN};
   return {EV: EVENTS, CH: CHAPTERS};
+}
+function rvSegData(){ return rvSegDataFor(rvSeg); }
+/* 史段按钮条数动态填充（数据量变化免手改 index.html 硬编码文案） */
+function renderRvSegCounts(){
+  const unit={ancient:"章",modern:"段","world-ancient":"段","world-modern":"段"};
+  for(const seg of Object.keys(unit)){
+    const el=document.getElementById("rvSegN-"+seg);
+    if(!el) continue;
+    const {EV,CH}=rvSegDataFor(seg);
+    el.textContent=CH.length+" "+unit[seg]+" · "+EV.length+" 事";
+  }
 }
 /* 分期按钮：按第一步所选史段重建（ancient=15 章 / modern=11 段 / world-*=4 段） */
 function renderRvPer(){
@@ -120,8 +132,7 @@ function rvEvents(){
   return rvSegData().EV;
 }
 
-function poolFromFilters(){
-  const EV=rvEvents();
+function poolFromFilters(EV){
   const allScope=(rvCfg.mode==="roam" && rvCfg.roamScope==="all");
   const q=rvCfg.q.toLowerCase();
   return EV.filter(e=>{
@@ -133,17 +144,21 @@ function poolFromFilters(){
   });
 }
 
+/* 错题池：当前史段历史标「fail」的题，同样套用门类/等第/分期/搜索筛选（与针对训练一致） */
 function wrongPool(){
   const EV=rvSegData().EV;
   const key="ht-review-"+rvSeg+"-";
-  return EV.filter(e=>localStorage.getItem(key+e.title)==="fail" || localStorage.getItem("ht-review-"+e.title)==="fail");  /* 兼容旧无前缀 key */
+  const fails=EV.filter(e=>localStorage.getItem(key+e.title)==="fail" || localStorage.getItem("ht-review-"+e.title)==="fail");  /* 兼容旧无前缀 key */
+  return poolFromFilters(fails);
 }
 
 function updateCount(){
-  document.getElementById("rvCount").textContent="当前范围共 "+poolFromFilters().length+" 题";
+  const pool=rvCfg.mode==="wrong" ? wrongPool() : poolFromFilters(rvEvents());
+  document.getElementById("rvCount").textContent="当前范围共 "+pool.length+" 题";
 }
 
 function showSetup(){
+  rvState=null;   /* 结束本轮：退出/再来一轮/切史段后 rvState 归零，避免误弹"复习进行中" */
   document.getElementById("rvSetup").style.display="";
   document.getElementById("rvStage").style.display="none";
   document.getElementById("rvDone").hidden=true;
@@ -157,7 +172,7 @@ function startReview(){
     pool=wrongPool();
     if(pool.length===0){warn.textContent="暂无错题，先去「针对训练」练几轮。";warn.hidden=false;return;}
   }else{
-    pool=poolFromFilters();
+    pool=poolFromFilters(rvEvents());
     if(pool.length===0){warn.textContent="该范围内没有题目，请调整筛选条件。";warn.hidden=false;return;}
     const max=rvCfg.numMode==="all"?pool.length:Math.min(rvCfg.num,pool.length);
     shuffle(pool); pool=pool.slice(0,max);
@@ -231,4 +246,5 @@ function finishRound(){
   if(s.mode==="roam"){stat.textContent="共 "+s.total+" 张 · 随机漫游完成";}
   else{stat.textContent="共 "+s.total+" 张 · 记住 "+s.okCount+" · 错题重练 "+s.failCount+" 次";}
   document.getElementById("rvBarIn").style.width="100%";
+  rvState=null;   /* 本轮收敛：已完成无需再占用 rvState（切史段不再误弹"复习进行中"） */
 }
