@@ -46,6 +46,32 @@ const URL = 'file:///' + path.resolve(__dirname, '..', 'index.html').replace(/\\
   check('答案合法', unit.answerValid);
   check('题干 hash 齐全', unit.hasHash);
 
+  // 0b. 选择题甲种单元断言
+  const unit2 = await page.evaluate(() => {
+    const pool = EVENTS.filter(e => e.year != null && e.importance === 3);
+    const qs = genChoiceA(pool, 20);
+    return {
+      n: qs.length,
+      four: qs.every(q => q.options.length === 4),
+      unique: qs.every(q => new Set(q.options.map(o => o.text)).size === 4),
+      answerValid: qs.every(q => q.answer >= 0 && q.answer < 4),
+      detail: qs.every(q => !!q.detail)
+    };
+  });
+  check('genChoiceA 生成 > 0', unit2.n > 0, 'n=' + unit2.n);
+  check('选项恒 4 个', unit2.four);
+  check('选项互不重复', unit2.unique);
+  check('答案合法', unit2.answerValid);
+  check('含完整时间 detail', unit2.detail);
+  const sample = await page.evaluate(() => {
+    const pool = EVENTS.filter(e => e.year != null);
+    const q = genChoiceA(pool, 1)[0];
+    const title = q.q.replace(/^「/, '').split('」')[0];
+    const ev = EVENTS.find(e => e.title === title);
+    return { text: q.options[q.answer].text, bucket: timeBucket(ev) ? timeBucket(ev).text : null };
+  });
+  check('正确项 = 真实时间桶', sample.text === sample.bucket, sample.text + ' vs ' + sample.bucket);
+
   // 1. 进入复习 → quiz 模式
   await page.click('.tab[data-view="review"]');
   await page.waitForTimeout(300);
@@ -104,6 +130,36 @@ const URL = 'file:///' + path.resolve(__dirname, '..', 'index.html').replace(/\\
   await page.click('#rvAgain');
   await page.waitForTimeout(200);
   check('返回设置界面', await page.locator('#rvSetup:visible').count() === 1);
+
+  // 7. 选择题甲种 UI：切题型 → 4 选项 → 判题 → 完成
+  await page.click('#rvQuizTypes button[data-qz="choiceA"]');
+  await page.waitForTimeout(150);
+  await page.fill('#rvNum', '1');
+  await page.waitForTimeout(150);
+  await page.click('#rvStart');
+  await page.waitForTimeout(400);
+  check('选择题卡片 4 选项', await page.locator('.qz-opt').count() === 4);
+  check('选择题题干「时间段」', (await page.locator('.qz-q').textContent()).includes('哪个时间段'));
+  check('进度显示选择题', (await page.locator('#rvProg').textContent()).includes('选择题'));
+  // 第 1 题答错
+  const ansC = await page.evaluate(() => rvState.cur.quiz.answer);
+  const wrongC = ansC === 0 ? 1 : 0;
+  await page.click('.qz-opt >> nth=' + wrongC);
+  await page.waitForTimeout(200);
+  check('选择题答错反馈', (await page.locator('.qz-res').textContent()).includes('✗'));
+  check('反馈含时间桶', ((await page.locator('.qz-res').textContent()).includes('世纪')) || ((await page.locator('.qz-res').textContent()).includes('年代')));
+  // 下一题 → 第 2 轮重练
+  await page.click('.qz-next');
+  await page.waitForTimeout(400);
+  check('选择题进入第 2 轮', (await page.locator('#rvFails').textContent()).includes('第 2 轮'));
+  // 第 2 轮答对
+  const ansC2 = await page.evaluate(() => rvState.cur.quiz.answer);
+  await page.click('.qz-opt >> nth=' + ansC2);
+  await page.waitForTimeout(200);
+  check('选择题答对反馈', (await page.locator('.qz-res').textContent()).includes('✓'));
+  await page.click('.qz-next');
+  await page.waitForTimeout(400);
+  check('选择题完成页', await page.locator('#rvDone:visible').count() === 1);
 
   let pass = 0, fail = 0;
   for (const r of results) { r.ok ? pass++ : fail++; console.log((r.ok ? 'PASS' : 'FAIL') + '\t' + r.name + (r.extra ? '\t(' + r.extra + ')' : '')); }

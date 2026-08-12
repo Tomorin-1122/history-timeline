@@ -179,12 +179,12 @@ function startReview(){
   const warn=document.getElementById("rvWarn");
   let cards;
   if(rvCfg.mode==="quiz"){
-    /* 题型专练：判断题（P1）。复用筛选池 → genJudgment 同世纪配对 */
+    /* 题型专练：判断题 / 选择题甲种。复用筛选池；era 事件（原始社会）由 timeBucket 排除 */
     const src=poolFromFilters(rvEvents());
     if(src.length<2){warn.textContent="该范围内题目太少，请调整筛选条件。";warn.hidden=false;return;}
     const max=rvCfg.numMode==="all"?Math.min(src.length,10):Math.min(rvCfg.num,src.length);
-    const qz=rvCfg.qz==="judge" ? genJudgment(src,max) : [];
-    if(qz.length===0){warn.textContent="该范围内无法生成判断题（需同世纪两事件），请扩大范围。";warn.hidden=false;return;}
+    const qz=rvCfg.qz==="judge" ? genJudgment(src,max) : (rvCfg.qz==="choiceA" ? genChoiceA(src,max) : []);
+    if(qz.length===0){warn.textContent="该范围内无法生成题目（判断题需同世纪两事件 / 选择题需可判时间），请扩大范围。";warn.hidden=false;return;}
     cards=qz.map(x=>({quiz:x}));   /* 包装为 {quiz}，与 {e} 区分 */
   }else{
     let pool;
@@ -249,7 +249,7 @@ function showCard(){
 function updateProg(){
   const s=rvState;
   const rt=s.roundTotal||s.total;
-  const mn=s.mode==="quiz"?(s.qz==="judge"?"判断题":"题型"):(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"));
+  const mn=s.mode==="quiz"?(s.qz==="judge"?"判断题":(s.qz==="choiceA"?"选择题":"题型")):(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"));
   document.getElementById("rvProg").textContent=mn+" 第 "+Math.min(s.roundDone+1,rt)+" / "+rt+" 张";
   document.getElementById("rvFails").textContent=s.mode==="roam"?"不计错题":((s.failCount>0?("错题 "+s.failCount+" · "):"")+(s.round>1?("第 "+s.round+" 轮"):""));
   document.getElementById("rvBarIn").style.width=(s.processed/s.total*100)+"%";
