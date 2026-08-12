@@ -217,6 +217,17 @@ const URL = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').repla
   await page.click('#filterToggle');   /* 收起浮层，进复习视图 */
   await page.waitForTimeout(150);
 
+  // 11h. 筛选浮层展开时 maptool 仍可操作（2026-08-12 修复：浮层撑开内容区，不再压住地图工具条）
+  await page.click('#filterToggle');   /* 展开浮层 */
+  await page.waitForTimeout(150);
+  const sv0 = Number(await page.locator('#yrSlider').inputValue());
+  await page.click('#stepNext');       /* 浮层展开下直接点 maptool 按钮（修复后不被遮挡） */
+  await page.waitForTimeout(100);
+  const sv1 = Number(await page.locator('#yrSlider').inputValue());
+  check('浮层展开时步进仍可点', sv1 !== sv0, sv0 + '→' + sv1);
+  await page.click('#filterToggle');   /* 收起浮层，进复习视图 */
+  await page.waitForTimeout(150);
+
   // 12. 视图切换：复习
   await page.click('.tab[data-view="review"]');
   await page.waitForTimeout(300);

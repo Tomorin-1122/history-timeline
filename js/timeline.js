@@ -176,6 +176,7 @@ function renderPerLinks(){
     perGroup.appendChild(a);
   });
   syncPerLinks();
+  if(typeof syncFilterSpace==="function") syncFilterSpace();   /* 史段切换重建分期链接，浮层高度可能变化 */
 }
 /* 分期链接高亮（多选章）：「全部」on = ch Set 空；章 on = 在 Set 中（仅地图视图参与 ch 过滤；时间轴视图锚点跳转不高亮章） */
 function syncPerLinks(){
@@ -250,10 +251,20 @@ function setBtn(gid,idx){ /* 旧单选高亮逻辑废弃（多选改 syncBtns）
 
 /* ---- 筛选面板展开/收起 + 关键词搜索 ---- */
 const filterToggle=document.getElementById("filterToggle"), filters=document.getElementById("filters");
+/* 筛选浮层撑开内容区：展开时按浮层高度给 .wrap 加 margin-top，浮层只占空档、不盖住 maptool/时间轴列表（2026-08-12 修复）
+   原 absolute 浮层（z-index:55）会直接压住下方 .wrap 内容，地图工具条无法点击 */
+function syncFilterSpace(){
+  const wrap=document.querySelector(".wrap");
+  const flt=document.getElementById("filters");
+  if(!wrap || !flt) return;                      /* 局部获取，避免 renderPerLinks 初始化调用时踩 const filters 的 TDZ */
+  wrap.style.marginTop = flt.hidden ? "" : (flt.offsetHeight+"px");
+}
 filterToggle.addEventListener("click",()=>{
   filters.hidden=!filters.hidden;
   filterToggle.textContent=filters.hidden?"筛选":"收起";
+  syncFilterSpace();
 });
+window.addEventListener("resize",()=>{ if(typeof syncFilterSpace==="function") syncFilterSpace(); });   /* 窄屏按钮换行会改变浮层高度 */
 const qInput=document.getElementById("q");
 qInput.addEventListener("input",()=>{st().q=qInput.value.trim();renderChips();applyFilter();});
 
