@@ -50,6 +50,12 @@ for (const t of Object.keys(COORDS)) {
   if (!Array.isArray(c) || c.length !== 2 || typeof c[0] !== 'number' || typeof c[1] !== 'number') errs.push('bad coords: ' + t);
   if (!allTitles.has(t)) errs.push('coords 指向不存在事件: ' + t);
 }
+/* 排序题核心链校验：链内 title 必须存在、链长≥2、无重复（维护 quiz_chains.js 后防失效） */
+for (const [k, arr] of Object.entries(QUIZ_CHAINS)) {
+  if (!Array.isArray(arr) || arr.length < 2) errs.push('链过短(<2): ' + k);
+  if (new Set(arr).size !== arr.length) errs.push('链内重复: ' + k);
+  for (const t of arr) { if (!allTitles.has(t)) errs.push('链指向不存在事件: ' + k + ' -> ' + t); }
+}
 const cov = [...new Set(EVENTS.map(e => e.ch))].sort((a,b)=>a-b).map(c => CHAPTERS[c].name);
 const covM = [...new Set(EVENTS_MODERN.map(e => e.ch))].sort((a,b)=>a-b).map(c => CHAPTERS_MODERN[c].name);
 const covW = [...new Set(EVENTS_WORLD.map(e => e.ch))].sort((a,b)=>a-b).map(c => CHAPTERS_WORLD[c].name);
@@ -72,4 +78,5 @@ if (errs.length) { console.log('ERRORS:'); errs.forEach(x => console.log(' -', x
 console.log('数据关卡: PASS');
 `;
 
-eval(src + '\n' + CHECK);
+const chainsSrc = fs.readFileSync(path.join(__dirname, '..', 'data', 'quiz_chains.js'), 'utf8');
+eval(src + '\n' + chainsSrc + '\n' + CHECK);
