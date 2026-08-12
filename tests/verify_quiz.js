@@ -87,6 +87,33 @@ const URL = 'file:///' + path.resolve(__dirname, '..', 'index.html').replace(/\\
   check('order 与 items 同集', unit3.orderMatches);
   check('事件均带时间展示', unit3.hasTime);
 
+  // 0d. 多选题（乙种）单元断言：正确项在该时段、错误项不在、选项 5-8
+  const unit4 = await page.evaluate(() => {
+    const qs = genChoiceB(10);
+    const all = [...EVENTS, ...EVENTS_MODERN, ...EVENTS_WORLD];
+    return {
+      n: qs.length,
+      ansCnt: qs.every(q => q.answer.length >= 2 && q.answer.length <= 4),
+      optCnt: qs.every(q => q.options.length >= 5 && q.options.length <= 8),
+      correctInBucket: qs.every(q => q.answer.every(i => {
+        const ev = all.find(e => e.title === q.options[i].text);
+        const b = ev ? timeBucket(ev) : null;
+        return b && b.text === q.detail;
+      })),
+      wrongOutOfBucket: qs.every(q => q.options.every((o, i) => {
+        if (q.answer.includes(i)) return true;
+        const ev = all.find(e => e.title === o.text);
+        const b = ev ? timeBucket(ev) : null;
+        return b && b.text !== q.detail;
+      }))
+    };
+  });
+  check('genChoiceB 生成 > 0', unit4.n > 0, 'n=' + unit4.n);
+  check('正确项 2-4 个', unit4.ansCnt);
+  check('选项 5-8 个', unit4.optCnt);
+  check('正确项均在该时段', unit4.correctInBucket);
+  check('错误项均不在该时段', unit4.wrongOutOfBucket);
+
   // 1. 进入复习 → quiz 模式
   await page.click('.tab[data-view="review"]');
   await page.waitForTimeout(300);
@@ -196,6 +223,37 @@ const URL = 'file:///' + path.resolve(__dirname, '..', 'index.html').replace(/\\
   await page.click('.qz-next');
   await page.waitForTimeout(400);
   check('排序题完成页', await page.locator('#rvDone:visible').count() === 1);
+
+  // 9. 多选题（乙种）UI：勾选 → 提交 → 全对/漏选判错 → 重练完成
+  await page.click('#rvAgain');
+  await page.waitForTimeout(200);
+  await page.click('#rvQuizTypes button[data-qz="choiceB"]');
+  await page.waitForTimeout(150);
+  await page.fill('#rvNum', '1');
+  await page.waitForTimeout(150);
+  await page.click('#rvStart');
+  await page.waitForTimeout(400);
+  check('多选题卡片渲染', await page.locator('.qz-opt').count() >= 5);
+  check('多选题题干「哪些事件」', (await page.locator('.qz-q').textContent()).includes('哪些事件'));
+  check('提交按钮', await page.locator('.qz-submit').count() === 1);
+  check('进度显示多选题', (await page.locator('#rvProg').textContent()).includes('多选题'));
+  const ansB = await page.evaluate(() => rvState.cur.quiz.answer);
+  await page.click('.qz-opt >> nth=' + ansB[0]);   /* 只选 1 个正确项 → 漏选判错 */
+  await page.click('.qz-submit');
+  await page.waitForTimeout(200);
+  check('多选题漏选判错', (await page.locator('.qz-res').textContent()).includes('✗'));
+  check('反馈列正确事件', (await page.locator('.qz-res').textContent()).includes('发生'));
+  await page.click('.qz-next');
+  await page.waitForTimeout(400);
+  check('多选题进入第 2 轮', (await page.locator('#rvFails').textContent()).includes('第 2 轮'));
+  const ansB2 = await page.evaluate(() => rvState.cur.quiz.answer);
+  for (const i of ansB2) await page.click('.qz-opt >> nth=' + i);
+  await page.click('.qz-submit');
+  await page.waitForTimeout(200);
+  check('多选题全对反馈', (await page.locator('.qz-res').textContent()).includes('✓'));
+  await page.click('.qz-next');
+  await page.waitForTimeout(400);
+  check('多选题完成页', await page.locator('#rvDone:visible').count() === 1);
 
   let pass = 0, fail = 0;
   for (const r of results) { r.ok ? pass++ : fail++; console.log((r.ok ? 'PASS' : 'FAIL') + '\t' + r.name + (r.extra ? '\t(' + r.extra + ')' : '')); }

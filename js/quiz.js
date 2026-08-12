@@ -1,5 +1,5 @@
-/* quiz.js — 题型专练：判断题/选择题/排序题（客观题）生成、渲染、判题
-   P1（2026-08-12）：判断题；P2：选择题甲种；P3（2026-08-12）：排序题（quiz_chains.js 核心链）。乙种规划中（见 docs/进阶题型方案.md） */
+/* quiz.js — 题型专练：判断题/选择题/排序题/多选题（客观题）生成、渲染、判题
+   P1（2026-08-12）：判断题；P2：选择题甲种；P3：排序题；P4（2026-08-12）：选择题乙种（跨时段多选） */
 'use strict';
 
 /* ---- 时间工具（核心数据转换）---- */
@@ -84,7 +84,7 @@ function genChoiceA(pool,n){
   return out;
 }
 
-/* ---- 排序题（P3）：核心链打乱，判题按链顺序（人工维护，数据同年无 month 亦可靠） ---- */
+/* 排序题（P3）：核心链打乱，判题按链顺序（人工维护，数据同年无 month 亦可靠） */
 function findEvent(t){
   return EVENTS.find(e=>e.title===t)||EVENTS_MODERN.find(e=>e.title===t)||EVENTS_WORLD.find(e=>e.title===t)||null;
 }
@@ -103,6 +103,41 @@ function genSorting(n){
              items:idx.map(k=>items[k]),
              order:ch.slice(),          /* 正确答案 = 链序（title 数组） */
              hash:"sort|"+ch.join("|")};
+    out.push(o);
+  }
+  return out;
+}
+
+/* ---- 选择题乙种（P4）：给定时间段选该时段发生的中外事件（跨史段同池） ---- */
+function genChoiceB(n){
+  const all=[...EVENTS,...EVENTS_MODERN,...EVENTS_WORLD];
+  const bucketMap={};
+  for(const e of all){
+    const b=timeBucket(e);
+    if(b) (bucketMap[b.key]=bucketMap[b.key]||[]).push({e,b});
+  }
+  const keys=Object.keys(bucketMap);
+  const out=[];
+  let guard=0;
+  while(out.length<n && keys.length && guard++<200){
+    const key=keys[Math.floor(Math.random()*keys.length)];
+    const group=bucketMap[key];
+    if(!group||group.length<3) continue;
+    const bText=group[0].b.text;
+    shuffle(group);
+    const correctCount=Math.min(3, group.length);      /* 正确项 2-3（该时段事件） */
+    const correct=group.slice(0,correctCount).map(g=>g.e);
+    const wrongPool=all.filter(e=>{ const bb=timeBucket(e); return bb && bb.key!==key; });   /* 错误项：其他时段 */
+    shuffle(wrongPool);
+    const wrongCount=Math.min(4, Math.max(2, 6-correctCount));
+    const wrong=wrongPool.slice(0,wrongCount);
+    const opts=[...correct.map(e=>e.title), ...wrong.map(e=>e.title)];
+    shuffle(opts);
+    const o={type:"choiceB", q:"下列哪些事件发生在「"+bText+"」？（多选）",
+             options:opts.map((t,i)=>({label:"ABCDEFGH"[i], text:t})),
+             answer:correct.map(ev=>opts.indexOf(ev.title)),
+             detail:bText,
+             hash:"choiceB|"+bText+"|"+opts.join("|")};
     out.push(o);
   }
   return out;
@@ -139,6 +174,7 @@ function genJudgment(pool,n){
 /* ---- 渲染（由 review.js 的 showCard 在 quiz 模式下调用）---- */
 function renderQuizCard(cur){
   if(cur.type==="sort"){ renderSortCard(cur); return; }
+  if(cur.type==="choiceB"){ renderChoiceB(cur); return; }
   const box=document.getElementById("rvQuiz");
   box.innerHTML="";
   const q=document.createElement("div");
@@ -152,6 +188,35 @@ function renderQuizCard(cur){
     opts.appendChild(b);
   });
   box.appendChild(q); box.appendChild(opts);
+  box.hidden=false;
+}
+/* 多选题渲染：选项 toggle 勾选（■=已选）→「提交」判题 */
+function renderChoiceB(cur){
+  const s=rvState;
+  s.cur._picks=[];
+  const box=document.getElementById("rvQuiz");
+  box.innerHTML="";
+  const q=document.createElement("div");
+  q.className="qz-q"; q.textContent=cur.q;
+  box.appendChild(q);
+  const wrap=document.createElement("div");
+  wrap.className="qz-opts";
+  cur.options.forEach((o,i)=>{
+    const b=document.createElement("button");
+    b.className="rv-btn qz-opt"; b.textContent="□　"+o.text;
+    b.addEventListener("click",()=>{
+      if(b.classList.contains("done")) return;
+      const picks=s.cur._picks, k=picks.indexOf(i);
+      if(k>=0){ picks.splice(k,1); b.classList.remove("sel"); b.textContent="□　"+o.text; }
+      else{ picks.push(i); b.classList.add("sel"); b.textContent="■　"+o.text; }
+    });
+    wrap.appendChild(b);
+  });
+  box.appendChild(wrap);
+  const sub=document.createElement("button");
+  sub.className="rv-btn ok qz-submit"; sub.textContent="提交";
+  sub.addEventListener("click",submitChoiceB);
+  box.appendChild(sub);
   box.hidden=false;
 }
 /* 排序题渲染：点选填序号，填满自动判题；点已选事件可取消 */
@@ -195,11 +260,15 @@ function renumSort(){
 function showQuizResult(ok,pick){
   const s=rvState, cur=s.cur.quiz;
   const box=document.getElementById("rvQuiz");
+  const correctArr=Array.isArray(cur.answer)?cur.answer:[cur.answer];
+  const pickedArr=Array.isArray(pick)?pick:(pick==null?[]:[pick]);
   box.querySelectorAll(".qz-opt").forEach((b,i)=>{
     b.disabled=true;
-    if(i===cur.answer) b.classList.add("right");
-    else if(!ok && i===pick) b.classList.add("wrong");
+    if(b.classList.contains("qz-sort-item")){ b.classList.add("done"); return; }   /* 排序题：不在此标记 */
+    if(correctArr.includes(i)) b.classList.add("right");
+    else if(!ok && pickedArr.includes(i)) b.classList.add("wrong");
   });
+  box.querySelectorAll(".qz-submit").forEach(x=>x.remove());   /* 多选题提交按钮：判后移除 */
   const res=document.createElement("div");
   res.className="qz-res "+(ok?"ok":"no");
   if(cur.type==="judge"){
@@ -209,6 +278,9 @@ function showQuizResult(ok,pick){
   }else if(cur.type==="sort"){
     res.textContent=(ok?"✓ 正确":"✗ 错误")+"　正确顺序：";
     res.textContent+=cur.order.map((t,j)=>{ const ev=findEvent(t); return (j+1)+"．"+t+(ev&&quizTimeText(ev)?"（"+quizTimeText(ev)+"）":""); }).join("　");
+  }else if(cur.type==="choiceB"){
+    res.textContent=(ok?"✓ 全对":"✗ 未全对")+"　发生在「"+cur.detail+"」的事件：";
+    res.textContent+=correctArr.map(i=>cur.options[i].text).join("、");
   }
   box.appendChild(res);
   const nx=document.createElement("button");

@@ -192,6 +192,8 @@ function startReview(){
       qz=genChoiceA(src,Math.min(max,src.length));
     }else if(rvCfg.qz==="sort"){
       qz=genSorting(max);
+    }else if(rvCfg.qz==="choiceB"){
+      qz=genChoiceB(max);
     }
     if(qz.length===0){warn.textContent="该范围内无法生成题目，请扩大范围或换题型。";warn.hidden=false;return;}
     cards=qz.map(x=>({quiz:x}));   /* 包装为 {quiz}，与 {e} 区分 */
@@ -258,7 +260,7 @@ function showCard(){
 function updateProg(){
   const s=rvState;
   const rt=s.roundTotal||s.total;
-  const mn=s.mode==="quiz"?(s.qz==="judge"?"判断题":(s.qz==="choiceA"?"选择题":(s.qz==="sort"?"排序题":"题型"))):(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"));
+  const mn=s.mode==="quiz"?(s.qz==="judge"?"判断题":(s.qz==="choiceA"?"选择题":(s.qz==="sort"?"排序题":(s.qz==="choiceB"?"多选题":"题型")))):(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"));
   document.getElementById("rvProg").textContent=mn+" 第 "+Math.min(s.roundDone+1,rt)+" / "+rt+" 张";
   document.getElementById("rvFails").textContent=s.mode==="roam"?"不计错题":((s.failCount>0?("错题 "+s.failCount+" · "):"")+(s.round>1?("第 "+s.round+" 轮"):""));
   document.getElementById("rvBarIn").style.width=(s.processed/s.total*100)+"%";
@@ -281,6 +283,11 @@ function quizAnswer(pick){
 function submitSort(){
   const s=rvState, picks=s.cur._picks||[];
   recordQuizResult(picks.join("|")===s.cur.quiz.order.join("|"));
+}
+function submitChoiceB(){
+  const s=rvState, cur=s.cur.quiz, picks=s.cur._picks||[];
+  const ok=picks.length===cur.answer.length && cur.answer.every(i=>picks.includes(i));   /* 全中才判对（批复严格） */
+  recordQuizResult(ok, picks);
 }
 function quizNext(){
   const s=rvState;
