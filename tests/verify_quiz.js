@@ -72,6 +72,21 @@ const URL = 'file:///' + path.resolve(__dirname, '..', 'index.html').replace(/\\
   });
   check('正确项 = 真实时间桶', sample.text === sample.bucket, sample.text + ' vs ' + sample.bucket);
 
+  // 0c. 排序题单元断言
+  const unit3 = await page.evaluate(() => {
+    const qs = genSorting(10);
+    return {
+      n: qs.length,
+      items: qs.every(q => q.items.length >= 3 && q.items.length === q.order.length),
+      orderMatches: qs.every(q => q.order.every(t => q.items.some(it => it.text === t))),   /* order 与 items 同集 */
+      hasTime: qs.every(q => q.items.every(it => it.time !== ""))
+    };
+  });
+  check('genSorting 生成 > 0', unit3.n > 0, 'n=' + unit3.n);
+  check('链长 ≥3 且 order 等长', unit3.items);
+  check('order 与 items 同集', unit3.orderMatches);
+  check('事件均带时间展示', unit3.hasTime);
+
   // 1. 进入复习 → quiz 模式
   await page.click('.tab[data-view="review"]');
   await page.waitForTimeout(300);
@@ -160,6 +175,27 @@ const URL = 'file:///' + path.resolve(__dirname, '..', 'index.html').replace(/\\
   await page.click('.qz-next');
   await page.waitForTimeout(400);
   check('选择题完成页', await page.locator('#rvDone:visible').count() === 1);
+
+  // 8. 排序题 UI：点选填序 → 填满自动判题 → 完成
+  await page.click('#rvAgain');
+  await page.waitForTimeout(200);
+  await page.click('#rvQuizTypes button[data-qz="sort"]');
+  await page.waitForTimeout(150);
+  await page.fill('#rvNum', '1');
+  await page.waitForTimeout(150);
+  await page.click('#rvStart');
+  await page.waitForTimeout(400);
+  check('排序题卡片渲染', await page.locator('.qz-sort-item').count() >= 3);
+  check('排序题题干「排列」', (await page.locator('.qz-q').textContent()).includes('排列'));
+  check('进度显示排序题', (await page.locator('#rvProg').textContent()).includes('排序题'));
+  const seq = await page.evaluate(() => rvState.cur.quiz.order.map(t => rvState.cur.quiz.items.findIndex(it => it.text === t)));
+  for (const k of seq) await page.click('.qz-sort-item >> nth=' + k);
+  await page.waitForTimeout(200);
+  check('排序答对自动判题', (await page.locator('.qz-res').textContent()).includes('✓'));
+  check('反馈含正确顺序', (await page.locator('.qz-res').textContent()).includes('正确顺序'));
+  await page.click('.qz-next');
+  await page.waitForTimeout(400);
+  check('排序题完成页', await page.locator('#rvDone:visible').count() === 1);
 
   let pass = 0, fail = 0;
   for (const r of results) { r.ok ? pass++ : fail++; console.log((r.ok ? 'PASS' : 'FAIL') + '\t' + r.name + (r.extra ? '\t(' + r.extra + ')' : '')); }

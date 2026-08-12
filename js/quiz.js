@@ -1,5 +1,5 @@
 /* quiz.js — 题型专练：判断题/选择题/排序题（客观题）生成、渲染、判题
-   P1（2026-08-12）：判断题；P2（2026-08-12）：选择题甲种（时间定位）。排序题/乙种规划中（见 docs/进阶题型方案.md） */
+   P1（2026-08-12）：判断题；P2：选择题甲种；P3（2026-08-12）：排序题（quiz_chains.js 核心链）。乙种规划中（见 docs/进阶题型方案.md） */
 'use strict';
 
 /* ---- 时间工具（核心数据转换）---- */
@@ -84,6 +84,30 @@ function genChoiceA(pool,n){
   return out;
 }
 
+/* ---- 排序题（P3）：核心链打乱，判题按链顺序（人工维护，数据同年无 month 亦可靠） ---- */
+function findEvent(t){
+  return EVENTS.find(e=>e.title===t)||EVENTS_MODERN.find(e=>e.title===t)||EVENTS_WORLD.find(e=>e.title===t)||null;
+}
+function genSorting(n){
+  const chains=Object.values(QUIZ_CHAINS||{}).filter(c=>Array.isArray(c)&&c.length>=3);
+  const out=[];
+  let guard=0;
+  while(out.length<n && chains.length && guard++<100){
+    const ch=chains[Math.floor(Math.random()*chains.length)];
+    /* 链内事件必须都能在主库找到（防维护后数据改名） */
+    if(!ch.every(t=>findEvent(t))) continue;
+    const items=ch.map((t,i)=>{ const ev=findEvent(t); return {text:t, time:ev?quizTimeText(ev):""}; });
+    const idx=items.map((_,i)=>i);
+    shuffle(idx);
+    const o={type:"sort", q:"按时间先后排列以下事件",
+             items:idx.map(k=>items[k]),
+             order:ch.slice(),          /* 正确答案 = 链序（title 数组） */
+             hash:"sort|"+ch.join("|")};
+    out.push(o);
+  }
+  return out;
+}
+
 /* ---- 判断题生成 ---- */
 /* 同世纪配对（批复：保迷惑性）、同年放弃重取；返回 n 道题对象 */
 function genJudgment(pool,n){
@@ -114,6 +138,7 @@ function genJudgment(pool,n){
 
 /* ---- 渲染（由 review.js 的 showCard 在 quiz 模式下调用）---- */
 function renderQuizCard(cur){
+  if(cur.type==="sort"){ renderSortCard(cur); return; }
   const box=document.getElementById("rvQuiz");
   box.innerHTML="";
   const q=document.createElement("div");
@@ -128,6 +153,43 @@ function renderQuizCard(cur){
   });
   box.appendChild(q); box.appendChild(opts);
   box.hidden=false;
+}
+/* 排序题渲染：点选填序号，填满自动判题；点已选事件可取消 */
+function renderSortCard(cur){
+  const s=rvState;
+  s.cur._picks=[];
+  const box=document.getElementById("rvQuiz");
+  box.innerHTML="";
+  const q=document.createElement("div");
+  q.className="qz-q"; q.textContent=cur.q;
+  box.appendChild(q);
+  const wrap=document.createElement("div");
+  wrap.className="qz-opts";
+  cur.items.forEach((it,i)=>{
+    const b=document.createElement("button");
+    b.className="rv-btn qz-opt qz-sort-item"; b.textContent=(i+1)+"　"+it.text;
+    b.addEventListener("click",()=>{
+      const picks=s.cur._picks, t=cur.items[i].text;
+      const k=picks.indexOf(t);
+      if(k>=0){ picks.splice(k,1); renumSort(); return; }   /* 取消已选 */
+      if(picks.length>=cur.items.length) return;
+      picks.push(t); renumSort();
+      if(picks.length===cur.items.length) submitSort();      /* 填满自动判题 */
+    });
+    wrap.appendChild(b);
+  });
+  box.appendChild(wrap);
+  box.hidden=false;
+}
+/* 序号重排：picked 显示其在选择序列中的序号，未选保持固定编号 */
+function renumSort(){
+  const s=rvState, cur=s.cur.quiz, picks=s.cur._picks;
+  const box=document.getElementById("rvQuiz");
+  box.querySelectorAll(".qz-sort-item").forEach((b,i)=>{
+    const t=cur.items[i].text, k=picks.indexOf(t);
+    if(k>=0){ b.classList.add("picked"); b.textContent=(k+1)+"．"+t; }
+    else{ b.classList.remove("picked"); b.textContent=(i+1)+"　"+t; }
+  });
 }
 /* 判题反馈：高亮正确项、显示对错与时间、出"下一题"（不再翻牌） */
 function showQuizResult(ok,pick){
@@ -144,6 +206,9 @@ function showQuizResult(ok,pick){
     res.textContent=(ok?"✓ 正确":"✗ 错误")+"　"+cur.earlier+"　早于　"+cur.later;
   }else if(cur.type==="choiceA"){
     res.textContent=(ok?"✓ 正确":"✗ 错误")+"　该事件属于　"+cur.options[cur.answer].text+(cur.detail?("　（"+cur.detail+"）"):"");
+  }else if(cur.type==="sort"){
+    res.textContent=(ok?"✓ 正确":"✗ 错误")+"　正确顺序：";
+    res.textContent+=cur.order.map((t,j)=>{ const ev=findEvent(t); return (j+1)+"．"+t+(ev&&quizTimeText(ev)?"（"+quizTimeText(ev)+"）":""); }).join("　");
   }
   box.appendChild(res);
   const nx=document.createElement("button");

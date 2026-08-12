@@ -266,6 +266,7 @@ h3{font-size:17.5px; font-weight:700}
 .rv-quiz .qz-opt:hover{border-color:var(--cin);color:var(--cin)}
 .rv-quiz .qz-opt.right{border-color:var(--cin);background:var(--cin-soft);color:var(--cin)}
 .rv-quiz .qz-opt.wrong{border-color:#b04a3a;background:#f3e2de;color:#8c3a2c}
+.rv-quiz .qz-opt.picked{border-color:var(--cin);background:var(--cin-soft);color:var(--cin);font-weight:700}
 .rv-quiz .qz-res{margin-top:18px;padding:12px 14px;font-size:13.5px;line-height:1.8;border-left:3px solid var(--cin);background:var(--cin-soft);color:var(--ink2)}
 .rv-quiz .qz-res.no{border-color:#b04a3a;background:#f3e2de}
 .rv-quiz .qz-next{display:block;margin:20px auto 0}

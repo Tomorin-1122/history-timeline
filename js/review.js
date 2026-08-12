@@ -179,12 +179,21 @@ function startReview(){
   const warn=document.getElementById("rvWarn");
   let cards;
   if(rvCfg.mode==="quiz"){
-    /* 题型专练：判断题 / 选择题甲种。复用筛选池；era 事件（原始社会）由 timeBucket 排除 */
-    const src=poolFromFilters(rvEvents());
-    if(src.length<2){warn.textContent="该范围内题目太少，请调整筛选条件。";warn.hidden=false;return;}
-    const max=rvCfg.numMode==="all"?Math.min(src.length,10):Math.min(rvCfg.num,src.length);
-    const qz=rvCfg.qz==="judge" ? genJudgment(src,max) : (rvCfg.qz==="choiceA" ? genChoiceA(src,max) : []);
-    if(qz.length===0){warn.textContent="该范围内无法生成题目（判断题需同世纪两事件 / 选择题需可判时间），请扩大范围。";warn.hidden=false;return;}
+    /* 题型专练：判断题 / 选择题甲种 / 排序题。判断/选择复用筛选池；排序题按核心链出题（忽略筛选） */
+    const max=rvCfg.numMode==="all"?10:Math.min(rvCfg.num,10);
+    let qz=[];
+    if(rvCfg.qz==="judge"){
+      const src=poolFromFilters(rvEvents());
+      if(src.length<2){warn.textContent="该范围内题目太少，请调整筛选条件。";warn.hidden=false;return;}
+      qz=genJudgment(src,Math.min(max,src.length));
+    }else if(rvCfg.qz==="choiceA"){
+      const src=poolFromFilters(rvEvents());
+      if(src.length<2){warn.textContent="该范围内题目太少，请调整筛选条件。";warn.hidden=false;return;}
+      qz=genChoiceA(src,Math.min(max,src.length));
+    }else if(rvCfg.qz==="sort"){
+      qz=genSorting(max);
+    }
+    if(qz.length===0){warn.textContent="该范围内无法生成题目，请扩大范围或换题型。";warn.hidden=false;return;}
     cards=qz.map(x=>({quiz:x}));   /* 包装为 {quiz}，与 {e} 区分 */
   }else{
     let pool;
@@ -249,22 +258,29 @@ function showCard(){
 function updateProg(){
   const s=rvState;
   const rt=s.roundTotal||s.total;
-  const mn=s.mode==="quiz"?(s.qz==="judge"?"判断题":(s.qz==="choiceA"?"选择题":"题型")):(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"));
+  const mn=s.mode==="quiz"?(s.qz==="judge"?"判断题":(s.qz==="choiceA"?"选择题":(s.qz==="sort"?"排序题":"题型"))):(s.mode==="roam"?"漫游":(s.mode==="wrong"?"错题":"训练"));
   document.getElementById("rvProg").textContent=mn+" 第 "+Math.min(s.roundDone+1,rt)+" / "+rt+" 张";
   document.getElementById("rvFails").textContent=s.mode==="roam"?"不计错题":((s.failCount>0?("错题 "+s.failCount+" · "):"")+(s.round>1?("第 "+s.round+" 轮"):""));
   document.getElementById("rvBarIn").style.width=(s.processed/s.total*100)+"%";
 }
 
 /* ---- 题型专练（quiz）答题：选择即判（无翻牌） ---- */
-function quizAnswer(pick){
+/* 判题结果记录（judge/choiceA/sort 共用）：写错题 key、计数、进 fails、出反馈 */
+function recordQuizResult(ok,pick){
   const s=rvState, cur=s.cur.quiz;
-  const ok=pick===cur.answer;
   const key="ht-review-qz-"+(s.seg||"ancient")+"-"+cur.hash;   /* 错题 key：题型独立，不复用事件错题 */
   if(ok){s.okCount++;localStorage.setItem(key,"ok");}
   else{s.failCount++;s.fails.push(s.cur);localStorage.setItem(key,"fail");}
   s.processed++; s.roundDone++;
   showQuizResult(ok,pick);
   updateProg();
+}
+function quizAnswer(pick){
+  recordQuizResult(pick===rvState.cur.quiz.answer, pick);
+}
+function submitSort(){
+  const s=rvState, picks=s.cur._picks||[];
+  recordQuizResult(picks.join("|")===s.cur.quiz.order.join("|"));
 }
 function quizNext(){
   const s=rvState;
