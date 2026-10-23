@@ -131,18 +131,18 @@ speedBtn.addEventListener("click",()=>{
   speedBtn.textContent=SPEEDS[speedIdx]+"×";
 });
 
-/* ---- 底图双轨（2026-08-03 部署版）：天地图优先（矢量/影像/地形可切换），瓦片 403 自动回退高德 ----
-   天地图浏览器端 key：Referer 白名单防护（timeline.yinyizhuan.cn, history-timeline-vert.vercel.app）；file:// 无 http Referer 必 403 → 回退高德 */
+/* ---- 底图：天地图（矢量/影像/地形可切换）----
+   天地图浏览器端 key：走 Referer 白名单（线上域名已加白）；file:// 无 http Referer 必 403
+   → 瓦片不可用时不加载任何第三方底图，改显灰底 + 点位 + 省界，并提示线上版完整 */
 const TDT_KEY="78aa1282ea7b6cabd336a205aada9e36";
 const TDT_SUB=["0","1","2","3","4","5","6","7"];
 const TDT_URL=function(layer){return "https://t{s}.tianditu.gov.cn/"+layer+"_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER="+layer+"&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk="+TDT_KEY;};
-const GAODE_URL="https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}";
-let tileMode="tdt";        /* 'tdt' 天地图（WGS84 免转换） | 'gaode' 高德（需 gcj02） */
 let tdtErr=0;              /* 天地图瓦片连续失败计数 */
+let tdtFailed=false;       /* 底图不可用：本会话不再加载瓦片，防反复重试 */
 /* 天地图三底图：矢量（默认）/ 影像（卫星）/ 地形（山川）——底图 + 注记图层名 */
 const TDT_BASES=[{base:"vec",ann:"cva",name:"矢量"},{base:"img",ann:"cia",name:"影像"},{base:"ter",ann:"cta",name:"地形"}];
 let tdtBaseIdx=0, tdtLayers=[];
-const mapCtrlBtns={};      /* 地图内控件按钮引用（底图/全屏），供回退时更新 */
+const mapCtrlBtns={};      /* 地图内控件按钮引用（底图/全屏），供底图状态更新 */
 
 function buildTdtLayers(){
   tdtLayers.forEach(l=>mapObj.removeLayer(l));
@@ -157,18 +157,30 @@ function buildTdtLayers(){
   vec.addTo(mapObj); cva.addTo(mapObj);
 }
 function onTdtErr(){
+  if(tdtFailed) return;
   tdtErr++;
-  if(tdtErr>=3 && tileMode==="tdt"){   /* 白名单未配 / file://：回退高德，不白屏 */
+  if(tdtErr>=3){                       /* 白名单未配 / file://：不加载第三方底图 */
+    tdtFailed=true;
     tdtLayers.forEach(l=>mapObj.removeLayer(l));
-    tileMode="gaode";
-    L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78}).addTo(mapObj);
-    if(typeof _setMapAttr==="function") _setMapAttr("高德地图");   /* 底部来源声明同步 */
+    tdtLayers=[];
+    showNoBasemapNotice();
     if(mapCtrlBtns.base) updateBaseBtn();
-    drawMarkers();                       /* 重绘：坐标改走 gcj02 */
   }
 }
+/* 底图不可用提示：灰底 + 点位 + 省界照常，只缺底图（file:// 或白名单外域名） */
+function showNoBasemapNotice(){
+  const attr=document.getElementById("mapAttr");
+  if(attr) attr.innerHTML='底图未加载（本地模式或域名未授权）｜ 清代省界 © CHGIS V6（复旦史地所/哈佛，地图书转换）';
+  const box=document.getElementById("map");
+  if(!box || document.getElementById("noBasemapTip")) return;
+  const d=document.createElement("div");
+  d.id="noBasemapTip";
+  d.textContent="底图未加载 · 点位与省界仍可用 · 完整底图请访问线上版";
+  d.style.cssText="position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:800;background:rgba(255,252,245,.95);border:1px solid #c9bda4;padding:6px 12px;font-size:12px;color:#5c5245;box-shadow:0 1px 4px rgba(0,0,0,.12);pointer-events:none;white-space:nowrap";
+  box.appendChild(d);
+}
 
-/* ---- 初始化：天地图优先；403 连续 3 次自动回退高德（本地 file:// 打开不白屏） ---- */
+/* ---- 初始化：加载天地图；403 连续 3 次转灰底提示（本地 file:// 打开不白屏） ---- */
 function initMap(){
   if(mapInited) return; mapInited=true;
   mapObj=L.map("map",{zoomControl:true}).setView(
@@ -181,9 +193,8 @@ function initMap(){
     if(el) el.innerHTML='底图 © '+base+' ｜ 清代省界 © CHGIS V6（复旦史地所/哈佛，地图书转换）';
   };
   window._setMapAttr=setAttr;
-  setAttr(tileMode==="tdt"?"天地图·国家基础地理信息中心":"高德地图");
-  if(tileMode==="tdt") buildTdtLayers();
-  else L.tileLayer(GAODE_URL,{subdomains:["1","2","3","4"],maxZoom:18,opacity:.78}).addTo(mapObj);
+  setAttr("天地图·国家基础地理信息中心");
+  buildTdtLayers();
   markers=L.markerClusterGroup({
     maxClusterRadius:35,               /* 仅重灾组（≥10 条）进入：低 zoom 成簇 */
     showCoverageOnHover:false,
@@ -233,12 +244,11 @@ function addMapControls(){
   ctrl.addTo(mapObj);
 }
 function swapTdtBase(){
-  if(tileMode==="gaode"){
-    /* 从高德切回天地图（白名单外域名仍会 403 再回退，但不再锁死；按钮可反复尝试） */
-    tileMode="tdt"; tdtErr=0;
-    mapObj.eachLayer(l=>{ if(l instanceof L.TileLayer) mapObj.removeLayer(l); });
+  if(tdtFailed){                          /* 之前不可用：按钮转为重试天地图 */
+    tdtFailed=false; tdtErr=0;
+    const tip=document.getElementById("noBasemapTip");
+    if(tip) tip.remove();
     buildTdtLayers();
-    drawMarkers();                          /* 坐标切回 WGS84（免转换） */
     updateBaseBtn();
     return;
   }
@@ -249,9 +259,9 @@ function swapTdtBase(){
 }
 function updateBaseBtn(){
   if(!mapCtrlBtns.base) return;
-  if(tileMode==="gaode"){
-    mapCtrlBtns.base.textContent="高";
-    mapCtrlBtns.base.title="底图已回退高德（天地图不可用）；点击可重试天地图";
+  if(tdtFailed){
+    mapCtrlBtns.base.textContent="重";
+    mapCtrlBtns.base.title="底图未加载；点击重试天地图";
   }else{
     mapCtrlBtns.base.textContent=TDT_BASES[tdtBaseIdx].name.charAt(0);
     mapCtrlBtns.base.title="切换底图：矢量/影像/地形（当前："+TDT_BASES[tdtBaseIdx].name+"）";
@@ -302,8 +312,8 @@ function jitterCoord(t,lat,lng){
 function addMarker(e, alpha, bold){
   const c=COORDS[e.title]; if(!c) return;
   const [jlat,jlng]=jitterCoord(e.title,c[0],c[1]);  /* 重合坐标确定性散开 ±550m */
-  /* 底图双轨：天地图 WGS84 直接用（CGCS2000≈WGS84 免转换）；高德瓦片需转 gcj02 */
-  const g=tileMode==="tdt"?[jlat,jlng]:wgs84ToGcj02(jlat,jlng);
+  /* 坐标统一 WGS84（底图为天地图，CGCS2000≈WGS84 免转换） */
+  const g=[jlat,jlng];
   const col=TYPE_COLORS[e.type]||"#9e3d26";
   const isEra=e.yearMode==="era";
   const a=alpha==null?1:alpha;
