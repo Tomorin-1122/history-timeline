@@ -68,3 +68,14 @@
 - **本项目按「现状」提供**，不附带任何明示或默示的担保，包括但不限于适销性与特定用途适用性。
 - **地图仅供示意**，相关边界不构成领土主张，也不作测绘依据。
 - **第三方资源**：历史疆域数据来自 CHGIS V6 / 地图书知识库（CC0），历史插图来自公开史料与网络，均仅作教学辅助；权利人如有异议，请联系下架。
+
+## 许可
+
+**代码用 MIT，内容用 CC BY-NC-SA 4.0。**
+
+- 代码（`js/`、`css/`、`index.html`、`server.js`、`scripts/`）—— **MIT**，见 [LICENSE](LICENSE)
+- 内容（`data/`、`js/data.js` 的事件条目、README 正文）—— **CC BY-NC-SA 4.0**，见 [LICENSE-CONTENT](LICENSE-CONTENT)：可自由复制与改编，但须署名、非商业、并以相同协议共享
+
+一句话：**代码拿去随便改，把考点搬去做付费课不行。**
+
+发现错漏欢迎指正，提 issue 或 PR 前请先看 [CONTRIBUTING.md](CONTRIBUTING.md)。
